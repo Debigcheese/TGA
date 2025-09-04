@@ -1,0 +1,26 @@
+﻿  tictactoe.cpp
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,28): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,28): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,28): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,34): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,34): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,34): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,40): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,40): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,40): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,46): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,46): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,46): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,52): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,52): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,52): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,58): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,58): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,58): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,64): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,64): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,64): warning C4309: 'initializing': truncation of constant value
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,70): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,70): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\TheGameAssembly\TGA\Random\tictactoe\tictactoe.cpp(8,70): warning C4309: 'initializing': truncation of constant value
+  tictactoe.vcxproj -> F:\TheGameAssembly\TGA\Random\tictactoe\x64\Debug\tictactoe.exe
