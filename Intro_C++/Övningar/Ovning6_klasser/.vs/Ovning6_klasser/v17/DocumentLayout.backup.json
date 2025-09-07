@@ -1,10 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Random\\Ovning6_klasser\\",
+  "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Random\\Ovning6_klasser\\Ovning6_klasser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Ovning6_klasser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Weapon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,13 +38,65 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Weapon.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
+              "RelativeDocumentMoniker": "Weapon.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
+              "RelativeToolTip": "Weapon.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-07T15:56:13.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Weapon.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
+              "RelativeDocumentMoniker": "Weapon.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
+              "RelativeToolTip": "Weapon.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-07T15:56:07.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
+              "RelativeDocumentMoniker": "Player.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
+              "RelativeToolTip": "Player.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-04T15:18:04.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
+              "RelativeDocumentMoniker": "Player.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
+              "RelativeToolTip": "Player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-04T15:16:52.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Ovning6_klasser.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Random\\Ovning6_klasser\\Ovning6_klasser.cpp",
-              "RelativeDocumentMoniker": "Ovning6_klasser.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Random\\Ovning6_klasser\\Ovning6_klasser.cpp",
-              "RelativeToolTip": "Ovning6_klasser.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Title": "Main.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
+              "RelativeDocumentMoniker": "Main.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
+              "RelativeToolTip": "Main.cpp",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADQAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-04T14:27:23.714Z",
               "EditorCaption": ""
