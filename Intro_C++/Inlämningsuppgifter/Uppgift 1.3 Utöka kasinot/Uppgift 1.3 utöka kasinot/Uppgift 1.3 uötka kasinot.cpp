@@ -29,7 +29,7 @@ std::mt19937 g_rng{ g_rd() };
 
 int globalMoney = INITIAL_MONEY;
 int globalBet = DEFAULT_BET;
-TableOption globalCurrentTable;
+TableOption globalCurrentTable = DEFAULT_TABLEOPTION;
 
 int globalStatArr[5] = { 0 };
 //[0] = guessing game | [1] = OddorEven | [2] = SpinTheWheel
@@ -52,14 +52,13 @@ void ShowRules();
 void ShowStats();
 //void ShowTableMessage();
 
-// Games
+// Games logic
 void PlayGuessingRound();
 void PlayOddEvenRound();
 void PlaySpinWheelRound();
 
 // Main
 void MainMenu();
-
 
 int ReadIntInRange(int aMinValue, int aMaxValue)
 {
@@ -102,15 +101,16 @@ void ChangeBet()
 
 void HandleBankruptcy()
 {
-    if (globalMoney < globalBet) {
-        std::cout << "\nYour bet is higher than what is currently in your wallet!, please change bet amount.\n";
-        ChangeBet();
-    }
     if (globalMoney <= 0)
     {
         std::cout << "\nYou're out of money! Security drag you out of the casino.\n";
         globalCurrentTable = TableOption::Quit;
     }
+    if (globalMoney < globalBet && globalCurrentTable != TableOption::Quit) {
+        std::cout << "\nYour bet is higher than what is currently in your wallet!, please change bet amount.\n";
+        ChangeBet();
+    }
+
 }
 
 void UpdateStats(bool isWin) {
@@ -278,7 +278,7 @@ void EvaluateTableEarnings()
     if (globalMoneyArr[tableIndex - 1] == 0) // first time
     {
         std::cout << "\nThe dealer greets you with a sly smile.\n";
-        system("pause");
+
     }
     else if (globalMoneyArr[tableIndex - 1] > maxEarning)
     {
@@ -295,16 +295,14 @@ void EvaluateTableEarnings()
             << "\nThis table has not been kind to you...\n"
             << "The dealer smirks as your losses keep piling up.\n"
             << "Maybe it's time to try your luck somewhere else.\n";
-        system("pause");
     }
     else 
     {
         std::cout 
             << "\nYour streak here has been mixed, some wins, some losses.\n"
             << "The dealer greets you with a sly smile.\n";
-        system("pause");
     }
-
+    system("pause");
 }
 
 void EnterTable(TableOption tableToEnter)
@@ -429,7 +427,7 @@ void PlayOddEvenRound()
 void PlaySpinWheelRound() 
 {
     std::cout << "\nSpin The Wheel (1):  ";
-    int pick = ReadIntInRange(1, 1);
+    ReadIntInRange(1, 1);
 
     int dice1 = RollDice();
     int dice2 = RollDice();
