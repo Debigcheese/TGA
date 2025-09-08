@@ -6,10 +6,13 @@
 #include "Car.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "UserManager.h"
 
 Player globalPlayer;
 Weapon globalWeapon;
 std::vector<Weapon> globalShop(3);
+
+UserManager globalUserManager;
 
 int ReadIntInRange(int aMin, int aMax);
 void WeaponMenu();
@@ -23,7 +26,7 @@ int ReadIntInRange(int aMin, int aMax)
 		std::cin >> value;
 		if (std::cin.fail() || value < aMin || value > aMax)
 		{
-			std::cout << "Invalid choice, choose between (" << aMin << " - " << aMax << "): ";
+			std::cout << "\nInvalid choice, choose between (" << aMin << " - " << aMax << "): ";
 			std::cin.ignore(10000, '\n');
 			std::cin.clear();
 			continue;
@@ -55,43 +58,56 @@ void WeaponMenu()
 
 void UserMenu()
 {
-	std::cout
-		<< "<--- USER MENU ---> \n";
-
-	for (int i = 0; i < globalShop.size(); i++)
+	while (true)
 	{
 		std::cout
-			<< "Weapon (" << i + 1 << "): "
-			<< globalShop[i].GetName() << "\t"
-			<< globalShop[i].GetWeaponTypeName() << "\t"
-			<< globalShop[i].GetDamage() << "\n";
-	}
+			<< "<--- USER MENU ---> \n"
+			<< "(1) Add user" << "\n"
+			<< "(2) View all users" << "\n"
+			<< "(3) View a single user" << "\n"
+			<< "(4) Remove a user" << "\n"
+			<< "(5) Exit" << "\n";
 
+		int userMenuIndex = ReadIntInRange(1, 5);
+
+		switch (userMenuIndex)
+		{
+		case 1:globalUserManager.AddUser(); break;
+		case 2:globalUserManager.ViewAllUsers(); break;
+		case 3:globalUserManager.ViewUser(); break;
+		case 4:globalUserManager.RemoveUser(); break;
+		case 5: return;
+		}
+		system("pause");
+		system("cls");
+	}
 }
 
 int main()
 {
 
-	std::cout << "Choose name: ";
-
-	std::string playerName;
-	std::cin >> playerName;
-
 	system("cls");
+	UserMenu();
 
-	//init shop by adding weapons
-	globalShop[0].Init("Steel Dagger", Type::Dagger, 18); // clamped 10–20
-	globalShop[1].Init("Hunter Bow  ", Type::Bow, 35);  // clamped 10–40
-	globalShop[2].Init("Longsword   ", Type::Sword, 85);  // clamped 30–100
+	//std::cout << "Choose name: ";
 
-	WeaponMenu();
+	//std::string playerName;
+	//std::cin >> playerName;
 
-	system("cls");
+	////init shop by adding weapons
+	//globalShop[0].Init("Steel Dagger", Type::Dagger, 18); // clamped 10–20
+	//globalShop[1].Init("Hunter Bow  ", Type::Bow, 35);  // clamped 10–40
+	//globalShop[2].Init("Longsword   ", Type::Sword, 85);  // clamped 30–100
 
-	Player(player);
-	player.Init(playerName, 100, globalWeapon);
+	//WeaponMenu();
 
-	player.PrintStats();
+	//system("cls");
+
+	//Player(player);
+	//player.Init(playerName, 100, globalWeapon);
+
+	//player.PrintStats();
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
