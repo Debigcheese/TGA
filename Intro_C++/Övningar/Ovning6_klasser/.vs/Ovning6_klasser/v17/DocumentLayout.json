@@ -1,26 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\",
+  "WorkspaceRootPath": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:UserManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:UserManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:User.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:User.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Weapon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Weapon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{26E1802D-ECF2-40FB-9324-C135C5976603}|Ovning6_klasser.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,19 +46,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserManager.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.cpp",
+              "RelativeDocumentMoniker": "UserManager.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.cpp",
+              "RelativeToolTip": "UserManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-08T09:02:35.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserManager.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.h",
+              "RelativeDocumentMoniker": "UserManager.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\UserManager.h",
+              "RelativeToolTip": "UserManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-08T08:56:29.377Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "User.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.cpp",
+              "RelativeDocumentMoniker": "User.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.cpp",
+              "RelativeToolTip": "User.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-08T08:13:02.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "User.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.h",
+              "RelativeDocumentMoniker": "User.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\User.h",
+              "RelativeToolTip": "User.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-08T08:12:57.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Weapon.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
               "RelativeDocumentMoniker": "Weapon.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.cpp",
               "RelativeToolTip": "Weapon.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -51,11 +115,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Weapon.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
               "RelativeDocumentMoniker": "Weapon.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Weapon.h",
               "RelativeToolTip": "Weapon.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -64,11 +128,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Player.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
               "RelativeDocumentMoniker": "Player.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.cpp",
               "RelativeToolTip": "Player.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -77,11 +141,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "Player.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
               "RelativeDocumentMoniker": "Player.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Player.h",
               "RelativeToolTip": "Player.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -90,13 +154,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Main.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
               "RelativeDocumentMoniker": "Main.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\\u00D6vningar\\Ovning6_klasser\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-04T14:27:23.714Z",
               "EditorCaption": ""

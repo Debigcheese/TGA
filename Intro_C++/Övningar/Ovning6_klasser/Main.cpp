@@ -11,76 +11,87 @@ Player globalPlayer;
 Weapon globalWeapon;
 std::vector<Weapon> globalShop(3);
 
-int ReadIntToRange(int aMin, int aMax);
+int ReadIntInRange(int aMin, int aMax);
 void WeaponMenu();
+void UserMenu();
 
-int ReadIntToRange(int aMin, int aMax) 
+int ReadIntInRange(int aMin, int aMax)
 {
-    int value;
-    while (true) 
-    {
-        std::cin >> value;
-        if (std::cin.fail() || value < aMin || value > aMax) 
-        {
-            std::cout << "Invalid choice, choose between (" << aMin << " - " << aMax << "): ";
-            std::cin.ignore(10000, '\n');
-            std::cin.clear();
-            continue;
-        }
-        return value;
-    }
+	int value;
+	while (true)
+	{
+		std::cin >> value;
+		if (std::cin.fail() || value < aMin || value > aMax)
+		{
+			std::cout << "Invalid choice, choose between (" << aMin << " - " << aMax << "): ";
+			std::cin.ignore(10000, '\n');
+			std::cin.clear();
+			continue;
+		}
+		return value;
+	}
 }
 
-void WeaponMenu() 
+void WeaponMenu()
 {
-    std::cout
-        << "<--- WEAPON MENU ---> \n";
+	std::cout
+		<< "<--- WEAPON MENU ---> \n";
 
-    for (int i = 0; i < globalShop.size(); i++)
-    {
-        std::cout
-        << "Weapon (" << i+1 << "): "
-            << globalShop[i].GetName() << "\t"
-            << globalShop[i].GetWeaponTypeName() << "\t"
-            << globalShop[i].GetDamage() << "\n";
-    }
+	for (int i = 0; i < globalShop.size(); i++)
+	{
+		std::cout
+			<< "Weapon (" << i + 1 << "): "
+			<< globalShop[i].GetName() << "\t"
+			<< globalShop[i].GetWeaponTypeName() << "\t"
+			<< globalShop[i].GetDamage() << "\n";
+	}
 
-    std::cout << "\nWeapon Choice: ";
+	std::cout << "\nWeapon Choice: ";
 
-    globalWeapon = globalShop[ReadIntToRange(1, 3)];
+	int weaponIndex = ReadIntInRange(1, 3);
+	weaponIndex--;
+	globalWeapon = globalShop[weaponIndex];
+}
+
+void UserMenu()
+{
+	std::cout
+		<< "<--- USER MENU ---> \n";
+
+	for (int i = 0; i < globalShop.size(); i++)
+	{
+		std::cout
+			<< "Weapon (" << i + 1 << "): "
+			<< globalShop[i].GetName() << "\t"
+			<< globalShop[i].GetWeaponTypeName() << "\t"
+			<< globalShop[i].GetDamage() << "\n";
+	}
+
 }
 
 int main()
 {
-    std::cout << "Choose name: ";
 
-    std::string playerName;
-    std::cin >> playerName;
+	std::cout << "Choose name: ";
 
-    system("cls");
+	std::string playerName;
+	std::cin >> playerName;
 
-    //init shop by adding weapons
-    globalShop[0].Init("Steel Dagger", Type::Dagger, 18); // clamped 10–20
-    globalShop[1].Init("Hunter Bow  ", Type::Bow, 35);  // clamped 10–40
-    globalShop[2].Init("Longsword   ", Type::Sword, 85);  // clamped 30–100
+	system("cls");
 
-    WeaponMenu();
+	//init shop by adding weapons
+	globalShop[0].Init("Steel Dagger", Type::Dagger, 18); // clamped 10–20
+	globalShop[1].Init("Hunter Bow  ", Type::Bow, 35);  // clamped 10–40
+	globalShop[2].Init("Longsword   ", Type::Sword, 85);  // clamped 30–100
 
-    system("cls");
+	WeaponMenu();
 
-    Weapon(dagger);
-    dagger.Init("Dagger", Type::Dagger, 15);
+	system("cls");
 
-    Weapon(Bow);
-    Bow.Init("Bow", Type::Bow, 30);
+	Player(player);
+	player.Init(playerName, 100, globalWeapon);
 
-    Weapon(Sword);
-    Sword.Init("Sword", Type::Sword, 60);
-
-    Player(player);
-    player.Init("Lucas", 100, dagger);
-
-    player.PrintStats();
+	player.PrintStats();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
