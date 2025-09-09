@@ -1,0 +1,24 @@
+#include "Enums.h"
+#include "Structs.h"
+#include "Print.h"
+#include "Menu.h"
+
+#include <iostream>
+#include <random>
+
+int main()
+{
+	using namespace Print;
+	using namespace Menu;
+
+	BetMultiplier betMulti = {};
+	Account account = {};
+	Table table = {};
+
+	table.statArr; //stats [0] = guessing game | [1] = OddorEven | [2] = SpinTheWheel
+	table.moneyArr;//money per table
+
+	ShowIntro(account);
+	MainMenu(account, table);
+	return 0;
+}

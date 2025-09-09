@@ -127,7 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Uppgift 2 Refaktorera kasinot.cpp" />
+    <ClCompile Include="Games.cpp" />
+    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Print.cpp" />
+    <ClCompile Include="TableFunctions.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Enums.h" />
+    <ClInclude Include="Games.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Print.h" />
+    <ClInclude Include="Structs.h" />
+    <ClInclude Include="TableFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
