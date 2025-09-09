@@ -8,4 +8,5 @@ namespace Games
 	void PlayGuessingRound(Account& account, Table& table);
 	void PlayOddEvenRound(Account& account, Table& table);
 	void PlaySpinWheelRound(Account& account, Table& table);
+	void PlayHigherOrLower(Account& account, Table& table);
 }

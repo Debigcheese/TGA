@@ -4,6 +4,7 @@
 #include "Games.h"
 #include "Menu.h"
 
+#include <random>
 #include <iostream>
 
 namespace TableFunctions
@@ -80,7 +81,6 @@ namespace TableFunctions
 
 		ShowStats(table);
 	}
-
 	// Table
 	void EvaluateTableEarnings(Account& account, Table& table)
 	{
@@ -117,64 +117,55 @@ namespace TableFunctions
 		system("pause");
 	}
 
-	void EnterTable(Account& account, Table& table)
+	//Higher or lower
+	int DrawRandomCard(int cardsLeft[], Cards cards)
 	{
-		EvaluateTableEarnings(account, table);
-
-		TableOption chosenTable = table.currentTable;
-		while (table.currentTable == chosenTable)
+		std::random_device rd;
+		std::mt19937 rng{ rd() };
+		std::uniform_int_distribution<int> dist(0, cards.deckSize);
+		int randomCardIndex = 0;
+		while (true)
 		{
-			ShowPersonalDetails(account);
-			ShowOptions(table);
-			HandleBankruptcy(account, table);
+			randomCardIndex = dist(rng);
 
-			GameAction action = static_cast<GameAction>(ReadIntInRange( //reads 1-4
-				static_cast<int>(GameAction::Play),
-				static_cast<int>(GameAction::LeaveTable)));
-
-			switch (action)
+			if (cardsLeft[randomCardIndex] != 0)
 			{
-			case GameAction::Play:
-			{
-				switch (table.currentTable)
-				{
-				case TableOption::GuessingGame:
-				{
-					PlayGuessingRound(account, table);
-					break;
-				}
-				case TableOption::OddOrEven:
-				{
-					PlayOddEvenRound(account, table);
-					break;
-				}
-				case TableOption::SpinTheWheel:
-				{
-					PlaySpinWheelRound(account, table);
-					break;
-				}
-				default: break;
-				}
-				HandleBankruptcy(account, table);
+				cardsLeft[randomCardIndex] = 0;
 				break;
-			}
-			case GameAction::ChangeBet:
-			{
-				ChangeBet(account);
-				break;
-			}
-			case GameAction::ShowRules:
-			{
-				ShowRules(table);
-				break;
-			}
-			case GameAction::LeaveTable:
-			{
-				table.currentTable = TableOption::Menu;
-				break;
-			}
-			default: break;
 			}
 		}
+		return randomCardIndex;
 	}
+
+	bool CompareCards(int previousCard, int newCard)
+	{
+		if (newCard > previousCard)
+		{
+			return true; //is higher
+		}
+		else
+		{
+			return false; //is lower
+		}
+
+	}
+
+	bool IsHigherOrLowerGameOver(Cards cards)
+	{
+		int countCardsLeft = 0;
+		for (int card : cards.cardsLeft)
+		{
+			if (card == 0)
+			{
+				countCardsLeft++;
+			}
+			if (countCardsLeft >= cards.deckSize)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 }

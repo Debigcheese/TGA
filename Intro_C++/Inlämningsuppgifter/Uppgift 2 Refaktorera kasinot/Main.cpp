@@ -6,6 +6,8 @@
 #include <iostream>
 #include <random>
 
+#include "Games.h"
+
 int main()
 {
 	using namespace Print;

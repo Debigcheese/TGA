@@ -31,8 +31,9 @@ namespace Print
 				<< "1) Guess The Sum\n"
 				<< "2) Odd or Even\n"
 				<< "3) Spin The Wheel\n"
-				<< "4) Show Stats\n"
-				<< "5) Leave casino\n"
+				<< "4) Higher or Lower\n"
+				<< "5) Show Stats\n"
+				<< "6) Leave casino\n"
 				<< "Choice: ";
 		}
 		else if (table.currentTable == TableOption::GuessingGame)
@@ -59,6 +60,16 @@ namespace Print
 		{
 			std::cout
 				<< "\n=== Table: Spin The Wheel ===\n"
+				<< "1) Play a round\n"
+				<< "2) Change bet\n"
+				<< "3) Show rules\n"
+				<< "4) Leave table\n"
+				<< "Choice: ";
+		}
+		else if (table.currentTable == TableOption::HighOrLow)
+		{
+			std::cout
+				<< "\n=== Table: Higher or Lower ===\n"
 				<< "1) Play a round\n"
 				<< "2) Change bet\n"
 				<< "3) Show rules\n"
@@ -97,6 +108,18 @@ namespace Print
 				<< "Win a large prize if all three symbols match, JACKPOT!\n"
 				<< "If all three symbols are different the house wins and you lose your bet.\n"
 				<< "Payout: 2x for two of a kind, 40x for three of a kind.\n";
+		}
+		else if (table.currentTable == TableOption::HighOrLow)
+		{
+			std::cout
+				<< "\n--- Rules: Higher or Lower ---\n"
+				<< "You play with a deck containing one of each card (2 through Ace).\n"
+				<< "A starting card is drawn. You must guess if the next card will be higher or lower.\n"
+				<< "If your guess is correct, you score a point. If not, you dont get a point.\n"
+				<< "This repeats until the deck is empty.\n"
+				<< "Win if you have enough points by the end of the deck.\n"
+				<< "Lose if you fail to reach the required points.\n"
+				<< "Payout: 2x if you win.\n";
 		}
 		system("pause");
 	}

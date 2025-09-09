@@ -26,7 +26,7 @@ namespace Menu
 
 			TableOption chosenTable = static_cast<TableOption>(ReadIntInRange(//reads 1-5
 				TableToIndex(TableOption::GuessingGame),
-				5)); // FIX
+				6)); // FIX
 
 			switch (chosenTable)
 			{
@@ -48,6 +48,12 @@ namespace Menu
 				EnterTable(account, table);
 				break;
 			}
+			case TableOption::HighOrLow:
+			{
+				table.currentTable = TableOption::HighOrLow;
+				EnterTable(account, table);
+				break;
+			}
 			case TableOption::Stats:
 			{
 				ShowStats(table);
@@ -60,13 +66,85 @@ namespace Menu
 				table.currentTable = TableOption::Quit;
 				break;
 			}
-			default: break;
+			default:
+			{
+				break;
+			}
 			}
 			//if (table.currentTable != TableOption::Quit)
 			//{
 			//	EnterTable(account, table);
 			//}
 
+		}
+	}
+
+	void EnterTable(Account& account, Table& table)
+	{
+		EvaluateTableEarnings(account, table);
+
+		TableOption chosenTable = table.currentTable;
+		while (table.currentTable == chosenTable)
+		{
+			ShowPersonalDetails(account);
+			ShowOptions(table);
+			HandleBankruptcy(account, table);
+
+			GameAction action = static_cast<GameAction>(ReadIntInRange( //reads 1-4
+				static_cast<int>(GameAction::Play),
+				static_cast<int>(GameAction::LeaveTable)));
+
+			switch (action)
+			{
+			case GameAction::Play:
+			{
+				switch (table.currentTable)
+				{
+				case TableOption::GuessingGame:
+				{
+					PlayGuessingRound(account, table);
+					break;
+				}
+				case TableOption::OddOrEven:
+				{
+					PlayOddEvenRound(account, table);
+					break;
+				}
+				case TableOption::SpinTheWheel:
+				{
+					PlaySpinWheelRound(account, table);
+					break;
+				}
+				case TableOption::HighOrLow:
+				{
+					PlayHigherOrLower(account, table);
+					break;
+				}
+				default: break;
+				}
+				HandleBankruptcy(account, table);
+				break;
+			}
+			case GameAction::ChangeBet:
+			{
+				ChangeBet(account);
+				break;
+			}
+			case GameAction::ShowRules:
+			{
+				ShowRules(table);
+				break;
+			}
+			case GameAction::LeaveTable:
+			{
+				table.currentTable = TableOption::Menu;
+				break;
+			}
+			default:
+			{
+				break;
+			}
+			}
 		}
 	}
 }

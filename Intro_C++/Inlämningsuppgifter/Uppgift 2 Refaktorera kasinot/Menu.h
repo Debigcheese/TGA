@@ -5,4 +5,5 @@
 namespace Menu
 {
 	void MainMenu(Account& account, Table& table);
+	void EnterTable(Account& account, Table& table);
 }

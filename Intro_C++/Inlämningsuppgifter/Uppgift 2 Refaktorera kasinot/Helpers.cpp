@@ -40,3 +40,11 @@ namespace Helpers
 		return index;
 	}
 }
+
+//int randomCardIndex = dist(rng);
+//char* randomCard = deck[randomCardIndex];
+//
+//if (randomCard != "-")
+//{
+//	return randomCard;
+//}

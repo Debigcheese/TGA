@@ -1,13 +1,14 @@
 #include "Games.h"
 #include "TableFunctions.h"
 #include "Helpers.h"
+#include "Print.h"
 
 #include <iostream>
 
 namespace Games
 {
 	using namespace Helpers;
-	using TableFunctions::UpdateStats;
+	using namespace TableFunctions;
 
 	// ---------- Guessing Game ----------
 	void PlayGuessingRound(Account& account, Table& table)
@@ -119,5 +120,93 @@ namespace Games
 			UpdateStats(table, false);
 		}
 		system("pause");
+	}
+
+	// ---------- Play Higher Or Lower ----------
+	void PlayHigherOrLower(Account& account, Table& table)
+	{
+		Cards cards = {};
+		HighOrLowPoints points = {};
+
+		points.currentPoints = 0;
+		int currentCardIndex = DrawRandomCard(cards.cardsLeft, cards);
+		bool gameOver = false;
+
+		while (!gameOver)
+		{
+			Print::ShowPersonalDetails(account);
+			std::cout << "\n";
+
+			std::cout << "Points: " << points.currentPoints << "\n";
+			std::cout << "Current card: [" << cards.cardLabels[currentCardIndex] << "] \n\n";
+
+			std::cout << "Is next card - \n";
+			std::cout << "Higher: (1)\n";
+			std::cout << "Lower:  (2)\n\n";
+			std::cout << "Choice: ";
+
+			int Higher = static_cast<int>(CardGuess::Higher);
+			int Lower = static_cast<int>(CardGuess::Lower);
+
+			int choice = ReadIntInRange(Higher, Lower);
+			CardGuess cardGuess = static_cast<CardGuess>(choice);
+
+			std::cout << "Drawing card... \n";
+			system("pause");
+			std::cout << "\n";
+
+			int randomCardIndex = DrawRandomCard(cards.cardsLeft, cards);
+			bool cardIsHigher = CompareCards(cards.cardValues[currentCardIndex], cards.cardValues[randomCardIndex]);
+
+			std::cout << "You drew: [" << cards.cardLabels[randomCardIndex] << "]\n";
+			std::cout << "You guessed [" << cards.cardLabels[randomCardIndex] << "]"
+				<< " is ";
+			if (cardGuess == CardGuess::Higher)
+			{
+				std::cout << "HIGHER than ";
+			}
+			else
+			{
+				std::cout << "LOWER than ";
+			}
+			std::cout << "[" << cards.cardLabels[currentCardIndex] << "] ";
+
+			if ((cardGuess == CardGuess::Higher && cardIsHigher) || (cardGuess == CardGuess::Lower && !cardIsHigher))
+			{
+				std::cout << "which is CORRECT \n";
+				points.currentPoints++;
+			}
+			else
+			{
+				std::cout << "which is FALSE \n";
+			}
+
+			if (IsHigherOrLowerGameOver(cards))
+			{
+				std::cout << "Deck of cards is empty!\n";
+				std::cout << "You got " << points.currentPoints << "/9 correct\n";
+				if (points.currentPoints >= points.requiredPoints)
+				{
+					int win = account.bet * table.betMulti.betMultiHigherOrLower;
+					account.money += win;
+					table.moneyArr[TableToIndex(TableOption::HighOrLow)] += win;
+					std::cout << "<--- 2X WIN! --->\n";
+					std::cout << "Payout: " << win << "\n";
+					UpdateStats(table, true);
+				}
+				else
+				{
+					account.money -= account.bet;
+					table.moneyArr[TableToIndex(TableOption::HighOrLow)] -= account.bet;
+					std::cout << "You lost: " << account.bet << "\n";
+					UpdateStats(table, false);
+				}
+				gameOver = true;
+			}
+
+			system("pause");
+			system("cls");
+			currentCardIndex = randomCardIndex;
+		}
 	}
 }
