@@ -17,41 +17,36 @@ namespace Menu
 	{
 		table.currentTable = TableOption::Menu;
 
-		while (table.currentTable == TableOption::Menu)
+		while (table.currentTable == TableOption::Menu && table.currentTable != TableOption::Quit)
 		{
-
 			ShowPersonalDetails(account);
 			ShowOptions(table);
 			HandleBankruptcy(account, table);
 
 			TableOption chosenTable = static_cast<TableOption>(ReadIntInRange(//reads 1-5
-				TableToIndex(TableOption::GuessingGame),
-				6)); // FIX
+				static_cast<int>(TableOption::GuessingGame),
+				static_cast<int>(TableOption::Quit))); // FIX
 
 			switch (chosenTable)
 			{
 			case TableOption::GuessingGame:
 			{
 				table.currentTable = TableOption::GuessingGame;
-				EnterTable(account, table);
 				break;
 			}
 			case TableOption::OddOrEven:
 			{
 				table.currentTable = TableOption::OddOrEven;
-				EnterTable(account, table);
 				break;
 			}
 			case TableOption::SpinTheWheel:
 			{
 				table.currentTable = TableOption::SpinTheWheel;
-				EnterTable(account, table);
 				break;
 			}
 			case TableOption::HighOrLow:
 			{
 				table.currentTable = TableOption::HighOrLow;
-				EnterTable(account, table);
 				break;
 			}
 			case TableOption::Stats:
@@ -71,20 +66,25 @@ namespace Menu
 				break;
 			}
 			}
-			//if (table.currentTable != TableOption::Quit)
-			//{
-			//	EnterTable(account, table);
-			//}
-
+			if (table.currentTable != TableOption::Quit)
+			{
+				if (!EvaluateTableEarnings(account, table))
+				{
+					EnterTable(account, table);
+				}
+				else
+				{
+					table.currentTable = TableOption::Menu;
+				}
+			}
 		}
 	}
 
 	void EnterTable(Account& account, Table& table)
 	{
-		EvaluateTableEarnings(account, table);
 
 		TableOption chosenTable = table.currentTable;
-		while (table.currentTable == chosenTable)
+		while (table.currentTable == chosenTable && table.currentTable != TableOption::Quit)
 		{
 			ShowPersonalDetails(account);
 			ShowOptions(table);
@@ -147,4 +147,6 @@ namespace Menu
 			}
 		}
 	}
+
+
 }

@@ -129,11 +129,12 @@ namespace Games
 		HighOrLowPoints points = {};
 
 		points.currentPoints = 0;
-		int currentCardIndex = DrawRandomCard(cards.cardsLeft, cards);
+		int currentCardIndex = DrawRandomCard(cards);
 		bool gameOver = false;
 
 		while (!gameOver)
 		{
+
 			Print::ShowPersonalDetails(account);
 			std::cout << "\n";
 
@@ -155,7 +156,7 @@ namespace Games
 			system("pause");
 			std::cout << "\n";
 
-			int randomCardIndex = DrawRandomCard(cards.cardsLeft, cards);
+			int randomCardIndex = DrawRandomCard(cards);
 			bool cardIsHigher = CompareCards(cards.cardValues[currentCardIndex], cards.cardValues[randomCardIndex]);
 
 			std::cout << "You drew: [" << cards.cardLabels[randomCardIndex] << "]\n";
@@ -184,21 +185,23 @@ namespace Games
 			if (IsHigherOrLowerGameOver(cards))
 			{
 				std::cout << "Deck of cards is empty!\n";
-				std::cout << "You got " << points.currentPoints << "/9 correct\n";
+				std::cout << "You got: " << points.currentPoints << "/13 correct\n";
+				std::cout << "Required points to win: " << points.requiredPoints << "/13 correct\n";
+
 				if (points.currentPoints >= points.requiredPoints)
 				{
 					int win = account.bet * table.betMulti.betMultiHigherOrLower;
 					account.money += win;
 					table.moneyArr[TableToIndex(TableOption::HighOrLow)] += win;
-					std::cout << "<--- 2X WIN! --->\n";
-					std::cout << "Payout: " << win << "\n";
+					std::cout << "<--- 3X WIN! --->\n";
+					std::cout << "Payout: " << win << " kr.\n""\n";
 					UpdateStats(table, true);
 				}
 				else
 				{
 					account.money -= account.bet;
 					table.moneyArr[TableToIndex(TableOption::HighOrLow)] -= account.bet;
-					std::cout << "You lost: " << account.bet << "\n";
+					std::cout << "\nYou lost: " << account.bet << " kr.\n";
 					UpdateStats(table, false);
 				}
 				gameOver = true;

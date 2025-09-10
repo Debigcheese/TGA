@@ -1,4 +1,5 @@
 #include "Helpers.h"
+#include "Structs.h"
 #include <iostream>
 #include <random>
 
@@ -22,9 +23,10 @@ namespace Helpers
 
 	int RollDice()
 	{
+		Dice dice = {};
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(1, 6);
+		std::uniform_int_distribution<int> dist(dice.diceMin, dice.diceMax);
 		return dist(rng);
 	}
 
@@ -39,6 +41,7 @@ namespace Helpers
 		int index = static_cast<int>(gameResult);
 		return index;
 	}
+
 }
 
 //int randomCardIndex = dist(rng);

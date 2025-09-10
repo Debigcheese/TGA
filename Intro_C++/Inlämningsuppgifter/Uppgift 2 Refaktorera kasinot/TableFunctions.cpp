@@ -33,6 +33,7 @@ namespace TableFunctions
 		if (account.money <= 0)
 		{
 			std::cout << "\nYou're out of money! Security drag you out of the casino.\n";
+			std::cout << "\nYou leave with: " << account.money << "kr.";
 			table.currentTable = TableOption::Quit;
 		}
 		if (account.money < account.bet && table.currentTable != TableOption::Quit)
@@ -82,10 +83,15 @@ namespace TableFunctions
 		ShowStats(table);
 	}
 	// Table
-	void EvaluateTableEarnings(Account& account, Table& table)
+	bool EvaluateTableEarnings(Account& account, Table& table)
 	{
-
 		int tableIndex = TableToIndex(table.currentTable);
+		bool wonTooMuch = false;
+
+		if (table.currentTable == TableOption::Quit)
+		{
+			return wonTooMuch;
+		}
 
 		if (table.moneyArr[tableIndex] == 0) // first time
 		{
@@ -98,8 +104,7 @@ namespace TableFunctions
 				<< "\nYou've been on fire at this table, winning far too much...\n"
 				<< "The pit boss whispers to the guards, and they politely escort you away.\n"
 				<< "You are no longer welcome at this table.\n";
-			system("pause");
-			MainMenu(account, table);
+			wonTooMuch = true;
 		}
 		else if (table.moneyArr[tableIndex] < table.maxLosses)
 		{
@@ -115,25 +120,31 @@ namespace TableFunctions
 				<< "The dealer greets you with a sly smile.\n";
 		}
 		system("pause");
+		return wonTooMuch;
 	}
 
 	//Higher or lower
-	int DrawRandomCard(int cardsLeft[], Cards cards)
+	int DrawRandomCard(Cards& cards)
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, cards.deckSize);
+		std::uniform_int_distribution<int> dist(0, cards.deckSize - 1);
 		int randomCardIndex = 0;
 		while (true)
 		{
 			randomCardIndex = dist(rng);
 
-			if (cardsLeft[randomCardIndex] != 0)
+			if (cards.cardsLeft[randomCardIndex] != 0)
 			{
-				cardsLeft[randomCardIndex] = 0;
+				cards.cardsLeft[randomCardIndex] = 0;
+				break;
+			}
+			if (IsHigherOrLowerGameOver(cards))
+			{
 				break;
 			}
 		}
+
 		return randomCardIndex;
 	}
 

@@ -13,7 +13,7 @@ struct BetMultiplier
 	static constexpr int betMultiOddOrEven = 2;
 	static constexpr int betMultiSpinWheelSmall = 2;
 	static constexpr int betMultiSpinWheelBig = 40;
-	static constexpr int betMultiHigherOrLower = 2;
+	static constexpr int betMultiHigherOrLower = 3;
 };
 
 struct Table
@@ -24,6 +24,12 @@ struct Table
 	static constexpr int maxEarnings = 450;
 	static constexpr int maxLosses = -150;
 	static BetMultiplier betMulti;
+};
+
+struct Dice
+{
+	static constexpr int diceMin = 1;
+	static constexpr int diceMax = 6;
 };
 
 struct Cards

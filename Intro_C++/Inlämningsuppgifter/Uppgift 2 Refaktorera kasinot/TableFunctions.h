@@ -6,9 +6,9 @@ namespace TableFunctions
 {
 	void ChangeBet(Account& account);
 	void UpdateStats(Table& table, bool isWin);
-	void EvaluateTableEarnings(Account& account, Table& table);
+	bool EvaluateTableEarnings(Account& account, Table& table);
 	void HandleBankruptcy(Account& account, Table& table);
-	int DrawRandomCard(int cardsLeft[], Cards cards);
+	int DrawRandomCard(Cards& cards);
 	bool CompareCards(int previousCard, int newCard);
 	bool IsHigherOrLowerGameOver(Cards cards);
 }
