@@ -18,7 +18,6 @@ int main()
 
 	table.statArr; //stats [0] = guessing game | [1] = OddorEven | [2] = SpinTheWheel
 	table.moneyArr;//money per table
-	table.moneyArr[2] = +500;
 	ShowIntro(account);
 	MainMenu(account, table);
 	return 0;
