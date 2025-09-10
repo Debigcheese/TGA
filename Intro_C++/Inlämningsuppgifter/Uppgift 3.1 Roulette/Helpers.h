@@ -11,4 +11,6 @@ namespace Helpers
 	RouletteColor GetColorFromIndex(const char rouletteLayout[], const int i);
 	void PrintIndexWithColor(const RouletteColor color, const int i);
 	void PrintBracketsWithColor(const RouletteColor color, const int side);
+	OddOrEven GetOddOrEvenFromIndex(const int i);
+
 }

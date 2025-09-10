@@ -23,10 +23,9 @@ namespace Helpers
 
 	int RollDice()
 	{
-		Dice dice = {};
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(dice.diceMin, dice.diceMax);
+		std::uniform_int_distribution<int> dist(CONSTANTS::DICE_MIN, CONSTANTS::DICE_MAX);
 		return dist(rng);
 	}
 
@@ -81,6 +80,19 @@ namespace Helpers
 			return;
 		}
 
+	}
+
+	OddOrEven GetOddOrEvenFromIndex(const int i)
+	{
+		if (i != 0 && i % 2 == 0)
+		{
+			return OddOrEven::Even;
+		}
+		else if (i != 0 && i % 2 == 1)
+		{
+			return OddOrEven::Odd;
+		}
+		return OddOrEven::None;
 	}
 
 }

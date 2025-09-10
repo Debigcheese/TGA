@@ -25,7 +25,7 @@ namespace Menu
 
 			TableOption chosenTable = static_cast<TableOption>(ReadIntInRange(//reads 1-5
 				static_cast<int>(TableOption::GuessingGame),
-				static_cast<int>(TableOption::Quit))); // FIX
+				static_cast<int>(TableOption::Quit)));
 
 			switch (chosenTable)
 			{
@@ -49,6 +49,11 @@ namespace Menu
 				table.currentTable = TableOption::HighOrLow;
 				break;
 			}
+			case TableOption::Roulette:
+			{
+				table.currentTable = TableOption::Roulette;
+				break;
+			}
 			case TableOption::Stats:
 			{
 				ShowStats(table);
@@ -66,9 +71,9 @@ namespace Menu
 				break;
 			}
 			}
-			if (table.currentTable != TableOption::Quit)
+			if (table.currentTable != TableOption::Quit && table.currentTable != TableOption::Menu)
 			{
-				if (!EvaluateTableEarnings(account, table))
+				if (!EvaluateTableEarnings(table))
 				{
 					EnterTable(account, table);
 				}
@@ -82,7 +87,6 @@ namespace Menu
 
 	void EnterTable(Account& account, Table& table)
 	{
-
 		TableOption chosenTable = table.currentTable;
 		while (table.currentTable == chosenTable && table.currentTable != TableOption::Quit)
 		{
@@ -118,6 +122,11 @@ namespace Menu
 				case TableOption::HighOrLow:
 				{
 					PlayHigherOrLower(account, table);
+					break;
+				}
+				case TableOption::Roulette:
+				{
+					PlayRoulette(account, table);
 					break;
 				}
 				default: break;

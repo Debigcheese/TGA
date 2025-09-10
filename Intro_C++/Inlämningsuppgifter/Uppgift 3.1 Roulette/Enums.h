@@ -44,18 +44,21 @@ enum class RouletteBetType
 
 enum class OddOrEven
 {
+	None = 0,
 	Odd = 1,
 	Even = 2,
 };
 
 enum class RouletteColor
 {
+	None = 0,
 	Red = 1,
 	Black = 2,
 };
 
 enum class Columns
 {
+	None = 0,
 	Left = 1,
 	Middle = 2,
 	Right = 3,

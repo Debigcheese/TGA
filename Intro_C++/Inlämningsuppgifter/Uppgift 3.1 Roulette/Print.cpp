@@ -11,7 +11,7 @@ namespace Print
 	void ShowIntro(const Account& account)
 	{
 		std::cout << "Welcome to the funky basement casino!\n";
-		std::cout << "You start with $" << account.money << ".\n\n";
+		std::cout << "You start with " << account.money << " kr.\n\n";
 		system("pause");
 		system("cls");
 	}
@@ -19,7 +19,7 @@ namespace Print
 	void ShowPersonalDetails(const Account& account)
 	{
 		system("cls");
-		std::cout << "Wallet: " << account.money << " kr. \nCurrent bet: " << account.bet << " kr.\n";
+		std::cout << "Wallet: " << account.money << " kr \nCurrent bet: " << account.bet << " kr\n";
 	}
 
 	void ShowOptions(const Table& table)
@@ -32,8 +32,9 @@ namespace Print
 				<< "2) Odd or Even\n"
 				<< "3) Spin The Wheel\n"
 				<< "4) Higher or Lower\n"
-				<< "5) Show Stats\n"
-				<< "6) Leave casino\n"
+				<< "5) Roulette\n"
+				<< "6) Show Stats\n"
+				<< "7) Leave casino\n"
 				<< "Choice: ";
 		}
 		else if (table.currentTable == TableOption::GuessingGame)
@@ -76,6 +77,17 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
+		else if (table.currentTable == TableOption::Roulette)
+		{
+			std::cout
+				<< "\n=== Table: Roulette ===\n"
+				<< "1) Play a round\n"
+				<< "2) Change bet\n"
+				<< "3) Show rules\n"
+				<< "4) Leave table\n"
+				<< "Choice: ";
+		}
+
 
 	}
 
@@ -150,21 +162,21 @@ namespace Print
 			std::cout << "\n";
 		}
 	}
-	void ShowRouletteBets()
-	{
-		std::cout << "\n";
-		std::cout << "Place your bets! \n";
-		std::cout << "Straight:  (1)\n";
-		std::cout << "Red/Black  (2)\n";
-		std::cout << "Odd/Even:  (3)\n";
-		std::cout << "Column:    (4)\n\n";
-
-		std::cout << "Choice: ";
-	}
 
 	void PrintRouletteType(const Roulette& roulette)
 	{
 
 
+	}
+
+	void PrintRouletteBet()
+	{
+		std::cout << "\n";
+		std::cout << "Place your bets! \n";
+		std::cout << "(1) Straight  \n";
+		std::cout << "(2) Red/Black  \n";
+		std::cout << "(3) Odd/Even:  \n";
+		std::cout << "(4) Column:    \n";
+		std::cout << "Choice: ";
 	}
 }

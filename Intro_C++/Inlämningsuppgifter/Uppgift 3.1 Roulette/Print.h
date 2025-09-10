@@ -10,6 +10,6 @@ namespace Print
 	void ShowOptions(const Table& table);
 	void ShowRules(const Table& table);
 	void ShowStats(const Table& table);
-	void ShowRouletteBets();
 	void PrintRouletteType(const Roulette& roulette);
+	void PrintRouletteBet();
 }

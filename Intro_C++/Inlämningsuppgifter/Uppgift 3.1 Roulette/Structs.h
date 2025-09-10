@@ -1,70 +1,44 @@
 #pragma once
 #include "Enums.h"
+#include "CONSTANTS.h"
 
 struct Account
 {
-	int money = 1000;
-	int bet = 20;
-};
-
-struct BetMultiplier
-{
-	static constexpr int betMultiGuess = 5;
-	static constexpr int betMultiOddOrEven = 2;
-	static constexpr int betMultiSpinWheelSmall = 2;
-	static constexpr int betMultiSpinWheelBig = 40;
-	static constexpr int betMultiHigherOrLower = 3;
-
-	static constexpr int betMultiRouletteStraight = 36;
-	static constexpr int betMultiRouletteColor = 2;
-	static constexpr int betMultiRouletteOddOrEven = 2;
-	static constexpr int betMultiRouletteCol = 3;
+	int money = CONSTANTS::DEFAULT_MONEY;
+	int bet = CONSTANTS::DEFAULT_BET;
 };
 
 struct Table
 {
-	TableOption currentTable = TableOption::Menu;
-	int statArr[5];
-	int moneyArr[4];
-	static constexpr int maxEarnings = 450;
-	static constexpr int maxLosses = -150;
-	static BetMultiplier betMulti;
-};
-
-struct Dice
-{
-	static constexpr int diceMin = 1;
-	static constexpr int diceMax = 6;
+	TableOption currentTable = CONSTANTS::DEFAULT_TABLE;
+	int statArr[CONSTANTS::STAT_ARRAY_SIZE];
+	int moneyArr[CONSTANTS::MONEY_ARRAY_SIZE];
 };
 
 struct Cards
 {
-	static constexpr int deckSize = 13;
-	const char* cardLabels[deckSize] = { "2","3","4","5","6","7","8","9","10","J","Q","K","A" };
-	const int cardValues[deckSize] = { 2,3,4,5,6,7,8,9,10,11,12,13,14 };
-	int cardsLeft[deckSize] = { 1,1,1,1,1,1,1,1,1,1,1,1,1 };
+	const char* cardLabels[CONSTANTS::DECK_SIZE] = { "2","3","4","5","6","7","8","9","10","J","Q","K","A" };
+	const int cardValues[CONSTANTS::DECK_SIZE] = { 2,3,4,5,6,7,8,9,10,11,12,13,14 };
+	int cardsLeft[CONSTANTS::DECK_SIZE] = { 1,1,1,1,1,1,1,1,1,1,1,1,1 };
 };
 
 struct HighOrLowPoints
 {
-	int currentPoints;
-	static constexpr int requiredPoints = 9;
+	int currentPoints = CONSTANTS::CURRENT_POINTS;
+	const int requiredPoints = CONSTANTS::REQUIRED_POINTS;
 };
 
-struct RouletteBetTypes
+struct RouletteBetPerType
 {
-	int straight;
-	RouletteColor color;
-	OddOrEven OddOrEven;
-	Columns column;
+	int straight = CONSTANTS::ROULETTE_STRAIGHT;
+	RouletteColor color = CONSTANTS::ROULETTE_COLOR;
+	OddOrEven OddOrEven = CONSTANTS::ROULETTE_ODD_OR_EVEN;
+	Columns column = CONSTANTS::ROULETTE_COLUMN;
 };
 
 struct Roulette
 {
-	static constexpr int rouletteSize = 37;
-	static constexpr int columnAmount = 3;
-
-	const char rouletteLayout[rouletteSize] =
+	const char rouletteLayout[CONSTANTS::ROULETTE_ARRAY_SIZE] =
 	{ '0',
 		'R','B','R',
 		'B','R','B',
@@ -82,8 +56,10 @@ struct Roulette
 		'R','B','R',
 	};
 
-	RouletteBetTypes betType;
-	RouletteBetTypes winningBetType;
+	RouletteBetType betType = RouletteBetType::None;
+	RouletteBetPerType betPerType = {};
+
+	RouletteBetPerType winningType = {};
 };
 
 

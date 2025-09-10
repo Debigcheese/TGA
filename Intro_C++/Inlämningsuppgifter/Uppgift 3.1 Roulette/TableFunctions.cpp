@@ -14,6 +14,7 @@ namespace TableFunctions
 	using namespace TableFunctions;
 	using namespace Games;
 	using namespace Menu;
+	using namespace CONSTANTS;
 
 	void ChangeBet(Account& account)
 	{
@@ -48,7 +49,7 @@ namespace TableFunctions
 	{
 		if (rouletteBetType == RouletteBetType::Straight)
 		{
-			int win = account.bet * table.betMulti.betMultiRouletteStraight;
+			int win = account.bet * BET_MULTI_ROULETTE_STRAIGHT;
 			account.money += win;
 			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
 			std::cout << "<--- 36X WIN! --->\n";
@@ -57,16 +58,16 @@ namespace TableFunctions
 		}
 		else if (rouletteBetType == RouletteBetType::RedBlack)
 		{
-			int win = account.bet * table.betMulti.betMultiRouletteColor;
+			int win = account.bet * BET_MULTI_ROULETTE_COLOR;
 			account.money += win;
 			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
 			std::cout << "<--- 2X WIN! --->\n";
 			std::cout << "Payout: " << win << " kr.\n""\n";
 			UpdateStats(table, true);
 		}
-		else if (rouletteBetType == RouletteBetType::RedBlack)
+		else if (rouletteBetType == RouletteBetType::OddEven)
 		{
-			int win = account.bet * table.betMulti.betMultiOddOrEven;
+			int win = account.bet * BET_MULTI_ROULETTE_ODDOREVEN;
 			account.money += win;
 			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
 			std::cout << "<--- 2X WIN! --->\n";
@@ -75,7 +76,7 @@ namespace TableFunctions
 		}
 		else if (rouletteBetType == RouletteBetType::Column)
 		{
-			int win = account.bet * table.betMulti.betMultiOddOrEven;
+			int win = account.bet * BET_MULTI_ROULETTE_COLUMN;
 			account.money += win;
 			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
 			std::cout << "<--- 3X WIN! --->\n";
@@ -123,7 +124,7 @@ namespace TableFunctions
 		ShowStats(table);
 	}
 	// Table
-	bool EvaluateTableEarnings(Account& account, Table& table)
+	bool EvaluateTableEarnings(Table& table)
 	{
 		int tableIndex = TableToIndex(table.currentTable);
 		bool wonTooMuch = false;
@@ -138,7 +139,7 @@ namespace TableFunctions
 			std::cout << "\nThe dealer greets you with a sly smile.\n";
 
 		}
-		else if (table.moneyArr[tableIndex] > table.maxEarnings)
+		else if (table.moneyArr[tableIndex] > EARNINGS_MAX)
 		{
 			std::cout
 				<< "\nYou've been on fire at this table, winning far too much...\n"
@@ -146,7 +147,7 @@ namespace TableFunctions
 				<< "You are no longer welcome at this table.\n";
 			wonTooMuch = true;
 		}
-		else if (table.moneyArr[tableIndex] < table.maxLosses)
+		else if (table.moneyArr[tableIndex] < LOSSES_MAX)
 		{
 			std::cout
 				<< "\nThis table has not been kind to you...\n"
@@ -168,7 +169,7 @@ namespace TableFunctions
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, cards.deckSize - 1);
+		std::uniform_int_distribution<int> dist(0, DECK_SIZE - 1);
 		int randomCardIndex = 0;
 		while (true)
 		{
@@ -201,7 +202,7 @@ namespace TableFunctions
 
 	}
 
-	bool IsHigherOrLowerGameOver(Cards cards)
+	bool IsHigherOrLowerGameOver(const Cards& cards)
 	{
 		int countCardsLeft = 0;
 		for (int card : cards.cardsLeft)
@@ -210,7 +211,7 @@ namespace TableFunctions
 			{
 				countCardsLeft++;
 			}
-			if (countCardsLeft >= cards.deckSize)
+			if (countCardsLeft >= DECK_SIZE)
 			{
 				return true;
 			}
@@ -220,7 +221,7 @@ namespace TableFunctions
 
 	void DrawRouletteBoard(const Roulette& roulette)
 	{
-		for (int i = 0; i < roulette.rouletteSize; i++)
+		for (int i = 0; i < ROULETTE_ARRAY_SIZE; i++)
 		{
 			if (i == 0)
 			{
@@ -250,49 +251,66 @@ namespace TableFunctions
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, roulette.rouletteSize);
+		std::uniform_int_distribution<int> dist(0, ROULETTE_ARRAY_SIZE);
 
 		int randomRouletteNumber = dist(rng);
 
 		return randomRouletteNumber;
 	}
 
-	void RouletteCorrectGuess(Roulette& roulette, const int winningNumber)
+	bool RouletteStraightGuess(Roulette& roulette, const int& winningNumber)
 	{
-
-		if (roulette.betType.straight == winningNumber)
+		if (roulette.betType == RouletteBetType::Straight &&
+			roulette.betPerType.straight == winningNumber)
 		{
-			roulette.winningBetType;
-			roulette.betType.straight;
+			return true;
 		}
-		if (roulette.betType.color == GetColorFromIndex(roulette.rouletteLayout, winningNumber))
+		return false;
+	}
+
+	RouletteColor RouletteColorGuess(Roulette& roulette, const int& winningNumber)
+	{
+		RouletteColor color = GetColorFromIndex(roulette.rouletteLayout, winningNumber);
+
+		if (roulette.betPerType.color == color)
 		{
-
-		}
-		for (int i = 0; i < roulette.rouletteSize; i++)
-		{
-			if (roulette.betType.OddOrEven == OddOrEven::Odd && winningNumber % 2 == 1 && winningNumber != 0)
-			{
-
-			}
-			else if (roulette.betType.OddOrEven == OddOrEven::Even && winningNumber % 2 == 0 && winningNumber != 0)
-			{
-
-			}
-			else if (roulette.betType.column == Columns::Left && winningNumber % 3 == 0 && winningNumber != 0)
-			{
-
-			}
-			else if (roulette.betType.column == Columns::Middle && winningNumber % 3 == 1 && winningNumber != 0)
-			{
-
-			}
-			else if (roulette.betType.column == Columns::Right && winningNumber % 3 == 2 && winningNumber != 0)
-			{
-
-			}
+			return color;
 		}
 
+		return RouletteColor::None;
+	}
+
+	OddOrEven RouletteOddOrEvenGuess(Roulette& roulette, const int& winningNumber)
+	{
+		OddOrEven OddOrEven = GetOddOrEvenFromIndex(winningNumber);
+
+		if (roulette.betPerType.OddOrEven == OddOrEven && roulette.betPerType.OddOrEven == OddOrEven::Even)
+		{
+			return OddOrEven::Even;
+		}
+		else if (roulette.betPerType.OddOrEven == OddOrEven && roulette.betPerType.OddOrEven == OddOrEven::Odd)
+		{
+			return OddOrEven::Odd;
+		}
+		return OddOrEven::None;
+	}
+
+	Columns RouletteColumnGuess(Roulette& roulette, const int& winningNumber)
+	{
+		if (roulette.betPerType.column == Columns::Left && winningNumber % 3 == 0 && winningNumber != 0)
+		{
+			return Columns::Left;
+		}
+		else if (roulette.betPerType.column == Columns::Middle && winningNumber % 3 == 1 && winningNumber != 0)
+		{
+			return Columns::Middle;
+		}
+		else if (roulette.betPerType.column == Columns::Right && winningNumber % 3 == 2 && winningNumber != 0)
+		{
+			return Columns::Right;
+		}
+
+		return Columns::None;
 	}
 
 

@@ -135,6 +135,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CONSTANTS.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Games.h" />
     <ClInclude Include="Helpers.h" />

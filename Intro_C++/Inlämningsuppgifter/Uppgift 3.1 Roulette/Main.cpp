@@ -16,11 +16,9 @@ int main()
 	Account account = {};
 	Table table = {};
 
-	table.statArr; //stats [0] = guessing game | [1] = OddorEven | [2] = SpinTheWheel
-	table.moneyArr;//money per table
+	table.statArr;
+	table.moneyArr;
 
-	Games::PlayRoulette(account, table);
-	system("pause");
 	ShowIntro(account);
 	MainMenu(account, table);
 	return 0;
