@@ -1,6 +1,7 @@
 #pragma once
 #include "Enums.h"
 #include "CONSTANTS.h"
+#include <string>
 
 struct Account
 {
@@ -57,9 +58,12 @@ struct Roulette
 	};
 
 	RouletteBetType betType = RouletteBetType::None;
-	RouletteBetPerType betPerType = {};
 
+	RouletteBetPerType betPerType = {};
 	RouletteBetPerType winningType = {};
+
+	std::string betTypeString = "";
+	std::string winningBetTypeString = "";
 };
 
 

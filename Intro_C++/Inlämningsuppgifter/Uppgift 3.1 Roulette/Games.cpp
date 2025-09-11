@@ -91,7 +91,7 @@ namespace Games
 
 		std::cout << dice1 << " | " << dice2 << " | " << dice3 << "\n";
 
-		int win = account.bet;
+		int win = 0;
 
 		if (dice1 == dice2 && dice2 == dice3)
 		{
@@ -217,175 +217,109 @@ namespace Games
 
 	void PlayRoulette(Account& account, Table& table)
 	{
-		Roulette roulette;
-		RouletteBetType betType;
-		std::string betTypeString = "";
+		Roulette roulette = {};
 
 		while (true)
 		{
 			Print::ShowPersonalDetails(account);
 			std::cout << "\n";
 			DrawRouletteBoard(roulette);
-			PrintRouletteBet();
+			PrintRouletteBet(RouletteBetType::None);
 
 			int choiceMin = static_cast<int>(RouletteBetType::Straight);
 			int choiceMax = static_cast<int>(RouletteBetType::Column);
 
 			int choice = ReadIntInRange(choiceMin, choiceMax);
-			betType = static_cast<RouletteBetType>(choice);
+			roulette.betType = static_cast<RouletteBetType>(choice);
 
 			system("cls");
 			Print::ShowPersonalDetails(account);
 			std::cout << "\n";
 			DrawRouletteBoard(roulette);
-
-			switch (betType)
-			{
-			case RouletteBetType::Straight:
-			{
-				std::cout << "\nPick your number!\n";
-				std::cout << "Choice: ";
-				int choiceStraight = ReadIntInRange(0, ROULETTE_ARRAY_SIZE);
-				roulette.betPerType.straight = choiceStraight;
-
-				std::cout << "\nYou betted on: " << choiceStraight << "\n";
-				break;
-			}
-			case RouletteBetType::RedBlack:
-			{
-				std::cout << "\nChoose Red or Black! \n";
-				std::cout << "Red   (1)\n";
-				std::cout << "Black (2)\n";
-				std::cout << "Choice: ";
-
-				int colorIndexMin = static_cast<int>(RouletteColor::Red);
-				int colorIndexMax = static_cast<int>(RouletteColor::Black);
-				int choiceColor = ReadIntInRange(colorIndexMin, colorIndexMax);
-				roulette.betPerType.color = static_cast<RouletteColor>(choiceColor);
-
-				if (choiceColor == static_cast<int>(RouletteColor::Red))
-				{
-					betTypeString = "Red";
-				}
-				else
-				{
-					betTypeString = "Black";
-				}
-				std::cout << "\nYou betted on: " << betTypeString << "\n";
-				break;
-			}
-			case RouletteBetType::OddEven:
-			{
-				std::cout << "\nChoose odd or even! \n";
-				std::cout << "Odd  (1)\n";
-				std::cout << "Even (2)\n";
-				std::cout << "Choice: ";
-
-				int OddOrEvenMin = static_cast<int>(OddOrEven::Odd);
-				int OddOrEvenMax = static_cast<int>(OddOrEven::Even);
-				int choiceOddOrEven = ReadIntInRange(OddOrEvenMin, OddOrEvenMax);
-				roulette.betPerType.OddOrEven = static_cast<OddOrEven>(choiceOddOrEven);
-
-				if (choiceOddOrEven == static_cast<int>(OddOrEven::Odd))
-				{
-					betTypeString = "Odd";
-				}
-				else
-				{
-					betTypeString = "Even";
-				}
-				std::cout << "\nYou betted on: " << betTypeString << "\n";
-				break;
-			}
-			case RouletteBetType::Column:
-			{
-				std::cout << "\nChoose column! \n";
-				std::cout << "Left Column   (1)\n";
-				std::cout << "Middle Column (2)\n";
-				std::cout << "Right Column  (3)\n";
-				std::cout << "Choice: ";
-
-				int colMin = static_cast<int>(Columns::Left);
-				int colMax = static_cast<int>(Columns::Right);
-				int choiceColumn = ReadIntInRange(colMin, colMax);
-				roulette.betPerType.column = static_cast<Columns>(choiceColumn);
-
-				if (choiceColumn == static_cast<int>(Columns::Left))
-				{
-					betTypeString = "Left";
-				}
-				else if (choiceColumn == static_cast<int>(Columns::Middle))
-				{
-					betTypeString = "Middle";
-				}
-				else
-				{
-					betTypeString = "Right";
-				}
-				std::cout << "\nYou betted on: " << betTypeString << "\n";
-				break;
-			}
-			default:
-			{
-				break;
-			}
-			}
-			system("pause");
-			std::cout << "\nBall is rolling... \n\n";
-			system("pause");
-
 			int winningNumber = GenerateRouletteNumber(roulette);
 
 			switch (roulette.betType)
 			{
 			case RouletteBetType::Straight:
 			{
-				roulette.winningType.straight = RouletteStraightGuess(roulette, winningNumber);
+				PrintRouletteBet(RouletteBetType::Straight);
+				int choiceStraight = ReadIntInRange(0, ROULETTE_ARRAY_SIZE - 1);
+				roulette.betPerType.straight = choiceStraight;
+				roulette.winningType.straight = winningNumber;
 				break;
 			}
 			case RouletteBetType::RedBlack:
 			{
-				roulette.winningType.color = RouletteColorGuess(roulette, winningNumber);
+				PrintRouletteBet(RouletteBetType::RedBlack);
+				int colorIndexMin = static_cast<int>(RouletteColor::Red);
+				int colorIndexMax = static_cast<int>(RouletteColor::Black);
+				int choiceColor = ReadIntInRange(colorIndexMin, colorIndexMax);
+
+				roulette.betPerType.color = static_cast<RouletteColor>(choiceColor);
+				roulette.winningType.color = GetColorFromIndex(roulette.rouletteLayout, winningNumber);
 				break;
 			}
 			case RouletteBetType::OddEven:
 			{
-				roulette.winningType.OddOrEven = RouletteOddOrEvenGuess(roulette, winningNumber);
+				PrintRouletteBet(RouletteBetType::OddEven);
+				int OddOrEvenMin = static_cast<int>(OddOrEven::Odd);
+				int OddOrEvenMax = static_cast<int>(OddOrEven::Even);
+				int choiceOddOrEven = ReadIntInRange(OddOrEvenMin, OddOrEvenMax);
+
+				roulette.betPerType.OddOrEven = static_cast<OddOrEven>(choiceOddOrEven);
+				roulette.winningType.OddOrEven = GetOddOrEvenFromIndex(winningNumber);
 				break;
 			}
 			case RouletteBetType::Column:
 			{
-				roulette.winningType.column = RouletteColumnGuess(roulette, winningNumber);
+				PrintRouletteBet(RouletteBetType::Column);
+				int colMin = static_cast<int>(Columns::Left);
+				int colMax = static_cast<int>(Columns::Right);
+				int choiceColumn = ReadIntInRange(colMin, colMax);
+
+				roulette.betPerType.column = static_cast<Columns>(choiceColumn);
+				roulette.winningType.column = GetColumnFromIndex(winningNumber);
 				break;
 			}
-			{
 			default:
 			{
 				break;
 			}
 			}
 
-			std::cout << "\n" << "Your guess: ";
-			if (roulette.betType == RouletteBetType::Straight)
+			roulette.betTypeString = GetStringFromRoulette(roulette.betPerType, roulette.betType);
+			roulette.winningBetTypeString = GetStringFromRoulette(roulette.winningType, roulette.betType);
+
+			std::cout << "\nYou betted on: " << roulette.betTypeString << "\n";
+			std::cout << "Ball is rolling...\n";
+			system("pause");
+
+			system("cls");
+
+			Print::ShowPersonalDetails(account);
+			std::cout << "\n";
+			DrawRouletteBoard(roulette);
+			std::cout << "\n";
+
+			std::cout << "Ball landed on: " << winningNumber << "\n\n";
+			std::cout << "Your guess: " << roulette.betTypeString << "\n";
+			std::cout << "Winning guess: " << roulette.winningBetTypeString << "\n\n";
+
+			if (RouletteResult(roulette))
 			{
-				std::cout << roulette.betPerType.straight;
+				RouletteBetPayout(account, table, roulette.betType);
 			}
 			else
 			{
-				std::cout << betTypeString;
+				account.money -= account.bet;
+				table.moneyArr[TableToIndex(TableOption::Roulette)] -= account.bet;
+				std::cout << "House wins. You lose " << account.bet << " kr.\n";
+				UpdateStats(table, false);
 			}
-			std::cout << "\n" << "Correct guess: ";
+			system("pause");
+			break;
 
-			// function that prints enum to string or return string, check if won or not, do payouts etc, setup rules.
-			//make it so you go back to play round table menu after a round.
-
-
-
-
-
-
-
-			}
+			// setup rules. make it so you go back to play round table menu after a round.
 		}
 	}
 }

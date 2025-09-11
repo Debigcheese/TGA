@@ -87,8 +87,6 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
-
-
 	}
 
 	void ShowRules(const Table& table)
@@ -133,6 +131,18 @@ namespace Print
 				<< "Lose if you fail to reach the required points.\n"
 				<< "Payout: 2x if you win.\n";
 		}
+		else if (table.currentTable == TableOption::Roulette)
+		{
+			std::cout
+				<< "\n--- Rules: Roulette ---\n"
+				<< "Place one bet type per spin.\n"
+				<< "Bet types & payouts:\n"
+				<< "1) Straight: Pick a single number (0-36). If the ball lands on it, payout 36x.\n"
+				<< "2) Red/Black: Pick a color. If the ball lands on that color, payout 1x.\n"
+				<< "3) Odd/Even: Pick Odd or Even. If the ball lands matching parity, payout 1x.\n"
+				<< "4) Column: Pick one of the three columns. If the ball lands in that column, payout 3x.\n"
+				<< "If your guess is incorrect, the house wins and you lose your bet\n\n";
+		}
 		system("pause");
 	}
 
@@ -163,20 +173,54 @@ namespace Print
 		}
 	}
 
-	void PrintRouletteType(const Roulette& roulette)
+	void PrintRouletteBet(const RouletteBetType& betType)
 	{
-
-
-	}
-
-	void PrintRouletteBet()
-	{
-		std::cout << "\n";
-		std::cout << "Place your bets! \n";
-		std::cout << "(1) Straight  \n";
-		std::cout << "(2) Red/Black  \n";
-		std::cout << "(3) Odd/Even:  \n";
-		std::cout << "(4) Column:    \n";
+		switch (betType)
+		{
+		case RouletteBetType::None:
+		{
+			std::cout << "\n";
+			std::cout << "Place your bets! \n";
+			std::cout << "(1) Straight  \n";
+			std::cout << "(2) Red/Black  \n";
+			std::cout << "(3) Odd/Even:  \n";
+			std::cout << "(4) Column:    \n";
+			break;
+		}
+		case RouletteBetType::Straight:
+		{
+			std::cout << "\nPick your number!\n";
+			break;
+		}
+		case RouletteBetType::RedBlack:
+		{
+			std::cout << "\nChoose Red or Black! \n";
+			std::cout << "Red   (1)\n";
+			std::cout << "Black (2)\n";
+			break;
+		}
+		case RouletteBetType::OddEven:
+		{
+			std::cout << "\nChoose odd or even! \n";
+			std::cout << "Odd  (1)\n";
+			std::cout << "Even (2)\n";
+			break;
+		}
+		case RouletteBetType::Column:
+		{
+			std::cout << "\nChoose column! \n";
+			std::cout << "Left Column   (1)\n";
+			std::cout << "Middle Column (2)\n";
+			std::cout << "Right Column  (3)\n";
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
 		std::cout << "Choice: ";
+
+
 	}
 }

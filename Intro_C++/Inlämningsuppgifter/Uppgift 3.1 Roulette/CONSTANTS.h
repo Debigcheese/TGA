@@ -31,14 +31,20 @@ namespace CONSTANTS
 	static const int ROULETTE_ARRAY_SIZE = 37;
 	static const int COLUMN_TOTAL_AMOUNT = 3;
 	static const int ROULETTE_STRAIGHT = 0;
+	static const int ROULETTE_BOARD_SINGLE_DIGIT_THRESHOLD = 10;
 	static const RouletteColor ROULETTE_COLOR = RouletteColor::Black;
 	static const OddOrEven ROULETTE_ODD_OR_EVEN = OddOrEven::Odd;
 	static const Columns ROULETTE_COLUMN = Columns::Middle;
 
 	// ROULETTE PAYOUT
 	static const int BET_MULTI_ROULETTE_STRAIGHT = 36;
-	static const int BET_MULTI_ROULETTE_COLOR = 2;
-	static const int BET_MULTI_ROULETTE_ODDOREVEN = 2;
+	static const int BET_MULTI_ROULETTE_COLOR = 1;
+	static const int BET_MULTI_ROULETTE_ODDOREVEN = 1;
 	static const int BET_MULTI_ROULETTE_COLUMN = 3;
+
+	//MY_TO_STRING
+	static const int MY_TO_STRING_BUFFER_SIZE = 12;
+	static const int MY_TO_STRING_INDEX = 11;
+	static const int MY_TO_STRING_DECIMAL_BASE = 10;
 
 }

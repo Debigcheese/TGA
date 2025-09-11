@@ -8,7 +8,6 @@ namespace TableFunctions
 	void UpdateStats(Table& table, bool isWin);
 	bool EvaluateTableEarnings(Table& table);
 	void HandleBankruptcy(Account& account, Table& table);
-	void RoulettePayout(Account& account, Table& table, RouletteBetType rouletteBetType);
 	//HigherOrLower
 	int DrawRandomCard(Cards& cards);
 	bool CompareCards(int previousCard, int newCard);
@@ -16,10 +15,7 @@ namespace TableFunctions
 	//Roulette
 	void DrawRouletteBoard(const Roulette& roulette);
 	int GenerateRouletteNumber(const Roulette& roulette);
-
-	bool RouletteStraightGuess(Roulette& roulette, const int& winningNumber);
-	RouletteColor RouletteColorGuess(Roulette& roulette, const int& winningNumber);
-	OddOrEven RouletteOddOrEvenGuess(Roulette& roulette, const int& winningNumber);
-	Columns RouletteColumnGuess(Roulette& roulette, const int& winningNumber);
+	bool RouletteResult(const Roulette& roulette);
+	void RouletteBetPayout(Account& account, Table& table, const RouletteBetType& betType);
 
 }

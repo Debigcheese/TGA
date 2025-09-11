@@ -51,20 +51,20 @@ namespace Helpers
 		return RouletteColor::Black;
 	}
 
-	void PrintIndexWithColor(const RouletteColor color, const int i)
+	void PrintIndexWithColor(const RouletteColor color, const int index)
 	{
 		if (color == RouletteColor::Red)
 		{
-			std::cout << "\033[31m" << i << "\033[0m";
+			std::cout << "\033[31m" << index << "\033[0m";
 			return;
 		}
-		std::cout << "\033[37m" << i << "\033[0m";
+		std::cout << "\033[37m" << index << "\033[0m";
 	}
 
-	void PrintBracketsWithColor(const RouletteColor color, const int side)
+	void PrintBracketsWithColor(const RouletteColor color, const Side side)
 	{
 		char bracket = '[';
-		if (side == 1)
+		if (side == Side::Right)
 		{
 			bracket = ']';
 		}
@@ -82,17 +82,113 @@ namespace Helpers
 
 	}
 
-	OddOrEven GetOddOrEvenFromIndex(const int i)
+	OddOrEven GetOddOrEvenFromIndex(const int index)
 	{
-		if (i != 0 && i % 2 == 0)
+		if (index != 0 && index % 2 == 0)
 		{
 			return OddOrEven::Even;
 		}
-		else if (i != 0 && i % 2 == 1)
+		else if (index != 0 && index % 2 == 1)
 		{
 			return OddOrEven::Odd;
 		}
 		return OddOrEven::None;
+	}
+
+	Columns GetColumnFromIndex(const int index)
+	{
+		if (index % 3 == 1 && index != 0)
+		{
+			return Columns::Left;
+		}
+		else if (index % 3 == 2 && index != 0)
+		{
+			return Columns::Middle;
+		}
+		else if (index % 3 == 0 && index != 0)
+		{
+			return Columns::Right;
+		}
+	}
+
+	std::string GetStringFromRoulette(const RouletteBetPerType betPerType, const RouletteBetType betType)
+	{
+		std::string betTypeString = "";
+
+		switch (betType)
+		{
+		case RouletteBetType::Straight:
+		{
+			betTypeString = myToString(betPerType.straight); // std::to_string(betPerType.straight);
+			break;
+		}
+		case RouletteBetType::RedBlack:
+		{
+			if (betPerType.color == RouletteColor::Red)
+			{
+				betTypeString = "Red";
+			}
+			else
+			{
+				betTypeString = "Black";
+			}
+			break;
+		}
+		case RouletteBetType::OddEven:
+		{
+			if (betPerType.OddOrEven == OddOrEven::Odd)
+			{
+				betTypeString = "Odd";
+			}
+			else
+			{
+				betTypeString = "Even";
+			}
+			break;
+		}
+		case RouletteBetType::Column:
+		{
+			if (betPerType.column == Columns::Left)
+			{
+				betTypeString = "Left";
+			}
+			else if (betPerType.column == Columns::Middle)
+			{
+				betTypeString = "Middle";
+			}
+			else
+			{
+				betTypeString = "Right";
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+		return betTypeString;
+	}
+
+	std::string myToString(int value)
+	{
+		if (value <= 0)
+		{
+			return std::string("0");
+		}
+		char buffer[CONSTANTS::MY_TO_STRING_BUFFER_SIZE] = {};
+		int index = CONSTANTS::MY_TO_STRING_INDEX;
+		int decimalBase = CONSTANTS::MY_TO_STRING_DECIMAL_BASE;
+		buffer[index] = '\0';
+
+		while (value > 0)
+		{
+			index--;
+			buffer[index] = '0' + (value % decimalBase);
+			value /= decimalBase;
+		}
+
+		return std::string(&buffer[index]);
 	}
 
 }

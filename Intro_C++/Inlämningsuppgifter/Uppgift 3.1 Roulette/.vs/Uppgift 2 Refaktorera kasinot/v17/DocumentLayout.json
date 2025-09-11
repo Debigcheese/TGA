@@ -1,54 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\",
+  "WorkspaceRootPath": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Print.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Print.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:TableFunctions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Print.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Helpers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C5A09AFC-245D-4C9D-B634-6A4AC7FCD40F}|Uppgift 2 Refaktorera kasinot.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,166 +50,136 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Print.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp",
-              "RelativeDocumentMoniker": "Print.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp",
-              "RelativeToolTip": "Print.cpp",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAACIAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T21:26:45.804Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Print.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.h",
-              "RelativeDocumentMoniker": "Print.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.h",
-              "RelativeToolTip": "Print.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T21:26:45.201Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Menu.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Menu.cpp",
-              "RelativeDocumentMoniker": "Menu.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Menu.cpp",
-              "RelativeToolTip": "Menu.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABYAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T21:26:07.337Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Main.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp",
-              "RelativeDocumentMoniker": "Main.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp",
-              "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T21:26:35.465Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Helpers.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h",
-              "RelativeDocumentMoniker": "Helpers.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h",
-              "RelativeToolTip": "Helpers.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T20:52:33.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Helpers.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp",
-              "RelativeDocumentMoniker": "Helpers.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp",
-              "RelativeToolTip": "Helpers.cpp",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAAAFcAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T20:52:32.465Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TableFunctions.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h",
-              "RelativeDocumentMoniker": "TableFunctions.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h",
-              "RelativeToolTip": "TableFunctions.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T20:12:21.22Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "TableFunctions.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp",
-              "RelativeDocumentMoniker": "TableFunctions.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp",
-              "RelativeToolTip": "TableFunctions.cpp",
-              "ViewState": "AgIAAPwAAAAAAAAAAAAAAAkBAAAPAAAAAAAAAA==",
+              "Title": "Print.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp",
+              "RelativeDocumentMoniker": "Print.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Print.cpp",
+              "RelativeToolTip": "Print.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH0AAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T20:12:19.532Z",
+              "WhenOpened": "2025-09-11T12:38:04.31Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Enums.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h",
               "RelativeDocumentMoniker": "Enums.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Enums.h",
               "RelativeToolTip": "Enums.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAEAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T19:59:13.208Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Games.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp",
-              "RelativeDocumentMoniker": "Games.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp",
-              "RelativeToolTip": "Games.cpp",
-              "ViewState": "AgIAAGYBAAAAAAAAAAAAAHsBAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-10T19:56:58.409Z",
+              "WhenOpened": "2025-09-11T11:42:17.189Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "CONSTANTS.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h",
               "RelativeDocumentMoniker": "CONSTANTS.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\CONSTANTS.h",
               "RelativeToolTip": "CONSTANTS.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T19:56:56.585Z",
+              "WhenOpened": "2025-09-11T11:37:06.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Structs.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h",
+              "RelativeDocumentMoniker": "Structs.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h",
+              "RelativeToolTip": "Structs.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-11T11:21:23.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TableFunctions.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h",
+              "RelativeDocumentMoniker": "TableFunctions.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.h",
+              "RelativeToolTip": "TableFunctions.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-11T10:12:28.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TableFunctions.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp",
+              "RelativeDocumentMoniker": "TableFunctions.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\TableFunctions.cpp",
+              "RelativeToolTip": "TableFunctions.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-11T10:12:27.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Helpers.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h",
+              "RelativeDocumentMoniker": "Helpers.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.h",
+              "RelativeToolTip": "Helpers.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-11T10:11:53.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Helpers.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp",
+              "RelativeDocumentMoniker": "Helpers.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Helpers.cpp",
+              "RelativeToolTip": "Helpers.cpp",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAAGEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-11T10:11:53.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Games.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp",
+              "RelativeDocumentMoniker": "Games.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Games.cpp",
+              "RelativeToolTip": "Games.cpp",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAAADkBAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-11T10:11:16.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Structs.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h",
-              "RelativeDocumentMoniker": "Structs.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Structs.h",
-              "RelativeToolTip": "Structs.h",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAADsAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-10T19:47:16.957Z",
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp",
+              "RelativeDocumentMoniker": "Main.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift 3.1 Roulette\\Main.cpp",
+              "RelativeToolTip": "Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-11T10:11:11.872Z",
               "EditorCaption": ""
             }
           ]

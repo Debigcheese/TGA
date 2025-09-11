@@ -64,5 +64,12 @@ enum class Columns
 	Right = 3,
 };
 
+enum class Side
+{
+	None = 0,
+	Left = 1,
+	Right = 2,
+};
+
 
 

@@ -45,46 +45,6 @@ namespace TableFunctions
 
 	}
 
-	void RoulettePayout(Account& account, Table& table, RouletteBetType rouletteBetType)
-	{
-		if (rouletteBetType == RouletteBetType::Straight)
-		{
-			int win = account.bet * BET_MULTI_ROULETTE_STRAIGHT;
-			account.money += win;
-			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
-			std::cout << "<--- 36X WIN! --->\n";
-			std::cout << "Payout: " << win << " kr.\n""\n";
-			UpdateStats(table, true);
-		}
-		else if (rouletteBetType == RouletteBetType::RedBlack)
-		{
-			int win = account.bet * BET_MULTI_ROULETTE_COLOR;
-			account.money += win;
-			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
-			std::cout << "<--- 2X WIN! --->\n";
-			std::cout << "Payout: " << win << " kr.\n""\n";
-			UpdateStats(table, true);
-		}
-		else if (rouletteBetType == RouletteBetType::OddEven)
-		{
-			int win = account.bet * BET_MULTI_ROULETTE_ODDOREVEN;
-			account.money += win;
-			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
-			std::cout << "<--- 2X WIN! --->\n";
-			std::cout << "Payout: " << win << " kr.\n""\n";
-			UpdateStats(table, true);
-		}
-		else if (rouletteBetType == RouletteBetType::Column)
-		{
-			int win = account.bet * BET_MULTI_ROULETTE_COLUMN;
-			account.money += win;
-			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
-			std::cout << "<--- 3X WIN! --->\n";
-			std::cout << "Payout: " << win << " kr.\n""\n";
-			UpdateStats(table, true);
-		}
-	}
-
 	void UpdateStats(Table& table, bool isWin)
 	{
 
@@ -229,16 +189,20 @@ namespace TableFunctions
 			}
 			else
 			{
-				if ((i != 1 && i != 4 && i != 7) && i < 10)
+				if ((i % CONSTANTS::COLUMN_TOTAL_AMOUNT == static_cast<int>(Columns::Left)) && i < ROULETTE_BOARD_SINGLE_DIGIT_THRESHOLD)
 				{
 					std::cout << " ";
 				}
+				//if ((i % 3 == 0) && i < 10)
+				//{
+				//	std::cout << "  ";
+				//}
 				RouletteColor indexColor = GetColorFromIndex(roulette.rouletteLayout, i);
-				PrintBracketsWithColor(indexColor, 0);
+				PrintBracketsWithColor(indexColor, Side::Left);
 				PrintIndexWithColor(indexColor, i);
-				PrintBracketsWithColor(indexColor, 1);
+				PrintBracketsWithColor(indexColor, Side::Right);
 
-				if (i % 3 == 0)
+				if (i % CONSTANTS::COLUMN_TOTAL_AMOUNT == 0)
 				{
 					std::cout << "\n";
 				}
@@ -251,66 +215,107 @@ namespace TableFunctions
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, ROULETTE_ARRAY_SIZE);
-
+		std::uniform_int_distribution<int> dist(0, ROULETTE_ARRAY_SIZE - 1);
 		int randomRouletteNumber = dist(rng);
 
 		return randomRouletteNumber;
 	}
 
-	bool RouletteStraightGuess(Roulette& roulette, const int& winningNumber)
+	bool RouletteResult(const Roulette& roulette)
 	{
-		if (roulette.betType == RouletteBetType::Straight &&
-			roulette.betPerType.straight == winningNumber)
+		switch (roulette.betType)
 		{
-			return true;
+		case RouletteBetType::Straight:
+		{
+			if (roulette.betPerType.straight == roulette.winningType.straight)
+			{
+				return true;
+			}
+			break;
+		}
+		case RouletteBetType::RedBlack:
+		{
+			if (roulette.betPerType.color == roulette.winningType.color)
+			{
+				return true;
+			}
+			break;
+		}
+		case RouletteBetType::OddEven:
+		{
+			if (roulette.betPerType.OddOrEven == roulette.winningType.OddOrEven)
+			{
+				return true;
+			}
+			break;
+		}
+		case RouletteBetType::Column:
+		{
+			if (roulette.betPerType.column == roulette.winningType.column)
+			{
+				return true;
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
 		}
 		return false;
 	}
 
-	RouletteColor RouletteColorGuess(Roulette& roulette, const int& winningNumber)
+	void RouletteBetPayout(Account& account, Table& table, const RouletteBetType& betType)
 	{
-		RouletteColor color = GetColorFromIndex(roulette.rouletteLayout, winningNumber);
+		int win = account.bet;
 
-		if (roulette.betPerType.color == color)
+		switch (betType)
 		{
-			return color;
-		}
-
-		return RouletteColor::None;
-	}
-
-	OddOrEven RouletteOddOrEvenGuess(Roulette& roulette, const int& winningNumber)
-	{
-		OddOrEven OddOrEven = GetOddOrEvenFromIndex(winningNumber);
-
-		if (roulette.betPerType.OddOrEven == OddOrEven && roulette.betPerType.OddOrEven == OddOrEven::Even)
+		case RouletteBetType::Straight:
 		{
-			return OddOrEven::Even;
+			win *= BET_MULTI_ROULETTE_STRAIGHT;
+			account.money += win;
+			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
+			std::cout << "<--- 36X WIN! --->\n";
+			std::cout << "Your payout: " << win << " kr.\n";
+			UpdateStats(table, true);
+			break;
 		}
-		else if (roulette.betPerType.OddOrEven == OddOrEven && roulette.betPerType.OddOrEven == OddOrEven::Odd)
+		case RouletteBetType::RedBlack:
 		{
-			return OddOrEven::Odd;
+			win *= BET_MULTI_ROULETTE_COLOR;
+			account.money += win;
+			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
+			std::cout << "<--- 1X WIN! --->\n";
+			std::cout << "Your payout: " << win << " kr.\n";
+			UpdateStats(table, true);
+			break;
 		}
-		return OddOrEven::None;
-	}
-
-	Columns RouletteColumnGuess(Roulette& roulette, const int& winningNumber)
-	{
-		if (roulette.betPerType.column == Columns::Left && winningNumber % 3 == 0 && winningNumber != 0)
+		case RouletteBetType::OddEven:
 		{
-			return Columns::Left;
+			win *= BET_MULTI_ROULETTE_ODDOREVEN;
+			account.money += win;
+			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
+			std::cout << "<--- 1X WIN! --->\n";
+			std::cout << "Your payout: " << win << " kr.\n";
+			UpdateStats(table, true);
+			break;
 		}
-		else if (roulette.betPerType.column == Columns::Middle && winningNumber % 3 == 1 && winningNumber != 0)
+		case RouletteBetType::Column:
 		{
-			return Columns::Middle;
+			win *= BET_MULTI_ROULETTE_COLUMN;
+			account.money += win;
+			table.moneyArr[TableToIndex(TableOption::Roulette)] += win;
+			std::cout << "<--- 3X WIN! --->\n";
+			std::cout << "Your payout: " << win << " kr.\n";
+			UpdateStats(table, true);
+			break;
 		}
-		else if (roulette.betPerType.column == Columns::Right && winningNumber % 3 == 2 && winningNumber != 0)
+		default:
 		{
-			return Columns::Right;
+			break;
 		}
-
-		return Columns::None;
+		}
 	}
 
 
