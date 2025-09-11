@@ -14,7 +14,6 @@ namespace TableFunctions
 	bool IsHigherOrLowerGameOver(const Cards& cards);
 	//Roulette
 	void DrawRouletteBoard(const Roulette& roulette);
-	int GenerateRouletteNumber(const Roulette& roulette);
 	bool RouletteResult(const Roulette& roulette);
 	void RouletteBetPayout(Account& account, Table& table, const RouletteBetType& betType);
 

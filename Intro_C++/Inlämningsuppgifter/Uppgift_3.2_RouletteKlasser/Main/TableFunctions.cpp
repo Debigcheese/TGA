@@ -127,13 +127,10 @@ namespace TableFunctions
 	//Higher or lower
 	int DrawRandomCard(Cards& cards)
 	{
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, DECK_SIZE - 1);
-		int randomCardIndex = 0;
+		int randomCardIndex;
 		while (true)
 		{
-			randomCardIndex = dist(rng);
+			randomCardIndex = GenerateRandomNumber(0, DECK_SIZE - 1);
 
 			if (cards.cardsLeft[randomCardIndex] != 0)
 			{
@@ -209,16 +206,6 @@ namespace TableFunctions
 
 			}
 		}
-	}
-
-	int GenerateRouletteNumber(const Roulette& roulette)
-	{
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(0, ROULETTE_ARRAY_SIZE - 1);
-		int randomRouletteNumber = dist(rng);
-
-		return randomRouletteNumber;
 	}
 
 	bool RouletteResult(const Roulette& roulette)

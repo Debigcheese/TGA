@@ -21,12 +21,17 @@ namespace Helpers
 		}
 	}
 
-	int RollDice()
+	int GenerateRandomNumber(int aMin, int aMaxValue)
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(CONSTANTS::DICE_MIN, CONSTANTS::DICE_MAX);
+		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
 		return dist(rng);
+	}
+
+	int RollDice()
+	{
+		return GenerateRandomNumber(1, 6);
 	}
 
 	int TableToIndex(const TableOption& table)

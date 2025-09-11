@@ -6,6 +6,7 @@
 namespace Helpers
 {
 	int ReadIntInRange(int aMinValue, int aMaxValue);
+	int GenerateRandomNumber(int aMin, int aMaxValue);
 	int RollDice();
 	int TableToIndex(const TableOption& table);
 	int ResultToIndex(const Result& gameResult);

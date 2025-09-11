@@ -236,7 +236,7 @@ namespace Games
 			Print::ShowPersonalDetails(account);
 			std::cout << "\n";
 			DrawRouletteBoard(roulette);
-			int winningNumber = GenerateRouletteNumber(roulette);
+			int winningNumber = GenerateRandomNumber(0, ROULETTE_ARRAY_SIZE - 1);
 
 			switch (roulette.betType)
 			{
