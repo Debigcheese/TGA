@@ -1,12 +1,10 @@
 #include "Print.h"
-#include "TableFunctions.h"
 #include "Helpers.h"
 
 #include <iostream>
 
 namespace Print
 {
-
 	// ---------- Print to console ----------
 	void ShowIntro(const Account& account)
 	{
@@ -15,13 +13,11 @@ namespace Print
 		system("pause");
 		system("cls");
 	}
-
 	void ShowPersonalDetails(const Account& account)
 	{
 		system("cls");
 		std::cout << "Wallet: " << account.money << " kr \nCurrent bet: " << account.bet << " kr\n";
 	}
-
 	void ShowOptions(const Table& table)
 	{
 		if (table.currentTable == TableOption::Menu)
@@ -88,7 +84,6 @@ namespace Print
 				<< "Choice: ";
 		}
 	}
-
 	void ShowRules(const Table& table)
 	{
 		if (table.currentTable == TableOption::GuessingGame)
@@ -145,7 +140,6 @@ namespace Print
 		}
 		system("pause");
 	}
-
 	void ShowStats(const Table& table)
 	{
 		std::cout << "\nYour five most recent games: \n";
@@ -173,54 +167,4 @@ namespace Print
 		}
 	}
 
-	void PrintRouletteBet(const RouletteBetType& betType)
-	{
-		switch (betType)
-		{
-		case RouletteBetType::None:
-		{
-			std::cout << "\n";
-			std::cout << "Place your bets! \n";
-			std::cout << "(1) Straight  \n";
-			std::cout << "(2) Red/Black  \n";
-			std::cout << "(3) Odd/Even:  \n";
-			std::cout << "(4) Column:    \n";
-			break;
-		}
-		case RouletteBetType::Straight:
-		{
-			std::cout << "\nPick your number!\n";
-			break;
-		}
-		case RouletteBetType::RedBlack:
-		{
-			std::cout << "\nChoose Red or Black! \n";
-			std::cout << "Red   (1)\n";
-			std::cout << "Black (2)\n";
-			break;
-		}
-		case RouletteBetType::OddEven:
-		{
-			std::cout << "\nChoose odd or even! \n";
-			std::cout << "Odd  (1)\n";
-			std::cout << "Even (2)\n";
-			break;
-		}
-		case RouletteBetType::Column:
-		{
-			std::cout << "\nChoose column! \n";
-			std::cout << "Left Column   (1)\n";
-			std::cout << "Middle Column (2)\n";
-			std::cout << "Right Column  (3)\n";
-			break;
-		}
-		default:
-		{
-			break;
-		}
-		}
-		std::cout << "Choice: ";
-
-
-	}
 }

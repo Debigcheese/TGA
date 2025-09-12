@@ -1,8 +1,5 @@
-﻿  Games.cpp
-  Helpers.cpp
-  Menu.cpp
-  Print.cpp
-  TableFunctions.cpp
+﻿  Casino.cpp
+  OddOrEvenGame.cpp
+  SpinTheWheel.cpp
   Generating Code...
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\Helpers.cpp(117,1): warning C4715: 'Helpers::GetColumnFromIndex': not all control paths return a value
   Main.vcxproj -> C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\x64\Debug\Main.exe

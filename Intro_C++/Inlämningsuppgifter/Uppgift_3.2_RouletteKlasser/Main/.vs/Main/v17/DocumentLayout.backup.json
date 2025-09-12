@@ -3,32 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Helpers.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:TableFunctions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:TableFunctions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:OddOrEvenGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:OddOrEvenGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:HigherOrLower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:SpinTheWheel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:SpinTheWheel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:GuessingGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:GuessingGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,96 +70,202 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TableFunctions.h",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.h",
-              "RelativeDocumentMoniker": "TableFunctions.h",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.h",
-              "RelativeToolTip": "TableFunctions.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-11T13:19:00.581Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Games.cpp",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Games.cpp",
-              "RelativeDocumentMoniker": "Games.cpp",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Games.cpp",
-              "RelativeToolTip": "Games.cpp",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAAAIoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-11T13:18:13.937Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TableFunctions.cpp",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.cpp",
-              "RelativeDocumentMoniker": "TableFunctions.cpp",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\TableFunctions.cpp",
-              "RelativeToolTip": "TableFunctions.cpp",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAAANAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-11T13:15:13.749Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Helpers.cpp",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.cpp",
-              "RelativeDocumentMoniker": "Helpers.cpp",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.cpp",
-              "RelativeToolTip": "Helpers.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-11T13:13:42.737Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Helpers.h",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h",
-              "RelativeDocumentMoniker": "Helpers.h",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h",
-              "RelativeToolTip": "Helpers.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-11T13:13:09.936Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CONSTANTS.h",
-              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
-              "RelativeDocumentMoniker": "CONSTANTS.h",
-              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
-              "RelativeToolTip": "CONSTANTS.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-11T13:07:50.486Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp",
               "RelativeDocumentMoniker": "Main.cpp",
               "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-11T13:03:55.66Z",
+              "WhenOpened": "2025-09-12T11:27:05.225Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Enums.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Enums.h",
+              "RelativeDocumentMoniker": "Enums.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Enums.h",
+              "RelativeToolTip": "Enums.h",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T12:04:32.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CONSTANTS.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
+              "RelativeDocumentMoniker": "CONSTANTS.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
+              "RelativeToolTip": "CONSTANTS.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T12:03:37.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Structs.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h",
+              "RelativeDocumentMoniker": "Structs.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h",
+              "RelativeToolTip": "Structs.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T12:03:24.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "HigherOrLower.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp",
+              "RelativeDocumentMoniker": "HigherOrLower.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp",
+              "RelativeToolTip": "HigherOrLower.cpp",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T12:02:04.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SpinTheWheel.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.h",
+              "RelativeDocumentMoniker": "SpinTheWheel.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.h",
+              "RelativeToolTip": "SpinTheWheel.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T11:57:09.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SpinTheWheel.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.cpp",
+              "RelativeDocumentMoniker": "SpinTheWheel.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\SpinTheWheel.cpp",
+              "RelativeToolTip": "SpinTheWheel.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T11:57:08.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OddOrEvenGame.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.cpp",
+              "RelativeDocumentMoniker": "OddOrEvenGame.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.cpp",
+              "RelativeToolTip": "OddOrEvenGame.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T11:56:49.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OddOrEvenGame.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.h",
+              "RelativeDocumentMoniker": "OddOrEvenGame.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\OddOrEvenGame.h",
+              "RelativeToolTip": "OddOrEvenGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T11:56:46.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GuessingGame.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h",
+              "RelativeDocumentMoniker": "GuessingGame.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h",
+              "RelativeToolTip": "GuessingGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T09:50:25.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GuessingGame.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp",
+              "RelativeDocumentMoniker": "GuessingGame.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp",
+              "RelativeToolTip": "GuessingGame.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T09:50:15.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Casino.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp",
+              "RelativeDocumentMoniker": "Casino.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp",
+              "RelativeToolTip": "Casino.cpp",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAACMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T09:25:26.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Casino.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h",
+              "RelativeDocumentMoniker": "Casino.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h",
+              "RelativeToolTip": "Casino.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T09:13:13.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RouletteGame.h",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
+              "RelativeDocumentMoniker": "RouletteGame.h",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
+              "RelativeToolTip": "RouletteGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-12T09:10:09.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RouletteGame.cpp",
+              "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
+              "RelativeDocumentMoniker": "RouletteGame.cpp",
+              "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
+              "RelativeToolTip": "RouletteGame.cpp",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAAQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-12T09:09:18.605Z",
               "EditorCaption": ""
             }
           ]

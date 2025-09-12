@@ -18,25 +18,28 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enums.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
+    <ClCompile Include="Casino.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Print.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Structs.cpp">
+    <ClCompile Include="GuessingGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TableFunctions.cpp">
+    <ClCompile Include="OddOrEvenGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpinTheWheel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HigherOrLower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RouletteGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +50,10 @@
     <ClInclude Include="Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Games.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
+    <ClInclude Include="Casino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Print.h">
@@ -62,7 +62,19 @@
     <ClInclude Include="Structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TableFunctions.h">
+    <ClInclude Include="GuessingGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OddOrEvenGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpinTheWheel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HigherOrLower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RouletteGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
