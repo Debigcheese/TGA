@@ -6,11 +6,10 @@ class SpinTheWheel
 {
 public:
 	SpinTheWheel();
-	SpinTheWheel(int aMoneyEarned);
-	int GetMoneyEarned();
+	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlaySpinWheelRound(Account& account, Table& table);
+	void PlaySpinWheelRound(Account& account);
 
 private:
 	int myMoneyEarned;

@@ -6,20 +6,19 @@ class RouletteGame
 {
 public:
 	RouletteGame();
-	RouletteGame(int aMoneyEarned);
-	int GetMoneyEarned();
+	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
 	// ---------- Play Roulette ----------
-	void PlayRoulette(Account& account, Table& table);
+	void PlayRoulette(Account& account);
 	//Roulette class specific functions
-	void DrawRouletteBoard(const Roulette& roulette);
-	bool RouletteResult(const Roulette& roulette);
-	int RouletteBetPayout(const Roulette& roulette);
-	void PrintRouletteBet(const RouletteBetType& betType);
+	void DrawRouletteBoard() const;
+	bool RouletteResult() const;
+	int GetRoulettePayoutAmount() const;
+	void PrintRouletteBet(const RouletteBetType& betType) const;
 
 private:
 	int myMoneyEarned;
-
+	Roulette roulette;
 };
 

@@ -6,9 +6,8 @@ namespace Print
 {
 	// Print to console
 	void ShowIntro(const Account& account);
-	void ShowPersonalDetails(const Account& account);
-	void ShowOptions(const Table& table);
-	void ShowRules(const Table& table);
-	void ShowStats(const Table& table);
-	void PrintRouletteBet(const RouletteBetType& betType);
+	void ShowPersonalDetails(const Account& account, const int statArr[]);
+	void ShowOptions(const TableOption& currentTable);
+	void ShowRules(const TableOption& currentTable);
+	void ShowStats(const int statArr[]);
 }

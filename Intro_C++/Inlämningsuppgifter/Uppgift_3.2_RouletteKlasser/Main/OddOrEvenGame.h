@@ -7,11 +7,11 @@ class OddOrEvenGame
 
 public:
 	OddOrEvenGame();
-	OddOrEvenGame(int aMoneyEarned);
-	int GetMoneyEarned();
+	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlayOddEvenRound(Account& account, Table& table);
+	void PlayOddEvenRound(Account& account);
+	bool IsDiceOdd(const int dice) const;
 
 private:
 	int myMoneyEarned;

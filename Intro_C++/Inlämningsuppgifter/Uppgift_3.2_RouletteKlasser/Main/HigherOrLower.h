@@ -6,17 +6,18 @@ class HigherOrLower
 {
 public:
 	HigherOrLower();
-	HigherOrLower(int aMoneyEarned);
-	int GetMoneyEarned();
+	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlayHigherOrLower(Account& account, Table& table);
+	void PlayHigherOrLower(Account& account);
 	//HigherOrLower
-	int DrawRandomCard(Cards& cards);
-	bool CompareCards(int previousCard, int newCard);
-	bool IsHigherOrLowerGameOver(const Cards& cards);
+	int DrawRandomCard();
+	bool CompareCards(int previousCard, int newCard) const;
+	bool IsHigherOrLowerGameOver() const;
 
 private:
 	int myMoneyEarned;
+	Cards cards;
+	HighOrLowPoints points;
 };
 

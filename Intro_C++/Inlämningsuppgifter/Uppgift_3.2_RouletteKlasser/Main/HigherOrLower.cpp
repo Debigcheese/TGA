@@ -11,12 +11,11 @@ using namespace Print;
 using namespace CONSTANTS;
 
 HigherOrLower::HigherOrLower()
+	: myMoneyEarned(0), cards(), points()
 {
 }
 
-HigherOrLower::HigherOrLower(int aMoneyEarned) : myMoneyEarned(aMoneyEarned) {}
-
-int HigherOrLower::GetMoneyEarned()
+int HigherOrLower::GetMoneyEarned() const
 {
 	return myMoneyEarned;
 }
@@ -27,19 +26,16 @@ void HigherOrLower::SetMoneyEarned(int aNewMoney)
 }
 
 // ---------- Play Higher Or Lower ----------
-void HigherOrLower::PlayHigherOrLower(Account& account, Table& table)
+void HigherOrLower::PlayHigherOrLower(Account& account)
 {
-	Cards cards = {};
-	HighOrLowPoints points = {};
-
 	points.currentPoints = 0;
-	int currentCardIndex = DrawRandomCard(cards);
+	int currentCardIndex = DrawRandomCard();
 	bool gameOver = false;
 
 	while (!gameOver)
 	{
 
-		Print::ShowPersonalDetails(account);
+		Print::ShowPersonalDetails(account, Casino::GetStatArr());
 		std::cout << "\n";
 
 		std::cout << "Points: " << points.currentPoints << "\n";
@@ -60,7 +56,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account, Table& table)
 		system("pause");
 		std::cout << "\n";
 
-		int randomCardIndex = DrawRandomCard(cards);
+		int randomCardIndex = DrawRandomCard();
 		bool cardIsHigher = CompareCards(cards.cardValues[currentCardIndex], cards.cardValues[randomCardIndex]);
 
 		std::cout << "You drew: [" << cards.cardLabels[randomCardIndex] << "]\n";
@@ -86,7 +82,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account, Table& table)
 			std::cout << "which is FALSE \n";
 		}
 
-		if (IsHigherOrLowerGameOver(cards))
+		if (IsHigherOrLowerGameOver())
 		{
 			std::cout << "Deck of cards is empty!\n";
 			std::cout << "You got: " << points.currentPoints << "/13 correct\n";
@@ -94,19 +90,13 @@ void HigherOrLower::PlayHigherOrLower(Account& account, Table& table)
 
 			if (points.currentPoints >= points.requiredPoints)
 			{
-				int win = account.bet * BET_MULTI_HIGHER_OR_LOWER;
-				account.money += win;
-				table.moneyArr[TableToIndex(TableOption::HighOrLow)] += win;
-				std::cout << "<--- 3X WIN! --->\n";
-				std::cout << "Payout: " << win << " kr.\n""\n";
-				Casino::UpdateStats(table, true);
+				myMoneyEarned += Casino::Payout(account, BET_MULTI_HIGHER_OR_LOWER);
+				Casino::UpdateStats(true);
 			}
 			else
 			{
-				account.money -= account.bet;
-				table.moneyArr[TableToIndex(TableOption::HighOrLow)] -= account.bet;
-				std::cout << "\nYou lost: " << account.bet << " kr.\n";
-				Casino::UpdateStats(table, false);
+				myMoneyEarned -= Casino::DeductBet(account);
+				Casino::UpdateStats(false);
 			}
 			gameOver = true;
 		}
@@ -120,7 +110,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account, Table& table)
 }
 
 //Higher or lower class specific functions
-int HigherOrLower::DrawRandomCard(Cards& cards)
+int HigherOrLower::DrawRandomCard()
 {
 	int randomCardIndex;
 	while (true)
@@ -132,7 +122,7 @@ int HigherOrLower::DrawRandomCard(Cards& cards)
 			cards.cardsLeft[randomCardIndex] = 0;
 			break;
 		}
-		if (IsHigherOrLowerGameOver(cards))
+		if (IsHigherOrLowerGameOver())
 		{
 			break;
 		}
@@ -140,7 +130,7 @@ int HigherOrLower::DrawRandomCard(Cards& cards)
 
 	return randomCardIndex;
 }
-bool HigherOrLower::CompareCards(int previousCard, int newCard)
+bool HigherOrLower::CompareCards(int previousCard, int newCard) const
 {
 	if (newCard > previousCard)
 	{
@@ -152,7 +142,7 @@ bool HigherOrLower::CompareCards(int previousCard, int newCard)
 	}
 
 }
-bool HigherOrLower::IsHigherOrLowerGameOver(const Cards& cards)
+bool HigherOrLower::IsHigherOrLowerGameOver() const
 {
 	int countCardsLeft = 0;
 	for (int card : cards.cardsLeft)

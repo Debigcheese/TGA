@@ -13,14 +13,16 @@ namespace Print
 		system("pause");
 		system("cls");
 	}
-	void ShowPersonalDetails(const Account& account)
+	void ShowPersonalDetails(const Account& account, const int statArr[])
 	{
 		system("cls");
-		std::cout << "Wallet: " << account.money << " kr \nCurrent bet: " << account.bet << " kr\n";
+		std::cout << "Wallet: " << account.money << " kr\t";
+		ShowStats(statArr);
+		std::cout << "\nCurrent bet: " << account.bet << " kr\n";
 	}
-	void ShowOptions(const Table& table)
+	void ShowOptions(const TableOption& currentTable)
 	{
-		if (table.currentTable == TableOption::Menu)
+		if (currentTable == TableOption::Menu)
 		{
 			std::cout
 				<< "\n<--- Main Menu --->\n"
@@ -33,7 +35,7 @@ namespace Print
 				<< "7) Leave casino\n"
 				<< "Choice: ";
 		}
-		else if (table.currentTable == TableOption::GuessingGame)
+		else if (currentTable == TableOption::GuessingGame)
 		{
 			std::cout
 				<< "\n=== Table: Guess The Sum ===\n"
@@ -43,7 +45,7 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
-		else if (table.currentTable == TableOption::OddOrEven)
+		else if (currentTable == TableOption::OddOrEven)
 		{
 			std::cout
 				<< "\n=== Table: Odd or Even ===\n"
@@ -53,7 +55,7 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
-		else if (table.currentTable == TableOption::SpinTheWheel)
+		else if (currentTable == TableOption::SpinTheWheel)
 		{
 			std::cout
 				<< "\n=== Table: Spin The Wheel ===\n"
@@ -63,7 +65,7 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
-		else if (table.currentTable == TableOption::HighOrLow)
+		else if (currentTable == TableOption::HighOrLow)
 		{
 			std::cout
 				<< "\n=== Table: Higher or Lower ===\n"
@@ -73,7 +75,7 @@ namespace Print
 				<< "4) Leave table\n"
 				<< "Choice: ";
 		}
-		else if (table.currentTable == TableOption::Roulette)
+		else if (currentTable == TableOption::Roulette)
 		{
 			std::cout
 				<< "\n=== Table: Roulette ===\n"
@@ -84,9 +86,9 @@ namespace Print
 				<< "Choice: ";
 		}
 	}
-	void ShowRules(const Table& table)
+	void ShowRules(const TableOption& currentTable)
 	{
-		if (table.currentTable == TableOption::GuessingGame)
+		if (currentTable == TableOption::GuessingGame)
 		{
 			std::cout
 				<< "\n--- Rules: Guess The Sum ---\n"
@@ -95,7 +97,7 @@ namespace Print
 				<< "Wrong guess: you lose your bet.\n"
 				<< "Payout: 5x on correct guess.\n";
 		}
-		else if (table.currentTable == TableOption::OddOrEven)
+		else if (currentTable == TableOption::OddOrEven)
 		{
 			std::cout
 				<< "\n--- Rules: Odd or Even ---\n"
@@ -104,7 +106,7 @@ namespace Print
 				<< "Mixed parity means the house wins. Sum does not matter.\n"
 				<< "Payout: 2x on win, otherwise you lose your bet.\n";
 		}
-		else if (table.currentTable == TableOption::SpinTheWheel)
+		else if (currentTable == TableOption::SpinTheWheel)
 		{
 			std::cout
 				<< "\n--- Rules: Spin The Wheel ---\n"
@@ -114,7 +116,7 @@ namespace Print
 				<< "If all three symbols are different the house wins and you lose your bet.\n"
 				<< "Payout: 2x for two of a kind, 40x for three of a kind.\n";
 		}
-		else if (table.currentTable == TableOption::HighOrLow)
+		else if (currentTable == TableOption::HighOrLow)
 		{
 			std::cout
 				<< "\n--- Rules: Higher or Lower ---\n"
@@ -126,7 +128,7 @@ namespace Print
 				<< "Lose if you fail to reach the required points.\n"
 				<< "Payout: 2x if you win.\n";
 		}
-		else if (table.currentTable == TableOption::Roulette)
+		else if (currentTable == TableOption::Roulette)
 		{
 			std::cout
 				<< "\n--- Rules: Roulette ---\n"
@@ -140,30 +142,28 @@ namespace Print
 		}
 		system("pause");
 	}
-	void ShowStats(const Table& table)
+	void ShowStats(const int statArr[])
 	{
-		std::cout << "\nYour five most recent games: \n";
+		std::cout << "Recent games: ";
 
-		const int statArrSize = sizeof(table.statArr) / sizeof(int);
-
-		for (int i = 0; i < statArrSize; i++)
+		for (int i = 0; i < CONSTANTS::STAT_ARRAY_SIZE; i++)
 		{
-			std::cout << i + 1 << ": ";
+			std::cout << i + 1;
 
-			if (table.statArr[i] == Helpers::ResultToIndex(Result::Loss))
+			if (statArr[i] == Helpers::ResultToIndex(Result::Loss))
 			{
-				std::cout << "Loss";
+				std::cout << "[L]";
 			}
-			else if (table.statArr[i] == Helpers::ResultToIndex(Result::Win))
+			else if (statArr[i] == Helpers::ResultToIndex(Result::Win))
 			{
-				std::cout << "Win";
+				std::cout << "[W]";
 			}
 			else
 			{
-				std::cout << "-";
+				std::cout << "[-]";
 
 			}
-			std::cout << "\n";
+			std::cout << " ";
 		}
 	}
 

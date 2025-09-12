@@ -6,11 +6,10 @@ class GuessingGame
 {
 public:
 	GuessingGame();
-	GuessingGame(int aMoneyEarned);
-	int GetMoneyEarned();
+	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlayGuessingRound(Account& account, Table& table);
+	void PlayGuessingRound(Account& account);
 
 private:
 	int myMoneyEarned;

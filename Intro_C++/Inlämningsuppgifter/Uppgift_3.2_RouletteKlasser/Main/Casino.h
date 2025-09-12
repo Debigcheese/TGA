@@ -19,15 +19,19 @@ public:
 	void MainMenu();
 	void EnterTable();
 
+	static const int* GetStatArr();
 	void ChangeBet();
-	void UpdateStats(Table& table, bool isWin);
-	bool EvaluateTableEarnings();
+	bool EvaluateTableEarnings(const int moneyEarnedAtTable) const;
 	void HandleBankruptcy();
-	static void Payout(Account& account, Table& table, int payoutAmount);
+
+	static int Payout(Account& account, int payoutAmount);
+	static int DeductBet(Account& account);
+	static void UpdateStats(bool isWin);
 
 private:
 	Account account;
-	Table table;
+	TableOption currentTable = CONSTANTS::DEFAULT_TABLE;
+	static int statArr[CONSTANTS::STAT_ARRAY_SIZE];
 
 	GuessingGame myGuessingGame;
 	OddOrEvenGame myOddOrEven;

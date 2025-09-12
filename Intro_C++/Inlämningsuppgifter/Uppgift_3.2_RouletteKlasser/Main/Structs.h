@@ -9,13 +9,6 @@ struct Account
 	int bet = CONSTANTS::DEFAULT_BET;
 };
 
-struct Table
-{
-	TableOption currentTable = CONSTANTS::DEFAULT_TABLE;
-	int statArr[CONSTANTS::STAT_ARRAY_SIZE];
-	int moneyArr[CONSTANTS::MONEY_ARRAY_SIZE];
-};
-
 struct Cards
 {
 	const char* cardLabels[CONSTANTS::DECK_SIZE] = { "2","3","4","5","6","7","8","9","10","J","Q","K","A" };

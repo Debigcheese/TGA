@@ -14,31 +14,26 @@ using namespace Print;
 using namespace CONSTANTS;
 
 RouletteGame::RouletteGame()
+	: myMoneyEarned(0), roulette()
 {
 }
-
-RouletteGame::RouletteGame(int aMoneyEarned) : myMoneyEarned(aMoneyEarned) {}
-
-int RouletteGame::GetMoneyEarned()
+int RouletteGame::GetMoneyEarned() const
 {
 	return myMoneyEarned;
 }
-
 void RouletteGame::SetMoneyEarned(int aNewMoney)
 {
 	myMoneyEarned = aNewMoney;
 }
 
-
 // ---------- Play Roulette ----------
-void RouletteGame::PlayRoulette(Account& account, Table& table)
+void RouletteGame::PlayRoulette(Account& account)
 {
-	Roulette roulette = {};
 	while (true)
 	{
-		Print::ShowPersonalDetails(account);
+		Print::ShowPersonalDetails(account, Casino::GetStatArr());
 		std::cout << "\n";
-		DrawRouletteBoard(roulette);
+		DrawRouletteBoard();
 		PrintRouletteBet(RouletteBetType::None);
 
 		int choiceMin = static_cast<int>(RouletteBetType::Straight);
@@ -48,9 +43,9 @@ void RouletteGame::PlayRoulette(Account& account, Table& table)
 		roulette.betType = static_cast<RouletteBetType>(choice);
 
 		system("cls");
-		Print::ShowPersonalDetails(account);
+		Print::ShowPersonalDetails(account, Casino::GetStatArr());
 		std::cout << "\n";
-		DrawRouletteBoard(roulette);
+		DrawRouletteBoard();
 		int winningNumber = GenerateRandomNumber(0, ROULETTE_ARRAY_SIZE - 1);
 
 		switch (roulette.betType)
@@ -111,37 +106,32 @@ void RouletteGame::PlayRoulette(Account& account, Table& table)
 
 		system("cls");
 
-		Print::ShowPersonalDetails(account);
+		Print::ShowPersonalDetails(account, Casino::GetStatArr());
 		std::cout << "\n";
-		DrawRouletteBoard(roulette);
+		DrawRouletteBoard();
 		std::cout << "\n";
 
 		std::cout << "Ball landed on: " << winningNumber << "\n\n";
 		std::cout << "Your guess: " << roulette.betTypeString << "\n";
 		std::cout << "Winning guess: " << roulette.winningBetTypeString << "\n\n";
 
-		if (RouletteResult(roulette))
+		if (RouletteResult())
 		{
-			Casino::Payout(account, table, RouletteBetPayout(roulette));
-			Casino::UpdateStats(table, true);
-
+			myMoneyEarned += Casino::Payout(account, GetRoulettePayoutAmount());
+			Casino::UpdateStats(true);
 		}
 		else
 		{
-			account.money -= account.bet;
-			table.moneyArr[TableToIndex(TableOption::Roulette)] -= account.bet;
-			std::cout << "House wins. You lose " << account.bet << " kr.\n";
-			Casino::UpdateStats(table, false);
+			myMoneyEarned -= Casino::DeductBet(account);
+			Casino::UpdateStats(false);
 		}
 		system("pause");
 		break;
-
-		// setup rules. make it so you go back to play round table menu after a round.
 	}
 }
 
 //Roulette class specific functions
-void RouletteGame::PrintRouletteBet(const RouletteBetType& betType)
+void RouletteGame::PrintRouletteBet(const RouletteBetType& betType) const
 {
 	switch (betType)
 	{
@@ -191,7 +181,7 @@ void RouletteGame::PrintRouletteBet(const RouletteBetType& betType)
 
 
 }
-void RouletteGame::DrawRouletteBoard(const Roulette& roulette)
+void RouletteGame::DrawRouletteBoard() const
 {
 	for (int i = 0; i < ROULETTE_ARRAY_SIZE; i++)
 	{
@@ -222,7 +212,7 @@ void RouletteGame::DrawRouletteBoard(const Roulette& roulette)
 		}
 	}
 }
-bool RouletteGame::RouletteResult(const Roulette& roulette)
+bool RouletteGame::RouletteResult() const
 {
 	switch (roulette.betType)
 	{
@@ -265,7 +255,7 @@ bool RouletteGame::RouletteResult(const Roulette& roulette)
 	}
 	return false;
 }
-int RouletteGame::RouletteBetPayout(const Roulette& roulette)
+int RouletteGame::GetRoulettePayoutAmount() const
 {
 	int payoutAmount = 0;
 	switch (roulette.betType)
@@ -295,4 +285,5 @@ int RouletteGame::RouletteBetPayout(const Roulette& roulette)
 		break;
 	}
 	}
+	return payoutAmount;
 }
