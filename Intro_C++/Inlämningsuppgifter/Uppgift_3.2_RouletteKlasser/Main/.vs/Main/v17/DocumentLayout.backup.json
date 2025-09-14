@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -50,30 +50,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "RouletteGame.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
               "RelativeDocumentMoniker": "RouletteGame.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
               "RelativeToolTip": "RouletteGame.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-12T19:49:37.976Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "RouletteGame.cpp",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
               "RelativeDocumentMoniker": "RouletteGame.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
               "RelativeToolTip": "RouletteGame.cpp",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAwwHkAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAwwHAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-12T19:48:44.231Z",
               "EditorCaption": ""
