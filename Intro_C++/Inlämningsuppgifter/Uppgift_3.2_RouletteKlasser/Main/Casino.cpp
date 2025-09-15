@@ -11,7 +11,12 @@ using namespace CONSTANTS;
 int Casino::statArr[CONSTANTS::STAT_ARRAY_SIZE] = {};
 
 Casino::Casino()
-	: myGuessingGameLow{ 1, 1000 }, myGuessingGameHigh{ 1000, 100000 }
+	: myGuessingGameLow
+	{ CONSTANTS::GUESSING_GAME_STAKE_LOW_MIN,
+	CONSTANTS::GUESSING_GAME_STAKE_LOW_MAX },
+	myGuessingGameHigh
+	{ GUESSING_GAME_STAKE_HIGH_MIN,
+	GUESSING_GAME_STAKE_HIGH_MAX }
 {
 }
 
@@ -34,7 +39,32 @@ void Casino::RunCasino()
 {
 	InitCasino();
 	ShowIntro(account);
+	ReadPlayerName();
 	MainMenu();
+}
+
+void Casino::ReadPlayerName()
+{
+	while (true)
+	{
+		std::cout << "Enter your name (2-16 letters): ";
+		std::cin.getline(account.name, NAME_ARRAY_SIZE);
+
+		int length = strlen(account.name);
+		bool valid = (length >= NAME_SIZE_MIN && length <= NAME_SIZE_MAX);
+
+		for (int i = 0; i < length && valid; i++)
+		{
+			if (!isalpha(static_cast<unsigned char>(account.name[i])))
+			{
+				valid = false;
+			}
+		}
+
+		if (valid) break;
+
+		std::cout << "Invalid name. Use only letters, 2–16 characters.\n";
+	}
 }
 
 //menus
@@ -431,12 +461,12 @@ bool Casino::EvaluateTableEarnings(const int moneyEarnedAtTable) const
 	if (stakes == Stakes::Low)
 	{
 		earningsMax = EARNINGS_MAX + myGuessingGameLow.GetBetMaximum();
-		LossesMax = LOSSES_MAX + myGuessingGameLow.GetBetMaximum();
+		LossesMax = LOSSES_MAX - myGuessingGameLow.GetBetMaximum();
 	}
 	else if (stakes == Stakes::High)
 	{
 		earningsMax = EARNINGS_MAX + myGuessingGameHigh.GetBetMaximum();
-		LossesMax = LOSSES_MAX + myGuessingGameHigh.GetBetMaximum();
+		LossesMax = LOSSES_MAX - myGuessingGameHigh.GetBetMaximum();
 	}
 
 	if (currentTable == TableOption::Quit)

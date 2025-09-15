@@ -184,6 +184,7 @@ namespace Helpers
 		char buffer[CONSTANTS::MY_TO_STRING_BUFFER_SIZE] = {};
 		int index = CONSTANTS::MY_TO_STRING_INDEX;
 		int decimalBase = CONSTANTS::MY_TO_STRING_DECIMAL_BASE;
+
 		buffer[index] = '\0';
 
 		while (value > 0)

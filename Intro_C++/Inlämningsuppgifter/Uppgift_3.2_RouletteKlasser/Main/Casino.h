@@ -16,6 +16,7 @@ public:
 	void InitCasino();
 	void RunCasino();
 
+	void ReadPlayerName();
 	void MainMenu();
 	void EnterTable();
 	void ChooseTableStakes();

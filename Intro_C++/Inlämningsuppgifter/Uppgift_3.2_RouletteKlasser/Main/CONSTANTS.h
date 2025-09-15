@@ -12,6 +12,9 @@ namespace CONSTANTS
 	static const int STAT_ARRAY_SIZE = 5;
 	static const int EARNINGS_MAX = 30000;
 	static const int LOSSES_MAX = -20000;
+	static const int NAME_ARRAY_SIZE = 17;
+	static const int NAME_SIZE_MIN = 2;
+	static const int NAME_SIZE_MAX = 16;
 
 	// PAYOUT
 	static const int BET_MULTI_GUESS = 5;
@@ -23,6 +26,12 @@ namespace CONSTANTS
 	static const int BET_MULTI_ROULETTE_COLOR = 1;
 	static const int BET_MULTI_ROULETTE_ODDOREVEN = 1;
 	static const int BET_MULTI_ROULETTE_COLUMN = 3;
+
+	//ODD OR EVEN
+	static const int GUESSING_GAME_STAKE_LOW_MIN = 1;
+	static const int GUESSING_GAME_STAKE_LOW_MAX = 1000;
+	static const int GUESSING_GAME_STAKE_HIGH_MIN = 1000;
+	static const int GUESSING_GAME_STAKE_HIGH_MAX = 100000;
 
 	//ODD OR EVEN
 	static const int EVEN_DIVISOR = 2;

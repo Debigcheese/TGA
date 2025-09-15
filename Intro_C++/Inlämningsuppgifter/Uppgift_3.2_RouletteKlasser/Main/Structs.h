@@ -7,6 +7,7 @@ struct Account
 {
 	int money = CONSTANTS::DEFAULT_MONEY;
 	int bet = CONSTANTS::DEFAULT_BET;
+	char name[CONSTANTS::NAME_ARRAY_SIZE] = "";
 };
 
 struct Cards

@@ -41,9 +41,11 @@ int GuessingGame::GetBetMinimum() const
 // ---------- Guessing Game ----------
 void GuessingGame::PlayGuessingRound(Account& account)
 {
-
 	std::cout << "\nEnter your guess (2-12): ";
-	int guess = ReadIntInRange(2, 12);
+	int doubleDiceMin = CONSTANTS::DICE_MIN + CONSTANTS::DICE_MIN;
+	int doubleDiceMax = CONSTANTS::DICE_MAX + CONSTANTS::DICE_MAX;
+
+	int guess = ReadIntInRange(doubleDiceMin, doubleDiceMax);
 
 	int diceOne = RollDice();
 	int diceTwo = RollDice();
