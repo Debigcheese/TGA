@@ -10,6 +10,7 @@ enum class TableOption
 	Roulette = 5,
 	Stats = 6,
 	Quit = 7,
+	Stakes = 8,
 };
 
 enum class GameAction
@@ -69,6 +70,14 @@ enum class Side
 	None = 0,
 	Left = 1,
 	Right = 2,
+};
+
+enum class Stakes
+{
+	None = 3,
+	Low = 1,
+	High = 2,
+
 };
 
 

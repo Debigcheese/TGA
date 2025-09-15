@@ -11,7 +11,12 @@ using namespace Print;
 using namespace CONSTANTS;
 
 GuessingGame::GuessingGame()
-	: myMoneyEarned(0)
+	: myMoneyEarned(0), myBetMinimum(0), myBetMaximum(0)
+{
+}
+
+GuessingGame::GuessingGame(int aBetMin, int aBetMax)
+	: myMoneyEarned(0), myBetMinimum(aBetMin), myBetMaximum(aBetMax)
 {
 }
 
@@ -24,9 +29,19 @@ void GuessingGame::SetMoneyEarned(int aNewMoney)
 {
 	myMoneyEarned = aNewMoney;
 }
+int GuessingGame::GetBetMaximum() const
+{
+	return myBetMaximum;
+}
+int GuessingGame::GetBetMinimum() const
+{
+	return myBetMinimum;
+}
+
 // ---------- Guessing Game ----------
 void GuessingGame::PlayGuessingRound(Account& account)
 {
+
 	std::cout << "\nEnter your guess (2-12): ";
 	int guess = ReadIntInRange(2, 12);
 

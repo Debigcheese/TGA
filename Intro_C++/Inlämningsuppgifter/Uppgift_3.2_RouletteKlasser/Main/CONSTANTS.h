@@ -8,6 +8,7 @@ namespace CONSTANTS
 
 	//CASINO
 	static const TableOption DEFAULT_TABLE = TableOption::Menu;
+	static const Stakes DEFAULT_STAKES = Stakes::None;
 	static const int STAT_ARRAY_SIZE = 5;
 	static const int EARNINGS_MAX = 30000;
 	static const int LOSSES_MAX = -20000;

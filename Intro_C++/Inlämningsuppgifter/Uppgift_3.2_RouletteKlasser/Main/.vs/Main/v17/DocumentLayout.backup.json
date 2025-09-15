@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:RouletteGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Structs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Casino.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:GuessingGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:GuessingGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Helpers.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:HigherOrLower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:HigherOrLower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Casino.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Enums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -39,8 +39,12 @@
       "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Print.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Print.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Print.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:CONSTANTS.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A89E6745-1F37-468C-95F7-5E513023BF32}|Main.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,43 +54,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RouletteGame.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
-              "RelativeDocumentMoniker": "RouletteGame.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.h",
-              "RelativeToolTip": "RouletteGame.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "HigherOrLower.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.h",
+              "RelativeDocumentMoniker": "HigherOrLower.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.h",
+              "RelativeToolTip": "HigherOrLower.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-12T19:49:37.976Z",
+              "WhenOpened": "2025-09-15T16:38:23.656Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RouletteGame.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
-              "RelativeDocumentMoniker": "RouletteGame.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\RouletteGame.cpp",
-              "RelativeToolTip": "RouletteGame.cpp",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAwwHAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "HigherOrLower.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp",
+              "RelativeDocumentMoniker": "HigherOrLower.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\HigherOrLower.cpp",
+              "RelativeToolTip": "HigherOrLower.cpp",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAF8AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-12T19:48:44.231Z",
+              "WhenOpened": "2025-09-15T16:37:52.464Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Helpers.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h",
+              "RelativeDocumentMoniker": "Helpers.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Helpers.h",
+              "RelativeToolTip": "Helpers.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-15T15:00:11.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "CONSTANTS.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
               "RelativeDocumentMoniker": "CONSTANTS.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\CONSTANTS.h",
               "RelativeToolTip": "CONSTANTS.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-12T19:26:17.291Z",
               "EditorCaption": ""
@@ -99,22 +120,9 @@
               "RelativeDocumentMoniker": "Enums.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Enums.h",
               "RelativeToolTip": "Enums.h",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAuwE0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-12T19:06:14.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Structs.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h",
-              "RelativeDocumentMoniker": "Structs.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Structs.h",
-              "RelativeToolTip": "Structs.h",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-12T18:58:26.745Z",
               "EditorCaption": ""
             },
             {
@@ -125,53 +133,66 @@
               "RelativeDocumentMoniker": "Print.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Print.cpp",
               "RelativeToolTip": "Print.cpp",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAJMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-12T18:57:55.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Print.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Print.h",
-              "RelativeDocumentMoniker": "Print.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Print.h",
-              "RelativeToolTip": "Print.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GuessingGame.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h",
+              "RelativeDocumentMoniker": "GuessingGame.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.h",
+              "RelativeToolTip": "GuessingGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-12T18:57:51.613Z",
+              "WhenOpened": "2025-09-15T09:57:13.703Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "GuessingGame.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp",
+              "RelativeDocumentMoniker": "GuessingGame.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\GuessingGame.cpp",
+              "RelativeToolTip": "GuessingGame.cpp",
+              "ViewState": "AgIAACAAAAAAAAAAAAAewC8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-15T09:57:12.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Casino.cpp",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp",
               "RelativeDocumentMoniker": "Casino.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.cpp",
               "RelativeToolTip": "Casino.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAGwBAAAAAAAAAAAewK0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-12T18:53:56.96Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Casino.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h",
               "RelativeDocumentMoniker": "Casino.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Casino.h",
               "RelativeToolTip": "Casino.h",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAuwCsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-12T18:53:51.624Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Main.cpp",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_3.2_RouletteKlasser\\Main\\Main.cpp",
               "RelativeDocumentMoniker": "Main.cpp",
@@ -179,12 +200,7 @@
               "RelativeToolTip": "Main.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-12T18:53:46.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2025-09-12T18:53:46.999Z"
             }
           ]
         }

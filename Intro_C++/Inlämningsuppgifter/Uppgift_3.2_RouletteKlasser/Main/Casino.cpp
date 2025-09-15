@@ -11,12 +11,14 @@ using namespace CONSTANTS;
 int Casino::statArr[CONSTANTS::STAT_ARRAY_SIZE] = {};
 
 Casino::Casino()
+	: myGuessingGameLow{ 1, 1000 }, myGuessingGameHigh{ 1000, 100000 }
 {
 }
 
 void Casino::InitCasino()
 {
-	myGuessingGame.SetMoneyEarned(0);
+	myGuessingGameLow.SetMoneyEarned(0);
+	myGuessingGameHigh.SetMoneyEarned(0);
 	myOddOrEven.SetMoneyEarned(0);
 	mySpinTheWheel.SetMoneyEarned(0);
 	myHigherOrLower.SetMoneyEarned(0);
@@ -55,8 +57,8 @@ void Casino::MainMenu()
 		{
 		case TableOption::GuessingGame:
 		{
-			currentTable = TableOption::GuessingGame;
-			moneyEarnedAtTable = myGuessingGame.GetMoneyEarned();
+			currentTable = TableOption::Stakes;
+			ChooseTableStakes();
 			break;
 		}
 		case TableOption::OddOrEven:
@@ -92,6 +94,7 @@ void Casino::MainMenu()
 		case TableOption::Quit:
 		{
 			std::cout << "\nYou leave with " << account.money << " kr. Come back soon!\n";
+			stakes = Stakes::None;
 			currentTable = TableOption::Quit;
 			break;
 		}
@@ -100,7 +103,7 @@ void Casino::MainMenu()
 			break;
 		}
 		}
-		if (currentTable != TableOption::Quit && currentTable != TableOption::Menu)
+		if (currentTable != TableOption::Quit && currentTable != TableOption::Menu && currentTable != TableOption::Stakes)
 		{
 			if (!EvaluateTableEarnings(moneyEarnedAtTable))
 			{
@@ -112,11 +115,12 @@ void Casino::MainMenu()
 void Casino::EnterTable()
 {
 	TableOption chosenTable = currentTable;
-	while (currentTable == chosenTable && currentTable != TableOption::Quit)
+	while (currentTable == chosenTable && currentTable != TableOption::Quit && currentTable != TableOption::Stakes)
 	{
 		ShowPersonalDetails(account, statArr);
 		ShowOptions(currentTable);
 		HandleBankruptcy();
+		ValidateBet();
 
 		GameAction action = static_cast<GameAction>(ReadIntInRange( //reads 1-4
 			static_cast<int>(GameAction::Play),
@@ -130,8 +134,20 @@ void Casino::EnterTable()
 			{
 			case TableOption::GuessingGame:
 			{
-				myGuessingGame.PlayGuessingRound(account);
-				break;
+				if (stakes == Stakes::Low)
+				{
+					myGuessingGameLow.PlayGuessingRound(account);
+					break;
+				}
+				else if (stakes == Stakes::High)
+				{
+					myGuessingGameHigh.PlayGuessingRound(account);
+					break;
+				}
+				else
+				{
+					break;
+				}
 			}
 			case TableOption::OddOrEven:
 			{
@@ -160,7 +176,24 @@ void Casino::EnterTable()
 		}
 		case GameAction::ChangeBet:
 		{
-			ChangeBet();
+			if (stakes == Stakes::None)
+			{
+				ChangeBet();
+			}
+			else if (stakes == Stakes::Low)
+			{
+				ChangeBetInRange(myGuessingGameLow.GetBetMinimum(), myGuessingGameLow.GetBetMaximum());
+			}
+			else if (stakes == Stakes::High)
+			{
+				if (account.money < myGuessingGameHigh.GetBetMinimum())
+				{
+					std::cout << "\nYou dont have enough credit to play on this table\n";
+					system("pause");
+					break;
+				}
+				ChangeBetInRange(myGuessingGameHigh.GetBetMinimum(), myGuessingGameHigh.GetBetMaximum());
+			}
 			break;
 		}
 		case GameAction::ShowRules:
@@ -171,6 +204,7 @@ void Casino::EnterTable()
 		case GameAction::LeaveTable:
 		{
 			currentTable = TableOption::Menu;
+			stakes = Stakes::None;
 			break;
 		}
 		default:
@@ -181,6 +215,69 @@ void Casino::EnterTable()
 	}
 }
 
+void Casino::ChooseTableStakes()
+{
+	while (currentTable == TableOption::Stakes && currentTable != TableOption::Quit)
+	{
+
+		ShowPersonalDetails(account, statArr);
+		HandleBankruptcy();
+
+		std::cout
+			<< "\n=== Stakes: Guess The Sum ===\n"
+			<< "1) Low stakes (" << myGuessingGameLow.GetBetMinimum() << " - " << myGuessingGameLow.GetBetMaximum() << ")\n"
+			<< "2) High stakes (" << myGuessingGameHigh.GetBetMinimum() << " - " << myGuessingGameHigh.GetBetMaximum() << ")\n"
+			<< "3) Return\n"
+			<< "Choice: ";
+
+		stakes = static_cast<Stakes>(ReadIntInRange( //reads 1-2
+			static_cast<int>(Stakes::Low),
+			static_cast<int>(Stakes::None)));
+
+		switch (stakes)
+		{
+		case Stakes::Low:
+		{
+			if (EvaluateTableEarnings(myGuessingGameLow.GetMoneyEarned()))
+			{
+				break;
+			}
+			currentTable = TableOption::GuessingGame;
+			ValidateBet();
+			EnterTable();
+			break;
+		}
+		case Stakes::High:
+		{
+			if (account.money < myGuessingGameHigh.GetBetMinimum())
+			{
+				std::cout << "\nYou dont have enough credit to enter this table\n";
+				system("pause");
+				break;
+			}
+			if (EvaluateTableEarnings(myGuessingGameHigh.GetMoneyEarned()))
+			{
+				break;
+			}
+			currentTable = TableOption::GuessingGame;
+			ValidateBet();
+			EnterTable();
+			break;
+
+		}
+		case Stakes::None:
+		{
+			stakes = Stakes::None;
+			MainMenu();
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+	}
+}
 const int* Casino::GetStatArr()
 {
 	return statArr;
@@ -197,6 +294,58 @@ void Casino::ChangeBet()
 	{
 		std::cout << "\nAll in! The guards raise an eyebrow as you push everything in...\n";
 		system("pause");
+	}
+}
+void Casino::ChangeBetInRange(int aBetMin, int aBetMax)
+{
+	if (account.money < aBetMax)
+	{
+		aBetMax = account.money;
+	}
+	std::cout << "Enter bet (" << aBetMin << " - " << aBetMax << "): ";
+	int newBet = ReadIntInRange(aBetMin, aBetMax);
+
+	account.bet = newBet;
+	if (account.bet == account.money)
+	{
+		std::cout << "\nAll in! The guards raise an eyebrow as you push everything in...\n";
+		system("pause");
+	}
+}
+void Casino::ValidateBet()
+{
+	if (stakes == Stakes::Low)
+	{
+		if (account.bet > myGuessingGameLow.GetBetMaximum())
+		{
+			std::cout << "\nYour bet is higher than what is allowed at this table! Please change bet amount.\n";
+			ChangeBetInRange(myGuessingGameLow.GetBetMinimum(), myGuessingGameLow.GetBetMaximum());
+		}
+		else if (account.bet < myGuessingGameLow.GetBetMinimum())
+		{
+			std::cout << "\nYour bet is lower than what is allowed at this table! Please change bet amount.\n";
+			ChangeBetInRange(myGuessingGameLow.GetBetMinimum(), myGuessingGameLow.GetBetMaximum());
+		}
+	}
+	else if (stakes == Stakes::High)
+	{
+		if (account.money < myGuessingGameHigh.GetBetMinimum())
+		{
+			std::cout << "\nYou dont have enough credit for this table anymore\n";
+			stakes = Stakes::None;
+			system("pause");
+			MainMenu();
+		}
+		else if (account.bet > myGuessingGameHigh.GetBetMaximum())
+		{
+			std::cout << "\nYour bet is higher than what is allowed at this table! Please change bet amount.\n";
+			ChangeBetInRange(myGuessingGameHigh.GetBetMinimum(), myGuessingGameHigh.GetBetMaximum());
+		}
+		else if (account.bet < myGuessingGameHigh.GetBetMinimum())
+		{
+			std::cout << "\nYour bet is lower than what is allowed at this table! Please change bet amount.\n";
+			ChangeBetInRange(myGuessingGameHigh.GetBetMinimum(), myGuessingGameHigh.GetBetMaximum());
+		}
 	}
 }
 void Casino::HandleBankruptcy()
@@ -276,6 +425,19 @@ bool Casino::EvaluateTableEarnings(const int moneyEarnedAtTable) const
 {
 	bool wonTooMuch = false;
 	bool shouldQuit = true;
+	int earningsMax = EARNINGS_MAX;
+	int LossesMax = LOSSES_MAX;
+
+	if (stakes == Stakes::Low)
+	{
+		earningsMax = EARNINGS_MAX + myGuessingGameLow.GetBetMaximum();
+		LossesMax = LOSSES_MAX + myGuessingGameLow.GetBetMaximum();
+	}
+	else if (stakes == Stakes::High)
+	{
+		earningsMax = EARNINGS_MAX + myGuessingGameHigh.GetBetMaximum();
+		LossesMax = LOSSES_MAX + myGuessingGameHigh.GetBetMaximum();
+	}
 
 	if (currentTable == TableOption::Quit)
 	{
@@ -287,7 +449,7 @@ bool Casino::EvaluateTableEarnings(const int moneyEarnedAtTable) const
 		std::cout << "\nThe dealer greets you with a sly smile.\n";
 
 	}
-	else if (moneyEarnedAtTable > EARNINGS_MAX)
+	else if (moneyEarnedAtTable > earningsMax)
 	{
 		wonTooMuch = true;
 		std::cout
@@ -296,7 +458,7 @@ bool Casino::EvaluateTableEarnings(const int moneyEarnedAtTable) const
 			<< "You are no longer welcome at this table.\n";
 
 	}
-	else if (moneyEarnedAtTable < LOSSES_MAX)
+	else if (moneyEarnedAtTable < LossesMax)
 	{
 		std::cout
 			<< "\nThis table has not been kind to you...\n"

@@ -18,9 +18,12 @@ public:
 
 	void MainMenu();
 	void EnterTable();
+	void ChooseTableStakes();
 
 	static const int* GetStatArr();
 	void ChangeBet();
+	void ChangeBetInRange(int aBetMin, int aBetMax);
+	void ValidateBet();
 	bool EvaluateTableEarnings(const int moneyEarnedAtTable) const;
 	void HandleBankruptcy();
 
@@ -31,9 +34,11 @@ public:
 private:
 	Account account;
 	TableOption currentTable = CONSTANTS::DEFAULT_TABLE;
+	Stakes stakes = CONSTANTS::DEFAULT_STAKES;
 	static int statArr[CONSTANTS::STAT_ARRAY_SIZE];
 
-	GuessingGame myGuessingGame;
+	GuessingGame myGuessingGameLow;
+	GuessingGame myGuessingGameHigh;
 	OddOrEvenGame myOddOrEven;
 	SpinTheWheel mySpinTheWheel;
 	HigherOrLower myHigherOrLower;
