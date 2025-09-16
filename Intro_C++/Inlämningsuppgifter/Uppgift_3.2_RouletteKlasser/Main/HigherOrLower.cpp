@@ -115,7 +115,7 @@ int HigherOrLower::DrawRandomCard()
 	int randomCardIndex;
 	while (true)
 	{
-		randomCardIndex = GenerateRandomNumber(0, DECK_SIZE - 1);
+		randomCardIndex = GenerateRandomNumber(0, DECK_SIZE - DECK_SIZE_TO_INDEX_OFFSET);
 
 		if (cards.cardsLeft[randomCardIndex] != 0)
 		{

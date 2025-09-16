@@ -46,14 +46,14 @@ void RouletteGame::PlayRoulette(Account& aAccount)
 		Print::ShowPersonalDetails(aAccount, Casino::GetStatArr(), Casino::GetPlayerName());
 		std::cout << "\n";
 		DrawRouletteBoard();
-		int winningNumber = GenerateRandomNumber(0, ROULETTE_ARRAY_SIZE - 1);
+		int winningNumber = GenerateRandomNumber(0, ROULETTE_ARRAY_SIZE - ROULETTE_SIZE_TO_INDEX_OFFSET);
 
 		switch (roulette.betType)
 		{
 		case RouletteBetType::RouletteBetType_Straight:
 		{
 			PrintRouletteBet(RouletteBetType::RouletteBetType_Straight);
-			int choiceStraight = ReadIntInRange(0, ROULETTE_ARRAY_SIZE - 1);
+			int choiceStraight = ReadIntInRange(0, ROULETTE_ARRAY_SIZE - ROULETTE_SIZE_TO_INDEX_OFFSET);
 			roulette.betPerType.straight = choiceStraight;
 			roulette.winningType.straight = winningNumber;
 			break;
@@ -195,10 +195,6 @@ void RouletteGame::DrawRouletteBoard() const
 			{
 				std::cout << " ";
 			}
-			//if ((i % 3 == 0) && i < 10)
-			//{
-			//	std::cout << "  ";
-			//}
 			RouletteColor indexColor = GetColorFromIndex(roulette.rouletteLayout, i);
 			PrintBracketsWithColor(indexColor, Side::Side_Left);
 			PrintIndexWithColor(indexColor, i);

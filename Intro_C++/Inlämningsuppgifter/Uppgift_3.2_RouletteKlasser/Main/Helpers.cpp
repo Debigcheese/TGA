@@ -1,10 +1,13 @@
 ﻿#include "Helpers.h"
 #include "Structs.h"
+#include "CONSTANTS.h"
 #include <iostream>
 #include <random>
 
 namespace Helpers
 {
+	using namespace CONSTANTS;
+
 	int ReadIntInRange(int aMinValue, int aMaxValue)
 	{
 		int value;
@@ -31,13 +34,13 @@ namespace Helpers
 
 	int RollDice()
 	{
-		return GenerateRandomNumber(1, 6);
+		return GenerateRandomNumber(DICE_MIN, DICE_MAX);
 	}
 
 	int TableToIndex(const TableOption& aTable)
 	{
 		int index = static_cast<int>(aTable);
-		return (index - 1);
+		return (index - ENUM_TO_INDEX_OFFSET);
 	}
 
 	int ResultToIndex(const Result& aGameResult)
@@ -89,11 +92,11 @@ namespace Helpers
 
 	OddOrEven GetOddOrEvenFromIndex(const int aIndex)
 	{
-		if (aIndex != 0 && aIndex % 2 == 0)
+		if (aIndex != ZERO_INDEX && aIndex % EVEN_DIVISOR == REMAINDER_EVEN)
 		{
 			return OddOrEven::OddOrEven_Even;
 		}
-		else if (aIndex != 0 && aIndex % 2 == 1)
+		else if (aIndex != ZERO_INDEX && aIndex % EVEN_DIVISOR == REMAINDER_ODD)
 		{
 			return OddOrEven::OddOrEven_Odd;
 		}
@@ -102,15 +105,15 @@ namespace Helpers
 
 	Columns GetColumnFromIndex(const int aIndex)
 	{
-		if (aIndex % 3 == 1 && aIndex != 0)
+		if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_LEFT_REMAINDER && aIndex != ZERO_INDEX)
 		{
 			return Columns::Columns_Left;
 		}
-		else if (aIndex % 3 == 2 && aIndex != 0)
+		else if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_MIDDLE_REMAINDER && aIndex != ZERO_INDEX)
 		{
 			return Columns::Columns_Middle;
 		}
-		else if (aIndex % 3 == 0 && aIndex != 0)
+		else if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_RIGHT_REMAINDER && aIndex != ZERO_INDEX)
 		{
 			return Columns::Columns_Right;
 		}

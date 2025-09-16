@@ -25,7 +25,6 @@ void SpinTheWheel::SetMoneyEarned(int aNewMoney)
 	myMoneyEarned = aNewMoney;
 }
 
-
 // ---------- Spin the wheel ----------
 void SpinTheWheel::PlaySpinWheelRound(Account& aAccount)
 {

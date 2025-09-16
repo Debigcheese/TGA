@@ -80,7 +80,7 @@ const char* Casino::GetPlayerName()
 	return ourName;
 }
 
-//menus
+//menus 
 void Casino::MainMenu()
 {
 	myCurrentTable = TableOption::TableOption_Menu;

@@ -1,11 +1,14 @@
 ﻿  Casino.cpp
 C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\Casino.cpp(60,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   GuessingGame.cpp
+  Helpers.cpp
   HigherOrLower.cpp
+  Main.cpp
   OddOrEvenGame.cpp
   Print.cpp
 C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\Print.cpp(176,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   RouletteGame.cpp
   SpinTheWheel.cpp
   Generating Code...
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\Helpers.cpp(120,1): warning C4715: 'Helpers::GetColumnFromIndex': not all control paths return a value
   Main.vcxproj -> C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\x64\Debug\Main.exe

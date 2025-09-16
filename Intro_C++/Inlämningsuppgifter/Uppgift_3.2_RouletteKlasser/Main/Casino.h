@@ -36,10 +36,11 @@ public:
 
 private:
 	static char ourName[CONSTANTS::NAME_ARRAY_SIZE];
+	static int ourStatArr[CONSTANTS::STAT_ARRAY_SIZE];
 	Account myAccount;
 	TableOption myCurrentTable = CONSTANTS::DEFAULT_TABLE;
 	Stakes myStakes = CONSTANTS::DEFAULT_STAKES;
-	static int ourStatArr[CONSTANTS::STAT_ARRAY_SIZE];
+
 
 	GuessingGame myGuessingGameLow;
 	GuessingGame myGuessingGameHigh;
