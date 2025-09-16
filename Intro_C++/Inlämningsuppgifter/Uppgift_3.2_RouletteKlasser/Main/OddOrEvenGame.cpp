@@ -13,7 +13,6 @@ using namespace CONSTANTS;
 OddOrEvenGame::OddOrEvenGame()
 	: myMoneyEarned(0)
 {
-
 }
 
 int OddOrEvenGame::GetMoneyEarned() const
@@ -27,10 +26,10 @@ void OddOrEvenGame::SetMoneyEarned(int aNewMoney)
 }
 
 // ---------- Odd or Even ----------
-void OddOrEvenGame::PlayOddEvenRound(Account& account)
+void OddOrEvenGame::PlayOddEvenRound(Account& aAccount)
 {
 	std::cout << "\nChoose: Odd (1) or Even (2): ";
-	int pick = ReadIntInRange(static_cast<int>(OddOrEven::Odd), static_cast<int>(OddOrEven::Even));
+	int pick = ReadIntInRange(static_cast<int>(OddOrEven::OddOrEven_Odd), static_cast<int>(OddOrEven::OddOrEven_Even));
 
 	int dice1 = RollDice();
 	int dice2 = RollDice();
@@ -42,24 +41,24 @@ void OddOrEvenGame::PlayOddEvenRound(Account& account)
 	bool bothOdd = dice1Odd && dice2Odd;
 	bool bothEven = !dice1Odd && !dice2Odd;
 
-	bool pickedOdd = (pick == static_cast<int>(OddOrEven::Odd));
+	bool pickedOdd = (pick == static_cast<int>(OddOrEven::OddOrEven_Odd));
 	bool playerWins = (pickedOdd && bothOdd) || (!pickedOdd && bothEven);
 
 	if (playerWins)
 	{
-		myMoneyEarned += Casino::Payout(account, BET_MULTI_ODD_OR_EVEN);
+		myMoneyEarned += Casino::Payout(aAccount, BET_MULTI_ODD_OR_EVEN);
 		Casino::UpdateStats(true);
 	}
 	else
 	{
-		myMoneyEarned -= Casino::DeductBet(account);
+		myMoneyEarned -= Casino::DeductBet(aAccount);
 		Casino::UpdateStats(false);
 	}
 
 	system("pause");
 }
 
-bool OddOrEvenGame::IsDiceOdd(const int dice) const
+bool OddOrEvenGame::IsDiceOdd(const int aDice) const
 {
-	return (dice % CONSTANTS::EVEN_DIVISOR == CONSTANTS::REMAINDER_ODD);
+	return (aDice % CONSTANTS::EVEN_DIVISOR == CONSTANTS::REMAINDER_ODD);
 }

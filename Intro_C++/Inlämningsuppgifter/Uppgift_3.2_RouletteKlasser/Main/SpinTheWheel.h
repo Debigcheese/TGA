@@ -9,7 +9,7 @@ public:
 	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlaySpinWheelRound(Account& account);
+	void PlaySpinWheelRound(Account& aAccount);
 
 private:
 	int myMoneyEarned;

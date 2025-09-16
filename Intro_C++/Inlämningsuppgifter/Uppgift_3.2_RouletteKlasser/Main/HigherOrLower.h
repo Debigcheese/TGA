@@ -9,10 +9,10 @@ public:
 	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlayHigherOrLower(Account& account);
+	void PlayHigherOrLower(Account& aAccount);
 	//HigherOrLower
 	int DrawRandomCard();
-	bool CompareCards(int previousCard, int newCard) const;
+	bool CompareCards(int aPreviousCard, int aNewCard) const;
 	bool IsHigherOrLowerGameOver() const;
 
 private:

@@ -8,15 +8,15 @@ namespace Helpers
 	int ReadIntInRange(int aMinValue, int aMaxValue);
 	int GenerateRandomNumber(int aMin, int aMaxValue);
 	int RollDice();
-	int TableToIndex(const TableOption& table);
-	int ResultToIndex(const Result& gameResult);
+	int TableToIndex(const TableOption& aTable);
+	int ResultToIndex(const Result& aGameResult);
 
-	void PrintIndexWithColor(const RouletteColor color, const int index);
-	void PrintBracketsWithColor(const RouletteColor color, const Side side);
-	RouletteColor GetColorFromIndex(const char rouletteLayout[], const int index);
-	OddOrEven GetOddOrEvenFromIndex(const int index);
-	Columns GetColumnFromIndex(const int index);
-	std::string GetStringFromRoulette(const RouletteBetPerType betPerType, const RouletteBetType betType);
-	std::string myToString(int value);
+	void PrintIndexWithColor(const RouletteColor aColor, const int aIndex);
+	void PrintBracketsWithColor(const RouletteColor aColor, const Side aSide);
+	RouletteColor GetColorFromIndex(const char aRouletteLayout[], const int aIndex);
+	OddOrEven GetOddOrEvenFromIndex(const int aIndex);
+	Columns GetColumnFromIndex(const int aIndex);
+	std::string GetStringFromRoulette(const RouletteBetPerType aBetPerType, const RouletteBetType aBetType);
+	std::string myToString(int aValue);
 
 }

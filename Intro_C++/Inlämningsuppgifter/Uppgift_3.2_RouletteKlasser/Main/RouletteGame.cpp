@@ -27,64 +27,64 @@ void RouletteGame::SetMoneyEarned(int aNewMoney)
 }
 
 // ---------- Play Roulette ----------
-void RouletteGame::PlayRoulette(Account& account)
+void RouletteGame::PlayRoulette(Account& aAccount)
 {
 	while (true)
 	{
-		Print::ShowPersonalDetails(account, Casino::GetStatArr());
+		Print::ShowPersonalDetails(aAccount, Casino::GetStatArr(), Casino::GetPlayerName());
 		std::cout << "\n";
 		DrawRouletteBoard();
-		PrintRouletteBet(RouletteBetType::None);
+		PrintRouletteBet(RouletteBetType::RouletteBetType_None);
 
-		int choiceMin = static_cast<int>(RouletteBetType::Straight);
-		int choiceMax = static_cast<int>(RouletteBetType::Column);
+		int choiceMin = static_cast<int>(RouletteBetType::RouletteBetType_Straight);
+		int choiceMax = static_cast<int>(RouletteBetType::RouletteBetType_Column);
 
 		int choice = ReadIntInRange(choiceMin, choiceMax);
 		roulette.betType = static_cast<RouletteBetType>(choice);
 
 		system("cls");
-		Print::ShowPersonalDetails(account, Casino::GetStatArr());
+		Print::ShowPersonalDetails(aAccount, Casino::GetStatArr(), Casino::GetPlayerName());
 		std::cout << "\n";
 		DrawRouletteBoard();
 		int winningNumber = GenerateRandomNumber(0, ROULETTE_ARRAY_SIZE - 1);
 
 		switch (roulette.betType)
 		{
-		case RouletteBetType::Straight:
+		case RouletteBetType::RouletteBetType_Straight:
 		{
-			PrintRouletteBet(RouletteBetType::Straight);
+			PrintRouletteBet(RouletteBetType::RouletteBetType_Straight);
 			int choiceStraight = ReadIntInRange(0, ROULETTE_ARRAY_SIZE - 1);
 			roulette.betPerType.straight = choiceStraight;
 			roulette.winningType.straight = winningNumber;
 			break;
 		}
-		case RouletteBetType::RedBlack:
+		case RouletteBetType::RouletteBetType_RedBlack:
 		{
-			PrintRouletteBet(RouletteBetType::RedBlack);
-			int colorIndexMin = static_cast<int>(RouletteColor::Red);
-			int colorIndexMax = static_cast<int>(RouletteColor::Black);
+			PrintRouletteBet(RouletteBetType::RouletteBetType_RedBlack);
+			int colorIndexMin = static_cast<int>(RouletteColor::RouletteColor_Red);
+			int colorIndexMax = static_cast<int>(RouletteColor::RouletteColor_Black);
 			int choiceColor = ReadIntInRange(colorIndexMin, colorIndexMax);
 
 			roulette.betPerType.color = static_cast<RouletteColor>(choiceColor);
 			roulette.winningType.color = GetColorFromIndex(roulette.rouletteLayout, winningNumber);
 			break;
 		}
-		case RouletteBetType::OddEven:
+		case RouletteBetType::RouletteBetType_OddEven:
 		{
-			PrintRouletteBet(RouletteBetType::OddEven);
-			int OddOrEvenMin = static_cast<int>(OddOrEven::Odd);
-			int OddOrEvenMax = static_cast<int>(OddOrEven::Even);
+			PrintRouletteBet(RouletteBetType::RouletteBetType_OddEven);
+			int OddOrEvenMin = static_cast<int>(OddOrEven::OddOrEven_Odd);
+			int OddOrEvenMax = static_cast<int>(OddOrEven::OddOrEven_Even);
 			int choiceOddOrEven = ReadIntInRange(OddOrEvenMin, OddOrEvenMax);
 
-			roulette.betPerType.OddOrEven = static_cast<OddOrEven>(choiceOddOrEven);
-			roulette.winningType.OddOrEven = GetOddOrEvenFromIndex(winningNumber);
+			roulette.betPerType.oddOrEven = static_cast<OddOrEven>(choiceOddOrEven);
+			roulette.winningType.oddOrEven = GetOddOrEvenFromIndex(winningNumber);
 			break;
 		}
-		case RouletteBetType::Column:
+		case RouletteBetType::RouletteBetType_Column:
 		{
-			PrintRouletteBet(RouletteBetType::Column);
-			int colMin = static_cast<int>(Columns::Left);
-			int colMax = static_cast<int>(Columns::Right);
+			PrintRouletteBet(RouletteBetType::RouletteBetType_Column);
+			int colMin = static_cast<int>(Columns::Columns_Left);
+			int colMax = static_cast<int>(Columns::Columns_Right);
 			int choiceColumn = ReadIntInRange(colMin, colMax);
 
 			roulette.betPerType.column = static_cast<Columns>(choiceColumn);
@@ -106,7 +106,7 @@ void RouletteGame::PlayRoulette(Account& account)
 
 		system("cls");
 
-		Print::ShowPersonalDetails(account, Casino::GetStatArr());
+		Print::ShowPersonalDetails(aAccount, Casino::GetStatArr(), Casino::GetPlayerName());
 		std::cout << "\n";
 		DrawRouletteBoard();
 		std::cout << "\n";
@@ -117,12 +117,12 @@ void RouletteGame::PlayRoulette(Account& account)
 
 		if (RouletteResult())
 		{
-			myMoneyEarned += Casino::Payout(account, GetRoulettePayoutAmount());
+			myMoneyEarned += Casino::Payout(aAccount, GetRoulettePayoutAmount());
 			Casino::UpdateStats(true);
 		}
 		else
 		{
-			myMoneyEarned -= Casino::DeductBet(account);
+			myMoneyEarned -= Casino::DeductBet(aAccount);
 			Casino::UpdateStats(false);
 		}
 		system("pause");
@@ -131,11 +131,11 @@ void RouletteGame::PlayRoulette(Account& account)
 }
 
 //Roulette class specific functions
-void RouletteGame::PrintRouletteBet(const RouletteBetType& betType) const
+void RouletteGame::PrintRouletteBet(const RouletteBetType& aBetType) const
 {
-	switch (betType)
+	switch (aBetType)
 	{
-	case RouletteBetType::None:
+	case RouletteBetType::RouletteBetType_None:
 	{
 		std::cout << "\n";
 		std::cout << "Place your bets! \n";
@@ -145,26 +145,26 @@ void RouletteGame::PrintRouletteBet(const RouletteBetType& betType) const
 		std::cout << "(4) Column:    \n";
 		break;
 	}
-	case RouletteBetType::Straight:
+	case RouletteBetType::RouletteBetType_Straight:
 	{
 		std::cout << "\nPick your number!\n";
 		break;
 	}
-	case RouletteBetType::RedBlack:
+	case RouletteBetType::RouletteBetType_RedBlack:
 	{
 		std::cout << "\nChoose Red or Black! \n";
 		std::cout << "Red   (1)\n";
 		std::cout << "Black (2)\n";
 		break;
 	}
-	case RouletteBetType::OddEven:
+	case RouletteBetType::RouletteBetType_OddEven:
 	{
 		std::cout << "\nChoose odd or even! \n";
 		std::cout << "Odd  (1)\n";
 		std::cout << "Even (2)\n";
 		break;
 	}
-	case RouletteBetType::Column:
+	case RouletteBetType::RouletteBetType_Column:
 	{
 		std::cout << "\nChoose column! \n";
 		std::cout << "Left Column   (1)\n";
@@ -191,7 +191,7 @@ void RouletteGame::DrawRouletteBoard() const
 		}
 		else
 		{
-			if ((i % CONSTANTS::COLUMN_TOTAL_AMOUNT == static_cast<int>(Columns::Left)) && i < ROULETTE_BOARD_SINGLE_DIGIT_THRESHOLD)
+			if ((i % CONSTANTS::COLUMN_TOTAL_AMOUNT == static_cast<int>(Columns::Columns_Left)) && i < ROULETTE_BOARD_SINGLE_DIGIT_THRESHOLD)
 			{
 				std::cout << " ";
 			}
@@ -200,9 +200,9 @@ void RouletteGame::DrawRouletteBoard() const
 			//	std::cout << "  ";
 			//}
 			RouletteColor indexColor = GetColorFromIndex(roulette.rouletteLayout, i);
-			PrintBracketsWithColor(indexColor, Side::Left);
+			PrintBracketsWithColor(indexColor, Side::Side_Left);
 			PrintIndexWithColor(indexColor, i);
-			PrintBracketsWithColor(indexColor, Side::Right);
+			PrintBracketsWithColor(indexColor, Side::Side_Right);
 
 			if (i % CONSTANTS::COLUMN_TOTAL_AMOUNT == 0)
 			{
@@ -216,7 +216,7 @@ bool RouletteGame::RouletteResult() const
 {
 	switch (roulette.betType)
 	{
-	case RouletteBetType::Straight:
+	case RouletteBetType::RouletteBetType_Straight:
 	{
 		if (roulette.betPerType.straight == roulette.winningType.straight)
 		{
@@ -224,7 +224,7 @@ bool RouletteGame::RouletteResult() const
 		}
 		break;
 	}
-	case RouletteBetType::RedBlack:
+	case RouletteBetType::RouletteBetType_RedBlack:
 	{
 		if (roulette.betPerType.color == roulette.winningType.color)
 		{
@@ -232,15 +232,15 @@ bool RouletteGame::RouletteResult() const
 		}
 		break;
 	}
-	case RouletteBetType::OddEven:
+	case RouletteBetType::RouletteBetType_OddEven:
 	{
-		if (roulette.betPerType.OddOrEven == roulette.winningType.OddOrEven)
+		if (roulette.betPerType.oddOrEven == roulette.winningType.oddOrEven)
 		{
 			return true;
 		}
 		break;
 	}
-	case RouletteBetType::Column:
+	case RouletteBetType::RouletteBetType_Column:
 	{
 		if (roulette.betPerType.column == roulette.winningType.column)
 		{
@@ -260,22 +260,22 @@ int RouletteGame::GetRoulettePayoutAmount() const
 	int payoutAmount = 0;
 	switch (roulette.betType)
 	{
-	case RouletteBetType::Straight:
+	case RouletteBetType::RouletteBetType_Straight:
 	{
 		payoutAmount = BET_MULTI_ROULETTE_STRAIGHT;
 		break;
 	}
-	case RouletteBetType::RedBlack:
+	case RouletteBetType::RouletteBetType_RedBlack:
 	{
 		payoutAmount = BET_MULTI_ROULETTE_COLOR;
 		break;
 	}
-	case RouletteBetType::OddEven:
+	case RouletteBetType::RouletteBetType_OddEven:
 	{
 		payoutAmount = BET_MULTI_ROULETTE_ODDOREVEN;
 		break;
 	}
-	case RouletteBetType::Column:
+	case RouletteBetType::RouletteBetType_Column:
 	{
 		payoutAmount = BET_MULTI_ROULETTE_COLUMN;
 		break;

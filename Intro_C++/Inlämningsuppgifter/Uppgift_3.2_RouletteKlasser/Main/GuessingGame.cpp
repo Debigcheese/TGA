@@ -39,7 +39,7 @@ int GuessingGame::GetBetMinimum() const
 }
 
 // ---------- Guessing Game ----------
-void GuessingGame::PlayGuessingRound(Account& account)
+void GuessingGame::PlayGuessingRound(Account& aAccount)
 {
 	std::cout << "\nEnter your guess (2-12): ";
 	int doubleDiceMin = CONSTANTS::DICE_MIN + CONSTANTS::DICE_MIN;
@@ -55,12 +55,12 @@ void GuessingGame::PlayGuessingRound(Account& account)
 
 	if (guess == sum)
 	{
-		myMoneyEarned += Casino::Payout(account, BET_MULTI_GUESS);
+		myMoneyEarned += Casino::Payout(aAccount, BET_MULTI_GUESS);
 		Casino::UpdateStats(true);
 	}
 	else
 	{
-		myMoneyEarned -= Casino::DeductBet(account);
+		myMoneyEarned -= Casino::DeductBet(aAccount);
 		Casino::UpdateStats(false);
 	}
 

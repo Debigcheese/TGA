@@ -17,26 +17,29 @@ public:
 	void RunCasino();
 
 	void ReadPlayerName();
+	static const char* GetPlayerName();
+
 	void MainMenu();
 	void EnterTable();
 	void ChooseTableStakes();
 
 	static const int* GetStatArr();
 	void ChangeBet();
-	void ChangeBetInRange(int aBetMin, int aBetMax);
+	void ChangeBetInRange(const int aBetMin, int aBetMax);
 	void ValidateBet();
-	bool EvaluateTableEarnings(const int moneyEarnedAtTable) const;
+	bool EvaluateTableEarnings(const int aMoneyEarnedAtTable) const;
 	void HandleBankruptcy();
 
-	static int Payout(Account& account, int payoutAmount);
-	static int DeductBet(Account& account);
-	static void UpdateStats(bool isWin);
+	static int Payout(Account& aAccount, const int aPayoutAmount);
+	static int DeductBet(Account& aAccount);
+	static void UpdateStats(bool aIsWin);
 
 private:
-	Account account;
-	TableOption currentTable = CONSTANTS::DEFAULT_TABLE;
-	Stakes stakes = CONSTANTS::DEFAULT_STAKES;
-	static int statArr[CONSTANTS::STAT_ARRAY_SIZE];
+	static char ourName[CONSTANTS::NAME_ARRAY_SIZE];
+	Account myAccount;
+	TableOption myCurrentTable = CONSTANTS::DEFAULT_TABLE;
+	Stakes myStakes = CONSTANTS::DEFAULT_STAKES;
+	static int ourStatArr[CONSTANTS::STAT_ARRAY_SIZE];
 
 	GuessingGame myGuessingGameLow;
 	GuessingGame myGuessingGameHigh;

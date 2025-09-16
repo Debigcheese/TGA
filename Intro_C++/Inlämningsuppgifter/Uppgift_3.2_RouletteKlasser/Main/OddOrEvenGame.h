@@ -10,8 +10,8 @@ public:
 	int GetMoneyEarned() const;
 	void SetMoneyEarned(int aNewMoney);
 
-	void PlayOddEvenRound(Account& account);
-	bool IsDiceOdd(const int dice) const;
+	void PlayOddEvenRound(Account& aAccount);
+	bool IsDiceOdd(const int aDice) const;
 
 private:
 	int myMoneyEarned;

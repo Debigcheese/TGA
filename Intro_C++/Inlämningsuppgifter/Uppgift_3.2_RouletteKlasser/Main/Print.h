@@ -5,9 +5,10 @@
 namespace Print
 {
 	// Print to console
-	void ShowIntro(const Account& account);
-	void ShowPersonalDetails(const Account& account, const int statArr[]);
-	void ShowOptions(const TableOption& currentTable);
-	void ShowRules(const TableOption& currentTable);
-	void ShowStats(const int statArr[]);
+	void ShowIntro(const Account& aAccount);
+	void ShowPersonalDetails(const Account& aAccount, const int aStatArr[], const char* aName);
+	void ShowOptions(const TableOption& aCurrentTable);
+	void ShowRules(const TableOption& aCurrentTable);
+	void ShowStats(const int aStatArr[]);
+	void ShowName(const char* aName);
 }

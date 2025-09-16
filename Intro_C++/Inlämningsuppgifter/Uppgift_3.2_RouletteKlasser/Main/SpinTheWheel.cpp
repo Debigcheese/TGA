@@ -27,10 +27,10 @@ void SpinTheWheel::SetMoneyEarned(int aNewMoney)
 
 
 // ---------- Spin the wheel ----------
-void SpinTheWheel::PlaySpinWheelRound(Account& account)
+void SpinTheWheel::PlaySpinWheelRound(Account& aAccount)
 {
 	std::cout << "\nSpin The Wheel (1):  ";
-	ReadIntInRange(1, 1);
+	ReadIntInRange(SPIN_THE_WHEEL_DEFAULT_VALUE_PLAY, SPIN_THE_WHEEL_DEFAULT_VALUE_PLAY);
 
 	int dice1 = RollDice();
 	int dice2 = RollDice();
@@ -40,17 +40,17 @@ void SpinTheWheel::PlaySpinWheelRound(Account& account)
 
 	if (dice1 == dice2 && dice2 == dice3)
 	{
-		myMoneyEarned += Casino::Payout(account, BET_MULTI_SPIN_WHEEL_BIG);
+		myMoneyEarned += Casino::Payout(aAccount, BET_MULTI_SPIN_WHEEL_BIG);
 		Casino::UpdateStats(true);
 	}
 	else if ((dice1 == dice2) || (dice2 == dice3) || (dice3 == dice1))
 	{
-		myMoneyEarned += Casino::Payout(account, BET_MULTI_SPIN_WHEEL_SMALL);
+		myMoneyEarned += Casino::Payout(aAccount, BET_MULTI_SPIN_WHEEL_SMALL);
 		Casino::UpdateStats(true);
 	}
 	else
 	{
-		myMoneyEarned -= Casino::DeductBet(account);
+		myMoneyEarned -= Casino::DeductBet(aAccount);
 		Casino::UpdateStats(false);
 	}
 

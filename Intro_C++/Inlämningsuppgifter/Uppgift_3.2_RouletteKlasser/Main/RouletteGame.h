@@ -10,12 +10,12 @@ public:
 	void SetMoneyEarned(int aNewMoney);
 
 	// ---------- Play Roulette ----------
-	void PlayRoulette(Account& account);
+	void PlayRoulette(Account& aAccount);
 	//Roulette class specific functions
 	void DrawRouletteBoard() const;
 	bool RouletteResult() const;
 	int GetRoulettePayoutAmount() const;
-	void PrintRouletteBet(const RouletteBetType& betType) const;
+	void PrintRouletteBet(const RouletteBetType& aBetType) const;
 
 private:
 	int myMoneyEarned;

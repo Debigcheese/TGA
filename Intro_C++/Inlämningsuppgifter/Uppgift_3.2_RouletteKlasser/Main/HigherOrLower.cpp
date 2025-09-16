@@ -26,7 +26,7 @@ void HigherOrLower::SetMoneyEarned(int aNewMoney)
 }
 
 // ---------- Play Higher Or Lower ----------
-void HigherOrLower::PlayHigherOrLower(Account& account)
+void HigherOrLower::PlayHigherOrLower(Account& aAccount)
 {
 	points.currentPoints = 0;
 	int currentCardIndex = DrawRandomCard();
@@ -35,7 +35,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account)
 	while (!gameOver)
 	{
 
-		Print::ShowPersonalDetails(account, Casino::GetStatArr());
+		Print::ShowPersonalDetails(aAccount, Casino::GetStatArr(), Casino::GetPlayerName());
 		std::cout << "\n";
 
 		std::cout << "Points: " << points.currentPoints << "\n";
@@ -46,8 +46,8 @@ void HigherOrLower::PlayHigherOrLower(Account& account)
 		std::cout << "Lower:  (2)\n\n";
 		std::cout << "Choice: ";
 
-		int Higher = static_cast<int>(CardGuess::Higher);
-		int Lower = static_cast<int>(CardGuess::Lower);
+		int Higher = static_cast<int>(CardGuess::CardGuess_Higher);
+		int Lower = static_cast<int>(CardGuess::CardGuess_Lower);
 
 		int choice = ReadIntInRange(Higher, Lower);
 		CardGuess cardGuess = static_cast<CardGuess>(choice);
@@ -62,7 +62,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account)
 		std::cout << "You drew: [" << cards.cardLabels[randomCardIndex] << "]\n";
 		std::cout << "You guessed [" << cards.cardLabels[randomCardIndex] << "]"
 			<< " is ";
-		if (cardGuess == CardGuess::Higher)
+		if (cardGuess == CardGuess::CardGuess_Higher)
 		{
 			std::cout << "HIGHER than ";
 		}
@@ -72,7 +72,7 @@ void HigherOrLower::PlayHigherOrLower(Account& account)
 		}
 		std::cout << "[" << cards.cardLabels[currentCardIndex] << "] ";
 
-		if ((cardGuess == CardGuess::Higher && cardIsHigher) || (cardGuess == CardGuess::Lower && !cardIsHigher))
+		if ((cardGuess == CardGuess::CardGuess_Higher && cardIsHigher) || (cardGuess == CardGuess::CardGuess_Lower && !cardIsHigher))
 		{
 			std::cout << "which is CORRECT \n";
 			points.currentPoints++;
@@ -90,12 +90,12 @@ void HigherOrLower::PlayHigherOrLower(Account& account)
 
 			if (points.currentPoints >= points.requiredPoints)
 			{
-				myMoneyEarned += Casino::Payout(account, BET_MULTI_HIGHER_OR_LOWER);
+				myMoneyEarned += Casino::Payout(aAccount, BET_MULTI_HIGHER_OR_LOWER);
 				Casino::UpdateStats(true);
 			}
 			else
 			{
-				myMoneyEarned -= Casino::DeductBet(account);
+				myMoneyEarned -= Casino::DeductBet(aAccount);
 				Casino::UpdateStats(false);
 			}
 			gameOver = true;
@@ -130,9 +130,9 @@ int HigherOrLower::DrawRandomCard()
 
 	return randomCardIndex;
 }
-bool HigherOrLower::CompareCards(int previousCard, int newCard) const
+bool HigherOrLower::CompareCards(int aPreviousCard, int aNewCard) const
 {
-	if (newCard > previousCard)
+	if (aNewCard > aPreviousCard)
 	{
 		return true; //is higher
 	}
