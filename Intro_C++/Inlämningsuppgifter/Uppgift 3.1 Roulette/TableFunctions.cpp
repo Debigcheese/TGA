@@ -10,10 +10,8 @@
 namespace TableFunctions
 {
 	using namespace Helpers;
-	using namespace Print;
-	using namespace TableFunctions;
 	using namespace Games;
-	using namespace Menu;
+	using namespace Print;
 	using namespace CONSTANTS;
 
 	void ChangeBet(Account& account)
@@ -211,7 +209,7 @@ namespace TableFunctions
 		}
 	}
 
-	int GenerateRouletteNumber(const Roulette& roulette)
+	int GenerateRouletteNumber()
 	{
 		std::random_device rd;
 		std::mt19937 rng{ rd() };
