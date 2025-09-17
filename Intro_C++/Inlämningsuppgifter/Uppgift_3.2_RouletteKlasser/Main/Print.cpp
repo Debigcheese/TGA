@@ -173,7 +173,7 @@ namespace Print
 
 	void ShowName(const char* aName)
 	{
-		int length = strlen(aName);
+		int length = static_cast<int>(strlen(aName));
 		for (int i = 0; i < length; i++)
 		{
 			std::cout << aName[i];

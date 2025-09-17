@@ -117,6 +117,7 @@ namespace Helpers
 		{
 			return Columns::Columns_Right;
 		}
+		return Columns::Columns_None;
 	}
 
 	std::string GetStringFromRoulette(const RouletteBetPerType aBetPerType, const RouletteBetType aBetType)
@@ -193,7 +194,7 @@ namespace Helpers
 		while (aValue > 0)
 		{
 			index--;
-			buffer[index] = '0' + (aValue % decimalBase);
+			buffer[index] = '0' + static_cast<char>((aValue % decimalBase));
 			aValue /= decimalBase;
 		}
 

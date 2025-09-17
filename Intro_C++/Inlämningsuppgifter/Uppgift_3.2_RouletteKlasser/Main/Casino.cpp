@@ -57,7 +57,7 @@ void Casino::ReadPlayerName()
 			std::cin.ignore(10000, '\n');    // discard leftover characters
 		}
 
-		int length = strlen(ourName);
+		int length = static_cast<int>(strlen(ourName));
 		bool valid = (length >= NAME_SIZE_MIN && length <= NAME_SIZE_MAX); // 2-16 characters
 
 		for (int i = 0; i < length && valid; i++)

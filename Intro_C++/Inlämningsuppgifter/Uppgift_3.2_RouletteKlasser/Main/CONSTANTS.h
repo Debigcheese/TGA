@@ -3,7 +3,7 @@
 namespace CONSTANTS
 {
 	//Account
-	const int DEFAULT_MONEY = 55000;
+	const int DEFAULT_MONEY = 555000;
 	const int DEFAULT_BET = 1000;
 
 	//CASINO
