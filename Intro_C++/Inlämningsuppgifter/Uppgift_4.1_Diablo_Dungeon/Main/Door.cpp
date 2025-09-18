@@ -1,10 +1,20 @@
 #include "Door.h"
 
-Door::Door(int aRoomOneId, int aRoomTwoId) : myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId)
+Door::Door(int aDoorId, int aRoomOneId, int aRoomTwoId) : myDoorId(aDoorId), myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId)
 {
 
 }
 
-void Door::OpenDoor()
+int Door::GetDoorId() const
 {
+	return myDoorId;
 }
+
+int* Door::GetRoomIds() const
+{
+	int roomIds[2] = {};
+	roomIds[0] = myRoomOneId;
+	roomIds[1] = myRoomTwoId;
+	return roomIds;
+}
+

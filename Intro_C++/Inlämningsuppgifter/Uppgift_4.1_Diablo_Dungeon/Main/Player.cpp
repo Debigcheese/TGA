@@ -11,6 +11,27 @@ void Player::Update()
 
 void Player::EnterRoom(int aRoomId)
 {
+	myRoomId = aRoomId;
+}
+
+int Player::OpenDoorWithID(int aDoorId)
+{
+	return 0;
+}
+
+void Player::OpenDoor(Door door)
+{
+	int* roomIds = {};
+	roomIds = door.GetRoomIds();
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (myRoomId != roomIds[i])
+		{
+			myRoomId = roomIds[i];
+			break;
+		}
+	}
 }
 
 float Player::GetDamage() const

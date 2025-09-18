@@ -4,12 +4,14 @@
 class Door
 {
 public:
-	Door(int aRoomOneId, int aRoomTwoId);
+	Door(int aDoorId, int aRoomOneId, int aRoomTwoId);
 
-	void OpenDoor();
+	int GetDoorId() const;
+	int* GetRoomIds() const;
 
 private:
-	int myRoomOneId;
-	int myRoomTwoId;
+	int myDoorId; //which room this door is in
+	int myRoomOneId; //Room on one side of door
+	int myRoomTwoId; //Room on other side of door
 };
 

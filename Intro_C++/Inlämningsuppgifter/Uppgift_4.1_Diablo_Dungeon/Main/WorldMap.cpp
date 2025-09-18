@@ -5,6 +5,10 @@
 
 using namespace Utils;
 
+WorldMap::WorldMap()
+{
+
+}
 WorldMap::WorldMap(std::vector<Room> myRooms)
 {
 
@@ -15,6 +19,11 @@ std::vector<Room> WorldMap::GetRooms()
 	return myRooms;
 }
 
+std::vector<Door> WorldMap::GetDoors()
+{
+	return myDoors;
+}
+
 void WorldMap::AddRoom(Room aRoomToAdd)
 {
 	myRooms.push_back(aRoomToAdd);
@@ -22,9 +31,28 @@ void WorldMap::AddRoom(Room aRoomToAdd)
 
 void WorldMap::GenerateWorld()
 {
-	Door(1, 2);
-	Door(1, 3);
-	myRooms.at(0);
+	//GenerateRandomEnemies();
+	Door doorOne = Door(0, 0, 0);
+	Door doorTwo = Door(0, 0, 1);
+	Door doorThree = Door(0, 0, 2);
+	Door doorFour = Door(0, 0, 3);
+
+	myDoors.push_back(doorOne);
+	myDoors.push_back(doorTwo);
+	myDoors.push_back(doorThree);
+	myDoors.push_back(doorFour);
+
+	std::vector<int> myDoorIds;
+	myDoorIds.push_back(doorOne.GetDoorId());
+	myDoorIds.push_back(doorTwo.GetDoorId());
+	myDoorIds.push_back(doorThree.GetDoorId());
+	myDoorIds.push_back(doorFour.GetDoorId());
+
+	std::vector<Enemy> enemies;// = myRooms.at(0).GetEnemies();
+	myRooms.push_back(Room(0, "Withered Halls", myDoorIds, enemies));
+
+
+
 	//Room(1, "Crypt of the Forgotten", , myRooms.at(0).GetMyEnemies())
 	//FirstRoom.SetRoomId(1)
 }

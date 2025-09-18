@@ -1,7 +1,7 @@
 #include "Room.h"
 
-Room::Room(int aRoomId, std::string aRoomName, std::vector<Door> aDoors, std::vector<Enemy> aEnemies) :
-	myRoomId(aRoomId), myRoomName(aRoomName), myDoors(aDoors), myEnemies(aEnemies)
+Room::Room(int aRoomId, std::string aRoomName, std::vector<int> aDoorIds, std::vector<Enemy> aEnemies) :
+	myRoomId(aRoomId), myRoomName(aRoomName), myDoorIds(aDoorIds), myEnemies(aEnemies)
 {
 
 }
@@ -31,7 +31,7 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 	myEnemies.push_back(aEnemyToAdd);
 }
 
-std::vector<Door> Room::GetDoors()
+std::vector<int> Room::GetDoorIds()
 {
-	return std::vector<Door>();
+	return myDoorIds;
 }
