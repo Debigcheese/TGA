@@ -28,34 +28,12 @@ void Navigation::UpdateNavigation()
 		myPlayer.SetRoomId(myNav.currentRoom.GetRoomId());
 		PrintLocation(myPlayer.GetRoomId());
 
-		PrintNavigation();
+		PrintDoors();
 		int navChoice = ReadIntInRange(1, 4);
+
 
 		myNav.currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId()); // gets current room
 		myNav.doorsInRoom = myNav.currentRoom.GetDoorsConnected(); // gets all doors in current room
-
-		if (navChoice == 4)
-		{
-			myPlayer.GetRoomId()
-				myPlayer.SetRoomId(otherRoomId);
-			myNav.currentRoom = myWorldMap.GetRoomWithId(otherRoomId);
-		}
-
-		int direction = myNav.currentRoom.GetRoomId() - navChoice;
-		if (direction < 0)
-		{
-			direction = -direction;
-		}
-		myNav.currentDirection = static_cast<Direction>(direction);//if available door directions == direction chosen 
-		myNav.doorDirections = GetValidDirections();
-
-		if (!DoesDoorExistInDirection())
-		{
-			std::cout << "There is no door in that direction.\n";
-			system("pause");
-			system("cls");
-			continue;
-		}
 
 		std::cout << "\nPlayer walks from room: " << myNav.currentRoom.GetRoomName()
 			<< " - ";
@@ -70,6 +48,8 @@ void Navigation::UpdateNavigation()
 				break;
 			}
 		}
+
+
 
 		std::cout << myNav.currentRoom.GetRoomName()
 			<< "\n";
@@ -90,10 +70,11 @@ std::vector<Direction> Navigation::GetValidDirections()
 	return myNav.doorDirections;
 }
 
-void Navigation::PrintNavigation()
+void Navigation::PrintDoors()
 {
 	std::cout
 		<< "\n<--- Navigation --->\n"
+		<< "Door 1: [" << myNav.currentRoom.GetRoomName() << "] -> " << myNav.doorsInRoom.at(0).HasRoomId(myNav.currentRoom.GetRoomId())
 		<< "1) Left\n"
 		<< "2) Middle\n"
 		<< "3) Right\n"

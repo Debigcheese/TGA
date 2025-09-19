@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Navigation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Navigation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Navigation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Door.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Door.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -31,16 +39,8 @@
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Diablo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Navigation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Navigation.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Diablo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Diablo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -96,14 +96,14 @@
               "RelativeDocumentMoniker": "Navigation.cpp",
               "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Navigation.cpp",
               "RelativeToolTip": "Navigation.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-19T12:41:31.319Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Navigation.h",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Navigation.h",
               "RelativeDocumentMoniker": "Navigation.h",
@@ -116,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Diablo.h",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Diablo.h",
               "RelativeDocumentMoniker": "Diablo.h",
@@ -129,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Diablo.cpp",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Diablo.cpp",
               "RelativeDocumentMoniker": "Diablo.cpp",
@@ -142,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "WorldMap.h",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\WorldMap.h",
               "RelativeDocumentMoniker": "WorldMap.h",
@@ -155,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "WorldMap.cpp",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\WorldMap.cpp",
               "RelativeDocumentMoniker": "WorldMap.cpp",
@@ -168,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Room.h",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Room.h",
               "RelativeDocumentMoniker": "Room.h",
@@ -181,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Room.cpp",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Room.cpp",
               "RelativeDocumentMoniker": "Room.cpp",
@@ -194,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Door.cpp",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\Door.cpp",
               "RelativeDocumentMoniker": "Door.cpp",
@@ -282,13 +282,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "GameStructs.h",
               "DocumentMoniker": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\GameStructs.h",
               "RelativeDocumentMoniker": "GameStructs.h",
               "ToolTip": "C:\\Users\\lucas.berg4\\OneDrive - Academedia\\Documents\\GitHub\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.1_Diablo_Dungeon\\Main\\GameStructs.h",
               "RelativeToolTip": "GameStructs.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-17T08:09:04.47Z",
               "EditorCaption": ""

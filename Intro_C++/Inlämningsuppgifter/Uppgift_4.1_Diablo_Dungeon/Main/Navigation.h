@@ -11,7 +11,7 @@ public:
 	void UpdateNavigation();
 
 	std::vector<Direction> GetValidDirections();
-	void PrintNavigation();
+	void PrintDoors();
 	void PrintLocation(const int aRoomId);
 	bool DoesDoorExistInDirection();
 

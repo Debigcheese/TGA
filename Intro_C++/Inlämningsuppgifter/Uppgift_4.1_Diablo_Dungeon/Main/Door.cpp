@@ -72,3 +72,12 @@ int Door::GetRoomIdDifference()
 	return difference;
 }
 
+bool Door::HasRoomId(int aRoomId)
+{
+	if (myRoomOneId == aRoomId || myRoomTwoId == aRoomId)
+	{
+		return true;
+	}
+	return false;
+}
+

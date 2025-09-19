@@ -10,6 +10,7 @@ public:
 	Direction GetDoorPOSFromCurrentRoomId(int aCurrentRoomId);
 	int GetOtherRoomId(const int aCurrentRoom) const;
 	int GetRoomIdDifference();
+	bool HasRoomId(int aRoomId);
 
 private:
 	int myRoomOneId; //Room on one side of door
