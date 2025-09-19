@@ -4,16 +4,15 @@
 #include "GameEnums.h"
 #include "GameStructs.h"
 
+
 class Navigation
 {
 public:
 	Navigation(WorldMap aWorldMap, Player aPlayer);
 	void UpdateNavigation();
 
-	std::vector<Direction> GetValidDirections();
-	void PrintDoors();
+	void PrintNavigation();
 	void PrintLocation(const int aRoomId);
-	bool DoesDoorExistInDirection();
 
 private:
 	Nav myNav;

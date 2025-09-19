@@ -2,82 +2,62 @@
 #include "Room.h"
 #include "GameEnums.h"
 #include "GameConstants.h"
+#include "GameStructs.h"
 
 using namespace GameConstants;
 
-Door::Door(int aRoomOneId, int aRoomTwoId) : myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId)
+Door::Door(int aRoomOneId, int aRoomTwoId, Direction aDirection) :
+	myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId), myDirection(aDirection), myDoorLock()
 {
 
 }
 
-
-Direction Door::GetDoorPOSFromCurrentRoomId(int aCurrentRoomId)
+Direction Door::GetDirectionFrom(int aCurrentRoomId) const
 {
-	Direction doorPos = Direction::None;
+	return aCurrentRoomId == myRoomOneId ? myDirection : Opposite(myDirection);
+}
 
-	int difference = aCurrentRoomId - GetOtherRoomId(aCurrentRoomId);
-	if (difference < 0)
+Direction Door::Opposite(Direction d) const
+{
+	switch (d)
 	{
-		difference = -difference;
+	case Direction::West:
+	{
+		return Direction::East;
 	}
-
-	switch (difference)
+	case Direction::East:
 	{
-	case 1:
-	{
-		doorPos = Direction::Left;
-		break;
+		return Direction::West;
 	}
-	case 2:
+	case Direction::North:
 	{
-		doorPos = Direction::Front;
-		break;
+		return Direction::South;
 	}
-	case 3:
+	case Direction::South:
 	{
-		doorPos = Direction::Right;
-		break;
-	}
-	case 4:
-	{
-		doorPos = Direction::Back;
-		break;
+		return Direction::North;
 	}
 	default:
 	{
-		doorPos = Direction::None;
-		break;
+		return Direction::None;
 	}
 	}
-	return doorPos;
+	return Direction::None;
 }
 
 
 int Door::GetOtherRoomId(const int aCurrentRoomId) const
 {
-	if (aCurrentRoomId == myRoomOneId)
-	{
-		return myRoomTwoId;
-	}
-	return myRoomOneId;
+	return aCurrentRoomId == myRoomOneId ? myRoomTwoId : myRoomOneId;
 }
 
-int Door::GetRoomIdDifference()
+void Door::AddDoorLock(DoorLock aDoorLock)
 {
-	int difference = myRoomOneId - myRoomTwoId;
-	if (difference < 0)
-	{
-		difference = -difference;
-	}
-	return difference;
+	myDoorLock = aDoorLock;
 }
 
-bool Door::HasRoomId(int aRoomId)
+bool Door::HasLock() const
 {
-	if (myRoomOneId == aRoomId || myRoomTwoId == aRoomId)
-	{
-		return true;
-	}
-	return false;
+	return myDoorLock.lockCheck != LockCheck::Unlocked;
 }
 

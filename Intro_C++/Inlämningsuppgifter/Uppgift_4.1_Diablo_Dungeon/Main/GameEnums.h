@@ -3,8 +3,15 @@
 enum class Direction
 {
 	None = 0,
-	Left = 1,
-	Front = 2,
-	Right = 3,
-	Back = 4,
+	West = 1,
+	North = 2,
+	East = 3,
+	South = 4,
+};
+
+enum class LockCheck
+{
+	Unlocked = 0,
+	Agility = 1,
+	Strength = 2,
 };

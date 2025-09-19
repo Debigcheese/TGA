@@ -1,19 +1,24 @@
 #pragma once
-#include "Room.h"
 #include "GameEnums.h"
+#include "GameStructs.h"
 
 class Door
 {
 public:
-	Door(int aRoomOneId, int aRoomTwoId);
+	Door(int aRoomOneId, int aRoomTwoId, Direction aDirection);
 
-	Direction GetDoorPOSFromCurrentRoomId(int aCurrentRoomId);
+	Direction GetDirectionFrom(int aCurrentRoomId) const;
+	Direction Opposite(Direction d) const;
 	int GetOtherRoomId(const int aCurrentRoom) const;
-	int GetRoomIdDifference();
-	bool HasRoomId(int aRoomId);
+	void AddDoorLock(DoorLock aDoorLock);
+
+	bool HasLock() const;
+	//void TryBreakLock(const Player& aPlayer);
 
 private:
 	int myRoomOneId; //Room on one side of door
 	int myRoomTwoId; //Room on other side of door
+	Direction myDirection;
+	DoorLock myDoorLock{};
 };
 

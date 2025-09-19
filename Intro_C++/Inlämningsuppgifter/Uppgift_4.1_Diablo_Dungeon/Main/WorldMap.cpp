@@ -3,6 +3,7 @@
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
+#include "GameStructs.h"
 
 using namespace Utils;
 
@@ -20,16 +21,16 @@ std::vector<Room> WorldMap::GetRooms()
 	return myRooms;
 }
 
-Room WorldMap::GetRoomWithId(const int aRoomId)
+Room* WorldMap::GetRoomWithId(const int aRoomId)
 {
-	for (int i = 0; i < myRooms.size();i++)
+	for (Room& room : myRooms)
 	{
-		if (myRooms.at(i).GetRoomId() == aRoomId)
+		if (room.GetRoomId() == aRoomId)
 		{
-			return myRooms.at(i);
+			return &room;
 		}
 	}
-	return myRooms.at(0);
+	return nullptr;
 }
 
 void WorldMap::AddRoom(Room aRoomToAdd)
@@ -62,37 +63,54 @@ void WorldMap::GenerateRandomEnemies()
 
 void WorldMap::GenerateDoors()
 {
-	Door room0door0 = Door(0, 1);
-	Door room0door1 = Door(0, 2);
-	Door room0door2 = Door(0, 3);
+	Door d0 = Door(0, 1, Direction::West);
+	Door d1 = Door(0, 2, Direction::North);
+	Door d2 = Door(0, 3, Direction::East);
 
-	Door room1door0 = Door(1, 3);
-	Door room1door1 = Door(1, 4);
+	Door d3 = Door(1, 3, Direction::North);
+	Door d4 = Door(1, 4, Direction::East);
 
-	Door room2door0 = Door(2, 3);
-	Door room2door1 = Door(2, 5);
+	Door d5 = Door(2, 3, Direction::East);
+	Door d6 = Door(2, 5, Direction::North);
 
-	Door room3door0 = Door(3, 4);
-	Door room3door1 = Door(3, 5);
+	Door d7 = Door(3, 4, Direction::West);
+	Door d8 = Door(3, 5, Direction::East);
 
-	myRooms.at(0).AddDoor(room0door0);
-	myRooms.at(0).AddDoor(room0door1);
-	myRooms.at(0).AddDoor(room0door2);
+	// Room 0 connections
+	myRooms.at(0).AddDoor(d0);
+	myRooms.at(0).AddDoor(d1);
+	myRooms.at(0).AddDoor(d2);
 
-	myRooms.at(1).AddDoor(room1door0);
-	myRooms.at(1).AddDoor(room1door1);
+	// Room 1 connections
+	myRooms.at(1).AddDoor(d0);
+	myRooms.at(1).AddDoor(d3);
+	myRooms.at(1).AddDoor(d4);
 
-	myRooms.at(2).AddDoor(room2door0);
-	myRooms.at(2).AddDoor(room2door1);
+	// Room 2 connections
+	myRooms.at(2).AddDoor(d1);
+	myRooms.at(2).AddDoor(d5);
+	myRooms.at(2).AddDoor(d6);
 
-	myRooms.at(3).AddDoor(room3door0);
-	myRooms.at(3).AddDoor(room3door1);
+	// Room 3 connections
+	myRooms.at(3).AddDoor(d2);
+	myRooms.at(3).AddDoor(d3);
+	myRooms.at(3).AddDoor(d5);
+	myRooms.at(3).AddDoor(d7);
+	myRooms.at(3).AddDoor(d8);
 
-	myRooms.at(4).AddDoor(room1door1);
-	myRooms.at(4).AddDoor(room3door0);
+	DoorLock agilityLock = { LockCheck::Agility , 50 };
+	for (Door& d : myRooms.at(3).GetDoorsConnected())
+	{
+		d.AddDoorLock(agilityLock);
+	}
 
-	myRooms.at(5).AddDoor(room2door1);
-	myRooms.at(5).AddDoor(room3door1);
+	// Room 4 connections
+	myRooms.at(4).AddDoor(d4);
+	myRooms.at(4).AddDoor(d7);
+
+	// Room 5 connections
+	myRooms.at(5).AddDoor(d6);
+	myRooms.at(5).AddDoor(d8);
 
 }
 

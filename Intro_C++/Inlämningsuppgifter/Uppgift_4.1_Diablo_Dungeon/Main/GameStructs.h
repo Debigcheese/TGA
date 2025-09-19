@@ -1,7 +1,7 @@
 #pragma once
+#include <vector>
 #include "GameEnums.h"
-#include "Room.h"
-#include "Door.h"
+class Room; // fwd declare (pointer only)
 
 struct PlayerAttributes
 {
@@ -14,8 +14,20 @@ struct PlayerAttributes
 // navigation
 struct Nav
 {
-	Room currentRoom;
+	Room* currentRoom = nullptr;
+	Room* previousRoom = nullptr;
 	Direction currentDirection = Direction::None;
 	std::vector<Direction> doorDirections;
-	std::vector<Door>doorsInRoom;
+};
+
+struct DoorLock
+{
+	LockCheck lockCheck = LockCheck::Unlocked;
+	float attributeValue;
+};
+
+struct Position
+{
+	int pos_X;
+	int pos_Y;
 };

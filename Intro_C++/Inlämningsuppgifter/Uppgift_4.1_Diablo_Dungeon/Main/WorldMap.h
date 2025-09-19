@@ -8,7 +8,7 @@ public:
 	WorldMap(std::vector<Room> aRooms);
 
 	std::vector<Room>GetRooms();
-	Room GetRoomWithId(const int aRoomId);
+	Room* GetRoomWithId(int aRoomId);
 
 	void AddRoom(Room aRoomToAdd);
 	void GenerateWorld();

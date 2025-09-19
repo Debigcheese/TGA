@@ -1,5 +1,6 @@
 #include "Room.h"
 
+
 Room::Room()
 {
 }
@@ -25,7 +26,12 @@ std::string Room::GetRoomName() const
 	return myRoomName;
 }
 
-std::vector<Enemy> Room::GetEnemies() const
+const std::vector<Enemy>& Room::GetEnemies() const
+{
+	return myEnemies;
+}
+
+std::vector<Enemy>& Room::GetEnemies()
 {
 	return myEnemies;
 }
@@ -35,12 +41,18 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 	myEnemies.push_back(aEnemyToAdd);
 }
 
-void Room::AddDoor(Door door)
+void Room::AddDoor(const Door& door)
 {
 	myDoors.push_back(door);
 }
 
-const std::vector<Door> Room::GetDoorsConnected() const
+const std::vector<Door>& Room::GetDoorsConnected() const
 {
 	return myDoors;
 }
+
+std::vector<Door>& Room::GetDoorsConnected()
+{
+	return myDoors;
+}
+

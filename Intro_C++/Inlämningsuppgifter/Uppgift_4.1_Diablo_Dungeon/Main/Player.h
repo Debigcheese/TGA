@@ -1,16 +1,15 @@
 #pragma once
-
 #include "GameStructs.h"
 #include "GameEnums.h"
 #include "Door.h"
+#include "WorldMap.h"
 
 class Player
 {
 public:
-	Player();
+	Player(WorldMap aWorldMap);
 	void Update();
-	//int OpenDoorWithID(int aDoorId);
-	//void OpenDoor(Door door);
+
 	int GetRoomId() const;
 	void SetRoomId(const int& aNewRoomId);
 
@@ -20,7 +19,10 @@ public:
 	float GetCarryCapacity() const;
 	float GetDefense() const;
 
+	void PrintAttributes() const;
+
 private:
+	WorldMap myWorldMap;
 	PlayerAttributes myAttributes;
 	int myRoomId;
 

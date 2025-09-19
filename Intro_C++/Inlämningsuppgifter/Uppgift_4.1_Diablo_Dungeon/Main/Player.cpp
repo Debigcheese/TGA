@@ -1,33 +1,57 @@
 #include "Player.h"
+#include "GameStructs.h"
+#include <iostream>
+#include "Utils.h"
 
-Player::Player()
+using namespace Utils;
+
+Player::Player(WorldMap aWorldMap) : myWorldMap(aWorldMap)
 {
 	myAttributes.myCurrentHealth = GetMaxHealth();
 }
 
 void Player::Update()
 {
+	while (true)
+	{
+		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
+		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
+
+		if (enemies.empty())
+		{
+			std::cout << "\nNo enemies in this room...\n";
+			system("pause");
+			return;
+		}
+
+		int enemiesKilled = 0;
+		for (Enemy& enemy : enemies)
+		{
+			if (enemy.IsDead())
+			{
+				enemiesKilled++;
+				if (enemies.size() == enemiesKilled)
+				{
+					std::cout << "\nAll enemies are dead.\n";
+					system("pause");
+					return;
+				}
+			}
+		}
+
+		std::cout
+			<< "\n<--- Navigation --->\n"
+			<< "1) West\n"
+			<< "2) North\n"
+			<< "3) East\n"
+			<< "4) South\n"
+			<< "Choice: ";
+
+		int combatChoice = ReadIntInRange(1, 4);
+
+		system("pause");
+	}
 }
-
-//int Player::OpenDoorWithID(int aDoorId)
-//{
-//	return 0;
-//}
-
-//void Player::OpenDoor(Door door)
-//{
-//	int* roomIds = {};
-//	roomIds = door.GetRoomIds();
-//
-//	for (int i = 0; i < 2; i++)
-//	{
-//		if (myRoomId != roomIds[i])
-//		{
-//			myRoomId = roomIds[i];
-//			break;
-//		}
-//	}
-//}
 
 int Player::GetRoomId() const
 {
@@ -62,4 +86,9 @@ float Player::GetCarryCapacity() const
 float Player::GetDefense() const
 {
 	return myAttributes.endurance + myAttributes.agility;
+}
+
+void Player::PrintAttributes() const
+{
+	std::cout << "";
 }
