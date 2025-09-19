@@ -131,6 +131,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Print.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameEnums.h" />
     <ClInclude Include="GameStructs.h" />
+    <ClInclude Include="Navigation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Print.h" />
     <ClInclude Include="Room.h" />

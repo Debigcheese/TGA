@@ -1,20 +1,74 @@
 #include "Door.h"
+#include "Room.h"
+#include "GameEnums.h"
+#include "GameConstants.h"
 
-Door::Door(int aDoorId, int aRoomOneId, int aRoomTwoId) : myDoorId(aDoorId), myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId)
+using namespace GameConstants;
+
+Door::Door(int aRoomOneId, int aRoomTwoId) : myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId)
 {
 
 }
 
-int Door::GetDoorId() const
+
+Direction Door::GetDoorPOSFromCurrentRoomId(int aCurrentRoomId)
 {
-	return myDoorId;
+	Direction doorPos = Direction::None;
+
+	int difference = aCurrentRoomId - GetOtherRoomId(aCurrentRoomId);
+	if (difference < 0)
+	{
+		difference = -difference;
+	}
+
+	switch (difference)
+	{
+	case 1:
+	{
+		doorPos = Direction::Left;
+		break;
+	}
+	case 2:
+	{
+		doorPos = Direction::Front;
+		break;
+	}
+	case 3:
+	{
+		doorPos = Direction::Right;
+		break;
+	}
+	case 4:
+	{
+		doorPos = Direction::Back;
+		break;
+	}
+	default:
+	{
+		doorPos = Direction::None;
+		break;
+	}
+	}
+	return doorPos;
 }
 
-int* Door::GetRoomIds() const
+
+int Door::GetOtherRoomId(const int aCurrentRoomId) const
 {
-	int roomIds[2] = {};
-	roomIds[0] = myRoomOneId;
-	roomIds[1] = myRoomTwoId;
-	return roomIds;
+	if (aCurrentRoomId == myRoomOneId)
+	{
+		return myRoomTwoId;
+	}
+	return myRoomOneId;
+}
+
+int Door::GetRoomIdDifference()
+{
+	int difference = myRoomOneId - myRoomTwoId;
+	if (difference < 0)
+	{
+		difference = -difference;
+	}
+	return difference;
 }
 

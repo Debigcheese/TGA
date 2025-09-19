@@ -9,9 +9,10 @@ class Player
 public:
 	Player();
 	void Update();
-	void EnterRoom(int aRoomId);
-	int OpenDoorWithID(int aDoorId);
-	void OpenDoor(Door door);
+	//int OpenDoorWithID(int aDoorId);
+	//void OpenDoor(Door door);
+	int GetRoomId() const;
+	void SetRoomId(const int& aNewRoomId);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;

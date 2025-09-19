@@ -4,21 +4,26 @@
 #include <string>
 #include <vector>
 
+class Door;
+
 class Room
 {
 public:
-	Room(int aRoomId, std::string aRoomName, std::vector<int> aDoorIds, std::vector<Enemy> aEnemies);
+	Room();
+	Room(int aRoomId, std::string aRoomName, std::vector<Enemy> aEnemies);
 	int GetRoomId() const;
 	void SetRoomId(int aRoomId);
 	std::string GetRoomName() const;
 	std::vector<Enemy> GetEnemies() const;
 	void AddEnemyToRoom(const Enemy& aEnemyToAdd);
-	std::vector<int> GetDoorIds();
+
+	void AddDoor(Door door);
+	const std::vector<Door> GetDoorsConnected() const;
 
 private:
 	int myRoomId;
 	std::string myRoomName;
-	std::vector<int> myDoorIds;
+	std::vector<Door> myDoors;
 	std::vector<Enemy> myEnemies;
 };
 

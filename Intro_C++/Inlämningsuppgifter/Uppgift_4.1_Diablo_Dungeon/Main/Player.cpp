@@ -9,29 +9,34 @@ void Player::Update()
 {
 }
 
-void Player::EnterRoom(int aRoomId)
+//int Player::OpenDoorWithID(int aDoorId)
+//{
+//	return 0;
+//}
+
+//void Player::OpenDoor(Door door)
+//{
+//	int* roomIds = {};
+//	roomIds = door.GetRoomIds();
+//
+//	for (int i = 0; i < 2; i++)
+//	{
+//		if (myRoomId != roomIds[i])
+//		{
+//			myRoomId = roomIds[i];
+//			break;
+//		}
+//	}
+//}
+
+int Player::GetRoomId() const
 {
-	myRoomId = aRoomId;
+	return myRoomId;
 }
 
-int Player::OpenDoorWithID(int aDoorId)
+void Player::SetRoomId(const int& aNewRoomId)
 {
-	return 0;
-}
-
-void Player::OpenDoor(Door door)
-{
-	int* roomIds = {};
-	roomIds = door.GetRoomIds();
-
-	for (int i = 0; i < 2; i++)
-	{
-		if (myRoomId != roomIds[i])
-		{
-			myRoomId = roomIds[i];
-			break;
-		}
-	}
+	myRoomId = aNewRoomId;
 }
 
 float Player::GetDamage() const

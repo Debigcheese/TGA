@@ -1,10 +1,10 @@
 #pragma once
 
-enum class DoorPosition
+enum class Direction
 {
 	None = 0,
-	Back = 1,
-	Right = 2,
-	Front = 3,
-	Left = 4,
+	Left = 1,
+	Front = 2,
+	Right = 3,
+	Back = 4,
 };

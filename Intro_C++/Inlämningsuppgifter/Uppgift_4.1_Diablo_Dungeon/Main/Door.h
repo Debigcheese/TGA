@@ -1,16 +1,17 @@
 #pragma once
 #include "Room.h"
+#include "GameEnums.h"
 
 class Door
 {
 public:
-	Door(int aDoorId, int aRoomOneId, int aRoomTwoId);
+	Door(int aRoomOneId, int aRoomTwoId);
 
-	int GetDoorId() const;
-	int* GetRoomIds() const;
+	Direction GetDoorPOSFromCurrentRoomId(int aCurrentRoomId);
+	int GetOtherRoomId(const int aCurrentRoom) const;
+	int GetRoomIdDifference();
 
 private:
-	int myDoorId; //which room this door is in
 	int myRoomOneId; //Room on one side of door
 	int myRoomTwoId; //Room on other side of door
 };

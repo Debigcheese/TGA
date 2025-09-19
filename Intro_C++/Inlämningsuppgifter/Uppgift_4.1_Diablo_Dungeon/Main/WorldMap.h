@@ -5,18 +5,19 @@ class WorldMap
 {
 public:
 	WorldMap();
-	WorldMap(std::vector<Room> myRooms);
+	WorldMap(std::vector<Room> aRooms);
 
 	std::vector<Room>GetRooms();
-	std::vector<Door>GetDoors();
+	Room GetRoomWithId(const int aRoomId);
 
 	void AddRoom(Room aRoomToAdd);
 	void GenerateWorld();
 	void GenerateRandomEnemies();
+	void GenerateDoors();
+	void GenerateRooms();
 
 private:
 	std::vector<Room> myRooms;
-	std::vector<Door> myDoors;
 
 };
 

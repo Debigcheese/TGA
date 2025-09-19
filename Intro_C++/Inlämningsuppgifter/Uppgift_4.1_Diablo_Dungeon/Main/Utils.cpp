@@ -1,4 +1,5 @@
 #include "Utils.h"
+#include "GameEnums.h"
 #include <iostream>
 #include <random>
 
@@ -25,5 +26,14 @@ namespace Utils
 		std::mt19937 rng{ rd() };
 		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
 		return dist(rng);
+	}
+	Direction GetDoorPOSFromIndex(const int& index)
+	{
+		Direction doorPos = static_cast<Direction>(index);
+		return doorPos;
+	}
+	int GetIndexFromDoorPOS(const Direction& aDoorPosition)
+	{
+		return static_cast<int>(aDoorPosition);
 	}
 }
