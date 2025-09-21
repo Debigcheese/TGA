@@ -7,4 +7,5 @@ namespace Utils
 	int GenerateRandomNumber(int aMin, int aMaxValue);
 	Direction GetDoorPOSFromIndex(const int& aIndex);
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition);
+	const char* EnemyTypeToString(const EnemyType aType);
 }

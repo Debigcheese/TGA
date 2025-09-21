@@ -12,7 +12,6 @@ public:
 	void UpdateNavigation();
 
 	void PrintNavigation();
-	void PrintLocation(const int aRoomId);
 
 private:
 	Nav myNav;

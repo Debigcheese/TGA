@@ -27,10 +27,24 @@ void Navigation::UpdateNavigation()
 	{
 		system("cls");
 		myPlayer.SetRoomId(myNav.currentRoom->GetRoomId());
-		PrintLocation(myPlayer.GetRoomId());
-
+		myPlayer.PrintHealth();
+		std::cout << "\n";
+		myNav.currentRoom->PrintRoomName();
+		std::cout << "\n";
 		PrintNavigation();
 		int navChoice = ReadIntInRange(1, 4);
+
+		if (myNav.currentRoom->DoesEnemiesExist())
+		{
+			std::cout << "combat ";
+			myPlayer.EnterCombat();
+		}
+		else
+		{
+			std::cout << "\nNo enemies in this room...\n";
+		}
+
+		system("pause");
 		myNav.currentDirection = static_cast<Direction>(navChoice);
 
 		myNav.currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
@@ -90,13 +104,6 @@ void Navigation::PrintNavigation()
 		<< "3) East\n"
 		<< "4) South\n"
 		<< "Choice: ";
-}
-
-void Navigation::PrintLocation(const int aRoomId)
-{
-	std::cout << "Location: ";
-	std::string location = myNav.currentRoom->GetRoomName();
-	std::cout << location << "\n";
 }
 
 

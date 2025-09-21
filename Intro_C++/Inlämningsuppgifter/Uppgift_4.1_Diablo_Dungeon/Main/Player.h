@@ -3,13 +3,20 @@
 #include "GameEnums.h"
 #include "Door.h"
 #include "WorldMap.h"
+#include "Enemy.h"
+#include <vector>
 
 class Player
 {
 public:
 	Player(WorldMap aWorldMap);
 	void Update();
+	void EnterCombat();
+	void ChooseTarget(const std::vector<Enemy>& aEnemies);
+	void ChooseAttack();
+	void TakeDamage(const float aDamage);
 
+	float GetDamageFromAttackType(const int& aAttackIndex) const;
 	int GetRoomId() const;
 	void SetRoomId(const int& aNewRoomId);
 
@@ -18,13 +25,19 @@ public:
 	float GetCurrentHealth() const;
 	float GetCarryCapacity() const;
 	float GetDefense() const;
+	float GetDefenseMultiplier() const;
+	bool IsDead() const;
 
+	void PrintTarget(const Enemy& aEnemy) const;
+	void PrintHealth() const;
 	void PrintAttributes() const;
 
 private:
 	WorldMap myWorldMap;
 	PlayerAttributes myAttributes;
 	int myRoomId;
-
+	int myTargetIndex;
+	int myAttackIndex;
+	bool myIsDead;
 };
 

@@ -21,10 +21,16 @@ public:
 	std::vector<Enemy>& GetEnemies();
 
 	void AddEnemyToRoom(const Enemy& aEnemyToAdd);
+	void RemoveEnemyFromRoom(int aEnemyID);
+	bool DoesEnemiesExist() const;
 
 	void AddDoor(const Door& door);
 	const std::vector<Door>& GetDoorsConnected() const;
 	std::vector<Door>& GetDoorsConnected();
+
+	void PrintRoomName() const;
+	void PrintEnemies() const;
+	void PrintEnemiesWithTarget(const int& aTargetIndex) const;
 
 private:
 	int myRoomId;

@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include "GameEnums.h"
+#include <string>
 #include <iostream>
 #include <random>
 
@@ -36,4 +37,45 @@ namespace Utils
 	{
 		return static_cast<int>(aDoorPosition);
 	}
+	const char* EnemyTypeToString(const EnemyType aType)
+	{
+		switch (aType)
+		{
+		case EnemyType::EnemyType_None:
+		{
+			return "None";
+		}
+		case EnemyType::EnemyType_Bat:
+		{
+			return "Bat";
+		}
+		case EnemyType::EnemyType_Skeleton:
+		{
+			return "Skeleton";
+		}
+		case EnemyType::EnemyType_Undead:
+		{
+			return "Undead";
+		}
+		case EnemyType::EnemyType_Beast:
+		{
+			return "Beast";
+		}
+		case EnemyType::EnemyType_Humanoid:
+		{
+			return "Humanoid";
+		}
+		case EnemyType::EnemyType_Elemental:
+		{
+			return "Elemental";
+		}
+		case EnemyType::EnemyType_Demon:
+		{
+			return "Demon";
+		}
+		}
+		return "Unknown";
+	}
+
 }
+

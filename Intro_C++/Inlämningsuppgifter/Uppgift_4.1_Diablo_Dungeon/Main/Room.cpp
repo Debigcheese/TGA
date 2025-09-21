@@ -1,5 +1,8 @@
 #include "Room.h"
+#include "iostream"
+#include "Utils.h"
 
+using namespace Utils;
 
 Room::Room()
 {
@@ -41,6 +44,23 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 	myEnemies.push_back(aEnemyToAdd);
 }
 
+void Room::RemoveEnemyFromRoom(int aEnemyID)
+{
+	for (int i = 0; i < myEnemies.size(); i++)
+	{
+		if (myEnemies[i].GetId() == aEnemyID)
+		{
+			myEnemies.erase(myEnemies.begin() + i);
+			break;
+		}
+	}
+}
+
+bool Room::DoesEnemiesExist() const
+{
+	return !myEnemies.empty();
+}
+
 void Room::AddDoor(const Door& door)
 {
 	myDoors.push_back(door);
@@ -54,5 +74,49 @@ const std::vector<Door>& Room::GetDoorsConnected() const
 std::vector<Door>& Room::GetDoorsConnected()
 {
 	return myDoors;
+}
+
+void Room::PrintRoomName() const
+{
+	std::cout << "Location: " << myRoomName;
+}
+
+void Room::PrintEnemies() const
+{
+	for (int i = 0; i < myEnemies.size(); i++)
+	{
+		std::cout << i + 1 << " - "
+			<< EnemyTypeToString(myEnemies[i].GetType()) << " "
+			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
+			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " HP | "
+			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD" << "\n";
+	}
+}
+
+void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
+{
+	const char* RED = "\x1b[31m";
+	const char* RESET = "\x1b[0m";
+	for (int i = 0; i < myEnemies.size(); i++)
+	{
+		if (aTargetIndex == i)
+		{
+			RED = "\x1b[31m";
+			RESET = "\x1b[0m";
+		}
+		else
+		{
+			RED = "";
+			RESET = "";
+		}
+		std::cout << RED
+			<< i + 1 << " - "
+			<< EnemyTypeToString(myEnemies[i].GetType()) << ""
+			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
+			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " HP | "
+			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD"
+			<< RESET << "\n";
+
+	}
 }
 

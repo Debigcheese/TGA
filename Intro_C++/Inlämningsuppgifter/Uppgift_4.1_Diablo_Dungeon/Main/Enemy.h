@@ -1,18 +1,28 @@
 #pragma once
+#include "GameStructs.h"
+#include "GameEnums.h"
+
 class Enemy
 {
 public:
-	Enemy(float aMaxHealth, float aDamage);
+	Enemy();
+	Enemy(float aMaxHealth, float aDamage, EnemyType aType);
+	void TakeDamage(const float aDamage);
+	void Attack(Player& player) const;
+
 	float GetMaxHealth() const;
 	float GetDamage() const;
 	float GetCurrentHealth() const;
-	void TakeDamage(const float aDamage);
 	bool IsDead() const;
+	void SetId(int aId);
+	int GetId() const;
+	EnemyType GetType()const;
 
 private:
-	float myMaxHealth;
+	int myId;
+	EnemyAttributes myAttributes;
+	EnemyType myType;
 	float myCurrentHealth;
-	float myDamage;
 	bool myIsDead;
 };
 

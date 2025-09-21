@@ -11,13 +11,17 @@ public:
 	Room* GetRoomWithId(int aRoomId);
 
 	void AddRoom(Room aRoomToAdd);
+
 	void GenerateWorld();
 	void GenerateRandomEnemies();
+	void GiveEnemyRandomId(Enemy& enemy);
 	void GenerateDoors();
 	void GenerateRooms();
 
 private:
+	int myNextId = 0;
 	std::vector<Room> myRooms;
+
 
 };
 

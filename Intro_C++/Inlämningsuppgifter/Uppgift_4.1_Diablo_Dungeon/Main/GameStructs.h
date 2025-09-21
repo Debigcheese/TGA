@@ -5,10 +5,16 @@ class Room; // fwd declare (pointer only)
 
 struct PlayerAttributes
 {
-	float strength = 10; //styrka
-	float agility = 10; // smidighet
-	float endurance = 10; // fysik
+	float strength = 10; //styrka (10-99)
+	float agility = 10; // smidighet (10-99)
+	float endurance = 10; // fysik (10-99)
 	float myCurrentHealth = 0;
+};
+
+struct EnemyAttributes
+{
+	float myMaxHealth;
+	float myDamage;
 };
 
 // navigation

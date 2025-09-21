@@ -56,9 +56,17 @@ void WorldMap::GenerateRandomEnemies()
 
 	for (int i = 0; i < enemyAmount; i++)
 	{
-		Enemy enemy = Enemy(20, 5);
+		Enemy enemy = Enemy(20, 5, EnemyType::EnemyType_Bat);
+		GiveEnemyRandomId(enemy);
 		myRooms.at(0).AddEnemyToRoom(enemy);
 	}
+}
+
+void WorldMap::GiveEnemyRandomId(Enemy& enemy)
+{
+	int newId = myNextId;
+	myNextId++;
+	enemy.SetId(newId);
 }
 
 void WorldMap::GenerateDoors()
@@ -117,6 +125,12 @@ void WorldMap::GenerateDoors()
 void WorldMap::GenerateRooms()
 {
 	std::vector<Enemy> enemies;
+	Enemy enemy = Enemy(20, 5, EnemyType::EnemyType_Bat);
+	GiveEnemyRandomId(enemy);
+
+	enemies.push_back(enemy);
+	enemies.push_back(enemy);
+
 	myRooms.push_back(Room(0, "Withered Halls", enemies));
 	myRooms.push_back(Room(1, "Obsidian Spire", enemies));
 	myRooms.push_back(Room(2, "Hollow Cavern", enemies));
