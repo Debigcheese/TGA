@@ -1,10 +1,3 @@
-﻿  Player.cpp
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(43,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(44,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(46,37): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(106,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(139,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(139,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(144,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(144,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  WorldMap.cpp
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\WorldMap.cpp(42,1): warning C4172: returning address of local variable or temporary : room
   Main.vcxproj -> C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\x64\Debug\Main.exe

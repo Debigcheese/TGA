@@ -1,6 +1,7 @@
 #pragma once
 #include "Room.h"
 
+
 class WorldMap
 {
 public:
@@ -15,6 +16,7 @@ public:
 
 	void GenerateWorld();
 	void GenerateRandomEnemies();
+	std::vector<Enemy> GenerateEnemiesForRoom(const int& aRoomId); // make enemies
 	void GiveEnemyRandomId(Enemy& enemy);
 	void GenerateDoors();
 	void GenerateRooms();
@@ -22,7 +24,5 @@ public:
 private:
 	int myNextId = 0;
 	std::vector<Room> myRooms;
-
-
 };
 

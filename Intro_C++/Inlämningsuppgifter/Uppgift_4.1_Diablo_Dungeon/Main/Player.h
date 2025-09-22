@@ -5,6 +5,7 @@
 #include "WorldMap.h"
 #include "Enemy.h"
 #include <vector>
+#include <string>
 
 class Player
 {
@@ -29,6 +30,7 @@ public:
 	float GetDefense() const;
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
+	std::string GetName() const;
 
 	void PrintTarget(const Enemy& aEnemy) const;
 	void PrintHealth() const;

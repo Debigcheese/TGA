@@ -17,6 +17,11 @@ void Player::Update()
 {
 	while (true)
 	{
+		if (IsDead())
+		{
+			break;
+		}
+
 		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
 		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
@@ -56,9 +61,8 @@ void Player::Update()
 
 		system("cls");
 		PrintPlayerUI();
-		bool shouldChangeTarget = false;
 
-		if (enemies[myTargetIndex].IsDead() && !enemies.empty())
+		if (enemies[myTargetIndex].IsDead())
 		{
 			currentRoom->RemoveEnemyFromRoom(enemies[myTargetIndex].GetId());
 			enemies = currentRoom->GetEnemies();
@@ -196,6 +200,11 @@ float Player::GetDefenseMultiplier() const
 bool Player::IsDead() const
 {
 	return myIsDead;
+}
+
+std::string Player::GetName() const
+{
+	return myName;
 }
 
 void Player::PrintTarget(const Enemy& aEnemy) const

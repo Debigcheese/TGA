@@ -10,10 +10,10 @@ class Navigation
 public:
 	Navigation(WorldMap& aWorldMap, Player& aPlayer);
 	void UpdateNavigation();
-	void UpdateMainMenu();
+	void UpdateAction();
 
 	void PrintNavigation() const;
-	void PrintMainMenu(bool aEnemiesExist, bool aShowCheats) const;
+	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
 
 private:
 	Nav myNav;

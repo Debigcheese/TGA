@@ -25,6 +25,10 @@ void Navigation::UpdateNavigation()
 {
 	while (true)
 	{
+		if (myPlayer.IsDead())
+		{
+			break;
+		}
 		system("cls");
 		myPlayer.PrintPlayerUI();
 		myNav.currentRoom->PrintEnemies();
@@ -39,8 +43,7 @@ void Navigation::UpdateNavigation()
 
 		if (!myNav.currentRoom->GetEnemies().empty())
 		{
-			std::cout << "You try walking to the door but get attacked!\n";
-			myNav.currentRoom->PrintEnemies();
+			std::cout << "You try walking to the door but get attacked!\n\n";
 			for (Enemy& enemy : myNav.currentRoom->GetEnemies())
 			{
 				enemy.Attack(myPlayer);
@@ -97,14 +100,21 @@ void Navigation::UpdateNavigation()
 		std::cout << "\nEntered room: " << myNav.currentRoom->GetRoomName() << "\n";
 
 		system("pause");
-
+		break;
 	}
 }
 
-void Navigation::UpdateMainMenu()
+void Navigation::UpdateAction()
 {
 	while (true)
 	{
+		if (myPlayer.IsDead())
+		{
+			std::cout << "\n" << "You died!";
+			std::cout << "\n" << "Quitting game...\n";
+			system("pause");
+			return;
+		}
 		system("cls");
 		myPlayer.SetRoomId(myNav.currentRoom->GetRoomId());
 		myPlayer.PrintPlayerUI();
@@ -114,11 +124,11 @@ void Navigation::UpdateMainMenu()
 		int max = 4;
 		if (myNav.currentRoom->GetEnemies().empty())
 		{
-			PrintMainMenu(false, false);
+			PrintActionMenu(false, false);
 		}
 		else
 		{
-			PrintMainMenu(true, false);
+			PrintActionMenu(true, false);
 			enemiesNearby = true;
 		}
 
@@ -176,10 +186,10 @@ void Navigation::PrintNavigation() const
 		<< "Choice: ";
 }
 
-void Navigation::PrintMainMenu(bool aEnemiesExist, bool aShowCheats) const
+void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 {
 	std::cout
-		<< "\n<--- Main Menu --->\n";
+		<< "\n<--- Action --->\n";
 	if (aEnemiesExist)
 	{
 		std::cout

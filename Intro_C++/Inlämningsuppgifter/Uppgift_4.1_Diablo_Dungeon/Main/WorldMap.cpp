@@ -52,14 +52,8 @@ void WorldMap::AddRoom(Room aRoomToAdd)
 
 void WorldMap::GenerateWorld()
 {
-	//GenerateRandomEnemies();
-
-
 	GenerateRooms();
 	GenerateDoors();
-
-	//Room(1, "Crypt of the Forgotten", , myRooms.at(0).GetMyEnemies())
-	//FirstRoom.SetRoomId(1)
 }
 
 void WorldMap::GenerateRandomEnemies()
@@ -72,6 +66,10 @@ void WorldMap::GenerateRandomEnemies()
 		GiveEnemyRandomId(enemy);
 		myRooms.at(0).AddEnemyToRoom(enemy);
 	}
+}
+
+void WorldMap::GenerateEnemies(const int& aRoomId)
+{
 }
 
 void WorldMap::GiveEnemyRandomId(Enemy& enemy)
@@ -131,7 +129,6 @@ void WorldMap::GenerateDoors()
 	// Room 5 connections
 	myRooms.at(5).AddDoor(d6);
 	myRooms.at(5).AddDoor(d8);
-
 }
 
 void WorldMap::GenerateRooms()
@@ -139,8 +136,9 @@ void WorldMap::GenerateRooms()
 	std::vector<Enemy> enemies;
 	Enemy enemy = Enemy(20, 5, EnemyType::EnemyType_Bat);
 	GiveEnemyRandomId(enemy);
-
 	enemies.push_back(enemy);
+
+	GiveEnemyRandomId(enemy);
 	enemies.push_back(enemy);
 
 	myRooms.push_back(Room(0, "Withered Halls", enemies));

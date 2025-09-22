@@ -46,14 +46,19 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 
 void Room::RemoveEnemyFromRoom(int aEnemyID)
 {
-	for (int i = 0; i < myEnemies.size(); i++)
-	{
-		if (myEnemies[i].GetId() == aEnemyID)
+	myEnemies.erase(std::remove_if(myEnemies.begin(), myEnemies.end(), [aEnemyID](const Enemy& enemy)
 		{
-			myEnemies.erase(myEnemies.begin() + i);
-			break;
-		}
-	}
+			return enemy.GetId() == aEnemyID;
+		}),
+		myEnemies.end());
+	//for (int i = 0; i < myEnemies.size(); i++)
+	//{
+	//	if (myEnemies[i].GetId() == aEnemyID)
+	//	{
+	//		myEnemies.erase(myEnemies.begin() + i);
+	//		break;
+	//	}
+	//}
 }
 
 bool Room::DoesEnemiesExist() const
