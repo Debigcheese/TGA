@@ -6,29 +6,26 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "Print.h"
+#include "Cheats.h"
 
 #include <vector>
 #include <iostream>
 
 using namespace Print;
 using namespace Utils;
+using namespace Cheats;
 
 Navigation::Navigation(WorldMap& aWorldMap, Player& aPlayer)
 	: myWorldMap(aWorldMap), myPlayer(aPlayer)
 {
 	myNav.currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
 	myNav.previousRoom = myNav.currentRoom;
-
 }
 
 void Navigation::UpdateNavigation()
 {
-	while (true)
+	while (true && !myPlayer.IsDead())
 	{
-		if (myPlayer.IsDead())
-		{
-			break;
-		}
 		system("cls");
 		myPlayer.PrintPlayerUI();
 		myNav.currentRoom->PrintEnemies();
@@ -106,29 +103,22 @@ void Navigation::UpdateNavigation()
 
 void Navigation::UpdateAction()
 {
-	while (true)
+	while (true && !myPlayer.IsDead())
 	{
-		if (myPlayer.IsDead())
-		{
-			std::cout << "\n" << "You died!";
-			std::cout << "\n" << "Quitting game...\n";
-			system("pause");
-			return;
-		}
 		system("cls");
 		myPlayer.SetRoomId(myNav.currentRoom->GetRoomId());
 		myPlayer.PrintPlayerUI();
 		myNav.currentRoom->PrintEnemies();
 
 		bool enemiesNearby = false;
-		int max = 4;
+		int max = 5;
 		if (myNav.currentRoom->GetEnemies().empty())
 		{
-			PrintActionMenu(false, false);
+			PrintActionMenu(false, true);
 		}
 		else
 		{
-			PrintActionMenu(true, false);
+			PrintActionMenu(true, true);
 			enemiesNearby = true;
 		}
 
@@ -166,7 +156,7 @@ void Navigation::UpdateAction()
 		}
 		case 5:
 		{
-			std::cout << "Should activate cheats\n";
+			UpdateCheats();
 			break;
 		}
 		}
@@ -215,5 +205,3 @@ void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 		<< "Choice: ";
 
 }
-
-

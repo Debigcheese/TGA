@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cheats.cpp" />
     <ClCompile Include="Diablo.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cheats.h" />
     <ClInclude Include="Diablo.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />

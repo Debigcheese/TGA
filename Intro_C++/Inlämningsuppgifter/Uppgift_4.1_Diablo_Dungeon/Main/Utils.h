@@ -8,4 +8,5 @@ namespace Utils
 	Direction GetDoorPOSFromIndex(const int& aIndex);
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition);
 	const char* EnemyTypeToString(const EnemyType aType);
+	const char* PrintRedText(bool aStart);
 }

@@ -7,18 +7,23 @@
 #include <string>
 
 using namespace Utils;
+using namespace EnemyDB;
 
 Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(float aMaxHealth, float aDamage, EnemyType aType) :
+Enemy::Enemy(EnemyType aType) :
 	myId(0),
-	myAttributes{ aMaxHealth,aDamage },
-	myCurrentHealth(aMaxHealth),
-	myType(aType),
+	myAttributes{ GetDef(aType).myType, GetDef(aType).myName, GetDef(aType).myDamage, GetDef(aType).myMaxHealth },
+	myCurrentHealth(GetDef(aType).myMaxHealth),
 	myIsDead(false)
 {
+}
+
+const EnemyAttributes& EnemyDB::GetDef(EnemyType aType)
+{
+	return EnemyDef[static_cast<int>(aType) - 1];
 }
 
 float Enemy::GetMaxHealth() const
@@ -54,7 +59,7 @@ void Enemy::Attack(Player& player) const
 
 	player.TakeDamage(dmg);
 
-	std::cout << EnemyTypeToString(myType) << " dealt "
+	std::cout << myAttributes.myName << " dealt "
 		<< "" << dmg << " dmg to you"
 		<< " [" << blockedDmg << " blocked damage]\n";
 }
@@ -76,8 +81,11 @@ int Enemy::GetId() const
 
 EnemyType Enemy::GetType() const
 {
-	return myType;
+	return myAttributes.myType;
 }
 
-
+const char* Enemy::GetName() const
+{
+	return myAttributes.myName;
+}
 

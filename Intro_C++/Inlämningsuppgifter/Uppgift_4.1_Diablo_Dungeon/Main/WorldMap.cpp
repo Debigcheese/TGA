@@ -6,6 +6,7 @@
 #include "GameStructs.h"
 
 using namespace Utils;
+using namespace EnemyDB;
 
 WorldMap::WorldMap()
 {
@@ -56,27 +57,18 @@ void WorldMap::GenerateWorld()
 	GenerateDoors();
 }
 
-void WorldMap::GenerateRandomEnemies()
+Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
 {
-	int enemyAmount = GenerateRandomNumber(0, 3);
-
-	for (int i = 0; i < enemyAmount; i++)
-	{
-		Enemy enemy = Enemy(20, 5, EnemyType::EnemyType_Bat);
-		GiveEnemyRandomId(enemy);
-		myRooms.at(0).AddEnemyToRoom(enemy);
-	}
+	Enemy enemy(aEnemyType);
+	GiveEnemyRandomId(enemy);
+	return enemy;
 }
 
-void WorldMap::GenerateEnemies(const int& aRoomId)
-{
-}
-
-void WorldMap::GiveEnemyRandomId(Enemy& enemy)
+void WorldMap::GiveEnemyRandomId(Enemy& aEnemy)
 {
 	int newId = myNextId;
 	myNextId++;
-	enemy.SetId(newId);
+	aEnemy.SetId(newId);
 }
 
 void WorldMap::GenerateDoors()
@@ -133,20 +125,47 @@ void WorldMap::GenerateDoors()
 
 void WorldMap::GenerateRooms()
 {
-	std::vector<Enemy> enemies;
-	Enemy enemy = Enemy(20, 5, EnemyType::EnemyType_Bat);
-	GiveEnemyRandomId(enemy);
-	enemies.push_back(enemy);
+	std::vector<Enemy> enemiesR0;
+	std::vector<Enemy> enemiesR1;
+	std::vector<Enemy> enemiesR2;
+	std::vector<Enemy> enemiesR3;
+	std::vector<Enemy> enemiesR4;
+	std::vector<Enemy> enemiesR5;
 
-	GiveEnemyRandomId(enemy);
-	enemies.push_back(enemy);
+	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Bat));
+	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Bat));
+	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
 
-	myRooms.push_back(Room(0, "Withered Halls", enemies));
-	myRooms.push_back(Room(1, "Obsidian Spire", enemies));
-	myRooms.push_back(Room(2, "Hollow Cavern", enemies));
-	myRooms.push_back(Room(3, "Pits of Torment", enemies));
-	myRooms.push_back(Room(4, "Eternal Abyss", enemies));
-	myRooms.push_back(Room(5, "Den of the Blighted", enemies));
+	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
+	//enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
+	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
+
+	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
+	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
+	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
+
+	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
+	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
+	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
+
+	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
+	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
+
+	enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
+	//enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+	enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+
+	//enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+	enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Demon));
+	//enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+
+	myRooms.push_back(Room(0, "Withered Halls", enemiesR0));
+	myRooms.push_back(Room(1, "Obsidian Spire", enemiesR1));
+	myRooms.push_back(Room(2, "Hollow Cavern", enemiesR2));
+	myRooms.push_back(Room(3, "Pits of Torment", enemiesR3));
+	myRooms.push_back(Room(4, "Eternal Abyss", enemiesR4));
+	myRooms.push_back(Room(5, "Den of the Blighted", enemiesR5));
 }
 
 

@@ -27,10 +27,10 @@ void Diablo::RunDiablo()
 
 	Navigation navig = Navigation(worldMap, player);
 
-	Welcome();
-	EnterUsername(player);
-	system("cls");
-	Intro(player);
+	//Welcome();
+	//EnterUsername(player);
+	//system("cls");
+	//Intro(player);
 
 	navig.UpdateAction();
 }
@@ -41,7 +41,7 @@ void Diablo::Intro(const Player& aPlayer)
 	system("pause");
 	std::cout << "\nSlay the enemies in this room (" << worldMap.GetRoomWithId(0)->GetRoomName() << ") in order to proceed.\n";
 	system("pause");
-	std::cout << "\nAnd try your best to get the hell out of here " << player.GetName() << "!\n";
+	std::cout << "\nAnd try your best to get the hell out of here " << aPlayer.GetName() << "!\n";
 	system("pause");
 }
 

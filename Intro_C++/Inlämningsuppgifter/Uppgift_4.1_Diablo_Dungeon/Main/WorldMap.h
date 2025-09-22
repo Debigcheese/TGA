@@ -15,9 +15,8 @@ public:
 	void AddRoom(Room aRoomToAdd);
 
 	void GenerateWorld();
-	void GenerateRandomEnemies();
-	std::vector<Enemy> GenerateEnemiesForRoom(const int& aRoomId); // make enemies
-	void GiveEnemyRandomId(Enemy& enemy);
+	Enemy GenerateEnemy(const EnemyType& aEnemyType);
+	void GiveEnemyRandomId(Enemy& aEnemy);
 	void GenerateDoors();
 	void GenerateRooms();
 

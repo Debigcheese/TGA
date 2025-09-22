@@ -4,7 +4,6 @@
 #include "GameEnums.h"
 #include "GameStructs.h"
 
-
 class Navigation
 {
 public:
@@ -19,5 +18,6 @@ private:
 	Nav myNav;
 	WorldMap& myWorldMap;
 	Player& myPlayer;
+
 };
 

@@ -77,5 +77,15 @@ namespace Utils
 		return "Unknown";
 	}
 
+	const char* PrintRedText(bool aStart)
+	{
+		if (aStart)
+		{
+			return "\x1b[31m";
+
+		}
+		return "\x1b[0m";
+	}
+
 }
 

@@ -4,8 +4,11 @@
 #include "Door.h"
 #include "WorldMap.h"
 #include "Enemy.h"
+#include "Cheats.h"
 #include <vector>
 #include <string>
+
+using namespace Cheats;
 
 class Player
 {

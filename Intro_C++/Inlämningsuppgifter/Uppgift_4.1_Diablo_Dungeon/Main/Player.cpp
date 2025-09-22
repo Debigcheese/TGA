@@ -3,6 +3,7 @@
 #include "WorldMap.h"
 #include "Enemy.h"
 #include "Utils.h"
+#include "Cheats.h"
 #include <vector>
 #include <iostream>
 
@@ -15,13 +16,8 @@ Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTarg
 
 void Player::Update()
 {
-	while (true)
+	while (true && !IsDead())
 	{
-		if (IsDead())
-		{
-			break;
-		}
-
 		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
 		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
@@ -123,6 +119,10 @@ void Player::ChooseAttack()
 
 void Player::TakeDamage(const float aDamage)
 {
+	if (Cheats::GetCheats().invincible)
+	{
+		return;
+	}
 	float newDamage = aDamage / GetDefenseMultiplier();
 	myAttributes.myCurrentHealth -= newDamage;
 	if (myAttributes.myCurrentHealth <= 0.0f)
@@ -130,6 +130,10 @@ void Player::TakeDamage(const float aDamage)
 		myAttributes.myCurrentHealth = 0.0f;
 		myIsDead = true;
 		IsDead();
+		std::cout << "\n" << "You died!";
+		std::cout << "\n" << "Quitting game...\n";
+		system("pause");
+		return;
 	}
 }
 
@@ -169,6 +173,10 @@ void Player::SetName(std::string aNewName)
 
 float Player::GetDamage() const
 {
+	if (Cheats::GetCheats().oneShot)
+	{
+		return myAttributes.strength * myAttributes.agility * 1000;
+	}
 	return myAttributes.strength * myAttributes.agility;
 }
 

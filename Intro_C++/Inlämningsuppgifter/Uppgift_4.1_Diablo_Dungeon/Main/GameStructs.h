@@ -13,8 +13,10 @@ struct PlayerAttributes
 
 struct EnemyAttributes
 {
-	float myMaxHealth;
+	EnemyType myType;
+	const char* myName;
 	float myDamage;
+	float myMaxHealth;
 };
 
 // navigation
@@ -37,3 +39,4 @@ struct Position
 	int pos_X;
 	int pos_Y;
 };
+
