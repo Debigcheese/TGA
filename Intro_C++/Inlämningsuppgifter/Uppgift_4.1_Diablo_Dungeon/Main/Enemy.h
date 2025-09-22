@@ -2,6 +2,8 @@
 #include "GameStructs.h"
 #include "GameEnums.h"
 
+class Player;
+
 class Enemy
 {
 public:

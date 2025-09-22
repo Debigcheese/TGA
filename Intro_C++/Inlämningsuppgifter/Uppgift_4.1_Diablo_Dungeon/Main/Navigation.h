@@ -8,14 +8,16 @@
 class Navigation
 {
 public:
-	Navigation(WorldMap aWorldMap, Player aPlayer);
+	Navigation(WorldMap& aWorldMap, Player& aPlayer);
 	void UpdateNavigation();
+	void UpdateMainMenu();
 
-	void PrintNavigation();
+	void PrintNavigation() const;
+	void PrintMainMenu(bool aEnemiesExist, bool aShowCheats) const;
 
 private:
 	Nav myNav;
-	WorldMap myWorldMap;
-	Player myPlayer;
+	WorldMap& myWorldMap;
+	Player& myPlayer;
 };
 

@@ -9,6 +9,7 @@ class Diablo
 public:
 	Diablo();
 	void RunDiablo();
+	void EnterUsername(Player& aPlayer);
 
 
 private:

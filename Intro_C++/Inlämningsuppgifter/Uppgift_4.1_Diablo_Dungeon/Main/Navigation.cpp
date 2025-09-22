@@ -13,10 +13,10 @@
 using namespace Print;
 using namespace Utils;
 
-Navigation::Navigation(WorldMap aWorldMap, Player aPlayer)
+Navigation::Navigation(WorldMap& aWorldMap, Player& aPlayer)
 	: myWorldMap(aWorldMap), myPlayer(aPlayer)
 {
-	myNav.currentRoom = myWorldMap.GetRoomWithId(0);
+	myNav.currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
 	myNav.previousRoom = myNav.currentRoom;
 
 }
@@ -26,25 +26,29 @@ void Navigation::UpdateNavigation()
 	while (true)
 	{
 		system("cls");
-		myPlayer.SetRoomId(myNav.currentRoom->GetRoomId());
-		myPlayer.PrintHealth();
-		std::cout << "\n";
-		myNav.currentRoom->PrintRoomName();
-		std::cout << "\n";
+		myPlayer.PrintPlayerUI();
+		myNav.currentRoom->PrintEnemies();
 		PrintNavigation();
-		int navChoice = ReadIntInRange(1, 4);
 
-		if (myNav.currentRoom->DoesEnemiesExist())
+		int navChoice = ReadIntInRange(1, 5);
+
+		if (navChoice == 5)
 		{
-			std::cout << "combat ";
-			myPlayer.EnterCombat();
-		}
-		else
-		{
-			std::cout << "\nNo enemies in this room...\n";
+			break;
 		}
 
-		system("pause");
+		if (!myNav.currentRoom->GetEnemies().empty())
+		{
+			std::cout << "You try walking to the door but get attacked!\n";
+			myNav.currentRoom->PrintEnemies();
+			for (Enemy& enemy : myNav.currentRoom->GetEnemies())
+			{
+				enemy.Attack(myPlayer);
+			}
+			system("pause");
+			break;
+		}
+
 		myNav.currentDirection = static_cast<Direction>(navChoice);
 
 		myNav.currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
@@ -91,11 +95,76 @@ void Navigation::UpdateNavigation()
 		}
 
 		std::cout << "\nEntered room: " << myNav.currentRoom->GetRoomName() << "\n";
+
 		system("pause");
+
 	}
 }
 
-void Navigation::PrintNavigation()
+void Navigation::UpdateMainMenu()
+{
+	while (true)
+	{
+		system("cls");
+		myPlayer.SetRoomId(myNav.currentRoom->GetRoomId());
+		myPlayer.PrintPlayerUI();
+		myNav.currentRoom->PrintEnemies();
+
+		bool enemiesNearby = false;
+		int max = 4;
+		if (myNav.currentRoom->GetEnemies().empty())
+		{
+			PrintMainMenu(false, false);
+		}
+		else
+		{
+			PrintMainMenu(true, false);
+			enemiesNearby = true;
+		}
+
+		int menuChoice = ReadIntInRange(1, max);
+
+		switch (menuChoice)
+		{
+		case 1:
+		{
+			if (enemiesNearby)
+			{
+				myPlayer.EnterCombat();
+				break;
+			}
+			std::cout << "No monsters in this room...\n";
+			std::cout << "Choose another action.\n";
+			system("pause");
+			break;
+		}
+		case 2:
+		{
+			UpdateNavigation();
+			break;
+		}
+		case 3:
+		{
+			myPlayer.EnterAttributesMenu();
+			break;
+		}
+		case 4:
+		{
+			std::cout << "Quitting Game...\n";
+			system("pause");
+			return;
+		}
+		case 5:
+		{
+			std::cout << "Should activate cheats\n";
+			break;
+		}
+		}
+	}
+
+}
+
+void Navigation::PrintNavigation() const
 {
 	std::cout
 		<< "\n<--- Navigation --->\n"
@@ -103,7 +172,38 @@ void Navigation::PrintNavigation()
 		<< "2) North\n"
 		<< "3) East\n"
 		<< "4) South\n"
+		<< "5) RETURN\n"
 		<< "Choice: ";
+}
+
+void Navigation::PrintMainMenu(bool aEnemiesExist, bool aShowCheats) const
+{
+	std::cout
+		<< "\n<--- Main Menu --->\n";
+	if (aEnemiesExist)
+	{
+		std::cout
+			<< "1) Combat\n";
+	}
+	else if (!aEnemiesExist)
+	{
+		std::cout
+			<< "1) Combat (No Enemies Nearby)\n";
+	}
+
+	std::cout
+		<< "2) Navigate\n"
+		<< "3) Attributes\n"
+		<< "4) Quit Game\n";
+	if (aShowCheats)
+	{
+		std::cout
+			<< "5) Cheats\n";
+	}
+
+	std::cout
+		<< "Choice: ";
+
 }
 
 

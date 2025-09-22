@@ -1,9 +1,8 @@
 #include "Enemy.h"
-#include "GameStructs.h"
-#include "GameEnums.h"
+
 #include "Player.h"
 #include "Utils.h"
-#include <cmath>
+
 #include <iostream>
 #include <string>
 
@@ -40,9 +39,9 @@ float Enemy::GetCurrentHealth() const
 void Enemy::TakeDamage(const float aDamage)
 {
 	myCurrentHealth -= aDamage;
-	if (myCurrentHealth <= 0)
+	if (myCurrentHealth <= 0.0f)
 	{
-		myCurrentHealth = 0;
+		myCurrentHealth = 0.0f;
 		myIsDead = true;
 		IsDead();
 	}
@@ -50,16 +49,14 @@ void Enemy::TakeDamage(const float aDamage)
 
 void Enemy::Attack(Player& player) const
 {
-	const float raw = GetDamage();
-	const float mult = player.GetDefenseMultiplier();          // e.g., 1.0–2.3...
-	const int dmg = static_cast<int>(std::round(raw / mult));  // mitigated
-	const int blocked = static_cast<int>(std::round(raw - dmg));
+	const int dmg = static_cast<int>(GetDamage() / player.GetDefenseMultiplier());
+	const int blockedDmg = static_cast<int>(GetDamage() - dmg);
 
-	player.TakeDamage(GetDamage());
+	player.TakeDamage(dmg);
 
-	std::cout << EnemyTypeToString(myType)
-		<< " -" << dmg << " HP"
-		<< " [" << blocked << " blocked damage]\n";
+	std::cout << EnemyTypeToString(myType) << " dealt "
+		<< "" << dmg << " dmg to you"
+		<< " [" << blockedDmg << " blocked damage]\n";
 }
 
 bool Enemy::IsDead() const

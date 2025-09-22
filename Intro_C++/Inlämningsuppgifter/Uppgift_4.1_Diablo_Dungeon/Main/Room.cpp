@@ -78,25 +78,38 @@ std::vector<Door>& Room::GetDoorsConnected()
 
 void Room::PrintRoomName() const
 {
-	std::cout << "Location: " << myRoomName;
+	std::cout << "Room: " << myRoomName;
 }
 
 void Room::PrintEnemies() const
 {
+	if (myEnemies.size() <= 0)
+	{
+		std::cout << "\n[No monsters in room]\n";
+		return;
+	}
+	std::cout << "\n[Monsters in room]\n";
 	for (int i = 0; i < myEnemies.size(); i++)
 	{
-		std::cout << i + 1 << " - "
-			<< EnemyTypeToString(myEnemies[i].GetType()) << " "
+		std::cout << "[" << i + 1 << "]" << " - "
+			<< EnemyTypeToString(myEnemies[i].GetType()) << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " HP | "
+			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
 			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD" << "\n";
 	}
 }
 
 void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 {
+	if (myEnemies.size() <= 0)
+	{
+		std::cout << "\n[No monsters in room]\n";
+		return;
+	}
+
 	const char* RED = "\x1b[31m";
 	const char* RESET = "\x1b[0m";
+	std::cout << "\n[Monsters in room]\n";
 	for (int i = 0; i < myEnemies.size(); i++)
 	{
 		if (aTargetIndex == i)
@@ -110,10 +123,10 @@ void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 			RESET = "";
 		}
 		std::cout << RED
-			<< i + 1 << " - "
-			<< EnemyTypeToString(myEnemies[i].GetType()) << ""
+			<< "[" << i + 1 << "]" << " - "
+			<< EnemyTypeToString(myEnemies[i].GetType()) << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " HP | "
+			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
 			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD"
 			<< RESET << "\n";
 

@@ -1,64 +1,10 @@
-﻿  Diablo.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Diablo.cpp')
-  
-  Door.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Door.cpp')
-  
-  Enemy.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Enemy.cpp')
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(51,13): error C2511: 'void Enemy::Attack(Player &) const': overloaded member function not found in 'Enemy'
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(5,7):
-      see declaration of 'Enemy'
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(53,20): error C2352: 'Enemy::GetDamage': a call of a non-static member function requires an object
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(30,14):
-      see declaration of 'Enemy::GetDamage'
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(53,14): error C2737: 'raw': const object must be initialized
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(58,20): error C2352: 'Enemy::GetDamage': a call of a non-static member function requires an object
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(30,14):
-      see declaration of 'Enemy::GetDamage'
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.cpp(60,33): error C2597: illegal reference to non-static member 'Enemy::myType'
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(24,12):
-      see declaration of 'Enemy::myType'
-  
-  Main.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Main.cpp')
-  
-  Navigation.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Navigation.cpp')
-  
-  Player.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Player.cpp')
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(52,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(53,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(55,37): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(84,11): error C2660: 'Enemy::Attack': function does not take 1 arguments
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,7):
-      see declaration of 'Enemy::Attack'
-      F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(84,11):
-      while trying to match the argument list '(Player)'
-  
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(109,49): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(141,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(141,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(146,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(146,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Room.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'Room.cpp')
-  
-  WorldMap.cpp
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Enemy.h(11,14): error C2061: syntax error: identifier 'Player'
-  (compiling source file 'WorldMap.cpp')
-  
-  Generating Code...
+﻿  Player.cpp
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(43,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(44,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(46,37): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(106,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(139,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(139,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(144,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\Player.cpp(144,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Main.vcxproj -> C:\Users\lucas.berg4\OneDrive - Academedia\Documents\GitHub\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.1_Diablo_Dungeon\Main\x64\Debug\Main.exe

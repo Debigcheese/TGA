@@ -33,6 +33,18 @@ Room* WorldMap::GetRoomWithId(const int aRoomId)
 	return nullptr;
 }
 
+Room* WorldMap::GetRoomWithId(int aRoomId) const
+{
+	for (Room room : myRooms)
+	{
+		if (room.GetRoomId() == aRoomId)
+		{
+			return &room;
+		}
+	}
+	return nullptr;
+}
+
 void WorldMap::AddRoom(Room aRoomToAdd)
 {
 	myRooms.push_back(aRoomToAdd);

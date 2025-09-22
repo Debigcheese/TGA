@@ -9,16 +9,18 @@
 class Player
 {
 public:
-	Player(WorldMap aWorldMap);
+	Player(WorldMap& aWorldMap);
 	void Update();
 	void EnterCombat();
-	void ChooseTarget(const std::vector<Enemy>& aEnemies);
+	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
+	void EnterAttributesMenu();
 
 	float GetDamageFromAttackType(const int& aAttackIndex) const;
 	int GetRoomId() const;
 	void SetRoomId(const int& aNewRoomId);
+	void SetName(std::string aNewName);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
@@ -30,10 +32,15 @@ public:
 
 	void PrintTarget(const Enemy& aEnemy) const;
 	void PrintHealth() const;
+	void PrintUserName() const;
+	void PrintPlayerUI() const;
 	void PrintAttributes() const;
+	void PrintDerivedAttributes() const;
+
 
 private:
-	WorldMap myWorldMap;
+	WorldMap& myWorldMap;
+	std::string myName;
 	PlayerAttributes myAttributes;
 	int myRoomId;
 	int myTargetIndex;

@@ -26,13 +26,11 @@ void Diablo::RunDiablo()
 	Player player = Player(worldMap);
 
 	Navigation navig = Navigation(worldMap, player);
-	navig.UpdateNavigation();
+	navig.UpdateMainMenu();
 
-	PrintIntro();
-	PrintMainMenu();
-	int menuChoice = ReadIntInRange(1, 2);
+}
 
-	system("cls");
-
+void Diablo::EnterUsername(Player& aPlayer)
+{
 }
 
