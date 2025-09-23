@@ -1,6 +1,6 @@
 #pragma once
 #include "Room.h"
-
+#include "Enemy.h"
 
 class WorldMap
 {

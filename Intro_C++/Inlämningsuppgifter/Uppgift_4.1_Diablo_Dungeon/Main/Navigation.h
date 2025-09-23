@@ -14,6 +14,7 @@ public:
 	void PrintNavigation() const;
 	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
 
+
 private:
 	Nav myNav;
 	WorldMap& myWorldMap;

@@ -9,7 +9,7 @@ enum class Direction
 	South = 4,
 };
 
-enum class LockCheck
+enum class LockType
 {
 	Unlocked = 0,
 	Agility = 1,

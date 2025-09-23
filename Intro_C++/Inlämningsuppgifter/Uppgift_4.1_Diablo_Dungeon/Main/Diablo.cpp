@@ -23,7 +23,7 @@ void Diablo::RunDiablo()
 	worldMap = world;
 	worldMap.GenerateWorld();
 
-	Player player = Player(worldMap);
+	Player player(worldMap);
 
 	Navigation navig = Navigation(worldMap, player);
 

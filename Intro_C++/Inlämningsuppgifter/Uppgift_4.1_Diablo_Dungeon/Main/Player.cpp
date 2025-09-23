@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "GameStructs.h"
 #include "WorldMap.h"
 #include "Enemy.h"
 #include "Utils.h"
@@ -213,6 +212,11 @@ bool Player::IsDead() const
 std::string Player::GetName() const
 {
 	return myName;
+}
+
+PlayerAttributes Player::GetAttributes() const
+{
+	return myAttributes;
 }
 
 void Player::PrintTarget(const Enemy& aEnemy) const

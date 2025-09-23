@@ -7,6 +7,7 @@ namespace Cheats
 	{
 		bool invincible = false;
 		bool oneShot = false;
+		bool ghost = false;
 	};
 
 	void UpdateCheats();

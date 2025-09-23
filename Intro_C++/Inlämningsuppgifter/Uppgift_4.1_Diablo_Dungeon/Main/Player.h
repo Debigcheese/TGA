@@ -1,14 +1,14 @@
 #pragma once
 #include "GameStructs.h"
 #include "GameEnums.h"
-#include "Door.h"
-#include "WorldMap.h"
-#include "Enemy.h"
 #include "Cheats.h"
 #include <vector>
 #include <string>
 
 using namespace Cheats;
+
+class WorldMap;
+class Enemy;
 
 class Player
 {
@@ -34,6 +34,7 @@ public:
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
 	std::string GetName() const;
+	PlayerAttributes GetAttributes() const;
 
 	void PrintTarget(const Enemy& aEnemy) const;
 	void PrintHealth() const;
@@ -42,11 +43,10 @@ public:
 	void PrintAttributes() const;
 	void PrintDerivedAttributes() const;
 
-
 private:
 	WorldMap& myWorldMap;
 	std::string myName;
-	PlayerAttributes myAttributes;
+	PlayerAttributes myAttributes{};
 	int myRoomId;
 	int myTargetIndex;
 	int myAttackIndex;

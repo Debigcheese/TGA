@@ -17,7 +17,7 @@ void Cheats::UpdateCheats()
 	{
 		system("cls");
 		Cheats::PrintCheatMenu();
-		int cheatsChoice = ReadIntInRange(1, 3);
+		int cheatsChoice = ReadIntInRange(1, 4);
 		switch (cheatsChoice)
 		{
 		case 1:
@@ -45,6 +45,18 @@ void Cheats::UpdateCheats()
 			break;
 		}
 		case 3:
+		{
+			if (!myCheats.ghost)
+			{
+				myCheats.ghost = true;
+			}
+			else
+			{
+				myCheats.ghost = false;
+			}
+			break;
+		}
+		case 4:
 		{
 			return;
 		}
@@ -83,8 +95,22 @@ void Cheats::PrintCheatMenu()
 		std::cout
 			<< "2) One-Shot\n";
 	}
+
+	if (myCheats.ghost)
+	{
+		std::cout
+			<< PrintRedText(true)
+			<< "3) Ghost"
+			<< PrintRedText(false)
+			<< "\n";
+	}
+	else
+	{
+		std::cout
+			<< "3) Ghost\n";
+	}
 	std::cout
-		<< "3) Return\n"
+		<< "4) Return\n"
 		<< "Choice: ";
 }
 
