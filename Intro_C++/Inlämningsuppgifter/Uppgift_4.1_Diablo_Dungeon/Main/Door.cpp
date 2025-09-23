@@ -5,6 +5,7 @@
 #include "Player.h"
 
 #include "iostream"
+
 using namespace GameConstants;
 
 Door::Door(int aRoomOneId, int aRoomTwoId, Direction aDirection) :
@@ -21,28 +22,28 @@ Direction Door::Opposite(Direction d) const
 {
 	switch (d)
 	{
-	case Direction::West:
+	case Direction::Direction_West:
 	{
-		return Direction::East;
+		return Direction::Direction_East;
 	}
-	case Direction::East:
+	case Direction::Direction_East:
 	{
-		return Direction::West;
+		return Direction::Direction_West;
 	}
-	case Direction::North:
+	case Direction::Direction_North:
 	{
-		return Direction::South;
+		return Direction::Direction_South;
 	}
-	case Direction::South:
+	case Direction::Direction_South:
 	{
-		return Direction::North;
+		return Direction::Direction_North;
 	}
 	default:
 	{
-		return Direction::None;
+		return Direction::Direction_None;
 	}
 	}
-	return Direction::None;
+	return Direction::Direction_None;
 }
 
 
@@ -68,15 +69,15 @@ const char* Door::LockTypeToString(const LockType& aLockType) const
 {
 	switch (aLockType)
 	{
-	case LockType::Unlocked:
+	case LockType::LockType_Unlocked:
 	{
 		return "Unlocked";
 	}
-	case LockType::Agility:
+	case LockType::LockType_Agility:
 	{
 		return "Agility";
 	}
-	case LockType::Strength:
+	case LockType::LockType_Strength:
 	{
 		return "Strength";
 	}
@@ -104,13 +105,14 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 			<< "2) Try Breaking\n"
 			<< "3) Return\n"
 			<< "Choice: ";
-		int lockChoice = Utils::ReadIntInRange(1, 3);
+		int lockChoice = Utils::ReadIntInRange(static_cast<int>(LockType::LockType_Agility), static_cast<int>(LockType::LockType_Unlocked));
+		LockType tempLockType = static_cast<LockType>(lockChoice);
 
-		switch (lockChoice)
+		switch (tempLockType)
 		{
-		case 1:
+		case LockType::LockType_Agility:
 		{
-			if (TryLockPick(aPlayer, LockType::Agility))
+			if (TryLockPick(aPlayer, LockType::LockType_Agility))
 			{
 				std::cout << "\nYou successfully lock-picked the door open!\n";
 				myLock.isLocked = false;
@@ -122,9 +124,9 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 			}
 			break;
 		}
-		case 2:
+		case LockType::LockType_Strength:
 		{
-			if (TryLockPick(aPlayer, LockType::Strength))
+			if (TryLockPick(aPlayer, LockType::LockType_Strength))
 			{
 				std::cout << "\nYou successfully broke the door open!\n";
 				myLock.isLocked = false;
@@ -136,7 +138,7 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 			}
 			break;
 		}
-		case 3:
+		case LockType::LockType_Unlocked:
 		{
 			return;
 		}
@@ -147,14 +149,14 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 
 bool Door::TryLockPick(const Player& aPlayer, const LockType& aType) const
 {
-	if (aType == LockType::Agility)
+	if (aType == LockType::LockType_Agility)
 	{
 		if (aPlayer.GetAttributes().agility >= myLock.agilityReq.attributeValue)
 		{
 			return true;
 		}
 	}
-	if (aType == LockType::Strength)
+	if (aType == LockType::LockType_Strength)
 	{
 		if (aPlayer.GetAttributes().strength >= myLock.strengthReq.attributeValue)
 		{

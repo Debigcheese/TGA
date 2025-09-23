@@ -1,10 +1,11 @@
 #include "Room.h"
-#include "iostream"
 #include "Utils.h"
+#include <iostream>
 
 using namespace Utils;
 
-Room::Room()
+Room::Room() :
+	myRoomId(), myRoomName(), myDoors(), myEnemies()
 {
 }
 
@@ -51,14 +52,6 @@ void Room::RemoveEnemyFromRoom(int aEnemyID)
 			return enemy.GetId() == aEnemyID;
 		}),
 		myEnemies.end());
-	//for (int i = 0; i < myEnemies.size(); i++)
-	//{
-	//	if (myEnemies[i].GetId() == aEnemyID)
-	//	{
-	//		myEnemies.erase(myEnemies.begin() + i);
-	//		break;
-	//	}
-	//}
 }
 
 bool Room::DoesEnemiesExist() const
@@ -88,7 +81,7 @@ void Room::PrintRoomName() const
 
 void Room::PrintEnemies() const
 {
-	if (myEnemies.size() <= 0)
+	if (myEnemies.size() <= ARRAY_COUNT_ZERO)
 	{
 		std::cout << "\n[No monsters in room]\n";
 		return;
@@ -96,8 +89,8 @@ void Room::PrintEnemies() const
 	std::cout << "\n[Monsters in room]\n";
 	for (int i = 0; i < myEnemies.size(); i++)
 	{
-		std::cout << "[" << i + 1 << "]" << " - "
-			<< EnemyTypeToString(myEnemies[i].GetType()) << ": "
+		std::cout << "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
+			<< myEnemies[i].GetName() << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
 			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
 			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD" << "\n";
@@ -106,7 +99,7 @@ void Room::PrintEnemies() const
 
 void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 {
-	if (myEnemies.size() <= 0)
+	if (myEnemies.size() <= ARRAY_COUNT_ZERO)
 	{
 		std::cout << "\n[No monsters in room]\n";
 		return;
@@ -128,8 +121,8 @@ void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 			RESET = "";
 		}
 		std::cout << RED
-			<< "[" << i + 1 << "]" << " - "
-			<< EnemyTypeToString(myEnemies[i].GetType()) << ": "
+			<< "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
+			<< myEnemies[i].GetName() << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
 			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
 			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD"

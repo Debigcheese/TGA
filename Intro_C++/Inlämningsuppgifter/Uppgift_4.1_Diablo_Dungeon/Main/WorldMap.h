@@ -21,7 +21,7 @@ public:
 	void GenerateRooms();
 
 private:
-	int myNextId = 0;
+	int myNextId;
 	std::vector<Room> myRooms;
 };
 

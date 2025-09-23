@@ -17,10 +17,11 @@ void Cheats::UpdateCheats()
 	{
 		system("cls");
 		Cheats::PrintCheatMenu();
-		int cheatsChoice = ReadIntInRange(1, 4);
-		switch (cheatsChoice)
+		int cheatsChoice = ReadIntInRange(static_cast<int>(CheatType::CheatType_Invincible), static_cast<int>(CheatType::CheatType_Ghost));
+		CheatType cheatType = static_cast<CheatType>(cheatsChoice);
+		switch (cheatType)
 		{
-		case 1:
+		case CheatType::CheatType_Invincible:
 		{
 			if (!myCheats.invincible)
 			{
@@ -32,7 +33,7 @@ void Cheats::UpdateCheats()
 			}
 			break;
 		}
-		case 2:
+		case CheatType::CheatType_OneShot:
 		{
 			if (!myCheats.oneShot)
 			{
@@ -44,7 +45,7 @@ void Cheats::UpdateCheats()
 			}
 			break;
 		}
-		case 3:
+		case CheatType::CheatType_Ghost:
 		{
 			if (!myCheats.ghost)
 			{
@@ -56,7 +57,7 @@ void Cheats::UpdateCheats()
 			}
 			break;
 		}
-		case 4:
+		case CheatType::CheatType_None:
 		{
 			return;
 		}

@@ -5,13 +5,13 @@
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
-#include "Print.h"
 #include "Navigation.h"
+#include "GameConstants.h"
 
 #include <iostream>
 
-using namespace Print;
 using namespace Utils;
+using namespace GameConstants;
 
 Diablo::Diablo()
 {
@@ -52,20 +52,20 @@ void Diablo::Welcome()
 
 void Diablo::EnterUsername(Player& aPlayer)
 {
-	char name[18];
+	char name[PLAYER_NAME_ARRAY_SIZE];
 	while (true)
 	{
 		std::cout << "\nEnter your name (2-16 letters): ";
-		std::cin.get(name, 18);
+		std::cin.get(name, PLAYER_NAME_ARRAY_SIZE);
 
 		if (std::cin.fail())
 		{
 			std::cin.clear();                // clear failbit
-			std::cin.ignore(10000, '\n');    // discard leftover characters
+			std::cin.ignore(CIN_IGNORE, '\n');    // discard leftover characters
 		}
 
 		int length = static_cast<int>(strlen(name));
-		bool valid = (length >= 2 && length <= 16); // 2-16 characters
+		bool valid = (length >= PLAYER_NAME_MIN_LENGTH && length <= PLAYER_NAME_MAX_LENGTH); // 2-16 characters
 
 		for (int i = 0; i < length && valid; i++)
 		{

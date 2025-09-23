@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameEnums.h"
+
 class Room; // fwd declare
 
 struct PlayerAttributes
@@ -24,21 +25,21 @@ struct Nav
 {
 	Room* currentRoom = nullptr;
 	Room* previousRoom = nullptr;
-	Direction currentDirection = Direction::None;
+	Direction currentDirection = Direction::Direction_None;
 	std::vector<Direction> doorDirections;
 };
 
 struct LockRequirements
 {
-	LockType lockType = LockType::Unlocked;
+	LockType lockType = LockType::LockType_Unlocked;
 	float attributeValue;
 };
 
 struct Lock
 {
 	bool isLocked;
-	LockRequirements strengthReq{ LockType::Strength, 0 };
-	LockRequirements agilityReq{ LockType::Agility, 0 };
+	LockRequirements strengthReq{ LockType::LockType_Strength, 0 };
+	LockRequirements agilityReq{ LockType::LockType_Agility, 0 };
 };
 
 struct Position

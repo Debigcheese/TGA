@@ -2,18 +2,44 @@
 
 enum class Direction
 {
-	None = 0,
-	West = 1,
-	North = 2,
-	East = 3,
-	South = 4,
+	Direction_None = 0,
+	Direction_West = 1,
+	Direction_North = 2,
+	Direction_East = 3,
+	Direction_South = 4,
 };
+
+enum class Action
+{
+	Action_None = 0,
+	Action_Combat = 1,
+	Action_Navigation = 2,
+	Action_Attributes = 3,
+	Action_Quit = 4,
+	Action_Cheats = 5,
+};
+
+enum class AttackType
+{
+	AttackType_None = -1,
+	AttackType_QuickAttack = 0,
+	AttackType_HeavyAttack = 1,
+};
+
+enum class AttriMenu
+{
+	AttriMenu_Attributes = 1,
+	AttriMenu_DerivedAttributes = 2,
+	AttriMenu_Return = 3,
+};
+
 
 enum class LockType
 {
-	Unlocked = 0,
-	Agility = 1,
-	Strength = 2,
+	LockType_None = 0,
+	LockType_Agility = 1,
+	LockType_Strength = 2,
+	LockType_Unlocked = 3,
 };
 
 enum class EnemyType
@@ -26,4 +52,12 @@ enum class EnemyType
 	EnemyType_Humanoid = 5,
 	EnemyType_Elemental = 6,
 	EnemyType_Demon = 7,
+};
+
+enum class CheatType
+{
+	CheatType_None = 4,
+	CheatType_Invincible = 1,
+	CheatType_OneShot = 2,
+	CheatType_Ghost = 3,
 };

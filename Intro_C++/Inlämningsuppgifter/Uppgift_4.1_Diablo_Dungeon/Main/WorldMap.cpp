@@ -8,11 +8,11 @@
 using namespace Utils;
 using namespace EnemyDB;
 
-WorldMap::WorldMap()
+WorldMap::WorldMap() : myNextId(ENEMY_ID_FIRST)
 {
 
 }
-WorldMap::WorldMap(std::vector<Room> myRooms)
+WorldMap::WorldMap(std::vector<Room> myRooms) : myNextId(ENEMY_ID_FIRST)
 {
 
 }
@@ -74,13 +74,13 @@ void WorldMap::GiveEnemyRandomId(Enemy& aEnemy)
 void WorldMap::GenerateDoors()
 {
 	//room 0
-	Door d1 = Door(0, 10, Direction::North);
-	Door d2 = Door(0, 1, Direction::East);
+	Door d1 = Door(0, 10, Direction::Direction_North);
+	Door d2 = Door(0, 1, Direction::Direction_East);
 
-	Door d3 = Door(1, 11, Direction::North);
-	Door d4 = Door(10, 11, Direction::East);
+	Door d3 = Door(1, 11, Direction::Direction_North);
+	Door d4 = Door(10, 11, Direction::Direction_East);
 
-	Door d5 = Door(10, 20, Direction::North);
+	Door d5 = Door(10, 20, Direction::Direction_North);
 
 	Lock doorLock;
 	doorLock.agilityReq.attributeValue = 50;

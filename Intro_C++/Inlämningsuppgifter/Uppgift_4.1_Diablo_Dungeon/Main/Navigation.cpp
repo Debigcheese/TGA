@@ -5,13 +5,11 @@
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
-#include "Print.h"
 #include "Cheats.h"
 
 #include <vector>
 #include <iostream>
 
-using namespace Print;
 using namespace Utils;
 
 Navigation::Navigation(WorldMap& aWorldMap, Player& aPlayer)
@@ -30,9 +28,9 @@ void Navigation::UpdateNavigation()
 		myNav.currentRoom->PrintEnemies();
 		PrintNavigation();
 
-		int navChoice = ReadIntInRange(1, 5);
+		int navChoice = ReadIntInRange(static_cast<int>(Direction::Direction_West), static_cast<int>(Direction::Direction_South) + NAV_DIRECTION_CHOICE_OFFSET);
 
-		if (navChoice == 5)
+		if (navChoice == static_cast<int>(Direction::Direction_South) + NAV_DIRECTION_CHOICE_OFFSET)
 		{
 			break;
 		}
@@ -112,7 +110,6 @@ void Navigation::UpdateAction()
 		myNav.currentRoom->PrintEnemies();
 
 		bool enemiesNearby = false;
-		int max = 5;
 		if (myNav.currentRoom->GetEnemies().empty())
 		{
 			PrintActionMenu(false, true);
@@ -123,11 +120,12 @@ void Navigation::UpdateAction()
 			enemiesNearby = true;
 		}
 
-		int menuChoice = ReadIntInRange(1, max);
+		int menuChoice = ReadIntInRange(static_cast<int>(Action::Action_Combat), static_cast<int>(Action::Action_Cheats));
+		Action actionChoice = static_cast<Action>(menuChoice);
 
-		switch (menuChoice)
+		switch (actionChoice)
 		{
-		case 1:
+		case Action::Action_Combat:
 		{
 			if (enemiesNearby)
 			{
@@ -139,23 +137,23 @@ void Navigation::UpdateAction()
 			system("pause");
 			break;
 		}
-		case 2:
+		case Action::Action_Navigation:
 		{
 			UpdateNavigation();
 			break;
 		}
-		case 3:
+		case Action::Action_Attributes:
 		{
 			myPlayer.EnterAttributesMenu();
 			break;
 		}
-		case 4:
+		case Action::Action_Quit:
 		{
 			std::cout << "Quitting Game...\n";
 			system("pause");
 			return;
 		}
-		case 5:
+		case Action::Action_Cheats:
 		{
 			UpdateCheats();
 			break;

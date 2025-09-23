@@ -1,5 +1,4 @@
 #include "Enemy.h"
-
 #include "Player.h"
 #include "Utils.h"
 
@@ -14,7 +13,7 @@ Enemy::Enemy()
 }
 
 Enemy::Enemy(EnemyType aType) :
-	myId(0),
+	myId(),
 	myAttributes{ GetDef(aType).myType, GetDef(aType).myName, GetDef(aType).myDamage, GetDef(aType).myMaxHealth },
 	myCurrentHealth(GetDef(aType).myMaxHealth),
 	myIsDead(false)
@@ -23,8 +22,9 @@ Enemy::Enemy(EnemyType aType) :
 
 const EnemyAttributes& EnemyDB::GetDef(EnemyType aType)
 {
-	return EnemyDef[static_cast<int>(aType) - 1];
+	return EnemyDef[static_cast<int>(aType)];
 }
+
 
 float Enemy::GetMaxHealth() const
 {
@@ -44,9 +44,9 @@ float Enemy::GetCurrentHealth() const
 void Enemy::TakeDamage(const float aDamage)
 {
 	myCurrentHealth -= aDamage;
-	if (myCurrentHealth <= 0.0f)
+	if (myCurrentHealth <= HEALTH_ZERO)
 	{
-		myCurrentHealth = 0.0f;
+		myCurrentHealth = HEALTH_ZERO;
 		myIsDead = true;
 		IsDead();
 	}

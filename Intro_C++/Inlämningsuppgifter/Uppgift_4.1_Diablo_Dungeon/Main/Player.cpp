@@ -20,7 +20,7 @@ void Player::Update()
 		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
 		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
-		if (myTargetIndex < 0 && enemies.size() > 1)
+		if (IsInvalidAttackIndex() && enemies.size() > 1)
 		{
 			PrintPlayerUI();
 			currentRoom->PrintEnemies();
@@ -29,7 +29,7 @@ void Player::Update()
 		}
 		else
 		{
-			myTargetIndex = 0;
+			myTargetIndex = PLAYER_ATTACK_INDEX_ZERO;
 		}
 
 		PrintPlayerUI();
@@ -44,13 +44,13 @@ void Player::Update()
 		int enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
 
 		enemies[myTargetIndex].TakeDamage(damage);
-		std::cout << "\nYou dealt " << damage << " dmg to " << EnemyTypeToString(enemies[myTargetIndex].GetType());
+		std::cout << "\nYou dealt " << damage << " dmg to " << enemies[myTargetIndex].GetName();
 		std::cout << " (" << enemyOldHp << "hp -> " << enemies[myTargetIndex].GetCurrentHealth() << "hp)" << "\n";
 		system("pause");
 
 		if (enemies[myTargetIndex].IsDead())
 		{
-			std::cout << "\n" << EnemyTypeToString(enemies[myTargetIndex].GetType()) << " has been slained!\n";
+			std::cout << "\n" << enemies[myTargetIndex].GetName() << " has been slained!\n";
 			system("pause");
 		}
 
@@ -61,7 +61,7 @@ void Player::Update()
 		{
 			currentRoom->RemoveEnemyFromRoom(enemies[myTargetIndex].GetId());
 			enemies = currentRoom->GetEnemies();
-			myTargetIndex = -1;
+			myTargetIndex = PLAYER_ATTACK_INDEX_INVALID;
 			currentRoom->PrintEnemies();
 		}
 		else
@@ -72,7 +72,7 @@ void Player::Update()
 		if (enemies.empty())
 		{
 			std::cout << "\nYou have slain all enemies in this room!\n";
-			myTargetIndex = -1;
+			myTargetIndex = PLAYER_ATTACK_INDEX_INVALID;
 			system("pause");
 			break;
 		}
@@ -103,7 +103,7 @@ void Player::ChooseTarget()
 		<< "\n<--- Choose Target --->\n"
 		<< "Choice: ";
 	int enemyCount = myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size();
-	myTargetIndex = ReadIntInRange(1, enemyCount) - 1;
+	myTargetIndex = ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) - PLAYER_TARGET_INDEX_OFFSET;
 }
 
 void Player::ChooseAttack()
@@ -113,7 +113,9 @@ void Player::ChooseAttack()
 		<< "1) Quick attack" << "\n"
 		<< "2) Heavy attack\n"
 		<< "Choice: ";
-	myAttackIndex = ReadIntInRange(1, 2) - 1;
+	myAttackIndex = ReadIntInRange(
+		static_cast<int>(AttackType::AttackType_QuickAttack),
+		static_cast<int>(AttackType::AttackType_HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
 }
 
 void Player::TakeDamage(const float aDamage)
@@ -124,9 +126,9 @@ void Player::TakeDamage(const float aDamage)
 	}
 	float newDamage = aDamage / GetDefenseMultiplier();
 	myAttributes.myCurrentHealth -= newDamage;
-	if (myAttributes.myCurrentHealth <= 0.0f)
+	if (myAttributes.myCurrentHealth <= HEALTH_ZERO)
 	{
-		myAttributes.myCurrentHealth = 0.0f;
+		myAttributes.myCurrentHealth = HEALTH_ZERO;
 		myIsDead = true;
 		IsDead();
 		std::cout << "\n" << "You died!";
@@ -138,17 +140,18 @@ void Player::TakeDamage(const float aDamage)
 
 float Player::GetDamageFromAttackType(const int& aAttackIndex) const
 {
-	float newDamage = 0.0f;
-	switch (aAttackIndex)
+	float newDamage = DAMAGE_ZERO;
+	AttackType atkType = static_cast<AttackType>(aAttackIndex);
+	switch (atkType)
 	{
-	case 0:
+	case AttackType::AttackType_QuickAttack:
 	{
 		newDamage = static_cast<float>(GenerateRandomNumber(GetDamage(), GetDamage()));
 		break;
 	}
-	case 1:
+	case AttackType::AttackType_HeavyAttack:
 	{
-		newDamage = static_cast<float>(GenerateRandomNumber(GetDamage() * 0.8f, GetDamage() * 1.2f));
+		newDamage = static_cast<float>(GenerateRandomNumber(GetDamage() * HEAVY_MULTI_MIN, GetDamage() * HEAVY_MULTI_MAX));
 		break;
 	}
 	}
@@ -174,14 +177,16 @@ float Player::GetDamage() const
 {
 	if (Cheats::GetCheats().oneShot)
 	{
-		return myAttributes.strength * myAttributes.agility * 1000;
+		return myAttributes.strength * myAttributes.agility * CHEATS_ONESHOT_MULTI;
 	}
 	return myAttributes.strength * myAttributes.agility;
 }
 
 float Player::GetMaxHealth() const
 {
-	return (myAttributes.endurance * 4) + (myAttributes.strength * 6) + (myAttributes.agility * 3);
+	return (myAttributes.endurance * ATTRI_GET_HEALTH_ENDURANCE_MULTI) +
+		(myAttributes.strength * ATTRI_GET_HEALTH_STRENGTH_MULTI) +
+		(myAttributes.agility * ATTRI_GET_HEALTH_AGILITY_MULTI);
 }
 
 float Player::GetCurrentHealth() const
@@ -191,7 +196,7 @@ float Player::GetCurrentHealth() const
 
 float Player::GetCarryCapacity() const
 {
-	return myAttributes.strength + (myAttributes.agility / 3);
+	return myAttributes.strength + (myAttributes.agility / ATTRI_GET_CARRY_AGILITY_DIV);
 }
 
 float Player::GetDefense() const
@@ -201,12 +206,17 @@ float Player::GetDefense() const
 
 float Player::GetDefenseMultiplier() const
 {
-	return (1.0f + (GetDefense() / 150.0f)); // (defense {20-198} /200) 
+	return (DEFENSE_BASE_MULTI + (GetDefense() / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
 }
 
 bool Player::IsDead() const
 {
 	return myIsDead;
+}
+
+bool Player::IsInvalidAttackIndex() const
+{
+	return myAttackIndex < PLAYER_ATTACK_INDEX_ZERO;
 }
 
 std::string Player::GetName() const
@@ -296,25 +306,28 @@ void Player::EnterAttributesMenu()
 			<< "3) Return\n"
 			<< "Choice: ";
 
-		int AttriMenuChoice = ReadIntInRange(1, 3);
+		AttriMenu AttriMenuChoice = static_cast<AttriMenu>(ReadIntInRange(
+			static_cast<int>(AttriMenu::AttriMenu_Attributes),
+			static_cast<int>(AttriMenu::AttriMenu_Return)));
+
 		bool shouldExit = false;
 		system("cls");
 
 		switch (AttriMenuChoice)
 		{
-		case 1:
+		case AttriMenu::AttriMenu_Attributes:
 		{
 			PrintAttributes();
 			system("pause");
 			break;
 		}
-		case 2:
+		case AttriMenu::AttriMenu_DerivedAttributes:
 		{
 			PrintDerivedAttributes();
 			system("pause");
 			break;
 		}
-		case 3:
+		case AttriMenu::AttriMenu_Return:
 		{
 			shouldExit = true;
 			break;

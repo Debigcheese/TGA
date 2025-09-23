@@ -1,13 +1,17 @@
 #pragma once
 #include "GameStructs.h"
 #include "GameEnums.h"
+#include "GameConstants.h"
 
+using namespace GameConstants;
 class Player;
 
 namespace EnemyDB
 {
+
 	const EnemyAttributes EnemyDef[] = {
 		// type , name, dmg, hp
+	{EnemyType::EnemyType_None, "None", 0.0f, 0.0f },
 	{EnemyType::EnemyType_Bat, "Bat", 5.0f, 40.0f },
 	{EnemyType::EnemyType_Skeleton, "Skeleton", 10.0f, 100.0f},
 	{EnemyType::EnemyType_Undead, "Undead", 12.0f, 130.0f},
@@ -27,12 +31,12 @@ public:
 	Enemy(EnemyType aType);
 	void TakeDamage(const float aDamage);
 	void Attack(Player& player) const;
+	void SetId(int aId);
 
 	float GetMaxHealth() const;
 	float GetDamage() const;
 	float GetCurrentHealth() const;
 	bool IsDead() const;
-	void SetId(int aId);
 	int GetId() const;
 	EnemyType GetType()const;
 	const char* GetName() const;

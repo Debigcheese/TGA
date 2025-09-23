@@ -134,7 +134,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Print.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WorldMap.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="GameStructs.h" />
     <ClInclude Include="Navigation.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Print.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WorldMap.h" />

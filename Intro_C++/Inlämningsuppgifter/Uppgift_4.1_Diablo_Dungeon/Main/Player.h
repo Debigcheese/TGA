@@ -33,6 +33,7 @@ public:
 	float GetDefense() const;
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
+	bool IsInvalidAttackIndex() const;
 	std::string GetName() const;
 	PlayerAttributes GetAttributes() const;
 
