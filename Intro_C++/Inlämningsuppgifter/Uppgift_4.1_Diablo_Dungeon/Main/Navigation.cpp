@@ -1,7 +1,7 @@
 #include "Navigation.h"
 #include "Diablo.h"
 #include "WorldMap.h"
-#include "Room.h" 
+#include "Room.h"
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
@@ -28,7 +28,10 @@ void Navigation::UpdateNavigation()
 		myNav.currentRoom->PrintEnemies();
 		PrintNavigation();
 
-		int navChoice = ReadIntInRange(static_cast<int>(Direction::Direction_West), static_cast<int>(Direction::Direction_South) + NAV_DIRECTION_CHOICE_OFFSET);
+		int navChoice = ReadIntInRange(
+			static_cast<int>(Direction::Direction_West),
+			static_cast<int>(Direction::Direction_South) +
+			NAV_DIRECTION_CHOICE_OFFSET);
 
 		if (navChoice == static_cast<int>(Direction::Direction_South) + NAV_DIRECTION_CHOICE_OFFSET)
 		{
@@ -73,15 +76,12 @@ void Navigation::UpdateNavigation()
 				int nextId = door.GetOtherRoomId(myNav.currentRoom->GetRoomId());
 				myPlayer.SetRoomId(nextId);
 				myNav.currentRoom = myWorldMap.GetRoomWithId(nextId);
-				system("pause");
 				break;
 			}
 		}
 
 		if (doorHasLock)
 		{
-			doorHasLock = false;
-			std::cout << "door has a lock";
 			system("pause");
 			continue;
 		}
@@ -94,6 +94,11 @@ void Navigation::UpdateNavigation()
 		}
 
 		std::cout << "\nEntered room: " << myNav.currentRoom->GetRoomName() << "\n";
+
+		if (myPlayer.GetRoomId() == ROOM_WIN_ID)
+		{
+			Win();
+		}
 
 		system("pause");
 		break;
@@ -120,47 +125,56 @@ void Navigation::UpdateAction()
 			enemiesNearby = true;
 		}
 
-		int menuChoice = ReadIntInRange(static_cast<int>(Action::Action_Combat), static_cast<int>(Action::Action_Cheats));
+		int menuChoice = ReadIntInRange(static_cast<int>(Action::Action_Combat),
+		                                static_cast<int>(Action::Action_Cheats));
 		Action actionChoice = static_cast<Action>(menuChoice);
 
 		switch (actionChoice)
 		{
 		case Action::Action_Combat:
-		{
-			if (enemiesNearby)
 			{
-				myPlayer.EnterCombat();
+				if (enemiesNearby)
+				{
+					myPlayer.EnterCombat();
+					break;
+				}
+				std::cout << "No monsters in this room...\n";
+				std::cout << "Choose another action.\n";
+				system("pause");
 				break;
 			}
-			std::cout << "No monsters in this room...\n";
-			std::cout << "Choose another action.\n";
-			system("pause");
-			break;
-		}
 		case Action::Action_Navigation:
-		{
-			UpdateNavigation();
-			break;
-		}
+			{
+				UpdateNavigation();
+				break;
+			}
 		case Action::Action_Attributes:
-		{
-			myPlayer.EnterAttributesMenu();
-			break;
-		}
+			{
+				myPlayer.EnterAttributesMenu();
+				break;
+			}
 		case Action::Action_Quit:
-		{
-			std::cout << "Quitting Game...\n";
-			system("pause");
-			return;
-		}
+			{
+				std::cout << "Quitting Game...\n";
+				system("pause");
+				return;
+			}
 		case Action::Action_Cheats:
-		{
-			UpdateCheats();
-			break;
-		}
+			{
+				UpdateCheats();
+				break;
+			}
 		}
 	}
+}
 
+void Navigation::Win() const
+{
+	std::cout << "\nYou reached the last room (" << myPlayer.GetName() << ")!\n";
+	std::cout << "Closing game...\n";
+	system("pause");
+	myPlayer.SetIsDead(true);
+	return;
 }
 
 void Navigation::PrintNavigation() const
@@ -202,5 +216,4 @@ void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 
 	std::cout
 		<< "Choice: ";
-
 }

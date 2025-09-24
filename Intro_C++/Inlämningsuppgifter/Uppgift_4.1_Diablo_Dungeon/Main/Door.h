@@ -10,12 +10,10 @@ public:
 	Door(int aRoomOneId, int aRoomTwoId, Direction aDirection);
 
 	Direction GetDirectionFrom(int aCurrentRoomId) const;
-	Direction Opposite(Direction d) const;
 	int GetOtherRoomId(const int aCurrentRoom) const;
-	void AddDoorLock(Lock aLock);
+	void AddDoorLock(const Lock& aLock);
 
 	bool HasLock() const;
-	const char* LockTypeToString(const LockType& aLockType) const;
 	void PrintDoorLock() const;
 	void UpdateDoorLock(const Player& aPlayer);
 	bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
@@ -26,4 +24,3 @@ private:
 	Direction myDirection;
 	Lock myLock{};
 };
-

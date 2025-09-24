@@ -21,9 +21,9 @@ enum class Action
 
 enum class AttackType
 {
-	AttackType_None = -1,
-	AttackType_QuickAttack = 0,
-	AttackType_HeavyAttack = 1,
+	AttackType_None = 0,
+	AttackType_QuickAttack = 1,
+	AttackType_HeavyAttack = 2,
 };
 
 enum class AttriMenu

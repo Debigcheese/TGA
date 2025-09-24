@@ -14,6 +14,10 @@ namespace GameConstants
 	const float HEALTH_ZERO = 0.0f;
 	const float DAMAGE_ZERO = 0.0f;
 
+	const float STRENGTH_BASE = 10.0f; //styrka (10-99)
+	const float AGILITY_BASE = 20.0f; // smidighet (10-99)
+	const float ENDURANCE_BASE = 40.0f; // fysik (10-99)
+
 	//Navigation
 	const int NAV_DIRECTION_CHOICE_OFFSET = 1;
 
@@ -44,4 +48,23 @@ namespace GameConstants
 
 	//worldmap
 	const int ENEMY_ID_FIRST = 0;
+	const int ROOM_0_INDEX = 0;
+	const int ROOM_1_INDEX = 1;
+	const int ROOM_2_INDEX = 2;
+	const int ROOM_3_INDEX = 3;
+	const int ROOM_4_INDEX = 4;
+	const int ROOM_5_INDEX = 5;
+
+	const int ROOM_0_ID = 0;
+	const int ROOM_1_ID = 1;
+	const int ROOM_2_ID = 10;
+	const int ROOM_3_ID = 11;
+	const int ROOM_4_ID = 20;
+	const int ROOM_WIN_ID = 100;
+
+	const int LOCK_1_AGILITY_REQ_DECLARE = 50;
+	const int LOCK_1_STRENGTH_REQ_DECLARE = 10;
+
+	const int LOCK_1_AGILITY_REQ = 50;
+	const int LOCK_1_STRENGTH_REQ = 10;
 }

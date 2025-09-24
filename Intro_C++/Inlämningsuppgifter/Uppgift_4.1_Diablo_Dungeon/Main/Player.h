@@ -1,8 +1,6 @@
 #pragma once
 #include "GameStructs.h"
-#include "GameEnums.h"
 #include "Cheats.h"
-#include <vector>
 #include <string>
 
 using namespace Cheats;
@@ -19,12 +17,13 @@ public:
 	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
-	void EnterAttributesMenu();
+	void EnterAttributesMenu() const;
 
-	float GetDamageFromAttackType(const int& aAttackIndex) const;
+	float GetDamageFromAttackType(int aAttackIndex) const;
 	int GetRoomId() const;
 	void SetRoomId(const int& aNewRoomId);
-	void SetName(std::string aNewName);
+	void SetName(const std::string& aNewName);
+	void SetIsDead(bool aIsDead);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
@@ -37,7 +36,6 @@ public:
 	std::string GetName() const;
 	PlayerAttributes GetAttributes() const;
 
-	void PrintTarget(const Enemy& aEnemy) const;
 	void PrintHealth() const;
 	void PrintUserName() const;
 	void PrintPlayerUI() const;
@@ -53,4 +51,3 @@ private:
 	int myAttackIndex;
 	bool myIsDead;
 };
-

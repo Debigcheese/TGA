@@ -7,43 +7,23 @@
 #include "iostream"
 
 using namespace GameConstants;
+using namespace Utils;
 
 Door::Door(int aRoomOneId, int aRoomTwoId, Direction aDirection) :
-	myRoomOneId(aRoomOneId), myRoomTwoId(aRoomTwoId), myDirection(aDirection)
+	myRoomOneId(aRoomOneId),
+	myRoomTwoId(aRoomTwoId),
+	myDirection(aDirection),
+	myLock{
+		false,
+		LockRequirements{LockType::LockType_Agility, 0},
+		LockRequirements{LockType::LockType_Strength, 0},
+	}
 {
 }
 
 Direction Door::GetDirectionFrom(int aCurrentRoomId) const
 {
 	return aCurrentRoomId == myRoomOneId ? myDirection : Opposite(myDirection);
-}
-
-Direction Door::Opposite(Direction d) const
-{
-	switch (d)
-	{
-	case Direction::Direction_West:
-	{
-		return Direction::Direction_East;
-	}
-	case Direction::Direction_East:
-	{
-		return Direction::Direction_West;
-	}
-	case Direction::Direction_North:
-	{
-		return Direction::Direction_South;
-	}
-	case Direction::Direction_South:
-	{
-		return Direction::Direction_North;
-	}
-	default:
-	{
-		return Direction::Direction_None;
-	}
-	}
-	return Direction::Direction_None;
 }
 
 
@@ -53,9 +33,10 @@ int Door::GetOtherRoomId(const int aCurrentRoomId) const
 	if (aCurrentRoomId == myRoomTwoId) return myRoomOneId;
 	std::cout << ("fromId not connected to this door");
 	system("pause");
+	return 0;
 }
 
-void Door::AddDoorLock(Lock aLock)
+void Door::AddDoorLock(const Lock& aLock)
 {
 	myLock = aLock;
 }
@@ -65,25 +46,6 @@ bool Door::HasLock() const
 	return myLock.isLocked;
 }
 
-const char* Door::LockTypeToString(const LockType& aLockType) const
-{
-	switch (aLockType)
-	{
-	case LockType::LockType_Unlocked:
-	{
-		return "Unlocked";
-	}
-	case LockType::LockType_Agility:
-	{
-		return "Agility";
-	}
-	case LockType::LockType_Strength:
-	{
-		return "Strength";
-	}
-	}
-	return nullptr;
-}
 
 void Door::PrintDoorLock() const
 {
@@ -105,43 +67,50 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 			<< "2) Try Breaking\n"
 			<< "3) Return\n"
 			<< "Choice: ";
-		int lockChoice = Utils::ReadIntInRange(static_cast<int>(LockType::LockType_Agility), static_cast<int>(LockType::LockType_Unlocked));
+		int lockChoice = Utils::ReadIntInRange(static_cast<int>(LockType::LockType_Agility),
+		                                       static_cast<int>(LockType::LockType_Unlocked));
 		LockType tempLockType = static_cast<LockType>(lockChoice);
 
 		switch (tempLockType)
 		{
 		case LockType::LockType_Agility:
-		{
-			if (TryLockPick(aPlayer, LockType::LockType_Agility))
 			{
-				std::cout << "\nYou successfully lock-picked the door open!\n";
-				myLock.isLocked = false;
-				return;
+				if (TryLockPick(aPlayer, LockType::LockType_Agility))
+				{
+					std::cout << "\nYou successfully lock-picked the door open!\n";
+					myLock.isLocked = false;
+					return;
+				}
+				else
+				{
+					std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
+						agilityReq.attributeValue << "\n";
+				}
+				break;
 			}
-			else
-			{
-				std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.agilityReq.attributeValue << "\n";
-			}
-			break;
-		}
 		case LockType::LockType_Strength:
-		{
-			if (TryLockPick(aPlayer, LockType::LockType_Strength))
 			{
-				std::cout << "\nYou successfully broke the door open!\n";
-				myLock.isLocked = false;
+				if (TryLockPick(aPlayer, LockType::LockType_Strength))
+				{
+					std::cout << "\nYou successfully broke the door open!\n";
+					myLock.isLocked = false;
+					return;
+				}
+				else
+				{
+					std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
+						strengthReq.attributeValue << "\n";
+				}
+				break;
+			}
+		case LockType::LockType_Unlocked:
+			{
 				return;
 			}
-			else
+		case LockType::LockType_None:
 			{
-				std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.strengthReq.attributeValue << "\n";
+				return;
 			}
-			break;
-		}
-		case LockType::LockType_Unlocked:
-		{
-			return;
-		}
 		}
 		system("pause");
 	}
@@ -165,4 +134,3 @@ bool Door::TryLockPick(const Player& aPlayer, const LockType& aType) const
 	}
 	return false;
 }
-

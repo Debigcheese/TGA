@@ -27,10 +27,10 @@ void Diablo::RunDiablo()
 
 	Navigation navig = Navigation(worldMap, player);
 
-	//Welcome();
-	//EnterUsername(player);
-	//system("cls");
-	//Intro(player);
+	Welcome();
+	EnterUsername(player);
+	system("cls");
+	Intro(player);
 
 	navig.UpdateAction();
 }

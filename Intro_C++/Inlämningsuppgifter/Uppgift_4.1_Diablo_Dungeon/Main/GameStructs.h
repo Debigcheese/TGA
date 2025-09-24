@@ -1,15 +1,17 @@
 #pragma once
 #include <vector>
 #include "GameEnums.h"
+#include "GameConstants.h"
 
 class Room; // fwd declare
+using namespace GameConstants;
 
 struct PlayerAttributes
 {
-	float strength = 10; //styrka (10-99)
-	float agility = 10; // smidighet (10-99)
-	float endurance = 10; // fysik (10-99)
-	float myCurrentHealth = 0;
+	float strength = STRENGTH_BASE; //styrka (10-99)
+	float agility = AGILITY_BASE; // smidighet (10-99)
+	float endurance = ENDURANCE_BASE; // fysik (10-99)
+	float myCurrentHealth = HEALTH_ZERO;
 };
 
 struct EnemyAttributes
@@ -38,8 +40,8 @@ struct LockRequirements
 struct Lock
 {
 	bool isLocked;
-	LockRequirements strengthReq{ LockType::LockType_Strength, 0 };
-	LockRequirements agilityReq{ LockType::LockType_Agility, 0 };
+	LockRequirements strengthReq{LockType::LockType_Strength, LOCK_1_STRENGTH_REQ_DECLARE};
+	LockRequirements agilityReq{LockType::LockType_Agility, LOCK_1_AGILITY_REQ_DECLARE};
 };
 
 struct Position
@@ -47,4 +49,3 @@ struct Position
 	int pos_X;
 	int pos_Y;
 };
-

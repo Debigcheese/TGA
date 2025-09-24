@@ -8,7 +8,7 @@ public:
 	WorldMap();
 	WorldMap(std::vector<Room> aRooms);
 
-	std::vector<Room>GetRooms();
+	std::vector<Room> GetRooms();
 	Room* GetRoomWithId(int aRoomId);
 	Room* GetRoomWithId(int aRoomId) const;
 
@@ -24,4 +24,3 @@ private:
 	int myNextId;
 	std::vector<Room> myRooms;
 };
-

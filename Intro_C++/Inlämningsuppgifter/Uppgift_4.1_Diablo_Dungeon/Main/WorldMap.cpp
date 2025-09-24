@@ -10,11 +10,10 @@ using namespace EnemyDB;
 
 WorldMap::WorldMap() : myNextId(ENEMY_ID_FIRST)
 {
-
 }
+
 WorldMap::WorldMap(std::vector<Room> myRooms) : myNextId(ENEMY_ID_FIRST)
 {
-
 }
 
 std::vector<Room> WorldMap::GetRooms()
@@ -36,11 +35,11 @@ Room* WorldMap::GetRoomWithId(const int aRoomId)
 
 Room* WorldMap::GetRoomWithId(int aRoomId) const
 {
-	for (Room room : myRooms)
+	for (const Room& room : myRooms)
 	{
 		if (room.GetRoomId() == aRoomId)
 		{
-			return &room;
+			return const_cast<Room*>(&room);
 		}
 	}
 	return nullptr;
@@ -74,43 +73,46 @@ void WorldMap::GiveEnemyRandomId(Enemy& aEnemy)
 void WorldMap::GenerateDoors()
 {
 	//room 0
-	Door d1 = Door(0, 10, Direction::Direction_North);
-	Door d2 = Door(0, 1, Direction::Direction_East);
+	Door d1 = Door(ROOM_0_ID, ROOM_2_ID, Direction::Direction_North);
+	Door d2 = Door(ROOM_0_ID, ROOM_1_ID, Direction::Direction_East);
 
-	Door d3 = Door(1, 11, Direction::Direction_North);
-	Door d4 = Door(10, 11, Direction::Direction_East);
+	Door d3 = Door(ROOM_1_ID, ROOM_3_ID, Direction::Direction_North);
+	Door d4 = Door(ROOM_2_ID, ROOM_3_ID, Direction::Direction_East);
 
-	Door d5 = Door(10, 20, Direction::Direction_North);
+	Door d5 = Door(ROOM_2_ID, ROOM_4_ID, Direction::Direction_North);
+
+	Door d6 = Door(ROOM_4_ID, ROOM_WIN_ID, Direction::Direction_West);
 
 	Lock doorLock;
-	doorLock.agilityReq.attributeValue = 50;
-	doorLock.strengthReq.attributeValue = 10;
+	doorLock.agilityReq.attributeValue = LOCK_1_AGILITY_REQ;
+	doorLock.strengthReq.attributeValue = LOCK_1_STRENGTH_REQ;
 
 	d5.AddDoorLock(doorLock);
 	d1.AddDoorLock(doorLock);
 
 	// Room 0 connections
-	myRooms.at(0).AddDoor(d1);
-	myRooms.at(0).AddDoor(d2);
+	myRooms.at(ROOM_0_INDEX).AddDoor(d1);
+	myRooms.at(ROOM_0_INDEX).AddDoor(d2);
 
 	// Room 1 connections
-	myRooms.at(1).AddDoor(d2);
-	myRooms.at(1).AddDoor(d3);
+	myRooms.at(ROOM_1_INDEX).AddDoor(d2);
+	myRooms.at(ROOM_1_INDEX).AddDoor(d3);
 
 	// Room 2 connections
-	myRooms.at(2).AddDoor(d1);
-	myRooms.at(2).AddDoor(d4);
-	myRooms.at(2).AddDoor(d5);
+	myRooms.at(ROOM_2_INDEX).AddDoor(d1);
+	myRooms.at(ROOM_2_INDEX).AddDoor(d4);
+	myRooms.at(ROOM_2_INDEX).AddDoor(d5);
 
 	// Room 3 connections
-	myRooms.at(3).AddDoor(d3);
-	myRooms.at(3).AddDoor(d4);
+	myRooms.at(ROOM_3_INDEX).AddDoor(d3);
+	myRooms.at(ROOM_3_INDEX).AddDoor(d4);
 
 	// Room 4 connections
-	myRooms.at(4).AddDoor(d5);
+	myRooms.at(ROOM_4_INDEX).AddDoor(d5);
+	myRooms.at(ROOM_4_INDEX).AddDoor(d6);
 
-
-
+	// Room 5 connections
+	myRooms.at(ROOM_5_INDEX).AddDoor(d6);
 }
 
 void WorldMap::GenerateRooms()
@@ -119,7 +121,7 @@ void WorldMap::GenerateRooms()
 	std::vector<Enemy> enemiesR1;
 	std::vector<Enemy> enemiesR2;
 	std::vector<Enemy> enemiesR3;
-	//std::vector<Enemy> enemiesR4;
+	std::vector<Enemy> enemiesR4;
 	std::vector<Enemy> enemiesR5;
 
 	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Bat));
@@ -127,12 +129,7 @@ void WorldMap::GenerateRooms()
 	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
 
 	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
-	//enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
 	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
-
-	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
-	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
-	//enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
 
 	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
 	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
@@ -142,20 +139,14 @@ void WorldMap::GenerateRooms()
 	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
 	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
 
-	//enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
-	////enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
-	//enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
+	enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Demon));
 
-	//enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
-	enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Demon));
-	//enemiesR5.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
-
-	myRooms.push_back(Room(0, "Withered Halls", enemiesR0));
-	myRooms.push_back(Room(1, "Obsidian Spire", enemiesR1));
-	myRooms.push_back(Room(10, "Hollow Cavern", enemiesR2));
-	myRooms.push_back(Room(11, "Pits of Torment", enemiesR3));
-	//myRooms.push_back(Room(20, "Eternal Abyss", enemiesR4));
-	myRooms.push_back(Room(20, "Den of the Blighted", enemiesR5));
+	myRooms.push_back(Room(ROOM_0_ID, "Withered Halls", enemiesR0));
+	myRooms.push_back(Room(ROOM_1_ID, "Obsidian Spire", enemiesR1));
+	myRooms.push_back(Room(ROOM_2_ID, "Hollow Cavern", enemiesR2));
+	myRooms.push_back(Room(ROOM_3_ID, "Pits of Torment", enemiesR3));
+	myRooms.push_back(Room(ROOM_4_ID, "Den of the Blighted", enemiesR4));
+	myRooms.push_back(Room(ROOM_WIN_ID, "Eternal Abyss", enemiesR5));
 }
 
 
