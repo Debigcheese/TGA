@@ -1,9 +1,7 @@
 #pragma once
-#include <vector>
 #include "GameEnums.h"
 #include "GameConstants.h"
 
-class Room; // fwd declare
 using namespace GameConstants;
 
 struct PlayerAttributes
@@ -22,15 +20,6 @@ struct EnemyAttributes
 	float myMaxHealth;
 };
 
-// navigation
-struct Nav
-{
-	Room* currentRoom = nullptr;
-	Room* previousRoom = nullptr;
-	Direction currentDirection = Direction::Direction_None;
-	std::vector<Direction> doorDirections;
-};
-
 struct LockRequirements
 {
 	LockType lockType = LockType::LockType_Unlocked;
@@ -46,6 +35,16 @@ struct Lock
 
 struct Position
 {
-	int pos_X;
-	int pos_Y;
+	int X;
+	int Y;
+
+	Position operator+(const Position& other) const
+	{
+		return {X + other.X, Y + other.Y};
+	}
+
+	bool operator==(const Position& other) const
+	{
+		return (X == other.X && Y == other.Y);
+	}
 };

@@ -24,6 +24,7 @@ public:
 	void SetRoomId(const int& aNewRoomId);
 	void SetName(const std::string& aNewName);
 	void SetIsDead(bool aIsDead);
+	void SetPosition(const Position& aNewPosition);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
@@ -35,6 +36,7 @@ public:
 	bool IsInvalidAttackIndex() const;
 	std::string GetName() const;
 	PlayerAttributes GetAttributes() const;
+	Position GetPosition() const;
 
 	void PrintHealth() const;
 	void PrintUserName() const;
@@ -50,4 +52,5 @@ private:
 	int myTargetIndex;
 	int myAttackIndex;
 	bool myIsDead;
+	Position myPos;
 };

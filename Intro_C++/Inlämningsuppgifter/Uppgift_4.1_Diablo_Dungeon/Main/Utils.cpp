@@ -36,6 +36,34 @@ namespace Utils
 		return doorPos;
 	}
 
+	Position GetPosFromDirection(const Direction& aDirection)
+	{
+		switch (aDirection)
+		{
+		case Direction::Direction_West:
+			{
+				return {-1, 0};
+			}
+		case Direction::Direction_North:
+			{
+				return {0, 1};
+			}
+		case Direction::Direction_East:
+			{
+				return {1, 0};
+			}
+		case Direction::Direction_South:
+			{
+				return {0, -1};
+			}
+		case Direction::Direction_None:
+			{
+				return {0, 0};
+			}
+		}
+		return {0, 0};
+	}
+
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition)
 	{
 		return static_cast<int>(aDoorPosition);

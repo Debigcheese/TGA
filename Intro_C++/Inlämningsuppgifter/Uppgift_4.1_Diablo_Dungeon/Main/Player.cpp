@@ -12,7 +12,7 @@ using namespace Utils;
 using namespace GameConstants;
 
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
-                                      myName("(-)")
+                                      myName("(-)"), myPos{0, 0}
 {
 	myAttributes.myCurrentHealth = GetMaxHealth();
 }
@@ -187,6 +187,11 @@ void Player::SetIsDead(bool aIsDead)
 	myIsDead = aIsDead;
 }
 
+void Player::SetPosition(const Position& aNewPosition)
+{
+	myPos = aNewPosition;
+}
+
 float Player::GetDamage() const
 {
 	if (Cheats::GetCheats().oneShot)
@@ -241,6 +246,11 @@ std::string Player::GetName() const
 PlayerAttributes Player::GetAttributes() const
 {
 	return myAttributes;
+}
+
+Position Player::GetPosition() const
+{
+	return myPos;
 }
 
 

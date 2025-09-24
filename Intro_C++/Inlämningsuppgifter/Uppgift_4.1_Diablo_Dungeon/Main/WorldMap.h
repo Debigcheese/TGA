@@ -1,5 +1,6 @@
 #pragma once
 #include "Room.h"
+#include "Door.h"
 #include "Enemy.h"
 
 class WorldMap
@@ -8,11 +9,12 @@ public:
 	WorldMap();
 	WorldMap(std::vector<Room> aRooms);
 
-	std::vector<Room> GetRooms();
+	std::vector<Door>& GetDoors();
+	std::vector<Room>& GetRooms();
 	Room* GetRoomWithId(int aRoomId);
 	Room* GetRoomWithId(int aRoomId) const;
 
-	void AddRoom(Room aRoomToAdd);
+	void AddRoom(const Room& aRoomToAdd);
 
 	void GenerateWorld();
 	Enemy GenerateEnemy(const EnemyType& aEnemyType);
@@ -23,4 +25,5 @@ public:
 private:
 	int myNextId;
 	std::vector<Room> myRooms;
+	std::vector<Door> myDoors;
 };

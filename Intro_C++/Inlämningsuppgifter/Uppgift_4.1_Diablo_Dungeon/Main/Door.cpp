@@ -9,10 +9,9 @@
 using namespace GameConstants;
 using namespace Utils;
 
-Door::Door(int aRoomOneId, int aRoomTwoId, Direction aDirection) :
+Door::Door(int aRoomOneId, int aRoomTwoId) :
 	myRoomOneId(aRoomOneId),
 	myRoomTwoId(aRoomTwoId),
-	myDirection(aDirection),
 	myLock{
 		false,
 		LockRequirements{LockType::LockType_Agility, 0},
@@ -20,12 +19,6 @@ Door::Door(int aRoomOneId, int aRoomTwoId, Direction aDirection) :
 	}
 {
 }
-
-Direction Door::GetDirectionFrom(int aCurrentRoomId) const
-{
-	return aCurrentRoomId == myRoomOneId ? myDirection : Opposite(myDirection);
-}
-
 
 int Door::GetOtherRoomId(const int aCurrentRoomId) const
 {
@@ -41,11 +34,20 @@ void Door::AddDoorLock(const Lock& aLock)
 	myLock = aLock;
 }
 
+bool Door::HasMatchingRoomIds(int aRoomIdOne, int aRoomIdTwo) const
+{
+	if ((aRoomIdOne == myRoomOneId || aRoomIdOne == myRoomTwoId)
+		&& (aRoomIdTwo == myRoomOneId || aRoomIdTwo == myRoomTwoId))
+	{
+		return true;
+	}
+	return false;
+}
+
 bool Door::HasLock() const
 {
 	return myLock.isLocked;
 }
-
 
 void Door::PrintDoorLock() const
 {

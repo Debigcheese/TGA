@@ -2,25 +2,25 @@
 #include "GameEnums.h"
 #include "GameStructs.h"
 
+class Room;
 class Player;
 
 class Door
 {
 public:
-	Door(int aRoomOneId, int aRoomTwoId, Direction aDirection);
+	Door(int aRoomOneId, int aRoomTwoId);
 
-	Direction GetDirectionFrom(int aCurrentRoomId) const;
-	int GetOtherRoomId(const int aCurrentRoom) const;
 	void AddDoorLock(const Lock& aLock);
-
-	bool HasLock() const;
-	void PrintDoorLock() const;
 	void UpdateDoorLock(const Player& aPlayer);
+	void PrintDoorLock() const;
+
+	bool HasMatchingRoomIds(int aRoomIdOne, int aRoomIdTwo) const;
+	int GetOtherRoomId(const int aCurrentRoom) const;
+	bool HasLock() const;
 	bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
 
 private:
 	int myRoomOneId; //Room on one side of door
 	int myRoomTwoId; //Room on other side of door
-	Direction myDirection;
 	Lock myLock{};
 };

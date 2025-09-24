@@ -16,7 +16,12 @@ WorldMap::WorldMap(std::vector<Room> myRooms) : myNextId(ENEMY_ID_FIRST)
 {
 }
 
-std::vector<Room> WorldMap::GetRooms()
+std::vector<Door>& WorldMap::GetDoors()
+{
+	return myDoors;
+}
+
+std::vector<Room>& WorldMap::GetRooms()
 {
 	return myRooms;
 }
@@ -45,7 +50,7 @@ Room* WorldMap::GetRoomWithId(int aRoomId) const
 	return nullptr;
 }
 
-void WorldMap::AddRoom(Room aRoomToAdd)
+void WorldMap::AddRoom(const Room& aRoomToAdd)
 {
 	myRooms.push_back(aRoomToAdd);
 }
@@ -73,15 +78,12 @@ void WorldMap::GiveEnemyRandomId(Enemy& aEnemy)
 void WorldMap::GenerateDoors()
 {
 	//room 0
-	Door d1 = Door(ROOM_0_ID, ROOM_2_ID, Direction::Direction_North);
-	Door d2 = Door(ROOM_0_ID, ROOM_1_ID, Direction::Direction_East);
-
-	Door d3 = Door(ROOM_1_ID, ROOM_3_ID, Direction::Direction_North);
-	Door d4 = Door(ROOM_2_ID, ROOM_3_ID, Direction::Direction_East);
-
-	Door d5 = Door(ROOM_2_ID, ROOM_4_ID, Direction::Direction_North);
-
-	Door d6 = Door(ROOM_4_ID, ROOM_WIN_ID, Direction::Direction_West);
+	Door d1 = Door(ROOM_0_ID, ROOM_2_ID);
+	Door d2 = Door(ROOM_0_ID, ROOM_1_ID);
+	Door d3 = Door(ROOM_1_ID, ROOM_3_ID);
+	Door d4 = Door(ROOM_2_ID, ROOM_3_ID);
+	Door d5 = Door(ROOM_2_ID, ROOM_4_ID);
+	Door d6 = Door(ROOM_4_ID, ROOM_WIN_ID);
 
 	Lock doorLock;
 	doorLock.agilityReq.attributeValue = LOCK_1_AGILITY_REQ;
@@ -90,29 +92,12 @@ void WorldMap::GenerateDoors()
 	d5.AddDoorLock(doorLock);
 	d1.AddDoorLock(doorLock);
 
-	// Room 0 connections
-	myRooms.at(ROOM_0_INDEX).AddDoor(d1);
-	myRooms.at(ROOM_0_INDEX).AddDoor(d2);
-
-	// Room 1 connections
-	myRooms.at(ROOM_1_INDEX).AddDoor(d2);
-	myRooms.at(ROOM_1_INDEX).AddDoor(d3);
-
-	// Room 2 connections
-	myRooms.at(ROOM_2_INDEX).AddDoor(d1);
-	myRooms.at(ROOM_2_INDEX).AddDoor(d4);
-	myRooms.at(ROOM_2_INDEX).AddDoor(d5);
-
-	// Room 3 connections
-	myRooms.at(ROOM_3_INDEX).AddDoor(d3);
-	myRooms.at(ROOM_3_INDEX).AddDoor(d4);
-
-	// Room 4 connections
-	myRooms.at(ROOM_4_INDEX).AddDoor(d5);
-	myRooms.at(ROOM_4_INDEX).AddDoor(d6);
-
-	// Room 5 connections
-	myRooms.at(ROOM_5_INDEX).AddDoor(d6);
+	myDoors.push_back(d1);
+	myDoors.push_back(d2);
+	myDoors.push_back(d3);
+	myDoors.push_back(d4);
+	myDoors.push_back(d5);
+	myDoors.push_back(d6);
 }
 
 void WorldMap::GenerateRooms()
@@ -141,12 +126,12 @@ void WorldMap::GenerateRooms()
 
 	enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Demon));
 
-	myRooms.push_back(Room(ROOM_0_ID, "Withered Halls", enemiesR0));
-	myRooms.push_back(Room(ROOM_1_ID, "Obsidian Spire", enemiesR1));
-	myRooms.push_back(Room(ROOM_2_ID, "Hollow Cavern", enemiesR2));
-	myRooms.push_back(Room(ROOM_3_ID, "Pits of Torment", enemiesR3));
-	myRooms.push_back(Room(ROOM_4_ID, "Den of the Blighted", enemiesR4));
-	myRooms.push_back(Room(ROOM_WIN_ID, "Eternal Abyss", enemiesR5));
+	AddRoom(Room(ROOM_0_ID, "Withered Halls", {0, 0}, enemiesR0));
+	AddRoom(Room(ROOM_1_ID, "Obsidian Spire", {1, 0}, enemiesR1));
+	AddRoom(Room(ROOM_2_ID, "Hollow Cavern", {0, 1}, enemiesR2));
+	AddRoom(Room(ROOM_3_ID, "Pits of Torment", {1, 1}, enemiesR3));
+	AddRoom(Room(ROOM_4_ID, "Den of the Blighted", {0, 2}, enemiesR4));
+	AddRoom(Room(ROOM_WIN_ID, "Eternal Abyss", {-1, 2}, enemiesR5));
 }
 
 

@@ -1,11 +1,13 @@
 #pragma once
 #include "GameEnums.h"
+#include "GameStructs.h"
 
 namespace Utils
 {
 	int ReadIntInRange(int aMinValue, int aMaxValue);
 	int GenerateRandomNumber(int aMin, int aMaxValue);
 	Direction GetDoorPOSFromIndex(const int& aIndex);
+	Position GetPosFromDirection(const Direction& aDirection);
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition);
 	const char* PrintRedText(bool aStart);
 	const char* LockTypeToString(const LockType& aLockType);

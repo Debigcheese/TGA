@@ -1,8 +1,5 @@
 #pragma once
 #include "WorldMap.h"
-#include "Player.h"
-#include "GameEnums.h"
-#include "GameStructs.h"
 
 class Navigation
 {
@@ -14,13 +11,9 @@ public:
 
 	void PrintNavigation() const;
 	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
-	
-
 
 private:
-	Nav myNav;
+	Room* currentRoom;
 	WorldMap& myWorldMap;
 	Player& myPlayer;
-
 };
-
