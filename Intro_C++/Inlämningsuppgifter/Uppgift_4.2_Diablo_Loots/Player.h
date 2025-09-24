@@ -1,14 +1,14 @@
 #pragma once
 #include "GameStructs.h"
-#include "GameEnums.h"
 #include "Cheats.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace Cheats;
 
 class WorldMap;
 class Enemy;
+class Item;
 
 class Player
 {
@@ -19,25 +19,28 @@ public:
 	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
-	void EnterAttributesMenu();
+	void EnterAttributesMenu() const;
 
-	float GetDamageFromAttackType(const int& aAttackIndex) const;
+	float GetDamageFromAttackType(int aAttackIndex) const;
 	int GetRoomId() const;
 	void SetRoomId(const int& aNewRoomId);
-	void SetName(std::string aNewName);
+	void SetName(const std::string& aNewName);
+	void SetIsDead(bool aIsDead);
+	void SetPosition(const Position& aNewPosition);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
 	float GetCurrentHealth() const;
 	float GetCarryCapacity() const;
 	float GetDefense() const;
+
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
 	bool IsInvalidAttackIndex() const;
 	std::string GetName() const;
 	PlayerAttributes GetAttributes() const;
+	Position GetPosition() const;
 
-	void PrintTarget(const Enemy& aEnemy) const;
 	void PrintHealth() const;
 	void PrintUserName() const;
 	void PrintPlayerUI() const;
@@ -48,9 +51,11 @@ private:
 	WorldMap& myWorldMap;
 	std::string myName;
 	PlayerAttributes myAttributes{};
+	PlayerAttributes myItemAttributes{};
 	int myRoomId;
 	int myTargetIndex;
 	int myAttackIndex;
 	bool myIsDead;
+	Position myPos;
+	std::vector<Item*> myInventory;
 };
-

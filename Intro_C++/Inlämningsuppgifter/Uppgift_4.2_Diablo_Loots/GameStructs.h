@@ -1,15 +1,15 @@
 #pragma once
-#include <vector>
 #include "GameEnums.h"
+#include "GameConstants.h"
 
-class Room; // fwd declare
+using namespace GameConstants;
 
 struct PlayerAttributes
 {
-	float strength = 10; //styrka (10-99)
-	float agility = 10; // smidighet (10-99)
-	float endurance = 10; // fysik (10-99)
-	float myCurrentHealth = 0;
+	float strength = STRENGTH_BASE; //styrka (10-99)
+	float agility = AGILITY_BASE; // smidighet (10-99)
+	float endurance = ENDURANCE_BASE; // fysik (10-99)
+	float myCurrentHealth = HEALTH_ZERO;
 };
 
 struct EnemyAttributes
@@ -18,15 +18,6 @@ struct EnemyAttributes
 	const char* myName;
 	float myDamage;
 	float myMaxHealth;
-};
-
-// navigation
-struct Nav
-{
-	Room* currentRoom = nullptr;
-	Room* previousRoom = nullptr;
-	Direction currentDirection = Direction::Direction_None;
-	std::vector<Direction> doorDirections;
 };
 
 struct LockRequirements
@@ -38,13 +29,33 @@ struct LockRequirements
 struct Lock
 {
 	bool isLocked;
-	LockRequirements strengthReq{ LockType::LockType_Strength, 0 };
-	LockRequirements agilityReq{ LockType::LockType_Agility, 0 };
+	LockRequirements strengthReq{LockType::LockType_Strength, LOCK_1_STRENGTH_REQ_DECLARE};
+	LockRequirements agilityReq{LockType::LockType_Agility, LOCK_1_AGILITY_REQ_DECLARE};
 };
 
 struct Position
 {
-	int pos_X;
-	int pos_Y;
+	int X;
+	int Y;
+
+	Position operator+(const Position& other) const
+	{
+		return {X + other.X, Y + other.Y};
+	}
+
+	bool operator==(const Position& other) const
+	{
+		return (X == other.X && Y == other.Y);
+	}
 };
 
+struct ItemAttributes
+{
+	float strength = 0; //styrka (10-99)
+	float agility = 0; // smidighet (10-99)
+	float endurance = 0; // fysik (10-99)
+	float health = 0;
+	float carryCapacity = 0;
+	float damage = 0;
+	float defense = 0;
+};

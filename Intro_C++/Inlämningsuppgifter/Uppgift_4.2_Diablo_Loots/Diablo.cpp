@@ -1,7 +1,7 @@
 #include "Diablo.h"
 #include "WorldMap.h"
 #include "Player.h"
-#include "Room.h" 
+#include "Room.h"
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
@@ -39,7 +39,8 @@ void Diablo::Intro(const Player& aPlayer)
 {
 	std::cout << "You wake up in a dungeon...\n";
 	system("pause");
-	std::cout << "\nSlay the enemies in this room (" << worldMap.GetRoomWithId(0)->GetRoomName() << ") in order to proceed.\n";
+	std::cout << "\nSlay the enemies in this room (" << worldMap.GetRoomWithId(0)->GetRoomName() <<
+		") in order to proceed.\n";
 	system("pause");
 	std::cout << "\nAnd try your best to get the hell out of here " << aPlayer.GetName() << "!\n";
 	system("pause");
@@ -60,8 +61,8 @@ void Diablo::EnterUsername(Player& aPlayer)
 
 		if (std::cin.fail())
 		{
-			std::cin.clear();                // clear failbit
-			std::cin.ignore(CIN_IGNORE, '\n');    // discard leftover characters
+			std::cin.clear(); // clear failbit
+			std::cin.ignore(CIN_IGNORE, '\n'); // discard leftover characters
 		}
 
 		int length = static_cast<int>(strlen(name));
@@ -81,6 +82,4 @@ void Diablo::EnterUsername(Player& aPlayer)
 		}
 		std::cout << "Invalid name. Use only letters, 2-16 characters.\n";
 	}
-
 }
-

@@ -3,14 +3,20 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "Cheats.h"
+#include "GameConstants.h"
+#include "Item.h"
+
 #include <vector>
 #include <iostream>
 
 using namespace Utils;
+using namespace GameConstants;
 
-Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false), myName("(-)")
+Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
+                                      myName("(-)"), myPos{0, 0}, myInventory()
 {
 	myAttributes.myCurrentHealth = GetMaxHealth();
+	myItemAttributes = {};
 }
 
 void Player::Update()
@@ -20,7 +26,7 @@ void Player::Update()
 		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
 		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
-		if (IsInvalidAttackIndex() && enemies.size() > 1)
+		if (IsInvalidAttackIndex() || enemies.size() > 1)
 		{
 			PrintPlayerUI();
 			currentRoom->PrintEnemies();
@@ -40,12 +46,12 @@ void Player::Update()
 		PrintPlayerUI();
 		currentRoom->PrintEnemiesWithTarget(myTargetIndex);
 
-		int damage = GetDamageFromAttackType(myAttackIndex);
-		int enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
-
+		float damage = GetDamageFromAttackType(myAttackIndex);
+		float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
 		enemies[myTargetIndex].TakeDamage(damage);
-		std::cout << "\nYou dealt " << damage << " dmg to " << enemies[myTargetIndex].GetName();
-		std::cout << " (" << enemyOldHp << "hp -> " << enemies[myTargetIndex].GetCurrentHealth() << "hp)" << "\n";
+		std::cout << "\nYou dealt " << static_cast<int>(damage) << " dmg to " << enemies[myTargetIndex].GetName();
+		std::cout << " (" << static_cast<int>(enemyOldHp) << "hp -> " << static_cast<int>(enemies[myTargetIndex].
+			GetCurrentHealth()) << "hp)" << "\n";
 		system("pause");
 
 		if (enemies[myTargetIndex].IsDead())
@@ -78,7 +84,6 @@ void Player::Update()
 		}
 		else
 		{
-
 			std::cout << "\n";
 			for (Enemy& enemy : enemies)
 			{
@@ -102,7 +107,7 @@ void Player::ChooseTarget()
 	std::cout
 		<< "\n<--- Choose Target --->\n"
 		<< "Choice: ";
-	int enemyCount = myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size();
+	int enemyCount = static_cast<int>(myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size());
 	myTargetIndex = ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) - PLAYER_TARGET_INDEX_OFFSET;
 }
 
@@ -124,8 +129,8 @@ void Player::TakeDamage(const float aDamage)
 	{
 		return;
 	}
-	float newDamage = aDamage / GetDefenseMultiplier();
-	myAttributes.myCurrentHealth -= newDamage;
+	const float dmgFloat = aDamage / GetDefenseMultiplier();
+	myAttributes.myCurrentHealth -= dmgFloat;
 	if (myAttributes.myCurrentHealth <= HEALTH_ZERO)
 	{
 		myAttributes.myCurrentHealth = HEALTH_ZERO;
@@ -138,22 +143,28 @@ void Player::TakeDamage(const float aDamage)
 	}
 }
 
-float Player::GetDamageFromAttackType(const int& aAttackIndex) const
+float Player::GetDamageFromAttackType(int aAttackIndex) const
 {
 	float newDamage = DAMAGE_ZERO;
-	AttackType atkType = static_cast<AttackType>(aAttackIndex);
+	AttackType atkType = static_cast<AttackType>(aAttackIndex + PLAYER_ATTACK_INDEX_OFFSET);
 	switch (atkType)
 	{
 	case AttackType::AttackType_QuickAttack:
-	{
-		newDamage = static_cast<float>(GenerateRandomNumber(GetDamage(), GetDamage()));
-		break;
-	}
+		{
+			newDamage = GetDamage();
+			break;
+		}
 	case AttackType::AttackType_HeavyAttack:
-	{
-		newDamage = static_cast<float>(GenerateRandomNumber(GetDamage() * HEAVY_MULTI_MIN, GetDamage() * HEAVY_MULTI_MAX));
-		break;
-	}
+		{
+			const int heavyMinMulti = static_cast<int>(GetDamage() * HEAVY_MULTI_MIN);
+			const int heavyMaxMulti = static_cast<int>(GetDamage() * HEAVY_MULTI_MAX);
+			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+			break;
+		}
+	case AttackType::AttackType_None:
+		{
+			break;
+		}
 	}
 	return newDamage;
 }
@@ -168,9 +179,19 @@ void Player::SetRoomId(const int& aNewRoomId)
 	myRoomId = aNewRoomId;
 }
 
-void Player::SetName(std::string aNewName)
+void Player::SetName(const std::string& aNewName)
 {
 	myName = aNewName;
+}
+
+void Player::SetIsDead(bool aIsDead)
+{
+	myIsDead = aIsDead;
+}
+
+void Player::SetPosition(const Position& aNewPosition)
+{
+	myPos = aNewPosition;
 }
 
 float Player::GetDamage() const
@@ -229,10 +250,11 @@ PlayerAttributes Player::GetAttributes() const
 	return myAttributes;
 }
 
-void Player::PrintTarget(const Enemy& aEnemy) const
+Position Player::GetPosition() const
 {
-	std::cout << static_cast<int>(aEnemy.GetCurrentHealth()) << "/" << static_cast<int>(aEnemy.GetMaxHealth()) << " hp";
+	return myPos;
 }
+
 
 void Player::PrintHealth() const
 {
@@ -253,7 +275,6 @@ void Player::PrintPlayerUI() const
 	std::cout << "\n";
 	std::cout << "Room: " << myWorldMap.GetRoomWithId(myRoomId)->GetRoomName();
 	std::cout << "\n";
-
 }
 
 void Player::PrintAttributes() const
@@ -270,7 +291,6 @@ void Player::PrintAttributes() const
 	std::cout << "Max-Health :   " << static_cast<int>(GetMaxHealth()) << " hp" << "\n";
 	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << "\n";
 	std::cout << "Carry Capacity " << static_cast<int>(GetCarryCapacity()) << "\n\n";
-
 }
 
 void Player::PrintDerivedAttributes() const
@@ -284,12 +304,13 @@ void Player::PrintDerivedAttributes() const
 
 	std::cout << "[Derived Attributes] " << "\n";
 	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << " (Strength * Agility)" << "\n";
-	std::cout << "Max-Health:    " << static_cast<int>(GetMaxHealth()) << " hp" << " (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
+	std::cout << "Max-Health:    " << static_cast<int>(GetMaxHealth()) << " hp" <<
+		" (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
 	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " (Endurance + Agility)" << "\n";
 	std::cout << "Carry Capacity " << static_cast<int>(GetCarryCapacity()) << " (Strength + Agility / 3)" << "\n\n";
 }
 
-void Player::EnterAttributesMenu()
+void Player::EnterAttributesMenu() const
 {
 	while (true)
 	{
@@ -316,27 +337,26 @@ void Player::EnterAttributesMenu()
 		switch (AttriMenuChoice)
 		{
 		case AttriMenu::AttriMenu_Attributes:
-		{
-			PrintAttributes();
-			system("pause");
-			break;
-		}
+			{
+				PrintAttributes();
+				system("pause");
+				break;
+			}
 		case AttriMenu::AttriMenu_DerivedAttributes:
-		{
-			PrintDerivedAttributes();
-			system("pause");
-			break;
-		}
+			{
+				PrintDerivedAttributes();
+				system("pause");
+				break;
+			}
 		case AttriMenu::AttriMenu_Return:
-		{
-			shouldExit = true;
-			break;
-		}
+			{
+				shouldExit = true;
+				break;
+			}
 		}
 		if (shouldExit)
 		{
 			break;
 		}
 	}
-
 }

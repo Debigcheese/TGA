@@ -5,14 +5,13 @@
 using namespace Utils;
 
 Room::Room() :
-	myRoomId(), myRoomName(), myDoors(), myEnemies()
+	myRoomId(), myRoomName(), myPos({0, 0}), myEnemies()
 {
 }
 
-Room::Room(int aRoomId, std::string aRoomName, std::vector<Enemy> aEnemies) :
-	myRoomId(aRoomId), myRoomName(aRoomName), myDoors(), myEnemies(aEnemies)
+Room::Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies) :
+	myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies)
 {
-
 }
 
 int Room::GetRoomId() const
@@ -28,6 +27,11 @@ void Room::SetRoomId(int aRoomId)
 std::string Room::GetRoomName() const
 {
 	return myRoomName;
+}
+
+Position Room::GetPosition() const
+{
+	return myPos;
 }
 
 const std::vector<Enemy>& Room::GetEnemies() const
@@ -48,30 +52,15 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 void Room::RemoveEnemyFromRoom(int aEnemyID)
 {
 	myEnemies.erase(std::remove_if(myEnemies.begin(), myEnemies.end(), [aEnemyID](const Enemy& enemy)
-		{
-			return enemy.GetId() == aEnemyID;
-		}),
-		myEnemies.end());
+	                {
+		                return enemy.GetId() == aEnemyID;
+	                }),
+	                myEnemies.end());
 }
 
 bool Room::DoesEnemiesExist() const
 {
 	return !myEnemies.empty();
-}
-
-void Room::AddDoor(const Door& door)
-{
-	myDoors.push_back(door);
-}
-
-const std::vector<Door>& Room::GetDoorsConnected() const
-{
-	return myDoors;
-}
-
-std::vector<Door>& Room::GetDoorsConnected()
-{
-	return myDoors;
 }
 
 void Room::PrintRoomName() const
@@ -127,7 +116,5 @@ void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
 			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD"
 			<< RESET << "\n";
-
 	}
 }
-

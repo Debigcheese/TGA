@@ -21,9 +21,9 @@ enum class Action
 
 enum class AttackType
 {
-	AttackType_None = -1,
-	AttackType_QuickAttack = 0,
-	AttackType_HeavyAttack = 1,
+	AttackType_None = 0,
+	AttackType_QuickAttack = 1,
+	AttackType_HeavyAttack = 2,
 };
 
 enum class AttriMenu
@@ -32,7 +32,6 @@ enum class AttriMenu
 	AttriMenu_DerivedAttributes = 2,
 	AttriMenu_Return = 3,
 };
-
 
 enum class LockType
 {
@@ -60,4 +59,12 @@ enum class CheatType
 	CheatType_Invincible = 1,
 	CheatType_OneShot = 2,
 	CheatType_Ghost = 3,
+};
+
+enum class ItemType
+{
+	ItemType_None = 0,
+	ItemType_Armor = 1,
+	ItemType_Weapon = 2,
+	ItemType_Spell = 3,
 };

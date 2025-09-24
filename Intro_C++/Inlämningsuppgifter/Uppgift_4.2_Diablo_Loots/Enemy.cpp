@@ -3,18 +3,13 @@
 #include "Utils.h"
 
 #include <iostream>
-#include <string>
 
 using namespace Utils;
 using namespace EnemyDB;
 
-Enemy::Enemy()
-{
-}
-
 Enemy::Enemy(EnemyType aType) :
 	myId(),
-	myAttributes{ GetDef(aType).myType, GetDef(aType).myName, GetDef(aType).myDamage, GetDef(aType).myMaxHealth },
+	myAttributes{GetDef(aType).myType, GetDef(aType).myName, GetDef(aType).myDamage, GetDef(aType).myMaxHealth},
 	myCurrentHealth(GetDef(aType).myMaxHealth),
 	myIsDead(false)
 {
@@ -54,13 +49,14 @@ void Enemy::TakeDamage(const float aDamage)
 
 void Enemy::Attack(Player& player) const
 {
-	const int dmg = static_cast<int>(GetDamage() / player.GetDefenseMultiplier());
-	const int blockedDmg = static_cast<int>(GetDamage() - dmg);
+	const float dmgFloat = GetDamage() / player.GetDefenseMultiplier();
+	const int dmg = static_cast<int>(dmgFloat);
+	const int blockedDmg = static_cast<int>(GetDamage()) - dmg;
 
-	player.TakeDamage(dmg);
+	player.TakeDamage(dmgFloat);
 
 	std::cout << myAttributes.myName << " dealt "
-		<< "" << dmg << " dmg to you"
+		<< "" << static_cast<int>(dmg) << " dmg to you"
 		<< " [" << blockedDmg << " blocked damage]\n";
 }
 
@@ -88,4 +84,3 @@ const char* Enemy::GetName() const
 {
 	return myAttributes.myName;
 }
-

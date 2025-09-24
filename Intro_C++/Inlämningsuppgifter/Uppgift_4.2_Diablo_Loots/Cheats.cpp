@@ -4,7 +4,10 @@
 
 using namespace Utils;
 
-namespace { Cheats::CheatState myCheats; }
+namespace
+{
+	Cheats::CheatState myCheats;
+}
 
 Cheats::CheatState& Cheats::GetCheats()
 {
@@ -17,50 +20,50 @@ void Cheats::UpdateCheats()
 	{
 		system("cls");
 		Cheats::PrintCheatMenu();
-		int cheatsChoice = ReadIntInRange(static_cast<int>(CheatType::CheatType_Invincible), static_cast<int>(CheatType::CheatType_Ghost));
-		CheatType cheatType = static_cast<CheatType>(cheatsChoice);
+		CheatType cheatType = static_cast<CheatType>(ReadIntInRange(static_cast<int>(CheatType::CheatType_Invincible),
+		                                                            static_cast<int>(CheatType::CheatType_None)));
 		switch (cheatType)
 		{
 		case CheatType::CheatType_Invincible:
-		{
-			if (!myCheats.invincible)
 			{
-				myCheats.invincible = true;
+				if (!myCheats.invincible)
+				{
+					myCheats.invincible = true;
+				}
+				else
+				{
+					myCheats.invincible = false;
+				}
+				break;
 			}
-			else
-			{
-				myCheats.invincible = false;
-			}
-			break;
-		}
 		case CheatType::CheatType_OneShot:
-		{
-			if (!myCheats.oneShot)
 			{
-				myCheats.oneShot = true;
+				if (!myCheats.oneShot)
+				{
+					myCheats.oneShot = true;
+				}
+				else
+				{
+					myCheats.oneShot = false;
+				}
+				break;
 			}
-			else
-			{
-				myCheats.oneShot = false;
-			}
-			break;
-		}
 		case CheatType::CheatType_Ghost:
-		{
-			if (!myCheats.ghost)
 			{
-				myCheats.ghost = true;
+				if (!myCheats.ghost)
+				{
+					myCheats.ghost = true;
+				}
+				else
+				{
+					myCheats.ghost = false;
+				}
+				break;
 			}
-			else
-			{
-				myCheats.ghost = false;
-			}
-			break;
-		}
 		case CheatType::CheatType_None:
-		{
-			return;
-		}
+			{
+				return;
+			}
 		}
 	}
 }
@@ -114,4 +117,3 @@ void Cheats::PrintCheatMenu()
 		<< "4) Return\n"
 		<< "Choice: ";
 }
-
