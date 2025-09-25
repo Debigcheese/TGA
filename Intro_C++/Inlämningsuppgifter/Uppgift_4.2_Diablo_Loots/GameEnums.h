@@ -2,69 +2,91 @@
 
 enum class Direction
 {
-	Direction_None = 0,
-	Direction_West = 1,
-	Direction_North = 2,
-	Direction_East = 3,
-	Direction_South = 4,
+	None = 0,
+	West = 1,
+	North = 2,
+	East = 3,
+	South = 4,
 };
 
 enum class Action
 {
-	Action_None = 0,
-	Action_Combat = 1,
-	Action_Navigation = 2,
-	Action_Attributes = 3,
-	Action_Quit = 4,
-	Action_Cheats = 5,
+	None = 0,
+	Combat = 1,
+	Navigation = 2,
+	Attributes = 3,
+	Quit = 4,
+	Cheats = 5,
 };
 
 enum class AttackType
 {
-	AttackType_None = 0,
-	AttackType_QuickAttack = 1,
-	AttackType_HeavyAttack = 2,
+	None = 0,
+	QuickAttack = 1,
+	HeavyAttack = 2,
 };
 
 enum class AttriMenu
 {
-	AttriMenu_Attributes = 1,
-	AttriMenu_DerivedAttributes = 2,
-	AttriMenu_Return = 3,
+	Attributes = 1,
+	DerivedAttributes = 2,
+	Return = 3,
 };
 
 enum class LockType
 {
-	LockType_None = 0,
-	LockType_Agility = 1,
-	LockType_Strength = 2,
-	LockType_Unlocked = 3,
+	None = 0,
+	Agility = 1,
+	Strength = 2,
+	Unlocked = 3,
 };
 
 enum class EnemyType
 {
-	EnemyType_None = 0,
-	EnemyType_Bat = 1,
-	EnemyType_Skeleton = 2,
-	EnemyType_Undead = 3,
-	EnemyType_Beast = 4,
-	EnemyType_Humanoid = 5,
-	EnemyType_Elemental = 6,
-	EnemyType_Demon = 7,
+	None = 0,
+	Bat = 1,
+	Skeleton = 2,
+	Undead = 3,
+	Beast = 4,
+	Humanoid = 5,
+	Elemental = 6,
+	Demon = 7,
 };
 
 enum class CheatType
 {
-	CheatType_None = 4,
-	CheatType_Invincible = 1,
-	CheatType_OneShot = 2,
-	CheatType_Ghost = 3,
+	None = 4,
+	Invincible = 1,
+	OneShot = 2,
+	Ghost = 3,
+};
+
+enum class AttributeType
+{
+	None = 0,
+	Strength = 1, //styrka (10-99)
+	Agility = 2, // smidighet (10-99)
+	Endurance = 3, // fysik (10-99)
+	MaxHealth = 4,
+	CurrentHealth = 5,
+	CarryCapacity = 6,
+	Damage = 7,
+	Defense = 8,
 };
 
 enum class ItemType
 {
-	ItemType_None = 0,
-	ItemType_Armor = 1,
-	ItemType_Weapon = 2,
-	ItemType_Spell = 3,
+	None = 0,
+	Armor = 1,
+	Weapon = 2,
+	Spell = 3,
+};
+
+enum class Rarity
+{
+	None = 0,
+	Bronze = 1,
+	Silver = 2,
+	Gold = 3,
+	Legendary = 4,
 };

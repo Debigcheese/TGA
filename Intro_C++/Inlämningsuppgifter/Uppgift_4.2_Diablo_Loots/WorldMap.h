@@ -18,12 +18,17 @@ public:
 
 	void GenerateWorld();
 	Enemy GenerateEnemy(const EnemyType& aEnemyType);
-	void GiveEnemyRandomId(Enemy& aEnemy);
+	void GiveEnemyUniqueId(Enemy& aEnemy);
 	void GenerateDoors();
 	void GenerateRooms();
 
+	//items
+	void GenerateItems();
+	void AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom);
+
 private:
-	int myNextId;
+	int myNextEnemyId;
 	std::vector<Room> myRooms;
 	std::vector<Door> myDoors;
+	std::vector<Item> myItems;
 };

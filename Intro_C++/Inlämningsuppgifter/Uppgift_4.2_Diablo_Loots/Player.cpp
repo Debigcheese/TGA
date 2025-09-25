@@ -15,7 +15,7 @@ using namespace GameConstants;
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
                                       myName("(-)"), myPos{0, 0}, myInventory()
 {
-	myAttributes.myCurrentHealth = GetMaxHealth();
+	myAttributes.currentHealth = GetMaxHealth();
 	myItemAttributes = {};
 }
 
@@ -119,8 +119,8 @@ void Player::ChooseAttack()
 		<< "2) Heavy attack\n"
 		<< "Choice: ";
 	myAttackIndex = ReadIntInRange(
-		static_cast<int>(AttackType::AttackType_QuickAttack),
-		static_cast<int>(AttackType::AttackType_HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
+		static_cast<int>(AttackType::QuickAttack),
+		static_cast<int>(AttackType::HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
 }
 
 void Player::TakeDamage(const float aDamage)
@@ -130,12 +130,11 @@ void Player::TakeDamage(const float aDamage)
 		return;
 	}
 	const float dmgFloat = aDamage / GetDefenseMultiplier();
-	myAttributes.myCurrentHealth -= dmgFloat;
-	if (myAttributes.myCurrentHealth <= HEALTH_ZERO)
+	myAttributes.currentHealth -= dmgFloat;
+	if (myAttributes.currentHealth <= HEALTH_ZERO)
 	{
-		myAttributes.myCurrentHealth = HEALTH_ZERO;
+		myAttributes.currentHealth = HEALTH_ZERO;
 		myIsDead = true;
-		IsDead();
 		std::cout << "\n" << "You died!";
 		std::cout << "\n" << "Quitting game...\n";
 		system("pause");
@@ -149,19 +148,19 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	AttackType atkType = static_cast<AttackType>(aAttackIndex + PLAYER_ATTACK_INDEX_OFFSET);
 	switch (atkType)
 	{
-	case AttackType::AttackType_QuickAttack:
+	case AttackType::QuickAttack:
 		{
-			newDamage = GetDamage();
+			newDamage = GetAttributes().damage;
 			break;
 		}
-	case AttackType::AttackType_HeavyAttack:
+	case AttackType::HeavyAttack:
 		{
-			const int heavyMinMulti = static_cast<int>(GetDamage() * HEAVY_MULTI_MIN);
-			const int heavyMaxMulti = static_cast<int>(GetDamage() * HEAVY_MULTI_MAX);
+			const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
+			const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
 			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
 			break;
 		}
-	case AttackType::AttackType_None:
+	case AttackType::None:
 		{
 			break;
 		}
@@ -194,6 +193,11 @@ void Player::SetPosition(const Position& aNewPosition)
 	myPos = aNewPosition;
 }
 
+void Player::SetItemAttributes(const Attributes& aItemAttributes)
+{
+	myItemAttributes = aItemAttributes;
+}
+
 float Player::GetDamage() const
 {
 	if (Cheats::GetCheats().oneShot)
@@ -210,11 +214,6 @@ float Player::GetMaxHealth() const
 		(myAttributes.agility * ATTRI_GET_HEALTH_AGILITY_MULTI);
 }
 
-float Player::GetCurrentHealth() const
-{
-	return myAttributes.myCurrentHealth;
-}
-
 float Player::GetCarryCapacity() const
 {
 	return myAttributes.strength + (myAttributes.agility / ATTRI_GET_CARRY_AGILITY_DIV);
@@ -227,7 +226,7 @@ float Player::GetDefense() const
 
 float Player::GetDefenseMultiplier() const
 {
-	return (DEFENSE_BASE_MULTI + (GetDefense() / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
+	return (DEFENSE_BASE_MULTI + (GetAttributes().defense / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
 }
 
 bool Player::IsDead() const
@@ -245,9 +244,34 @@ std::string Player::GetName() const
 	return myName;
 }
 
-PlayerAttributes Player::GetAttributes() const
+const Attributes& Player::GetBaseAttributes() const
 {
-	return myAttributes;
+	return {
+
+		myAttributes.strength,
+		myAttributes.agility,
+		myAttributes.endurance,
+		GetMaxHealth(),
+		myAttributes.currentHealth,
+		GetCarryCapacity(),
+		GetDamage(),
+		GetDefense(),
+	};
+}
+
+Attributes Player::GetAttributes() const
+{
+	return {
+
+		GetBaseAttributes().strength + myItemAttributes.strength,
+		myAttributes.agility + myItemAttributes.agility,
+		myAttributes.endurance + myItemAttributes.endurance,
+		GetMaxHealth() + myItemAttributes.maxHealth,
+		myAttributes.currentHealth + myItemAttributes.currentHealth,
+		GetCarryCapacity() + myItemAttributes.carryCapacity,
+		GetDamage() + myItemAttributes.damage,
+		GetDefense() + myItemAttributes.defense
+	};
 }
 
 Position Player::GetPosition() const
@@ -255,10 +279,11 @@ Position Player::GetPosition() const
 	return myPos;
 }
 
-
 void Player::PrintHealth() const
 {
-	std::cout << "Health: " << static_cast<int>(GetCurrentHealth()) << "/" << static_cast<int>(GetMaxHealth()) << " hp";
+	std::cout << "Health: "
+		<< static_cast<int>(GetAttributes().currentHealth) << "/"
+		<< static_cast<int>(GetAttributes().maxHealth) << " hp";
 }
 
 void Player::PrintUserName() const
@@ -278,6 +303,22 @@ void Player::PrintPlayerUI() const
 }
 
 void Player::PrintAttributes() const
+{
+	std::cout << "Player Username: " << myName << "\n\n";
+
+	std::cout << "[Base Attributes] " << "\n";
+	std::cout << "Strength:  " << static_cast<int>(GetAttributes().strength) << "/99" << "\n";
+	std::cout << "Agility:   " << static_cast<int>(GetAttributes().agility) << "/99" << "\n";
+	std::cout << "Endurance: " << static_cast<int>(GetAttributes().endurance) << "/99" << "\n\n";
+
+	std::cout << "[Derived Attributes] " << "\n";
+	std::cout << "Attack Damage: " << static_cast<int>(GetAttributes().damage) << " AD" << "\n";
+	std::cout << "Max-Health :   " << static_cast<int>(GetAttributes().maxHealth) << " hp" << "\n";
+	std::cout << "Defense:       " << static_cast<int>(GetAttributes().defense) << "\n";
+	std::cout << "Carry Capacity " << static_cast<int>(GetAttributes().carryCapacity) << "\n\n";
+}
+
+void Player::PrintBaseAttributes() const
 {
 	std::cout << "Player Username: " << myName << "\n\n";
 
@@ -328,27 +369,27 @@ void Player::EnterAttributesMenu() const
 			<< "Choice: ";
 
 		AttriMenu AttriMenuChoice = static_cast<AttriMenu>(ReadIntInRange(
-			static_cast<int>(AttriMenu::AttriMenu_Attributes),
-			static_cast<int>(AttriMenu::AttriMenu_Return)));
+			static_cast<int>(AttriMenu::Attributes),
+			static_cast<int>(AttriMenu::Return)));
 
 		bool shouldExit = false;
 		system("cls");
 
 		switch (AttriMenuChoice)
 		{
-		case AttriMenu::AttriMenu_Attributes:
+		case AttriMenu::Attributes:
 			{
 				PrintAttributes();
 				system("pause");
 				break;
 			}
-		case AttriMenu::AttriMenu_DerivedAttributes:
+		case AttriMenu::DerivedAttributes:
 			{
 				PrintDerivedAttributes();
 				system("pause");
 				break;
 			}
-		case AttriMenu::AttriMenu_Return:
+		case AttriMenu::Return:
 			{
 				shouldExit = true;
 				break;

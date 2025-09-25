@@ -28,11 +28,11 @@ void Navigation::UpdateNavigation()
 		PrintNavigation();
 
 		int navChoice = ReadIntInRange(
-			static_cast<int>(Direction::Direction_West),
-			static_cast<int>(Direction::Direction_South) +
+			static_cast<int>(Direction::West),
+			static_cast<int>(Direction::South) +
 			NAV_DIRECTION_CHOICE_OFFSET);
 
-		if (navChoice == static_cast<int>(Direction::Direction_South) + NAV_DIRECTION_CHOICE_OFFSET)
+		if (navChoice == static_cast<int>(Direction::South) + NAV_DIRECTION_CHOICE_OFFSET)
 		{
 			break;
 		}
@@ -133,13 +133,13 @@ void Navigation::UpdateAction()
 			enemiesNearby = true;
 		}
 
-		int menuChoice = ReadIntInRange(static_cast<int>(Action::Action_Combat),
-		                                static_cast<int>(Action::Action_Cheats));
+		int menuChoice = ReadIntInRange(static_cast<int>(Action::Combat),
+		                                static_cast<int>(Action::Cheats));
 		Action actionChoice = static_cast<Action>(menuChoice);
 
 		switch (actionChoice)
 		{
-		case Action::Action_Combat:
+		case Action::Combat:
 			{
 				if (enemiesNearby)
 				{
@@ -151,23 +151,23 @@ void Navigation::UpdateAction()
 				system("pause");
 				break;
 			}
-		case Action::Action_Navigation:
+		case Action::Navigation:
 			{
 				UpdateNavigation();
 				break;
 			}
-		case Action::Action_Attributes:
+		case Action::Attributes:
 			{
 				myPlayer.EnterAttributesMenu();
 				break;
 			}
-		case Action::Action_Quit:
+		case Action::Quit:
 			{
 				std::cout << "Quitting Game...\n";
 				system("pause");
 				return;
 			}
-		case Action::Action_Cheats:
+		case Action::Cheats:
 			{
 				UpdateCheats();
 				break;
@@ -175,6 +175,34 @@ void Navigation::UpdateAction()
 		}
 	}
 }
+
+//std::cout
+//<< "\n<--- Action --->\n";
+//if (aEnemiesExist)
+//{
+//	std::cout
+//		<< "1) Combat\n";
+//}
+//else if (!aEnemiesExist)
+//{
+//	std::cout
+//		<< "1) Combat (No Enemies Nearby)\n";
+//}
+//
+//std::cout
+//<< "2) Navigate\n"
+//<< "3) Look Around\n"
+//<< "4) Attributes\n";
+//
+//if (aShowCheats)
+//{
+//	std::cout
+//		<< "5) Cheats\n";
+//}
+//
+//std::cout
+//<< "6) Quit Game\n"
+//<< "Choice: ";
 
 void Navigation::Win() const
 {
@@ -214,8 +242,9 @@ void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 
 	std::cout
 		<< "2) Navigate\n"
-		<< "3) Attributes\n"
-		<< "4) Quit Game\n";
+		<< "3) Look Around\n"
+		<< "4) Attributes\n";
+
 	if (aShowCheats)
 	{
 		std::cout
@@ -223,5 +252,6 @@ void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 	}
 
 	std::cout
+		<< "6) Quit Game\n"
 		<< "Choice: ";
 }

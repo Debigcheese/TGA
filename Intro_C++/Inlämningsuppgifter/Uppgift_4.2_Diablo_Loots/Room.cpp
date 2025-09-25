@@ -63,6 +63,17 @@ bool Room::DoesEnemiesExist() const
 	return !myEnemies.empty();
 }
 
+void Room::AddItemToRoom(const Item& aItemToAdd)
+{
+	myLoot.push_back(aItemToAdd);
+}
+
+const std::vector<Item>& Room::GetLootInRoom() const
+{
+	return myLoot;
+}
+
+
 void Room::PrintRoomName() const
 {
 	std::cout << "Room: " << myRoomName;

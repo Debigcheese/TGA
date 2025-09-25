@@ -40,23 +40,23 @@ namespace Utils
 	{
 		switch (aDirection)
 		{
-		case Direction::Direction_West:
+		case Direction::West:
 			{
 				return {-1, 0};
 			}
-		case Direction::Direction_North:
+		case Direction::North:
 			{
 				return {0, 1};
 			}
-		case Direction::Direction_East:
+		case Direction::East:
 			{
 				return {1, 0};
 			}
-		case Direction::Direction_South:
+		case Direction::South:
 			{
 				return {0, -1};
 			}
-		case Direction::Direction_None:
+		case Direction::None:
 			{
 				return {0, 0};
 			}
@@ -82,19 +82,19 @@ namespace Utils
 	{
 		switch (aLockType)
 		{
-		case LockType::LockType_Unlocked:
+		case LockType::Unlocked:
 			{
 				return "Unlocked";
 			}
-		case LockType::LockType_Agility:
+		case LockType::Agility:
 			{
 				return "Agility";
 			}
-		case LockType::LockType_Strength:
+		case LockType::Strength:
 			{
 				return "Strength";
 			}
-		case LockType::LockType_None:
+		case LockType::None:
 			{
 				return "none";
 			}
@@ -106,25 +106,25 @@ namespace Utils
 	{
 		switch (d)
 		{
-		case Direction::Direction_West:
+		case Direction::West:
 			{
-				return Direction::Direction_East;
+				return Direction::East;
 			}
-		case Direction::Direction_East:
+		case Direction::East:
 			{
-				return Direction::Direction_West;
+				return Direction::West;
 			}
-		case Direction::Direction_North:
+		case Direction::North:
 			{
-				return Direction::Direction_South;
+				return Direction::South;
 			}
-		case Direction::Direction_South:
+		case Direction::South:
 			{
-				return Direction::Direction_North;
+				return Direction::North;
 			}
 		default:
 			{
-				return Direction::Direction_None;
+				return Direction::None;
 			}
 		}
 	}

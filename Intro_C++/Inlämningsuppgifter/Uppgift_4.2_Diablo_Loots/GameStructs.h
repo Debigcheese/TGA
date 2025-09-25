@@ -4,13 +4,6 @@
 
 using namespace GameConstants;
 
-struct PlayerAttributes
-{
-	float strength = STRENGTH_BASE; //styrka (10-99)
-	float agility = AGILITY_BASE; // smidighet (10-99)
-	float endurance = ENDURANCE_BASE; // fysik (10-99)
-	float myCurrentHealth = HEALTH_ZERO;
-};
 
 struct EnemyAttributes
 {
@@ -22,15 +15,15 @@ struct EnemyAttributes
 
 struct LockRequirements
 {
-	LockType lockType = LockType::LockType_Unlocked;
+	LockType lockType = LockType::Unlocked;
 	float attributeValue;
 };
 
 struct Lock
 {
 	bool isLocked;
-	LockRequirements strengthReq{LockType::LockType_Strength, LOCK_1_STRENGTH_REQ_DECLARE};
-	LockRequirements agilityReq{LockType::LockType_Agility, LOCK_1_AGILITY_REQ_DECLARE};
+	LockRequirements strengthReq{LockType::Strength, LOCK_1_STRENGTH_REQ_DECLARE};
+	LockRequirements agilityReq{LockType::Agility, LOCK_1_AGILITY_REQ_DECLARE};
 };
 
 struct Position
@@ -49,13 +42,24 @@ struct Position
 	}
 };
 
-struct ItemAttributes
+struct Attributes
 {
 	float strength = 0; //styrka (10-99)
 	float agility = 0; // smidighet (10-99)
 	float endurance = 0; // fysik (10-99)
-	float health = 0;
+	float maxHealth = 0;
+	float currentHealth = 0;
 	float carryCapacity = 0;
 	float damage = 0;
 	float defense = 0;
+};
+
+struct ItemAttributes
+{
+	int id;
+	ItemType type;
+	Rarity rarity;
+	const char* name;
+	float weight;
+	Attributes attributes;
 };

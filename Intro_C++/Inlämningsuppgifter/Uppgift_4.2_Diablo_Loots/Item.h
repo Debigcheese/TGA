@@ -1,41 +1,191 @@
 #pragma once
 #include "GameStructs.h"
 #include "GameEnums.h"
-#include <string>
+#include <vector>
 
+class Item;
 class Player;
 
 namespace ItemDB
 {
-	const EnemyAttributes EnemyDef[] = {
-		// type , name, dmg, hp
-		{EnemyType::EnemyType_None, "None", 0.0f, 0.0f},
-		{EnemyType::EnemyType_Bat, "Bat", 5.0f, 40.0f},
-		{EnemyType::EnemyType_Skeleton, "Skeleton", 10.0f, 100.0f},
-		{EnemyType::EnemyType_Undead, "Undead", 12.0f, 130.0f},
-		{EnemyType::EnemyType_Beast, "Beast", 16.0f, 200},
-		{EnemyType::EnemyType_Humanoid, "Humanoid", 20.0f, 250.0f},
-		{EnemyType::EnemyType_Elemental, "Elemental", 30.0f, 300.0f},
-		{EnemyType::EnemyType_Demon, "Demon", 50.0f, 500.0f},
+	const ItemAttributes ItemDef[] = {
+		{
+			0, ItemType::Weapon, Rarity::Bronze, "Eclipse", 1.0f,
+			{
+				10.0f, 5.0f, 5.0f,
+				0.0f, 0.0f, 0.0f,
+				40.0f, 0.0f
+			}
+		},
+		{
+			1, ItemType::Weapon, Rarity::Legendary, "GodSword", 3.0f,
+			{
+				15.0f, 10.0f, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				100.0f, 0.0f
+			}
+		},
+		{
+			2, ItemType::Armor, Rarity::Bronze, "Aegis", 1.0f,
+			{
+				0.0f, -5.0f, 30.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 50.0f
+			}
+		},
+		{
+			3, ItemType::Spell, Rarity::Silver, "Fireball", 1.0f,
+			{
+				0.0f, 0.0f, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				100.0f, 0.0f
+			}
+		},
+		{
+			4, ItemType::Armor, Rarity::Gold, "Backpack", 1.0f,
+			{
+				0.0f, 0.0f, 0.0f,
+				0.0f, 0.0f, 3.0f,
+				0.0f, 0.0f
+			}
+		},
+		{
+			5, ItemType::Weapon, Rarity::Silver, "Storm Breaker", 2.5f,
+			{
+				12.0f, 5.0f, 0.0f,
+				0.0f, 0, 0.0f,
+				75.0f, 0.0f
+			}
+		},
+		{
+			6, ItemType::Armor, Rarity::Gold, "Dragon Scale", 3.0f,
+			{
+				5.0f, 0.0f, 50.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 150.0f
+			}
+		},
+		{
+			7, ItemType::Spell, Rarity::Legendary, "Chain Lightning", 2.0f,
+			{
+				0.0f, 5.0f, 0.0f,
+				10.0f, 0.0f, 0.0f,
+				250.0f, 0.0f
+			}
+		},
+		{
+			8, ItemType::Weapon, Rarity::Bronze, "Rusty Dagger", 0.5f,
+			{
+				0.0f, 2.0f, 0.0f,
+				0.0f, 0.0f, 1.0f,
+				15.0f, 0.0f
+			}
+		},
+		{
+			9, ItemType::Armor, Rarity::Silver, "Knight Helm", 1.5f,
+			{
+				0.0f, 0.0f, 20.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 25.0f
+			}
+		},
+		{
+			10, ItemType::Spell, Rarity::Bronze, "Magic Missile", 0.8f,
+			{
+				0.0f, 10, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				30.0f, 0.0f
+			}
+		},
+		{
+			11, ItemType::Weapon, Rarity::Gold, "Blood Fang", 2.2f,
+			{
+				8.0f, 8.0f, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				90.0f, -10.0f
+			}
+		},
+		{
+			12, ItemType::Armor, Rarity::Legendary, "Celestial Shield", 3.5f,
+			{
+				0.0f, 0.0f, 60.0f,
+				0.0f, 0.0f, 5.0f,
+				0.0f, 200.0f
+			}
+		},
+		{
+			13, ItemType::Weapon, Rarity::Silver, "War Axe", 2.0f,
+			{
+				15.0f, -2.0f, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				60.0f, 0.0f
+			}
+		},
+		{
+			14, ItemType::Armor, Rarity::Bronze, "Leather Boots", 0.6f,
+			{
+				0.0f, 3.0f, 5.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 10.0f
+			}
+		},
+		{
+			15, ItemType::Spell, Rarity::Gold, "Meteor Strike", 3.0f,
+			{
+				0.0f, 0.0f, 0.0f,
+				0.0f, 0.0f, 0.0f,
+				175.0f, 0.0f
+			}
+		},
+		{
+			16, ItemType::Weapon, Rarity::Legendary, "Void Reaver", 3.5f,
+			{
+				15.0f, 15.0f, -10.0f,
+				0.0f, 0.0f, 0.0f,
+				150.0f, 0.0f
+			}
+		},
+		{
+			17, ItemType::Armor, Rarity::Silver, "Iron Chestplate", 2.5f,
+			{
+				-5.0f, 0.0f, 20.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 80.0f
+			}
+		},
+		{
+			18, ItemType::Weapon, Rarity::Bronze, "Training Sword", 1.2f,
+			{
+				5.0f, 2.0f, 2.0f,
+				0.0f, 0.0f, 0.0f,
+				10.0f, 0.0f
+			}
+		},
+		{
+			19, ItemType::Spell, Rarity::Legendary, "Time Warp", 2.5f,
+			{
+				10.0f, 80.0f, 10.0f,
+				15.0f, 0.0f, 2.0f,
+				0.0f, 0.0f
+			}
+		},
 	};
 
-	const EnemyAttributes& GetDef(EnemyType aType);
-}
 
+	const ItemAttributes& GetDef(int aId);
+	int GetItemCount();
+	std::vector<int> GetIdsFromRarities(const std::vector<Rarity>& aRarities);
+	std::vector<Item> GetItemsWithRarity(const std::vector<Rarity>& aItemRarities);
+}
 
 class Item
 {
 public:
-	Item();
+	Item(int aId);
 
-
-	void PrintHealth() const;
-	void PrintUserName() const;
-	void PrintPlayerUI() const;
-	void PrintAttributes() const;
-	void PrintDerivedAttributes() const;
+	void SetId(int aNewId);
+	void PrintItemAttributes() const;
 
 private:
-	std::string myName;
-	Player& myPlayer;
+	ItemAttributes myAttributes;
 };

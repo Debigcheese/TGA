@@ -49,9 +49,9 @@ void Enemy::TakeDamage(const float aDamage)
 
 void Enemy::Attack(Player& player) const
 {
-	const float dmgFloat = GetDamage() / player.GetDefenseMultiplier();
+	const float dmgFloat = player.GetAttributes().damage / player.GetDefenseMultiplier();
 	const int dmg = static_cast<int>(dmgFloat);
-	const int blockedDmg = static_cast<int>(GetDamage()) - dmg;
+	const int blockedDmg = static_cast<int>(player.GetAttributes().damage) - dmg;
 
 	player.TakeDamage(dmgFloat);
 

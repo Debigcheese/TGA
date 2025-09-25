@@ -4,15 +4,16 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "GameStructs.h"
+#include "Item.h"
 
 using namespace Utils;
 using namespace EnemyDB;
 
-WorldMap::WorldMap() : myNextId(ENEMY_ID_FIRST)
+WorldMap::WorldMap() : myNextEnemyId(ENEMY_ID_FIRST)
 {
 }
 
-WorldMap::WorldMap(std::vector<Room> myRooms) : myNextId(ENEMY_ID_FIRST)
+WorldMap::WorldMap(std::vector<Room> myRooms) : myNextEnemyId(ENEMY_ID_FIRST)
 {
 }
 
@@ -59,19 +60,20 @@ void WorldMap::GenerateWorld()
 {
 	GenerateRooms();
 	GenerateDoors();
+	GenerateItems();
 }
 
 Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
 {
 	Enemy enemy(aEnemyType);
-	GiveEnemyRandomId(enemy);
+	GiveEnemyUniqueId(enemy);
 	return enemy;
 }
 
-void WorldMap::GiveEnemyRandomId(Enemy& aEnemy)
+void WorldMap::GiveEnemyUniqueId(Enemy& aEnemy)
 {
-	int newId = myNextId;
-	myNextId++;
+	int newId = myNextEnemyId;
+	myNextEnemyId++;
 	aEnemy.SetId(newId);
 }
 
@@ -109,22 +111,22 @@ void WorldMap::GenerateRooms()
 	std::vector<Enemy> enemiesR4;
 	std::vector<Enemy> enemiesR5;
 
-	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Bat));
-	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Bat));
-	enemiesR0.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
+	enemiesR0.push_back(GenerateEnemy(EnemyType::Bat));
+	enemiesR0.push_back(GenerateEnemy(EnemyType::Bat));
+	enemiesR0.push_back(GenerateEnemy(EnemyType::Skeleton));
 
-	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
-	enemiesR1.push_back(GenerateEnemy(EnemyType::EnemyType_Undead));
+	enemiesR1.push_back(GenerateEnemy(EnemyType::Skeleton));
+	enemiesR1.push_back(GenerateEnemy(EnemyType::Undead));
 
-	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Skeleton));
-	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
-	enemiesR2.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
+	enemiesR2.push_back(GenerateEnemy(EnemyType::Skeleton));
+	enemiesR2.push_back(GenerateEnemy(EnemyType::Beast));
+	enemiesR2.push_back(GenerateEnemy(EnemyType::Humanoid));
 
-	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Beast));
-	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Elemental));
-	enemiesR3.push_back(GenerateEnemy(EnemyType::EnemyType_Humanoid));
+	enemiesR3.push_back(GenerateEnemy(EnemyType::Beast));
+	enemiesR3.push_back(GenerateEnemy(EnemyType::Elemental));
+	enemiesR3.push_back(GenerateEnemy(EnemyType::Humanoid));
 
-	enemiesR4.push_back(GenerateEnemy(EnemyType::EnemyType_Demon));
+	enemiesR4.push_back(GenerateEnemy(EnemyType::Demon));
 
 	AddRoom(Room(ROOM_0_ID, "Withered Halls", {0, 0}, enemiesR0));
 	AddRoom(Room(ROOM_1_ID, "Obsidian Spire", {1, 0}, enemiesR1));
@@ -132,6 +134,33 @@ void WorldMap::GenerateRooms()
 	AddRoom(Room(ROOM_3_ID, "Pits of Torment", {1, 1}, enemiesR3));
 	AddRoom(Room(ROOM_4_ID, "Den of the Blighted", {0, 2}, enemiesR4));
 	AddRoom(Room(ROOM_WIN_ID, "Eternal Abyss", {-1, 2}, enemiesR5));
+}
+
+void WorldMap::GenerateItems()
+{
+	AddItemsToRoomId(ROOM_0_ID, ItemDB::GetItemsWithRarity({
+		                 Rarity::Bronze,
+	                 }));
+	AddItemsToRoomId(ROOM_1_ID, ItemDB::GetItemsWithRarity({
+		                 Rarity::Bronze, Rarity::Silver,
+	                 }));
+	AddItemsToRoomId(ROOM_2_ID, ItemDB::GetItemsWithRarity({
+		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold,
+	                 }));
+	AddItemsToRoomId(ROOM_3_ID, ItemDB::GetItemsWithRarity({
+		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
+	                 }));
+	AddItemsToRoomId(ROOM_4_ID, ItemDB::GetItemsWithRarity({
+		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
+	                 }));
+}
+
+void WorldMap::AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom)
+{
+	for (auto item : aItemsToRoom)
+	{
+		GetRoomWithId(aRoomId)->AddItemToRoom(item);
+	}
 }
 
 

@@ -27,31 +27,33 @@ public:
 	void SetName(const std::string& aNewName);
 	void SetIsDead(bool aIsDead);
 	void SetPosition(const Position& aNewPosition);
+	void SetItemAttributes(const Attributes& aItemAttributes);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
-	float GetCurrentHealth() const;
 	float GetCarryCapacity() const;
 	float GetDefense() const;
+	const Attributes& GetBaseAttributes() const;
+	Attributes GetAttributes() const;
 
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
 	bool IsInvalidAttackIndex() const;
 	std::string GetName() const;
-	PlayerAttributes GetAttributes() const;
 	Position GetPosition() const;
 
 	void PrintHealth() const;
 	void PrintUserName() const;
 	void PrintPlayerUI() const;
 	void PrintAttributes() const;
+	void PrintBaseAttributes() const;
 	void PrintDerivedAttributes() const;
 
 private:
 	WorldMap& myWorldMap;
 	std::string myName;
-	PlayerAttributes myAttributes{};
-	PlayerAttributes myItemAttributes{};
+	Attributes myAttributes{};
+	Attributes myItemAttributes{};
 	int myRoomId;
 	int myTargetIndex;
 	int myAttackIndex;

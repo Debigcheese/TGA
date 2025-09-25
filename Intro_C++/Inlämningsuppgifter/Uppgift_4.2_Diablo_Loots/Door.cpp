@@ -14,8 +14,8 @@ Door::Door(int aRoomOneId, int aRoomTwoId) :
 	myRoomTwoId(aRoomTwoId),
 	myLock{
 		false,
-		LockRequirements{LockType::LockType_Agility, 0},
-		LockRequirements{LockType::LockType_Strength, 0},
+		LockRequirements{LockType::Agility, 0},
+		LockRequirements{LockType::Strength, 0},
 	}
 {
 }
@@ -69,15 +69,15 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 			<< "2) Try Breaking\n"
 			<< "3) Return\n"
 			<< "Choice: ";
-		int lockChoice = Utils::ReadIntInRange(static_cast<int>(LockType::LockType_Agility),
-		                                       static_cast<int>(LockType::LockType_Unlocked));
+		int lockChoice = Utils::ReadIntInRange(static_cast<int>(LockType::Agility),
+		                                       static_cast<int>(LockType::Unlocked));
 		LockType tempLockType = static_cast<LockType>(lockChoice);
 
 		switch (tempLockType)
 		{
-		case LockType::LockType_Agility:
+		case LockType::Agility:
 			{
-				if (TryLockPick(aPlayer, LockType::LockType_Agility))
+				if (TryLockPick(aPlayer, LockType::Agility))
 				{
 					std::cout << "\nYou successfully lock-picked the door open!\n";
 					myLock.isLocked = false;
@@ -90,9 +90,9 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 				}
 				break;
 			}
-		case LockType::LockType_Strength:
+		case LockType::Strength:
 			{
-				if (TryLockPick(aPlayer, LockType::LockType_Strength))
+				if (TryLockPick(aPlayer, LockType::Strength))
 				{
 					std::cout << "\nYou successfully broke the door open!\n";
 					myLock.isLocked = false;
@@ -105,11 +105,11 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 				}
 				break;
 			}
-		case LockType::LockType_Unlocked:
+		case LockType::Unlocked:
 			{
 				return;
 			}
-		case LockType::LockType_None:
+		case LockType::None:
 			{
 				return;
 			}
@@ -120,14 +120,14 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 
 bool Door::TryLockPick(const Player& aPlayer, const LockType& aType) const
 {
-	if (aType == LockType::LockType_Agility)
+	if (aType == LockType::Agility)
 	{
 		if (aPlayer.GetAttributes().agility >= myLock.agilityReq.attributeValue)
 		{
 			return true;
 		}
 	}
-	if (aType == LockType::LockType_Strength)
+	if (aType == LockType::Strength)
 	{
 		if (aPlayer.GetAttributes().strength >= myLock.strengthReq.attributeValue)
 		{
