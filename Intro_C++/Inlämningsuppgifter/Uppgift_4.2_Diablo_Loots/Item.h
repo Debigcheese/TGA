@@ -3,11 +3,24 @@
 #include "GameEnums.h"
 #include <vector>
 
-class Item;
 class Player;
+
+class Item
+{
+public:
+	Item(int aId);
+
+	void SetId(int aNewId);
+	void PrintItemOnPickup() const;
+	void PrintItemAttributes() const;
+
+private:
+	ItemAttributes myAttributes;
+};
 
 namespace ItemDB
 {
+
 	const ItemAttributes ItemDef[] = {
 		{
 			0, ItemType::Weapon, Rarity::Bronze, "Eclipse", 1.0f,
@@ -177,15 +190,3 @@ namespace ItemDB
 	std::vector<int> GetIdsFromRarities(const std::vector<Rarity>& aRarities);
 	std::vector<Item> GetItemsWithRarity(const std::vector<Rarity>& aItemRarities);
 }
-
-class Item
-{
-public:
-	Item(int aId);
-
-	void SetId(int aNewId);
-	void PrintItemAttributes() const;
-
-private:
-	ItemAttributes myAttributes;
-};

@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "Door.h"
 #include "Enemy.h"
+#include "Item.h"
 
 class WorldMap
 {
@@ -30,5 +31,4 @@ private:
 	int myNextEnemyId;
 	std::vector<Room> myRooms;
 	std::vector<Door> myDoors;
-	std::vector<Item> myItems;
 };

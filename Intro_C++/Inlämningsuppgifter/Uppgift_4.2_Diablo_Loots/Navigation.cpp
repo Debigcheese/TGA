@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "Cheats.h"
+#include "Item.h"
 
 #include <vector>
 #include <iostream>
@@ -134,47 +135,95 @@ void Navigation::UpdateAction()
 		}
 
 		int menuChoice = ReadIntInRange(static_cast<int>(Action::Combat),
-		                                static_cast<int>(Action::Cheats));
+			static_cast<int>(Action::Quit));
 		Action actionChoice = static_cast<Action>(menuChoice);
 
 		switch (actionChoice)
 		{
 		case Action::Combat:
+		{
+			if (enemiesNearby)
 			{
-				if (enemiesNearby)
-				{
-					myPlayer.EnterCombat();
-					break;
-				}
-				std::cout << "No monsters in this room...\n";
-				std::cout << "Choose another action.\n";
-				system("pause");
+				myPlayer.EnterCombat();
 				break;
 			}
+			std::cout << "No monsters in this room...\n";
+			std::cout << "Choose another action.\n";
+			system("pause");
+			break;
+		}
 		case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+		{
+			UpdateNavigation();
+			break;
+		}
+		case Action::LookAround:
+		{
+			UpdateLookAround();
+			break;
+		}
 		case Action::Attributes:
-			{
-				myPlayer.EnterAttributesMenu();
-				break;
-			}
-		case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+		{
+			myPlayer.EnterAttributesMenu();
+			break;
+		}
 		case Action::Cheats:
-			{
-				UpdateCheats();
-				break;
-			}
+		{
+			UpdateCheats();
+			break;
+		}
+		case Action::Quit:
+		{
+			std::cout << "Quitting Game...\n";
+			system("pause");
+			return;
+		}
 		}
 	}
 }
+
+void Navigation::UpdateLookAround()
+{
+	while (true && !myPlayer.IsDead())
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+
+		bool enemiesNearby = (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost);
+
+		PrintLookAround();
+
+		LookAround menuChoice = static_cast<LookAround>(ReadIntInRange(
+			static_cast<int>(LookAround::Scavenge),
+			static_cast<int>(LookAround::Return)));
+
+		switch (menuChoice)
+		{
+		case LookAround::Scavenge:
+		{
+			std::vector<Item>& myitems = myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->GetLootInRoom();
+			for (auto& item : myitems)
+			{
+				item.PrintItemOnPickup();
+			}
+			system("pause");
+			break;
+		}
+		case LookAround::OpenChest:
+		{
+			UpdateNavigation();
+			break;
+		}
+		case LookAround::Return:
+		{
+			//lookl around
+			return;
+		}
+		}
+	}
+}
+
 
 //std::cout
 //<< "\n<--- Action --->\n";
@@ -253,5 +302,15 @@ void Navigation::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const
 
 	std::cout
 		<< "6) Quit Game\n"
+		<< "Choice: ";
+}
+
+void Navigation::PrintLookAround() const
+{
+	std::cout
+		<< "\n<--- Loot --->\n"
+		<< "1) Scavenge\n"
+		<< "2) Open Chest\n"
+		<< "3) Return\n"
 		<< "Choice: ";
 }

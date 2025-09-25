@@ -1,3 +1,2 @@
-﻿  Player.cpp
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.2_Diablo_Loots\Player.cpp(249,1): warning C4172: returning address of local variable or temporary 
-  Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.2_Diablo_Loots\x64\Debug\Main.exe
+﻿  Item.cpp
+  Main.vcxproj -> F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.2_Diablo_Loots\x64\Debug\Main.exe

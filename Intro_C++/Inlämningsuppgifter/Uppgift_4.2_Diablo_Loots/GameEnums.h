@@ -14,9 +14,10 @@ enum class Action
 	None = 0,
 	Combat = 1,
 	Navigation = 2,
-	Attributes = 3,
-	Quit = 4,
+	LookAround = 3,
+	Attributes = 4,
 	Cheats = 5,
+	Quit = 6,
 };
 
 enum class AttackType
@@ -30,6 +31,13 @@ enum class AttriMenu
 {
 	Attributes = 1,
 	DerivedAttributes = 2,
+	Return = 3,
+};
+
+enum class LookAround
+{
+	Scavenge = 1,
+	OpenChest = 2,
 	Return = 3,
 };
 
@@ -89,4 +97,13 @@ enum class Rarity
 	Silver = 2,
 	Gold = 3,
 	Legendary = 4,
+};
+
+enum class TextColor
+{
+	Red,
+	Brown,
+	Silver,
+	Gold,
+	Magenta
 };

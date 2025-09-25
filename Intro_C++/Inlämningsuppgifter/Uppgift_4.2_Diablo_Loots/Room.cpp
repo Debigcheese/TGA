@@ -1,16 +1,17 @@
 #include "Room.h"
 #include "Utils.h"
 #include <iostream>
+#include "Item.h"
 
 using namespace Utils;
 
 Room::Room() :
-	myRoomId(), myRoomName(), myPos({0, 0}), myEnemies()
+	myRoomId(), myRoomName(), myPos({ 0, 0 }), myEnemies()
 {
 }
 
 Room::Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies) :
-	myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies)
+	myRoomId(aRoomId), myRoomName(aRoomName), myPos{ aPosition.X, aPosition.Y }, myEnemies(aEnemies)
 {
 }
 
@@ -52,10 +53,10 @@ void Room::AddEnemyToRoom(const Enemy& aEnemyToAdd)
 void Room::RemoveEnemyFromRoom(int aEnemyID)
 {
 	myEnemies.erase(std::remove_if(myEnemies.begin(), myEnemies.end(), [aEnemyID](const Enemy& enemy)
-	                {
-		                return enemy.GetId() == aEnemyID;
-	                }),
-	                myEnemies.end());
+		{
+			return enemy.GetId() == aEnemyID;
+		}),
+		myEnemies.end());
 }
 
 bool Room::DoesEnemiesExist() const
@@ -73,6 +74,10 @@ const std::vector<Item>& Room::GetLootInRoom() const
 	return myLoot;
 }
 
+std::vector<Item>& Room::GetLootInRoom()
+{
+	return myLoot;
+}
 
 void Room::PrintRoomName() const
 {

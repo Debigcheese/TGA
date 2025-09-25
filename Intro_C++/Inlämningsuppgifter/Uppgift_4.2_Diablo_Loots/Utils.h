@@ -12,4 +12,8 @@ namespace Utils
 	const char* PrintRedText(bool aStart);
 	const char* LockTypeToString(const LockType& aLockType);
 	Direction Opposite(const Direction& d);
+	const char* GetColorCode(TextColor color, bool aStart);
+	TextColor GetColorFromRarity(Rarity rarity);
+	const char* RarityToString(Rarity rarity);
+
 }

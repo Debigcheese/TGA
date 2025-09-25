@@ -27,6 +27,7 @@ public:
 	//items
 	void AddItemToRoom(const Item& aItemToAdd);
 	const std::vector<Item>& GetLootInRoom() const;
+	std::vector<Item>& GetLootInRoom();
 
 	void PrintRoomName() const;
 	void PrintEnemies() const;

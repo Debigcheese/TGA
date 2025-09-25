@@ -25,7 +25,7 @@ namespace Utils
 	int GenerateRandomNumber(int aMin, int aMaxValue)
 	{
 		std::random_device rd;
-		std::mt19937 rng{rd()};
+		std::mt19937 rng{ rd() };
 		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
 		return dist(rng);
 	}
@@ -41,27 +41,27 @@ namespace Utils
 		switch (aDirection)
 		{
 		case Direction::West:
-			{
-				return {-1, 0};
-			}
-		case Direction::North:
-			{
-				return {0, 1};
-			}
-		case Direction::East:
-			{
-				return {1, 0};
-			}
-		case Direction::South:
-			{
-				return {0, -1};
-			}
-		case Direction::None:
-			{
-				return {0, 0};
-			}
+		{
+			return { -1, 0 };
 		}
-		return {0, 0};
+		case Direction::North:
+		{
+			return { 0, 1 };
+		}
+		case Direction::East:
+		{
+			return { 1, 0 };
+		}
+		case Direction::South:
+		{
+			return { 0, -1 };
+		}
+		case Direction::None:
+		{
+			return { 0, 0 };
+		}
+		}
+		return { 0, 0 };
 	}
 
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition)
@@ -83,21 +83,21 @@ namespace Utils
 		switch (aLockType)
 		{
 		case LockType::Unlocked:
-			{
-				return "Unlocked";
-			}
+		{
+			return "Unlocked";
+		}
 		case LockType::Agility:
-			{
-				return "Agility";
-			}
+		{
+			return "Agility";
+		}
 		case LockType::Strength:
-			{
-				return "Strength";
-			}
+		{
+			return "Strength";
+		}
 		case LockType::None:
-			{
-				return "none";
-			}
+		{
+			return "none";
+		}
 		}
 		return nullptr;
 	}
@@ -107,25 +107,88 @@ namespace Utils
 		switch (d)
 		{
 		case Direction::West:
-			{
-				return Direction::East;
-			}
+		{
+			return Direction::East;
+		}
 		case Direction::East:
-			{
-				return Direction::West;
-			}
+		{
+			return Direction::West;
+		}
 		case Direction::North:
-			{
-				return Direction::South;
-			}
+		{
+			return Direction::South;
+		}
 		case Direction::South:
-			{
-				return Direction::North;
-			}
+		{
+			return Direction::North;
+		}
 		default:
-			{
-				return Direction::None;
-			}
+		{
+			return Direction::None;
+		}
 		}
 	}
+	const char* GetColorCode(TextColor color, bool aStart)
+	{
+		if (!aStart)
+			return "\x1b[0m"; // reset
+
+		switch (color)
+		{
+		case TextColor::Red:
+		{
+			return "\x1b[31m"; // Red
+		}
+		case TextColor::Brown:
+		{
+			return "\x1b[33m"; // Brown-ish (ANSI only has yellow, looks like dark brown on some terms)
+		}
+		case TextColor::Silver:
+		{
+			return "\x1b[37m"; // White/grey
+		}
+		case TextColor::Gold:
+		{
+			return "\x1b[93m"; // Bright yellow (gold-like)
+		}
+		case TextColor::Magenta:
+		{
+			return "\x1b[35m"; // Magenta
+		}
+		default:
+		{
+			return "\x1b[0m"; // fallback reset
+		}
+		}
+	}
+
+	TextColor GetColorFromRarity(Rarity rarity) //none = red
+	{
+		return static_cast<TextColor>(rarity);
+	}
+
+	const char* RarityToString(Rarity rarity)
+	{
+		switch (rarity)
+		{
+		case Rarity::Bronze:
+		{
+			return "Bronze";
+		}
+		case Rarity::Silver:
+		{
+			return "Silver";
+		}
+		case Rarity::Gold:
+		{
+			return "Gold";
+		}
+		case Rarity::Legendary:
+		{
+			return "Legendary";
+		}
+		}
+		return nullptr;
+	}
+
 }
