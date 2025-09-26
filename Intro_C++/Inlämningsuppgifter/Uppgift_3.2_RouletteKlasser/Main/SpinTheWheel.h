@@ -1,6 +1,5 @@
 #pragma once
 #include "Structs.h"
-#include "Enums.h"
 
 class SpinTheWheel
 {
@@ -12,6 +11,10 @@ public:
 	void PlaySpinWheelRound(Account& aAccount);
 
 private:
+	//SPIN THE WHEEL
+	const int SPIN_THE_WHEEL_DEFAULT_VALUE_PLAY = 1;
+	const int BET_MULTI_SPIN_WHEEL_SMALL = 2;
+	const int BET_MULTI_SPIN_WHEEL_BIG = 40;
+
 	int myMoneyEarned;
 };
-

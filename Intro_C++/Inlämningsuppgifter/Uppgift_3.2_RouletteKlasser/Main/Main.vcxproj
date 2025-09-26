@@ -140,7 +140,6 @@
     <ClCompile Include="SpinTheWheel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CONSTANTS.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GuessingGame.h" />
     <ClInclude Include="Helpers.h" />
