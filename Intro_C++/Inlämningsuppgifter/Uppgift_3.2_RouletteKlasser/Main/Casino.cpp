@@ -341,7 +341,7 @@ const int* Casino::GetStatArr()
 	return ourStatArr;
 }
 
-const int Casino::GetStatArrSize()
+int Casino::GetStatArrSize()
 {
 	return STAT_ARRAY_SIZE;
 }

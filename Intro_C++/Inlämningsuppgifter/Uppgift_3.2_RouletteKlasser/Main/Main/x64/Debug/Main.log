@@ -1,5 +1,11 @@
-﻿  OddOrEvenGame.cpp
+﻿  Casino.cpp
+  GuessingGame.cpp
+  Helpers.cpp
+  HigherOrLower.cpp
+  Main.cpp
+  OddOrEvenGame.cpp
   Print.cpp
+  RouletteGame.cpp
   SpinTheWheel.cpp
   Generating Code...
   Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_3.2_RouletteKlasser\Main\x64\Debug\Main.exe
