@@ -2,13 +2,11 @@
 #include "Casino.h"
 #include "Helpers.h"
 #include "Print.h"
-#include "CONSTANTS.h"
 
 #include <iostream>
 
 using namespace Helpers;
 using namespace Print;
-using namespace CONSTANTS;
 
 GuessingGame::GuessingGame()
 	: myMoneyEarned(0), myBetMinimum(0), myBetMaximum(0)
@@ -29,10 +27,12 @@ void GuessingGame::SetMoneyEarned(int aNewMoney)
 {
 	myMoneyEarned = aNewMoney;
 }
+
 int GuessingGame::GetBetMaximum() const
 {
 	return myBetMaximum;
 }
+
 int GuessingGame::GetBetMinimum() const
 {
 	return myBetMinimum;
@@ -42,8 +42,8 @@ int GuessingGame::GetBetMinimum() const
 void GuessingGame::PlayGuessingRound(Account& aAccount)
 {
 	std::cout << "\nEnter your guess (2-12): ";
-	int doubleDiceMin = CONSTANTS::DICE_MIN + CONSTANTS::DICE_MIN;
-	int doubleDiceMax = CONSTANTS::DICE_MAX + CONSTANTS::DICE_MAX;
+	int doubleDiceMin = DICE_MIN + DICE_MIN;
+	int doubleDiceMax = DICE_MAX + DICE_MAX;
 
 	int guess = ReadIntInRange(doubleDiceMin, doubleDiceMax);
 
@@ -66,5 +66,3 @@ void GuessingGame::PlayGuessingRound(Account& aAccount)
 
 	system("pause");
 }
-
-

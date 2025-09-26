@@ -1,22 +1,33 @@
 #pragma once
 #include "Enums.h"
-#include "Structs.h"
 #include <string>
+#include <random>
 
 namespace Helpers
 {
+	struct RandomGeneratorState
+	{
+		std::mt19937 rng;
+
+		RandomGeneratorState(unsigned int seed = std::random_device{}());
+	};
+
+	const int DICE_MIN = 1;
+	const int DICE_MAX = 6;
+
+	const int MY_TO_STRING_BUFFER_SIZE = 12;
+	const int MY_TO_STRING_INDEX = 11;
+	const int MY_TO_STRING_DECIMAL_BASE = 10;
+
+	static RandomGeneratorState GlobalRng;
+
 	int ReadIntInRange(int aMinValue, int aMaxValue);
 	int GenerateRandomNumber(int aMin, int aMaxValue);
 	int RollDice();
-	int TableToIndex(const TableOption& aTable);
 	int ResultToIndex(const Result& aGameResult);
 
-	void PrintIndexWithColor(const RouletteColor aColor, const int aIndex);
-	void PrintBracketsWithColor(const RouletteColor aColor, const Side aSide);
-	RouletteColor GetColorFromIndex(const char aRouletteLayout[], const int aIndex);
-	OddOrEven GetOddOrEvenFromIndex(const int aIndex);
-	Columns GetColumnFromIndex(const int aIndex);
-	std::string GetStringFromRoulette(const RouletteBetPerType aBetPerType, const RouletteBetType aBetType);
-	std::string myToString(int aValue);
+	void PrintIndexWithColor(const Color aColor, const int aIndex);
+	void PrintBracketsWithColor(const Color aColor, const Side aSide);
 
+	std::string myToString(int aValue);
 }

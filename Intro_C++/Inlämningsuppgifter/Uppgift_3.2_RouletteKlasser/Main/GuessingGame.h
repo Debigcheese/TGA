@@ -1,6 +1,5 @@
 #pragma once
 #include "Structs.h"
-#include "Enums.h"
 
 class GuessingGame
 {
@@ -18,5 +17,8 @@ private:
 	int myBetMaximum;
 	int myBetMinimum;
 	int myMoneyEarned;
+	//constants
+	const int BET_MULTI_GUESS = 5;
+	const int DICE_MIN = 1;
+	const int DICE_MAX = 6;
 };
-

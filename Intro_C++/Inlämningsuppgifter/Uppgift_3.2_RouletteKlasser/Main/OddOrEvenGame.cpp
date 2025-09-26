@@ -2,13 +2,11 @@
 #include "OddOrEvenGame.h"
 #include "Helpers.h"
 #include "Print.h"
-#include "CONSTANTS.h"
 
 #include <iostream>
 
 using namespace Helpers;
 using namespace Print;
-using namespace CONSTANTS;
 
 OddOrEvenGame::OddOrEvenGame()
 	: myMoneyEarned(0)
@@ -25,11 +23,16 @@ void OddOrEvenGame::SetMoneyEarned(int aNewMoney)
 	myMoneyEarned = aNewMoney;
 }
 
+bool OddOrEvenGame::IsDiceOdd(const int aDice) const
+{
+	return (aDice % EVEN_DIVISOR == REMAINDER_ODD);
+}
+
 // ---------- Odd or Even ----------
 void OddOrEvenGame::PlayOddEvenRound(Account& aAccount)
 {
 	std::cout << "\nChoose: Odd (1) or Even (2): ";
-	int pick = ReadIntInRange(static_cast<int>(OddOrEven::OddOrEven_Odd), static_cast<int>(OddOrEven::OddOrEven_Even));
+	int pick = ReadIntInRange(static_cast<int>(OddOrEven::Odd), static_cast<int>(OddOrEven::Even));
 
 	int dice1 = RollDice();
 	int dice2 = RollDice();
@@ -41,7 +44,7 @@ void OddOrEvenGame::PlayOddEvenRound(Account& aAccount)
 	bool bothOdd = dice1Odd && dice2Odd;
 	bool bothEven = !dice1Odd && !dice2Odd;
 
-	bool pickedOdd = (pick == static_cast<int>(OddOrEven::OddOrEven_Odd));
+	bool pickedOdd = (pick == static_cast<int>(OddOrEven::Odd));
 	bool playerWins = (pickedOdd && bothOdd) || (!pickedOdd && bothEven);
 
 	if (playerWins)
@@ -56,9 +59,4 @@ void OddOrEvenGame::PlayOddEvenRound(Account& aAccount)
 	}
 
 	system("pause");
-}
-
-bool OddOrEvenGame::IsDiceOdd(const int aDice) const
-{
-	return (aDice % CONSTANTS::EVEN_DIVISOR == CONSTANTS::REMAINDER_ODD);
 }

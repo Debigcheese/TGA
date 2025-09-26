@@ -1,13 +1,9 @@
 ﻿#include "Helpers.h"
 #include "Structs.h"
-#include "CONSTANTS.h"
 #include <iostream>
-#include <random>
 
 namespace Helpers
 {
-	using namespace CONSTANTS;
-
 	int ReadIntInRange(int aMinValue, int aMaxValue)
 	{
 		int value;
@@ -24,23 +20,21 @@ namespace Helpers
 		}
 	}
 
+	RandomGeneratorState::RandomGeneratorState(unsigned int seed)
+		: rng(seed)
+	{
+	}
+
+
 	int GenerateRandomNumber(int aMin, int aMaxValue)
 	{
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
 		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
-		return dist(rng);
+		return dist(GlobalRng.rng);
 	}
 
 	int RollDice()
 	{
 		return GenerateRandomNumber(DICE_MIN, DICE_MAX);
-	}
-
-	int TableToIndex(const TableOption& aTable)
-	{
-		int index = static_cast<int>(aTable);
-		return (index - ENUM_TO_INDEX_OFFSET);
 	}
 
 	int ResultToIndex(const Result& aGameResult)
@@ -49,19 +43,9 @@ namespace Helpers
 		return index;
 	}
 
-	RouletteColor GetColorFromIndex(const char aRouletteLayout[], const int aIndex)
+	void PrintIndexWithColor(const Color aColor, const int aIndex)
 	{
-		if (aRouletteLayout[aIndex] == 'R')
-		{
-			return RouletteColor::RouletteColor_Red;
-		}
-
-		return RouletteColor::RouletteColor_Black;
-	}
-
-	void PrintIndexWithColor(const RouletteColor aColor, const int aIndex)
-	{
-		if (aColor == RouletteColor::RouletteColor_Red)
+		if (aColor == Color::Red)
 		{
 			std::cout << "\033[31m" << aIndex << "\033[0m";
 			return;
@@ -69,115 +53,26 @@ namespace Helpers
 		std::cout << "\033[37m" << aIndex << "\033[0m";
 	}
 
-	void PrintBracketsWithColor(const RouletteColor aColor, const Side aSide)
+	void PrintBracketsWithColor(const Color aColor, const Side aSide)
 	{
 		char bracket = '[';
-		if (aSide == Side::Side_Right)
+		if (aSide == Side::Right)
 		{
 			bracket = ']';
 		}
 
-		if (aColor == RouletteColor::RouletteColor_Red)
+		if (aColor == Color::Red)
 		{
 			std::cout << "\033[31m" << bracket << "\033[0m";
 			return;
 		}
-		else if (aColor == RouletteColor::RouletteColor_Black)
+		else if (aColor == Color::Black)
 		{
 			std::cout << "\033[37m" << bracket << "\033[0m";
 			return;
 		}
-
 	}
 
-	OddOrEven GetOddOrEvenFromIndex(const int aIndex)
-	{
-		if (aIndex != ZERO_INDEX && aIndex % EVEN_DIVISOR == REMAINDER_EVEN)
-		{
-			return OddOrEven::OddOrEven_Even;
-		}
-		else if (aIndex != ZERO_INDEX && aIndex % EVEN_DIVISOR == REMAINDER_ODD)
-		{
-			return OddOrEven::OddOrEven_Odd;
-		}
-		return OddOrEven::OddOrEven_None;
-	}
-
-	Columns GetColumnFromIndex(const int aIndex)
-	{
-		if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_LEFT_REMAINDER && aIndex != ZERO_INDEX)
-		{
-			return Columns::Columns_Left;
-		}
-		else if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_MIDDLE_REMAINDER && aIndex != ZERO_INDEX)
-		{
-			return Columns::Columns_Middle;
-		}
-		else if (aIndex % COLUMN_TOTAL_AMOUNT == COLUMN_RIGHT_REMAINDER && aIndex != ZERO_INDEX)
-		{
-			return Columns::Columns_Right;
-		}
-		return Columns::Columns_None;
-	}
-
-	std::string GetStringFromRoulette(const RouletteBetPerType aBetPerType, const RouletteBetType aBetType)
-	{
-		std::string betTypeString = "";
-
-		switch (aBetType)
-		{
-		case RouletteBetType::RouletteBetType_Straight:
-		{
-			betTypeString = myToString(aBetPerType.straight); // std::to_string(betPerType.straight);
-			break;
-		}
-		case RouletteBetType::RouletteBetType_RedBlack:
-		{
-			if (aBetPerType.color == RouletteColor::RouletteColor_Red)
-			{
-				betTypeString = "Red";
-			}
-			else
-			{
-				betTypeString = "Black";
-			}
-			break;
-		}
-		case RouletteBetType::RouletteBetType_OddEven:
-		{
-			if (aBetPerType.oddOrEven == OddOrEven::OddOrEven_Odd)
-			{
-				betTypeString = "Odd";
-			}
-			else
-			{
-				betTypeString = "Even";
-			}
-			break;
-		}
-		case RouletteBetType::RouletteBetType_Column:
-		{
-			if (aBetPerType.column == Columns::Columns_Left)
-			{
-				betTypeString = "Left";
-			}
-			else if (aBetPerType.column == Columns::Columns_Middle)
-			{
-				betTypeString = "Middle";
-			}
-			else
-			{
-				betTypeString = "Right";
-			}
-			break;
-		}
-		default:
-		{
-			break;
-		}
-		}
-		return betTypeString;
-	}
 
 	std::string myToString(int aValue)
 	{
@@ -185,9 +80,9 @@ namespace Helpers
 		{
 			return std::string("0");
 		}
-		char buffer[CONSTANTS::MY_TO_STRING_BUFFER_SIZE] = {};
-		int index = CONSTANTS::MY_TO_STRING_INDEX;
-		int decimalBase = CONSTANTS::MY_TO_STRING_DECIMAL_BASE;
+		char buffer[MY_TO_STRING_BUFFER_SIZE] = {};
+		int index = MY_TO_STRING_INDEX;
+		int decimalBase = MY_TO_STRING_DECIMAL_BASE;
 
 		buffer[index] = '\0';
 
@@ -200,7 +95,6 @@ namespace Helpers
 
 		return std::string(&buffer[index]);
 	}
-
 }
 
 //int randomCardIndex = dist(rng);

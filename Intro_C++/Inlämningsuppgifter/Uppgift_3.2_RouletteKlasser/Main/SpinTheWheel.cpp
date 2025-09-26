@@ -2,13 +2,11 @@
 #include "Casino.h"
 #include "Helpers.h"
 #include "Print.h"
-#include "CONSTANTS.h"
 
 #include <iostream>
 
 using namespace Helpers;
 using namespace Print;
-using namespace CONSTANTS;
 
 SpinTheWheel::SpinTheWheel()
 	: myMoneyEarned(0)

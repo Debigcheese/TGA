@@ -2,83 +2,80 @@
 
 enum class TableOption
 {
-	TableOption_Menu = 0,
-	TableOption_GuessingGame = 1,
-	TableOption_OddOrEven = 2,
-	TableOption_SpinTheWheel = 3,
-	TableOption_HighOrLow = 4,
-	TableOption_Roulette = 5,
-	TableOption_Stats = 6,
-	TableOption_Quit = 7,
-	TableOption_Stakes = 8,
+	Menu = 0,
+	GuessingGame = 1,
+	OddOrEven = 2,
+	SpinTheWheel = 3,
+	HighOrLow = 4,
+	Roulette = 5,
+	Stats = 6,
+	Quit = 7,
+	Stakes = 8,
 };
 
 enum class GameAction
 {
-	GameAction_Play = 1,
-	GameAction_ChangeBet = 2,
-	GameAction_ShowRules = 3,
-	GameAction_LeaveTable = 4,
+	Play = 1,
+	ChangeBet = 2,
+	ShowRules = 3,
+	LeaveTable = 4,
 };
 
 enum class Result
 {
-	Result_Empty = 0,
-	Result_Win = 1,
-	Result_Loss = -1,
+	Empty = 0,
+	Win = 1,
+	Loss = -1,
 };
 
 enum class CardGuess
 {
-	CardGuess_Higher = 1,
-	CardGuess_Lower = 2,
+	Higher = 1,
+	Lower = 2,
 };
 
 enum class RouletteBetType
 {
-	RouletteBetType_None = 0,
-	RouletteBetType_Straight = 1,
-	RouletteBetType_RedBlack = 2,
-	RouletteBetType_OddEven = 3,
-	RouletteBetType_Column = 4,
+	None = 0,
+	Straight = 1,
+	RedBlack = 2,
+	OddEven = 3,
+	Column = 4,
 };
 
 enum class OddOrEven
 {
-	OddOrEven_None = 0,
-	OddOrEven_Odd = 1,
-	OddOrEven_Even = 2,
+	None = 0,
+	Odd = 1,
+	Even = 2,
 };
 
-enum class RouletteColor
+enum class Color
 {
-	RouletteColor_None = 0,
-	RouletteColor_Red = 1,
-	RouletteColor_Black = 2,
+	None = 0,
+	Red = 1,
+	Black = 2,
+	Green = 3,
 };
 
 enum class Columns
 {
-	Columns_None = 0,
-	Columns_Left = 1,
-	Columns_Middle = 2,
-	Columns_Right = 3,
+	None = 0,
+	Left = 1,
+	Middle = 2,
+	Right = 3,
 };
 
 enum class Side
 {
-	Side_None = 0,
-	Side_Left = 1,
-	Side_Right = 2,
+	None = 0,
+	Left = 1,
+	Right = 2,
 };
 
 enum class Stakes
 {
-	Stakes_None = 3,
-	Stakes_Low = 1,
-	Stakes_High = 2,
-
+	None = 3,
+	Low = 1,
+	High = 2,
 };
-
-
-
