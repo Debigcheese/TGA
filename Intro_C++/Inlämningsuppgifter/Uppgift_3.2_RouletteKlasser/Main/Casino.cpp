@@ -62,7 +62,7 @@ void Casino::ReadPlayerName() const
 		if (std::cin.fail())
 		{
 			std::cin.clear(); // clear failbit
-			std::cin.ignore(10000, '\n'); // discard leftover characters
+			std::cin.ignore(CIN_IGNORE_MAX, '\n'); // discard leftover characters
 		}
 
 		int length = static_cast<int>(strlen(ourName));
@@ -92,14 +92,17 @@ const char* Casino::GetPlayerName()
 void Casino::EnterMainMenu()
 {
 	myCurrentTable = TableOption::Menu;
+	myStakes = Stakes::None;
 
 	while (myCurrentTable == TableOption::Menu && myCurrentTable != TableOption::Quit)
 	{
 		ShowPersonalDetails(myAccount, ourStatArr, ourName);
 		ShowOptions(myCurrentTable);
-		HandleBankruptcy();
-
-		TableOption chosenTable = static_cast<TableOption>(ReadIntInRange( //reads 1-5
+		if (HandleBankruptcy())
+		{
+			return;
+		}
+		auto chosenTable = static_cast<TableOption>(ReadIntInRange( //reads 1-5
 			static_cast<int>(TableOption::GuessingGame),
 			static_cast<int>(TableOption::Quit)));
 
@@ -150,7 +153,7 @@ void Casino::EnterMainMenu()
 				std::cout << "!\n";
 				myStakes = Stakes::None;
 				myCurrentTable = TableOption::Quit;
-				break;
+				return;
 			}
 			default:
 			{
@@ -165,6 +168,10 @@ void Casino::EnterMainMenu()
 				EnterTable();
 			}
 		}
+		if (myCurrentTable != TableOption::Quit)
+		{
+			myCurrentTable = TableOption::Menu;
+		}
 	}
 }
 
@@ -176,10 +183,13 @@ void Casino::EnterTable()
 	{
 		ShowPersonalDetails(myAccount, ourStatArr, ourName);
 		ShowOptions(myCurrentTable);
-		HandleBankruptcy();
+		if (HandleBankruptcy())
+		{
+			return;
+		}
 		ValidateBet();
 
-		GameAction action = static_cast<GameAction>(ReadIntInRange( //reads 1-4
+		auto action = static_cast<GameAction>(ReadIntInRange( //reads 1-4
 			static_cast<int>(GameAction::Play),
 			static_cast<int>(GameAction::LeaveTable)));
 
@@ -196,15 +206,12 @@ void Casino::EnterTable()
 							myGuessingGameLow.PlayGuessingRound(myAccount);
 							break;
 						}
-						else if (myStakes == Stakes::High)
+						if (myStakes == Stakes::High)
 						{
 							myGuessingGameHigh.PlayGuessingRound(myAccount);
 							break;
 						}
-						else
-						{
-							break;
-						}
+						break;
 					}
 					case TableOption::OddOrEven:
 					{
@@ -226,9 +233,13 @@ void Casino::EnterTable()
 						myRoulette.PlayRoulette(myAccount);
 						break;
 					}
-					default: break;
+					default:
+						break;
 				}
-				HandleBankruptcy();
+				if (HandleBankruptcy())
+				{
+					return;
+				}
 				break;
 			}
 			case GameAction::ChangeBet:
@@ -277,7 +288,10 @@ void Casino::ChooseTableStakes()
 	while (myCurrentTable == TableOption::Stakes && myCurrentTable != TableOption::Quit)
 	{
 		ShowPersonalDetails(myAccount, ourStatArr, ourName);
-		HandleBankruptcy();
+		if (HandleBankruptcy())
+		{
+			return;
+		}
 
 		std::cout
 			<< "\n=== Stakes: Guess The Sum ===\n"
@@ -366,6 +380,11 @@ void Casino::ChangeBetInRange(const int aBetMin, int aBetMax)
 	{
 		aBetMax = myAccount.money;
 	}
+	if (aBetMin == aBetMax)
+	{
+		myAccount.bet = aBetMin;
+	}
+
 	std::cout << "Enter bet (" << aBetMin << " - " << aBetMax << "): ";
 	int newBet = ReadIntInRange(aBetMin, aBetMax);
 
@@ -414,19 +433,24 @@ void Casino::ValidateBet()
 	}
 }
 
-void Casino::HandleBankruptcy()
+bool Casino::HandleBankruptcy()
 {
 	if (myAccount.money <= 0)
 	{
 		std::cout << "\nYou're out of money! Security drag you out of the casino.\n";
 		std::cout << "\nYou leave with: " << myAccount.money << "kr.";
 		myCurrentTable = TableOption::Quit;
+		myStakes = Stakes::None;
+		std::cin.clear();
+		std::cin.ignore(CIN_IGNORE_MAX, '\n');
+		return true;
 	}
 	if (myAccount.money < myAccount.bet && myCurrentTable != TableOption::Quit)
 	{
 		std::cout << "\nYour bet is higher than what is currently in your wallet!, please change bet amount.\n";
 		ChangeBet();
 	}
+	return false;
 }
 
 int Casino::Payout(Account& aAccount, const int aPayoutAmount)
@@ -458,7 +482,7 @@ int Casino::DeductBet(Account& aAccount)
 void Casino::UpdateStats(bool aIsWin)
 {
 	int arrIndex = 0;
-	const int statArrSize = sizeof(ourStatArr) / sizeof(int);
+	constexpr int statArrSize = sizeof(ourStatArr) / sizeof(int);
 
 	int statArrTemp[statArrSize] = {};
 
@@ -473,10 +497,7 @@ void Casino::UpdateStats(bool aIsWin)
 		{
 			break; //free spot
 		}
-		else
-		{
-			ourStatArr[i + 1] = statArrTemp[i]; // move all indexes to the left [W][L][L][L][W] -> [0][W][L][L][L]
-		}
+		ourStatArr[i + 1] = statArrTemp[i]; // move all indexes to the left [W][L][L][L][W] -> [0][W][L][L][L]
 	}
 
 	arrIndex = 0;

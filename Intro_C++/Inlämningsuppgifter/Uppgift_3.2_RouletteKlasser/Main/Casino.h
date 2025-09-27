@@ -29,7 +29,7 @@ public:
 	void ChangeBetInRange(const int aBetMin, int aBetMax);
 	void ValidateBet();
 	bool EvaluateTableEarnings(const int aMoneyEarnedAtTable) const;
-	void HandleBankruptcy();
+	bool HandleBankruptcy();
 
 	static int Payout(Account& aAccount, const int aPayoutAmount);
 	static int DeductBet(Account& aAccount);
@@ -61,6 +61,7 @@ private:
 	const int GUESSING_GAME_STAKE_HIGH_MIN = 1000;
 	const int GUESSING_GAME_STAKE_HIGH_MAX = 100000;
 
+	const int CIN_IGNORE_MAX = 10000;
 
 	static char ourName[NAME_ARRAY_SIZE];
 	static int ourStatArr[STAT_ARRAY_SIZE];

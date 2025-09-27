@@ -9,7 +9,7 @@ using namespace Helpers;
 using namespace Print;
 
 HigherOrLower::HigherOrLower()
-	: myMoneyEarned(0), myCards(), myPoints({CURRENT_POINTS, REQUIRED_POINTS})
+	: myMoneyEarned(0), myCards(), myPoints({ CURRENT_POINTS, REQUIRED_POINTS })
 {
 	for (int i = 0; i < DECK_SIZE; i++)
 	{
@@ -85,9 +85,9 @@ void HigherOrLower::PlayHigherOrLower(Account& aAccount)
 
 		if (IsHigherOrLowerGameOver())
 		{
-			std::cout << "Deck of myCards is empty!\n";
+			std::cout << "Deck of cards is empty!\n";
 			std::cout << "You got: " << myPoints.currentPoints << "/13 correct\n";
-			std::cout << "Required myPoints to win: " << myPoints.requiredPoints << "/13 correct\n";
+			std::cout << "Required points to win: " << myPoints.requiredPoints << "/13 correct\n";
 
 			if (myPoints.currentPoints >= myPoints.requiredPoints)
 			{
