@@ -23,87 +23,20 @@ Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTarg
 	myItemAttributes = {};
 }
 
-void Player::Update()
+void Player::Attack()
 {
-	while (true && !IsDead())
-	{
-		Room* currentRoom = myWorldMap.GetRoomWithId(myRoomId);
-		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
+	Room* currentRoom = myWorldMap.GetRoomWithId(GetRoomId());
+	std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
-		if (IsInvalidAttackIndex() || enemies.size() > 1)
-		{
-			PrintPlayerUI();
-			currentRoom->PrintEnemies();
-			ChooseTarget();
-			system("cls");
-		}
-		else
-		{
-			myTargetIndex = PLAYER_ATTACK_INDEX_ZERO;
-		}
+	PrintPlayerUI();
+	currentRoom->PrintEnemiesWithTarget(myTargetIndex);
 
-		PrintPlayerUI();
-		currentRoom->PrintEnemiesWithTarget(myTargetIndex);
-		ChooseAttack();
-		system("cls");
-
-		PrintPlayerUI();
-		currentRoom->PrintEnemiesWithTarget(myTargetIndex);
-
-		float damage = GetDamageFromAttackType(myAttackIndex);
-		float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
-		enemies[myTargetIndex].TakeDamage(damage);
-		std::cout << "\nYou dealt " << static_cast<int>(damage) << " dmg to " << enemies[myTargetIndex].GetName();
-		std::cout << " (" << static_cast<int>(enemyOldHp) << "hp -> " << static_cast<int>(enemies[myTargetIndex].
-			GetCurrentHealth()) << "hp)" << "\n";
-		system("pause");
-
-		if (enemies[myTargetIndex].IsDead())
-		{
-			std::cout << "\n" << enemies[myTargetIndex].GetName() << " has been slained!\n";
-			system("pause");
-		}
-
-		system("cls");
-		PrintPlayerUI();
-
-		if (enemies[myTargetIndex].IsDead())
-		{
-			currentRoom->RemoveEnemyFromRoom(enemies[myTargetIndex].GetId());
-			enemies = currentRoom->GetEnemies();
-			myTargetIndex = PLAYER_ATTACK_INDEX_INVALID;
-			currentRoom->PrintEnemies();
-		}
-		else
-		{
-			currentRoom->PrintEnemiesWithTarget(myTargetIndex);
-		}
-
-		if (enemies.empty())
-		{
-			std::cout << "\nYou have slain all enemies in this room!\n";
-			myTargetIndex = PLAYER_ATTACK_INDEX_INVALID;
-			system("pause");
-			break;
-		}
-		else
-		{
-			std::cout << "\n";
-			for (Enemy& enemy : enemies)
-			{
-				enemy.Attack(*this);
-			}
-			system("pause");
-		}
-	}
-}
-
-void Player::EnterCombat()
-{
-	if (myWorldMap.GetRoomWithId(myRoomId)->DoesEnemiesExist())
-	{
-		Update();
-	}
+	float damage = GetDamageFromAttackType(myAttackIndex);
+	float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
+	enemies[myTargetIndex].TakeDamage(damage);
+	std::cout << "\nYou dealt " << static_cast<int>(damage) << " dmg to " << enemies[myTargetIndex].GetName();
+	std::cout << " (" << static_cast<int>(enemyOldHp) << "hp -> " << static_cast<int>(enemies[myTargetIndex].
+		GetCurrentHealth()) << "hp)" << "\n";
 }
 
 void Player::ChooseTarget()
@@ -195,11 +128,6 @@ void Player::SetIsDead(bool aIsDead)
 void Player::SetPosition(const Position& aNewPosition)
 {
 	myPos = aNewPosition;
-}
-
-void Player::SetItemAttributes(const Attributes& aItemAttributes)
-{
-	myItemAttributes = aItemAttributes;
 }
 
 float Player::GetDamage() const
@@ -403,5 +331,43 @@ void Player::EnterAttributesMenu() const
 		{
 			break;
 		}
+	}
+}
+
+bool Player::CanPickupItem(const Item& aItem) const
+{
+	if (GetAttributes().carryCapacity + aItem.GetWeight() >= GetInventoryWeight())
+	{
+		return true;
+	}
+	return false;
+}
+
+float Player::GetInventoryWeight() const
+{
+	float totalWeight = 0;
+	if (myInventory.empty())
+	{
+		return totalWeight;
+	}
+	for (auto item : myInventory)
+	{
+		totalWeight += item.GetWeight();
+	}
+	return totalWeight;
+}
+
+void Player::AddItemToInventory(const Item& aItem)
+{
+	myInventory.push_back(aItem);
+	UpdateItemAttributes();
+}
+
+void Player::UpdateItemAttributes()
+{
+	myItemAttributes.Clear();
+	for (auto item : myInventory)
+	{
+		myItemAttributes += item.GetAttributes().attributes;
 	}
 }

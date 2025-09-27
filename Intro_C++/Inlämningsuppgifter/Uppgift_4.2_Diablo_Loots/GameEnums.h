@@ -15,9 +15,10 @@ enum class Action
 	Combat = 1,
 	Navigation = 2,
 	LookAround = 3,
-	Attributes = 4,
-	Cheats = 5,
-	Quit = 6,
+	Inventory = 4,
+	Attributes = 5,
+	Cheats = 6,
+	Quit = 7,
 };
 
 enum class AttackType

@@ -52,6 +52,24 @@ struct Attributes
 	float carryCapacity = 0;
 	float damage = 0;
 	float defense = 0;
+
+	Attributes& operator+=(const Attributes& other)
+	{
+		strength += other.strength;
+		agility += other.agility;
+		endurance += other.endurance;
+		maxHealth += other.maxHealth;
+		currentHealth += other.currentHealth;
+		carryCapacity += other.carryCapacity;
+		damage += other.damage;
+		defense += other.defense;
+		return *this;
+	}
+
+	void Clear()
+	{
+		*this = {};
+	}
 };
 
 struct ItemAttributes

@@ -14,12 +14,16 @@ class Player
 {
 public:
 	Player(WorldMap& aWorldMap);
-	void Update();
-	void EnterCombat();
+
+	void Attack();
 	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
 	void EnterAttributesMenu() const;
+	bool CanPickupItem(const Item& aItem) const;
+	float GetInventoryWeight() const;
+	void AddItemToInventory(const Item& aItem);
+	void UpdateItemAttributes();
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
 	int GetRoomId() const;
@@ -27,7 +31,6 @@ public:
 	void SetName(const std::string& aNewName);
 	void SetIsDead(bool aIsDead);
 	void SetPosition(const Position& aNewPosition);
-	void SetItemAttributes(const Attributes& aItemAttributes);
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
@@ -36,6 +39,10 @@ public:
 	const Attributes& GetBaseAttributes() const;
 	Attributes GetAttributes() const;
 
+	void SetAttackIndex(int aAttackIndex) { myAttackIndex = aAttackIndex; }
+	void SetTargetIndex(int aTargetIndex) { myTargetIndex = aTargetIndex; }
+	int GetAttackIndex() const { return myAttackIndex; }
+	int GetTargetIndex() const { return myTargetIndex; }
 	float GetDefenseMultiplier() const;
 	bool IsDead() const;
 	bool IsInvalidAttackIndex() const;
@@ -62,5 +69,5 @@ private:
 	int myAttackIndex;
 	bool myIsDead;
 	Position myPos;
-	std::vector<Item*> myInventory;
+	std::vector<Item> myInventory;
 };

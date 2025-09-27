@@ -10,6 +10,10 @@ class Item
 public:
 	Item(int aId);
 
+	const char* GetName() const;
+	float GetWeight() const;
+	ItemAttributes GetAttributes() const;
+
 	void SetId(int aNewId);
 	void PrintItemOnPickup() const;
 	void PrintItemAttributes() const;

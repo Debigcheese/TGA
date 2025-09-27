@@ -18,6 +18,21 @@ Item::Item(int aId) :
 {
 }
 
+const char* Item::GetName() const
+{
+	return myAttributes.name;
+}
+
+float Item::GetWeight() const
+{
+	return myAttributes.weight;
+}
+
+ItemAttributes Item::GetAttributes() const
+{
+	return myAttributes;
+}
+
 void Item::SetId(int aNewId)
 {
 	myAttributes.id = aNewId;

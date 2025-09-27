@@ -14,10 +14,10 @@ void Diablo::RunDiablo()
 {
 	myWorldMap.GenerateWorld();
 
-	Welcome();
-	EnterUsername(myPlayer);
-	system("cls");
-	Intro(myPlayer);
+	//Welcome();
+	//EnterUsername(myPlayer);
+	//system("cls");
+	//Intro(myPlayer);
 
 	myPlayerController.UpdateAction();
 }

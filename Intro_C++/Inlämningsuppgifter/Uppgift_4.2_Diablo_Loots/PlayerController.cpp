@@ -1,5 +1,4 @@
 #include "PlayerController.h"
-#include "Diablo.h"
 #include "WorldMap.h"
 #include "Room.h"
 #include "Door.h"
@@ -16,7 +15,6 @@ using namespace Utils;
 PlayerController::PlayerController(WorldMap& aWorldMap, Player& aPlayer)
 	: myWorldMap(aWorldMap), myPlayer(aPlayer), currentRoom(nullptr)
 {
-	currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
 }
 
 void PlayerController::UpdateAction()
@@ -24,6 +22,7 @@ void PlayerController::UpdateAction()
 	while (true && !myPlayer.IsDead())
 	{
 		system("cls");
+		currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
 		myPlayer.SetRoomId(currentRoom->GetRoomId());
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemies();
@@ -39,22 +38,15 @@ void PlayerController::UpdateAction()
 			enemiesNearby = true;
 		}
 
-		int menuChoice = ReadIntInRange(static_cast<int>(Action::Combat),
-		                                static_cast<int>(Action::Quit));
-		Action actionChoice = static_cast<Action>(menuChoice);
+		Action actionChoice = static_cast<Action>(ReadIntInRange(
+			static_cast<int>(Action::Combat),
+			static_cast<int>(Action::Quit)));
 
 		switch (actionChoice)
 		{
 			case Action::Combat:
 			{
-				if (enemiesNearby)
-				{
-					myPlayer.EnterCombat();
-					break;
-				}
-				std::cout << "No monsters in this room...\n";
-				std::cout << "Choose another action.\n";
-				system("pause");
+				UpdateCombat();
 				break;
 			}
 			case Action::Navigation:
@@ -65,6 +57,11 @@ void PlayerController::UpdateAction()
 			case Action::LookAround:
 			{
 				UpdateLookAround();
+				break;
+			}
+			case Action::Inventory:
+			{
+				UpdateInventory();
 				break;
 			}
 			case Action::Attributes:
@@ -84,6 +81,78 @@ void PlayerController::UpdateAction()
 				return;
 			}
 		}
+	}
+}
+
+void PlayerController::UpdateCombat()
+{
+	if (!myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->DoesEnemiesExist())
+	{
+		std::cout << "No monsters in this room...\n";
+		std::cout << "Choose another action.\n";
+		system("pause");
+		return;
+	}
+
+	while (true && !myPlayer.IsDead())
+	{
+		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
+
+		if (myPlayer.IsInvalidAttackIndex() || enemies.size() > 1)
+		{
+			myPlayer.PrintPlayerUI();
+			currentRoom->PrintEnemies();
+			myPlayer.ChooseTarget();
+			system("cls");
+		}
+		else
+		{
+			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_ZERO);
+		}
+
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
+		myPlayer.ChooseAttack();
+		system("cls");
+
+		myPlayer.Attack();
+
+		system("pause");
+
+		if (enemies[myPlayer.GetTargetIndex()].IsDead())
+		{
+			std::cout << "\n" << enemies[myPlayer.GetTargetIndex()].GetName() << " has been slained!\n";
+			system("pause");
+		}
+
+		system("cls");
+		myPlayer.PrintPlayerUI();
+
+		if (enemies[myPlayer.GetTargetIndex()].IsDead())
+		{
+			currentRoom->RemoveEnemyFromRoom(enemies[myPlayer.GetTargetIndex()].GetId());
+			enemies = currentRoom->GetEnemies();
+			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_INVALID);
+			currentRoom->PrintEnemies();
+		}
+		else
+		{
+			currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
+		}
+
+		if (enemies.empty())
+		{
+			std::cout << "\nYou have slain all enemies in this room!\n";
+			system("pause");
+			break;
+		}
+
+		std::cout << "\n";
+		for (Enemy& enemy : enemies)
+		{
+			enemy.Attack(myPlayer);
+		}
+		system("pause");
 	}
 }
 
@@ -182,9 +251,19 @@ void PlayerController::UpdateNavigation()
 	}
 }
 
-
 void PlayerController::UpdateLookAround()
 {
+	if (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
+	{
+		std::cout << "You try walking to the door but get attacked!\n\n";
+		for (Enemy& enemy : currentRoom->GetEnemies())
+		{
+			enemy.Attack(myPlayer);
+		}
+		system("pause");
+		//break;
+	}
+
 	while (true && !myPlayer.IsDead())
 	{
 		system("cls");
@@ -203,12 +282,8 @@ void PlayerController::UpdateLookAround()
 		{
 			case LookAround::Scavenge:
 			{
-				std::vector<Item>& myitems = myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->GetLootInRoom();
-				for (auto& item : myitems)
-				{
-					item.PrintItemOnPickup();
-				}
-				system("pause");
+				UpdatePickupItem(myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->GetLootInRoom());
+
 				break;
 			}
 			case LookAround::OpenChest:
@@ -225,34 +300,50 @@ void PlayerController::UpdateLookAround()
 	}
 }
 
+void PlayerController::UpdatePickupItem(std::vector<Item>& aItems) const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		PrintPickupMenu(aItems);
+		if (aItems.empty())
+		{
+			std::cout << "(No loot here...)\n";
+			system("pause");
+			return;
+		}
 
-//std::cout
-//<< "\n<--- Action --->\n";
-//if (aEnemiesExist)
-//{
-//	std::cout
-//		<< "1) Combat\n";
-//}
-//else if (!aEnemiesExist)
-//{
-//	std::cout
-//		<< "1) Combat (No Enemies Nearby)\n";
-//}
-//
-//std::cout
-//<< "2) Navigate\n"
-//<< "3) Look Around\n"
-//<< "4) Attributes\n";
-//
-//if (aShowCheats)
-//{
-//	std::cout
-//		<< "5) Cheats\n";
-//}
-//
-//std::cout
-//<< "6) Quit Game\n"
-//<< "Choice: ";
+		int menuChoice = ReadIntInRange(1, static_cast<int>(aItems.size()) + 1);
+		Item itemToPickup = aItems[menuChoice - 1];
+
+		for (int i = 0; i < static_cast<int>(aItems.size()); ++i)
+		{
+			if (menuChoice == static_cast<int>(aItems.size()) + 1)
+			{
+				return;
+			}
+			if (menuChoice == i)
+			{
+				if (myPlayer.CanPickupItem(aItems[menuChoice - 1]))
+				{
+					myPlayer.AddItemToInventory(itemToPickup);
+					std::cout << "\n[" << itemToPickup.GetName() << "}"
+						<< " has been added to your inventory!\n";
+					system("pause");
+					return;
+				}
+				else
+				{
+					std::cout << "\n(Item too heavy to pickup)\n";
+					system("pause");
+				}
+			}
+		}
+	}
+}
+
+void PlayerController::UpdateInventory()
+{
+}
 
 void PlayerController::Win() const
 {
@@ -293,16 +384,19 @@ void PlayerController::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) con
 	std::cout
 		<< "2) Navigate\n"
 		<< "3) Look Around\n"
-		<< "4) Attributes\n";
+		<< "4) Inventory\n";
+	std::cout
+		<< "\n<--- Other --->\n"
+		<< "5) Attributes\n";
 
 	if (aShowCheats)
 	{
 		std::cout
-			<< "5) Cheats\n";
+			<< "6) Cheats\n";
 	}
 
 	std::cout
-		<< "6) Quit Game\n"
+		<< "7) Quit Game\n"
 		<< "Choice: ";
 }
 
@@ -313,5 +407,24 @@ void PlayerController::PrintLookAround() const
 		<< "1) Scavenge\n"
 		<< "2) Open Chest\n"
 		<< "3) Return\n"
+		<< "Choice: ";
+}
+
+void PlayerController::PrintPickupMenu(const std::vector<Item>& aLoot) const
+{
+	std::cout
+		<< "\n<--- Pickup Loot --->\n";
+	if (aLoot.empty())
+	{
+		return;
+	}
+
+	for (int i = 0; i < static_cast<int>(aLoot.size()); ++i)
+	{
+		std::cout << (i + 1) << ") "
+			<< "[" << aLoot[i].GetName() << "]" << "\n";
+	}
+
+	std::cout << static_cast<int>(aLoot.size()) + 2 << ") Return\n"
 		<< "Choice: ";
 }
