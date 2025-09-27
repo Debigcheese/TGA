@@ -3,10 +3,10 @@
 namespace GameConstants
 {
 	//Diablo.cpp
-	const int PLAYER_NAME_ARRAY_SIZE = 18;
-	const int PLAYER_NAME_MIN_LENGTH = 2;
-	const int PLAYER_NAME_MAX_LENGTH = 16;
-	const int CIN_IGNORE = 10000;
+	constexpr int PLAYER_NAME_ARRAY_SIZE = 18;
+	constexpr int PLAYER_NAME_MIN_LENGTH = 2;
+	constexpr int PLAYER_NAME_MAX_LENGTH = 16;
+	constexpr int CIN_IGNORE = 10000;
 
 	const int DOOR_COUNT_MAXIMUM = 4;
 
@@ -18,7 +18,7 @@ namespace GameConstants
 	const float AGILITY_BASE = 20.0f; // smidighet (10-99)
 	const float ENDURANCE_BASE = 40.0f; // fysik (10-99)
 
-	//Navigation
+	//PlayerController
 	const int NAV_DIRECTION_CHOICE_OFFSET = 1;
 
 	//Player

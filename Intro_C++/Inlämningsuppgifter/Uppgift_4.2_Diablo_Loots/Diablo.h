@@ -1,8 +1,7 @@
 #pragma once
 #include "WorldMap.h"
-#include "Navigation.h"
+#include "PlayerController.h"
 #include "Player.h"
-#include "GameEnums.h"
 
 class Diablo
 {
@@ -15,6 +14,7 @@ public:
 	void Intro(const Player& aPlayer);
 
 private:
-	WorldMap worldMap;
+	WorldMap myWorldMap;
+	PlayerController myPlayerController;
+	Player myPlayer;
 };
-

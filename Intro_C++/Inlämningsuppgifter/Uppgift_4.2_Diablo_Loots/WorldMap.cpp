@@ -4,7 +4,7 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "GameStructs.h"
-#include "Item.h"
+#include "ItemDB.h"
 
 using namespace Utils;
 using namespace EnemyDB;
@@ -136,24 +136,42 @@ void WorldMap::GenerateRooms()
 	AddRoom(Room(ROOM_WIN_ID, "Eternal Abyss", {-1, 2}, enemiesR5));
 }
 
+std::vector<Item> WorldMap::GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const
+{
+	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(aItemRarities);
+
+	const int RANDOM_SIZE = Utils::GenerateRandomNumber(0, 2);
+
+	std::vector<Item> itemsInRoom = {};
+
+	for (int i = 0; i < RANDOM_SIZE; ++i)
+	{
+		int randomIndex = Utils::GenerateRandomNumber(0, static_cast<int>(itemIdPool.size() - 1));
+		int chosenId = itemIdPool[randomIndex];
+		itemsInRoom.emplace_back(chosenId);
+	}
+	return itemsInRoom;
+}
+
 void WorldMap::GenerateItems()
 {
-	AddItemsToRoomId(ROOM_0_ID, ItemDB::GetItemsWithRarity({
+	AddItemsToRoomId(ROOM_0_ID, GenerateItemsWithRarity({
 		                 Rarity::Bronze,
 	                 }));
-	AddItemsToRoomId(ROOM_1_ID, ItemDB::GetItemsWithRarity({
+	AddItemsToRoomId(ROOM_1_ID, GenerateItemsWithRarity({
 		                 Rarity::Bronze, Rarity::Silver,
 	                 }));
-	AddItemsToRoomId(ROOM_2_ID, ItemDB::GetItemsWithRarity({
+	AddItemsToRoomId(ROOM_2_ID, GenerateItemsWithRarity({
 		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold,
 	                 }));
-	AddItemsToRoomId(ROOM_3_ID, ItemDB::GetItemsWithRarity({
+	AddItemsToRoomId(ROOM_3_ID, GenerateItemsWithRarity({
 		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
 	                 }));
-	AddItemsToRoomId(ROOM_4_ID, ItemDB::GetItemsWithRarity({
+	AddItemsToRoomId(ROOM_4_ID, GenerateItemsWithRarity({
 		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
 	                 }));
 }
+
 
 void WorldMap::AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom)
 {

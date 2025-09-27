@@ -43,15 +43,14 @@ void Enemy::TakeDamage(const float aDamage)
 	{
 		myCurrentHealth = HEALTH_ZERO;
 		myIsDead = true;
-		IsDead();
 	}
 }
 
 void Enemy::Attack(Player& player) const
 {
-	const float dmgFloat = player.GetAttributes().damage / player.GetDefenseMultiplier();
+	const float dmgFloat = GetDamage() / player.GetDefenseMultiplier();
 	const int dmg = static_cast<int>(dmgFloat);
-	const int blockedDmg = static_cast<int>(player.GetAttributes().damage) - dmg;
+	const int blockedDmg = static_cast<int>(GetDamage()) - dmg;
 
 	player.TakeDamage(dmgFloat);
 

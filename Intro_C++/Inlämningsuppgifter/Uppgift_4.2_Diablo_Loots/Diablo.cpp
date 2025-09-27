@@ -1,45 +1,32 @@
 #include "Diablo.h"
-#include "WorldMap.h"
+#include "PlayerController.h"
 #include "Player.h"
-#include "Room.h"
-#include "Door.h"
-#include "Enemy.h"
-#include "Utils.h"
-#include "Navigation.h"
 #include "GameConstants.h"
-
 #include <iostream>
 
-using namespace Utils;
 using namespace GameConstants;
 
-Diablo::Diablo()
+Diablo::Diablo() : myWorldMap(), myPlayer(myWorldMap), myPlayerController(myWorldMap, myPlayer)
 {
 }
 
 void Diablo::RunDiablo()
 {
-	WorldMap world;
-	worldMap = world;
-	worldMap.GenerateWorld();
+	myWorldMap.GenerateWorld();
 
-	Player player(worldMap);
+	Welcome();
+	EnterUsername(myPlayer);
+	system("cls");
+	Intro(myPlayer);
 
-	Navigation navig = Navigation(worldMap, player);
-
-	//Welcome();
-	//EnterUsername(player);
-	//system("cls");
-	//Intro(player);
-
-	navig.UpdateAction();
+	myPlayerController.UpdateAction();
 }
 
 void Diablo::Intro(const Player& aPlayer)
 {
 	std::cout << "You wake up in a dungeon...\n";
 	system("pause");
-	std::cout << "\nSlay the enemies in this room (" << worldMap.GetRoomWithId(0)->GetRoomName() <<
+	std::cout << "\nSlay the enemies in this room (" << myWorldMap.GetRoomWithId(0)->GetRoomName() <<
 		") in order to proceed.\n";
 	system("pause");
 	std::cout << "\nAnd try your best to get the hell out of here " << aPlayer.GetName() << "!\n";

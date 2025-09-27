@@ -2,10 +2,20 @@
 #include "GameEnums.h"
 #include "GameConstants.h"
 #include <iostream>
-#include <random>
 
 namespace Utils
 {
+	RandomGeneratorState::RandomGeneratorState(unsigned int seed)
+		: rng(seed)
+	{
+	}
+
+	int GenerateRandomNumber(int aMin, int aMaxValue)
+	{
+		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
+		return dist(myRng.rng);
+	}
+
 	int ReadIntInRange(int aMinValue, int aMaxValue)
 	{
 		int value;
@@ -22,14 +32,6 @@ namespace Utils
 		}
 	}
 
-	int GenerateRandomNumber(int aMin, int aMaxValue)
-	{
-		std::random_device rd;
-		std::mt19937 rng{ rd() };
-		std::uniform_int_distribution<int> dist(aMin, aMaxValue);
-		return dist(rng);
-	}
-
 	Direction GetDoorPOSFromIndex(const int& index)
 	{
 		Direction doorPos = static_cast<Direction>(index);
@@ -40,28 +42,28 @@ namespace Utils
 	{
 		switch (aDirection)
 		{
-		case Direction::West:
-		{
-			return { -1, 0 };
+			case Direction::West:
+			{
+				return {-1, 0};
+			}
+			case Direction::North:
+			{
+				return {0, 1};
+			}
+			case Direction::East:
+			{
+				return {1, 0};
+			}
+			case Direction::South:
+			{
+				return {0, -1};
+			}
+			case Direction::None:
+			{
+				return {0, 0};
+			}
 		}
-		case Direction::North:
-		{
-			return { 0, 1 };
-		}
-		case Direction::East:
-		{
-			return { 1, 0 };
-		}
-		case Direction::South:
-		{
-			return { 0, -1 };
-		}
-		case Direction::None:
-		{
-			return { 0, 0 };
-		}
-		}
-		return { 0, 0 };
+		return {0, 0};
 	}
 
 	int GetIndexFromDoorPOS(const Direction& aDoorPosition)
@@ -82,22 +84,22 @@ namespace Utils
 	{
 		switch (aLockType)
 		{
-		case LockType::Unlocked:
-		{
-			return "Unlocked";
-		}
-		case LockType::Agility:
-		{
-			return "Agility";
-		}
-		case LockType::Strength:
-		{
-			return "Strength";
-		}
-		case LockType::None:
-		{
-			return "none";
-		}
+			case LockType::Unlocked:
+			{
+				return "Unlocked";
+			}
+			case LockType::Agility:
+			{
+				return "Agility";
+			}
+			case LockType::Strength:
+			{
+				return "Strength";
+			}
+			case LockType::None:
+			{
+				return "none";
+			}
 		}
 		return nullptr;
 	}
@@ -106,28 +108,29 @@ namespace Utils
 	{
 		switch (d)
 		{
-		case Direction::West:
-		{
-			return Direction::East;
-		}
-		case Direction::East:
-		{
-			return Direction::West;
-		}
-		case Direction::North:
-		{
-			return Direction::South;
-		}
-		case Direction::South:
-		{
-			return Direction::North;
-		}
-		default:
-		{
-			return Direction::None;
-		}
+			case Direction::West:
+			{
+				return Direction::East;
+			}
+			case Direction::East:
+			{
+				return Direction::West;
+			}
+			case Direction::North:
+			{
+				return Direction::South;
+			}
+			case Direction::South:
+			{
+				return Direction::North;
+			}
+			default:
+			{
+				return Direction::None;
+			}
 		}
 	}
+
 	const char* GetColorCode(TextColor color, bool aStart)
 	{
 		if (!aStart)
@@ -135,30 +138,30 @@ namespace Utils
 
 		switch (color)
 		{
-		case TextColor::Red:
-		{
-			return "\x1b[31m"; // Red
-		}
-		case TextColor::Brown:
-		{
-			return "\x1b[33m"; // Brown-ish (ANSI only has yellow, looks like dark brown on some terms)
-		}
-		case TextColor::Silver:
-		{
-			return "\x1b[37m"; // White/grey
-		}
-		case TextColor::Gold:
-		{
-			return "\x1b[93m"; // Bright yellow (gold-like)
-		}
-		case TextColor::Magenta:
-		{
-			return "\x1b[35m"; // Magenta
-		}
-		default:
-		{
-			return "\x1b[0m"; // fallback reset
-		}
+			case TextColor::Red:
+			{
+				return "\x1b[31m"; // Red
+			}
+			case TextColor::Brown:
+			{
+				return "\x1b[33m"; // Brown-ish (ANSI only has yellow, looks like dark brown on some terms)
+			}
+			case TextColor::Silver:
+			{
+				return "\x1b[37m"; // White/grey
+			}
+			case TextColor::Gold:
+			{
+				return "\x1b[93m"; // Bright yellow (gold-like)
+			}
+			case TextColor::Magenta:
+			{
+				return "\x1b[35m"; // Magenta
+			}
+			default:
+			{
+				return "\x1b[0m"; // fallback reset
+			}
 		}
 	}
 
@@ -171,24 +174,28 @@ namespace Utils
 	{
 		switch (rarity)
 		{
-		case Rarity::Bronze:
-		{
-			return "Bronze";
-		}
-		case Rarity::Silver:
-		{
-			return "Silver";
-		}
-		case Rarity::Gold:
-		{
-			return "Gold";
-		}
-		case Rarity::Legendary:
-		{
-			return "Legendary";
-		}
+			case Rarity::Bronze:
+			{
+				return "Bronze";
+			}
+			case Rarity::Silver:
+			{
+				return "Silver";
+			}
+			case Rarity::Gold:
+			{
+				return "Gold";
+			}
+			case Rarity::Legendary:
+			{
+				return "Legendary";
+			}
 		}
 		return nullptr;
 	}
 
+	const char* GetPrefixSign(float aValue)
+	{
+		return aValue > 0 ? "+" : "-";
+	}
 }

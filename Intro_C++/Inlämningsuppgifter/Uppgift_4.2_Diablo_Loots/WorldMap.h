@@ -26,6 +26,7 @@ public:
 	//items
 	void GenerateItems();
 	void AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom);
+	std::vector<Item> GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const;
 
 private:
 	int myNextEnemyId;

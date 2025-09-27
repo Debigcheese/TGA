@@ -24,7 +24,7 @@ void Cheats::UpdateCheats()
 		                                                            static_cast<int>(CheatType::None)));
 		switch (cheatType)
 		{
-		case CheatType::Invincible:
+			case CheatType::Invincible:
 			{
 				if (!myCheats.invincible)
 				{
@@ -36,7 +36,7 @@ void Cheats::UpdateCheats()
 				}
 				break;
 			}
-		case CheatType::OneShot:
+			case CheatType::OneShot:
 			{
 				if (!myCheats.oneShot)
 				{
@@ -48,7 +48,7 @@ void Cheats::UpdateCheats()
 				}
 				break;
 			}
-		case CheatType::Ghost:
+			case CheatType::Ghost:
 			{
 				if (!myCheats.ghost)
 				{
@@ -60,7 +60,7 @@ void Cheats::UpdateCheats()
 				}
 				break;
 			}
-		case CheatType::None:
+			case CheatType::None:
 			{
 				return;
 			}

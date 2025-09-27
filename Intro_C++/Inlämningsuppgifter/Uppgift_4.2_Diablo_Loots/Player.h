@@ -50,6 +50,9 @@ public:
 	void PrintDerivedAttributes() const;
 
 private:
+	//CONSTANTS
+	static constexpr float DEFAULT_BASE_ATTRIBUTE = 10.0f;
+
 	WorldMap& myWorldMap;
 	std::string myName;
 	Attributes myAttributes{};

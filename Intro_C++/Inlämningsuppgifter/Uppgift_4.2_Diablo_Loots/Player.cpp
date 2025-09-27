@@ -15,6 +15,10 @@ using namespace GameConstants;
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
                                       myName("(-)"), myPos{0, 0}, myInventory()
 {
+	myAttributes.strength = DEFAULT_BASE_ATTRIBUTE;
+	myAttributes.agility = DEFAULT_BASE_ATTRIBUTE;
+	myAttributes.endurance = DEFAULT_BASE_ATTRIBUTE;
+
 	myAttributes.currentHealth = GetMaxHealth();
 	myItemAttributes = {};
 }
@@ -148,19 +152,19 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	AttackType atkType = static_cast<AttackType>(aAttackIndex + PLAYER_ATTACK_INDEX_OFFSET);
 	switch (atkType)
 	{
-	case AttackType::QuickAttack:
+		case AttackType::QuickAttack:
 		{
 			newDamage = GetAttributes().damage;
 			break;
 		}
-	case AttackType::HeavyAttack:
+		case AttackType::HeavyAttack:
 		{
 			const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
 			const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
 			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
 			break;
 		}
-	case AttackType::None:
+		case AttackType::None:
 		{
 			break;
 		}
@@ -377,19 +381,19 @@ void Player::EnterAttributesMenu() const
 
 		switch (AttriMenuChoice)
 		{
-		case AttriMenu::Attributes:
+			case AttriMenu::Attributes:
 			{
 				PrintAttributes();
 				system("pause");
 				break;
 			}
-		case AttriMenu::DerivedAttributes:
+			case AttriMenu::DerivedAttributes:
 			{
 				PrintDerivedAttributes();
 				system("pause");
 				break;
 			}
-		case AttriMenu::Return:
+			case AttriMenu::Return:
 			{
 				shouldExit = true;
 				break;
