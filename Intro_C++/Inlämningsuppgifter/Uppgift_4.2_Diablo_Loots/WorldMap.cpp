@@ -170,7 +170,7 @@ void WorldMap::CreateChests(int aRoomId, int aAmount, Rarity aRarity)
 	chests.reserve(COUNT);
 	for (int i = 0; i < COUNT; ++i)
 	{
-		chests.emplace_back(aRoomId, GetItemsUpToRarity(0, 3, aRarity));
+		chests.emplace_back(aRoomId, aRarity, GetItemsUpToRarity(0, 3, aRarity));
 	}
 	AddChestsToRoomId(aRoomId, chests);
 }

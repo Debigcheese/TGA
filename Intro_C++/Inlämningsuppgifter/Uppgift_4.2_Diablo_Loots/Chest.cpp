@@ -1,7 +1,9 @@
 #include "Chest.h"
 
-Chest::Chest(int aRoomId, const std::vector<Item>& aItems) : myRoomId(aRoomId), myName("Wooden Chest"), myIsOpen(false),
-                                                             myItems(aItems)
+Chest::Chest(int aRoomId, Rarity aRarity, const std::vector<Item>& aItems) : myRoomId(aRoomId),
+                                                                             myName(GetNameFromRarity()),
+                                                                             myIsOpen(false),
+                                                                             myItems(aItems)
 {
 }
 
@@ -15,7 +17,35 @@ std::vector<Item> Chest::Open()
 	return std::exchange(myItems, {});
 }
 
-const char* Chest::GetName() const
+std::string Chest::GetNameFromRarity() const
+{
+	switch (myRarity)
+	{
+		case Rarity::None:
+		{
+			return "";
+		}
+		case Rarity::Bronze:
+		{
+			return "Wooden chest";
+		}
+		case Rarity::Silver:
+		{
+			return "Silver chest";
+		}
+		case Rarity::Gold:
+		{
+			return "Gold chest";
+		}
+		case Rarity::Legendary:
+		{
+			return "Legendary chest";
+		}
+	}
+	return "Wooden chest";
+}
+
+std::string Chest::GetName() const
 {
 	return myName;
 }

@@ -211,6 +211,11 @@ Position Player::GetPosition() const
 	return myPos;
 }
 
+std::vector<Item> Player::GetInventory() const
+{
+	return myInventory;
+}
+
 void Player::PrintHealth() const
 {
 	std::cout << "Health: "
@@ -234,6 +239,7 @@ void Player::PrintPlayerUI() const
 	std::cout << "\n";
 }
 
+//prints attributes after items + buffs
 void Player::PrintAttributes() const
 {
 	std::cout << "Player Username: " << myName << "\n\n";
@@ -247,7 +253,7 @@ void Player::PrintAttributes() const
 	std::cout << "Attack Damage: " << static_cast<int>(GetAttributes().damage) << " AD" << "\n";
 	std::cout << "Max-Health :   " << static_cast<int>(GetAttributes().maxHealth) << " hp" << "\n";
 	std::cout << "Defense:       " << static_cast<int>(GetAttributes().defense) << "\n";
-	std::cout << "Carry Capacity " << static_cast<int>(GetAttributes().carryCapacity) << "\n\n";
+	std::cout << "Carry Capacity: " << static_cast<int>(GetAttributes().carryCapacity) << "kg" << "\n\n";
 }
 
 void Player::PrintBaseAttributes() const
@@ -263,9 +269,10 @@ void Player::PrintBaseAttributes() const
 	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << "\n";
 	std::cout << "Max-Health :   " << static_cast<int>(GetMaxHealth()) << " hp" << "\n";
 	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << "\n";
-	std::cout << "Carry Capacity " << static_cast<int>(GetCarryCapacity()) << "\n\n";
+	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg" << "\n\n";
 }
 
+//prints base attributes + derived calculation
 void Player::PrintDerivedAttributes() const
 {
 	std::cout << "Player Username: " << myName << "\n\n";
@@ -280,59 +287,10 @@ void Player::PrintDerivedAttributes() const
 	std::cout << "Max-Health:    " << static_cast<int>(GetMaxHealth()) << " hp" <<
 		" (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
 	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " (Endurance + Agility)" << "\n";
-	std::cout << "Carry Capacity " << static_cast<int>(GetCarryCapacity()) << " (Strength + Agility / 3)" << "\n\n";
+	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg " << " (Strength + Agility / 3)" <<
+		"\n\n";
 }
 
-void Player::EnterAttributesMenu() const
-{
-	while (true)
-	{
-		system("cls");
-		myWorldMap.GetRoomWithId(myRoomId)->PrintRoomName();
-		std::cout << "\n";
-		PrintHealth();
-		std::cout << "\n";
-
-		std::cout
-			<< "\n<--- Attributes --->\n"
-			<< "1) Attributes\n"
-			<< "2) Derived Attributes Info\n"
-			<< "3) Return\n"
-			<< "Choice: ";
-
-		AttriMenu AttriMenuChoice = static_cast<AttriMenu>(ReadIntInRange(
-			static_cast<int>(AttriMenu::Attributes),
-			static_cast<int>(AttriMenu::Return)));
-
-		bool shouldExit = false;
-		system("cls");
-
-		switch (AttriMenuChoice)
-		{
-			case AttriMenu::Attributes:
-			{
-				PrintAttributes();
-				system("pause");
-				break;
-			}
-			case AttriMenu::DerivedAttributes:
-			{
-				PrintDerivedAttributes();
-				system("pause");
-				break;
-			}
-			case AttriMenu::Return:
-			{
-				shouldExit = true;
-				break;
-			}
-		}
-		if (shouldExit)
-		{
-			break;
-		}
-	}
-}
 
 bool Player::CanPickupItem(const Item& aItem) const
 {
@@ -360,6 +318,13 @@ float Player::GetInventoryWeight() const
 void Player::AddItemToInventory(const Item& aItem)
 {
 	myInventory.push_back(aItem);
+
+	UpdateItemAttributes();
+}
+
+void Player::RemoveFromInventory(int aIndex)
+{
+	myInventory.erase(myInventory.begin() + aIndex);
 
 	UpdateItemAttributes();
 }

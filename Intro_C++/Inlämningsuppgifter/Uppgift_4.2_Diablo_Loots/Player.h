@@ -19,10 +19,10 @@ public:
 	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
-	void EnterAttributesMenu() const;
 	bool CanPickupItem(const Item& aItem) const;
 	float GetInventoryWeight() const;
 	void AddItemToInventory(const Item& aItem);
+	void RemoveFromInventory(int aIndex);
 	void UpdateItemAttributes();
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
@@ -48,6 +48,7 @@ public:
 	bool IsInvalidAttackIndex() const;
 	std::string GetName() const;
 	Position GetPosition() const;
+	std::vector<Item> GetInventory() const;
 
 	void PrintHealth() const;
 	void PrintUserName() const;

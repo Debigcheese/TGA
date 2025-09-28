@@ -66,7 +66,7 @@ void PlayerController::UpdateAction()
 			}
 			case Action::Attributes:
 			{
-				myPlayer.EnterAttributesMenu();
+				UpdateAttributes();
 				break;
 			}
 			case Action::Cheats:
@@ -255,22 +255,19 @@ void PlayerController::UpdateScavenge()
 {
 	if (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
 	{
-		std::cout << "You try walking to the door but get attacked!\n\n";
+		std::cout << "You try scavenging the room but get attacked!\n\n";
 		for (Enemy& enemy : currentRoom->GetEnemies())
 		{
 			enemy.Attack(myPlayer);
 		}
 		system("pause");
-		//break;
+		return;
 	}
-
 	while (true && !myPlayer.IsDead())
 	{
 		system("cls");
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemies();
-
-		bool enemiesNearby = (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost);
 
 		PrintScavenge();
 
@@ -341,8 +338,9 @@ void PlayerController::UpdatePickupItem(std::vector<Item>& aItems) const
 		else
 		{
 			myPlayer.AddItemToInventory(itemToPickup);
-			std::cout << "\n[" << itemToPickup.GetName() << "]"
-				<< " has been added to your inventory!\n";
+			std::cout << "\n";
+			itemToPickup.PrintItemName();
+			std::cout << " has been added to your inventory!\n";
 			currentRoom->GetLootInRoom().erase(currentRoom->GetLootInRoom().begin() + CHEST_INDEX);
 			system("pause");
 		}
@@ -409,14 +407,105 @@ void PlayerController::UpdateLootChests() const
 		std::cout << "\n|" << chest.GetName() << "|"
 			<< " has been opened and dropped items on the floor!\n";
 
-		chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
+		//chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
 		system("pause");
 		return;
 	}
 }
 
-void PlayerController::UpdateInventory()
+void PlayerController::UpdateInventory() const
 {
+	while (true && !myPlayer.IsDead())
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+
+		PrintInventory();
+
+		const int OFFSET_INDEX = 1;
+		const int RETURN_INDEX = static_cast<int>(myPlayer.GetInventory().size()) + OFFSET_INDEX;
+
+		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
+		{
+			return;
+		}
+
+		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+		Item item = myPlayer.GetInventory()[ITEM_INDEX];
+
+		std::cout << "\nDrop item?\n"
+			<< "1) Yes\n"
+			<< "2) No\n"
+			<< "Choice: ";
+
+		int dropItemChoice = ReadIntInRange(1, 2);
+
+		if (dropItemChoice == 2)
+		{
+			return;
+		}
+		currentRoom->AddItemToRoom(item);
+		myPlayer.RemoveFromInventory(ITEM_INDEX);
+
+		std::cout << "\nYou dropped ";
+		item.PrintItemName();
+		std::cout << " on the floor\n";
+		system("pause");
+		return;
+	}
+}
+
+void PlayerController::UpdateAttributes() const
+{
+	while (true)
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+
+		std::cout
+			<< "\n<--- Attributes --->\n"
+			<< "1) Starting Attributes\n"
+			<< "2) Buffed Attributes\n"
+			<< "3) Return\n"
+			<< "Choice: ";
+
+		AttriMenu menuChoice = static_cast<AttriMenu>(ReadIntInRange(
+			static_cast<int>(AttriMenu::Attributes),
+			static_cast<int>(AttriMenu::Return)));
+
+		if (menuChoice == AttriMenu::Return)
+		{
+			return;
+		}
+
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+
+		switch (menuChoice)
+		{
+			case AttriMenu::Attributes:
+			{
+				myPlayer.PrintDerivedAttributes();
+				break;
+			}
+			case AttriMenu::DerivedAttributes:
+			{
+				myPlayer.PrintAttributes();
+				break;
+			}
+			case AttriMenu::Return:
+			{
+				return;
+			}
+		}
+		system("pause");
+		return;
+	}
 }
 
 void PlayerController::Win() const
@@ -431,7 +520,7 @@ void PlayerController::Win() const
 void PlayerController::PrintNavigation() const
 {
 	std::cout
-		<< "\n<--- PlayerController --->\n"
+		<< "\n<--- Navigation --->\n"
 		<< "1) West\n"
 		<< "2) North\n"
 		<< "3) East\n"
@@ -496,8 +585,9 @@ void PlayerController::PrintPickupMenu(const std::vector<Item>& aLoot) const
 
 	for (int i = 0; i < static_cast<int>(aLoot.size()); ++i)
 	{
-		std::cout << (i + 1) << ") "
-			<< "[" << aLoot[i].GetName() << "]" << "\n";
+		std::cout << (i + 1) << ") ";
+		aLoot[i].PrintItemOnDisplay();
+		std::cout << "\n";
 	}
 
 	std::cout << static_cast<int>(aLoot.size()) + 1 << ") Return\n"
@@ -516,9 +606,33 @@ void PlayerController::PrintChestMenu() const
 	for (int i = 0; i < static_cast<int>(currentRoom->GetChestInRoom().size()); ++i)
 	{
 		std::cout << (i + 1) << ") "
-			<< "[" << currentRoom->GetChestInRoom()[i].GetName() << "]" << "\n";
+			<< "|" << currentRoom->GetChestInRoom()[i].GetName() << "|" << "\n";
 	}
 
 	std::cout << static_cast<int>(currentRoom->GetChestInRoom().size()) + 1 << ") Return\n"
+		<< "Choice: ";
+}
+
+void PlayerController::PrintInventory() const
+{
+	std::cout << "\n<--- Inventory ("
+		<< static_cast<int>(myPlayer.GetInventoryWeight()) << "/"
+		<< static_cast<int>(myPlayer.GetCarryCapacity()) << "kg) --->\n";
+
+	if (myPlayer.GetInventory().empty())
+	{
+		std::cout << "Empty...";
+	}
+
+	const int INVENTORY_SIZE = static_cast<int>(myPlayer.GetInventory().size());
+
+	for (int i = 0; i < INVENTORY_SIZE; ++i)
+	{
+		std::cout << (i + 1) << ") ";
+		std::cout << "";
+		myPlayer.GetInventory()[i].PrintItemOnDisplay();
+		std::cout << "\n";
+	}
+	std::cout << INVENTORY_SIZE + 1 << ") Return\n"
 		<< "Choice: ";
 }

@@ -38,14 +38,8 @@ void Item::SetId(int aNewId)
 	myAttributes.id = aNewId;
 }
 
-void Item::PrintItemOnPickup() const
+void Item::PrintItemAttributes() const
 {
-	std::cout << GetColorCode(GetColorFromRarity(myAttributes.rarity), true)
-		<< "\n<------ " << RarityToString(myAttributes.rarity) << " ------>"
-		<< GetColorCode(GetColorFromRarity(myAttributes.rarity), false)
-		<< "\n"
-		<< "[" << myAttributes.name << "]" << "\n";
-
 	// Print non-zero attributes
 	const Attributes& a = myAttributes.attributes;
 	if (a.strength != 0.0f)
@@ -97,10 +91,34 @@ void Item::PrintItemOnPickup() const
 			<< a.defense << "\n";
 	}
 
+	std::cout << "Weight: +"
+		<< static_cast<int>(myAttributes.weight)
+		<< "kg\n";
+}
+
+void Item::PrintItemOnPickup() const
+{
+	std::cout << GetColorCode(GetColorFromRarity(myAttributes.rarity), true)
+		<< "\n<------ " << RarityToString(myAttributes.rarity) << " ------>"
+		<< GetColorCode(GetColorFromRarity(myAttributes.rarity), false)
+		<< "\n"
+		<< "         [" << myAttributes.name << "]" << "\n";
+
+	PrintItemAttributes();
+
 	std::cout << "\n";
 }
 
-void Item::PrintItemAttributes() const
+void Item::PrintItemOnDisplay() const
 {
-	std::cout << "";
+	PrintItemName();
+	std::cout << "\n";
+	PrintItemAttributes();
+}
+
+void Item::PrintItemName() const
+{
+	std::cout << GetColorCode(GetColorFromRarity(myAttributes.rarity), true)
+		<< "[" << myAttributes.name << "]"
+		<< GetColorCode(GetColorFromRarity(myAttributes.rarity), false);
 }

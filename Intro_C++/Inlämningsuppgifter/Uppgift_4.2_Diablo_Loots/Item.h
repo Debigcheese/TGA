@@ -15,8 +15,10 @@ public:
 	ItemAttributes GetAttributes() const;
 
 	void SetId(int aNewId);
-	void PrintItemOnPickup() const;
 	void PrintItemAttributes() const;
+	void PrintItemOnPickup() const;
+	void PrintItemOnDisplay() const;
+	void PrintItemName() const;
 
 private:
 	ItemAttributes myAttributes;

@@ -196,7 +196,7 @@ namespace Utils
 
 	const char* GetPrefixSign(float aValue)
 	{
-		return aValue > 0 ? "+" : "-";
+		return aValue > 0 ? "+" : ""; // when value < 0 then it will show subtract sign so no need for double --
 	}
 
 	std::vector<Rarity> GetRaritiesFromMax(Rarity aRarity)

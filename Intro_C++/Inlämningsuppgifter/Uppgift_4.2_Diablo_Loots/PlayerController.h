@@ -16,8 +16,8 @@ public:
 	void UpdateScavenge();
 	void UpdatePickupItem(std::vector<Item>& aItems) const;
 	void UpdateLootChests() const;
-	void UpdateInventory();
-
+	void UpdateInventory() const;
+	void UpdateAttributes() const;
 	void Win() const;
 
 	void PrintNavigation() const;
@@ -25,6 +25,7 @@ public:
 	void PrintScavenge() const;
 	void PrintPickupMenu(const std::vector<Item>& aLoot) const;
 	void PrintChestMenu() const;
+	void PrintInventory() const;
 
 private:
 	Room* currentRoom;

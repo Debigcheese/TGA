@@ -7,63 +7,16 @@
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:PlayerController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:WorldMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Chest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:WorldMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\PlayerController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:PlayerController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Diablo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.43.34808\\INCLUDE\\VECTOR||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameEnums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -74,8 +27,59 @@
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\PlayerController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:PlayerController.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Chest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Chest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:WorldMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Room.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\ItemDB.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:ItemDB.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Room.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Diablo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameEnums.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -89,13 +93,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "PlayerController.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\PlayerController.h",
               "RelativeDocumentMoniker": "PlayerController.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\PlayerController.h",
               "RelativeToolTip": "PlayerController.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-27T14:52:20.015Z",
               "IsPinned": true,
@@ -109,7 +113,7 @@
               "RelativeDocumentMoniker": "PlayerController.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\PlayerController.cpp",
               "RelativeToolTip": "PlayerController.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAcwBYAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAANoBAAAAAAAAAAAswN4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-27T14:52:18.375Z",
               "IsPinned": true,
@@ -117,13 +121,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Player.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.h",
               "RelativeDocumentMoniker": "Player.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.h",
               "RelativeToolTip": "Player.h",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAABkAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-27T15:45:10.711Z",
               "IsPinned": true,
@@ -137,84 +141,38 @@
               "RelativeDocumentMoniker": "Player.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Player.cpp",
               "RelativeToolTip": "Player.cpp",
-              "ViewState": "AgIAAOUAAAAAAAAAAAAswP4AAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAcwEoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-27T15:45:07.842Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Diablo.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp",
-              "RelativeDocumentMoniker": "Diablo.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp",
-              "RelativeToolTip": "Diablo.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-27T22:56:54.03Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Main.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp",
-              "RelativeDocumentMoniker": "Main.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp",
-              "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-27T22:56:45.635Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "vector",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector",
-              "ViewState": "AgIAAAoIAAAAAAAAAAAvwB0IAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-27T22:54:58.788Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "GameEnums.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h",
-              "RelativeDocumentMoniker": "GameEnums.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h",
-              "RelativeToolTip": "GameEnums.h",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-27T20:55:00.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "WorldMap.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.h",
               "RelativeDocumentMoniker": "WorldMap.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.h",
               "RelativeToolTip": "WorldMap.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-27T20:08:23.443Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 12,
               "Title": "WorldMap.cpp",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.cpp",
               "RelativeDocumentMoniker": "WorldMap.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\WorldMap.cpp",
               "RelativeToolTip": "WorldMap.cpp",
-              "ViewState": "AgIAAHMAAAAAAAAAAAAswLAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAswKYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-27T19:51:48.317Z",
               "EditorCaption": ""
@@ -227,33 +185,33 @@
               "RelativeDocumentMoniker": "Chest.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.cpp",
               "RelativeToolTip": "Chest.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-27T19:52:59.917Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Chest.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.h",
               "RelativeDocumentMoniker": "Chest.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Chest.h",
               "RelativeToolTip": "Chest.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-27T19:43:45.662Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "Room.cpp",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.cpp",
               "RelativeDocumentMoniker": "Room.cpp",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.cpp",
               "RelativeToolTip": "Room.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-27T19:42:58.791Z",
               "EditorCaption": ""
@@ -261,32 +219,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Room.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h",
-              "RelativeDocumentMoniker": "Room.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h",
-              "RelativeToolTip": "Room.h",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-27T19:42:55.73Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Utils.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp",
-              "RelativeDocumentMoniker": "Utils.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp",
-              "RelativeToolTip": "Utils.cpp",
-              "ViewState": "AgIAALkAAAAAAAAAAAAcwMsAAAAaAAAAAAAAAA==",
+              "Title": "Item.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.cpp",
+              "RelativeDocumentMoniker": "Item.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.cpp",
+              "RelativeToolTip": "Item.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-27T20:51:57.006Z",
+              "WhenOpened": "2025-09-27T18:18:37.823Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 5,
+              "Title": "Item.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.h",
+              "RelativeDocumentMoniker": "Item.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.h",
+              "RelativeToolTip": "Item.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-27T18:18:35.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Utils.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.h",
               "RelativeDocumentMoniker": "Utils.h",
@@ -298,46 +256,101 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Utils.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp",
+              "RelativeDocumentMoniker": "Utils.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Utils.cpp",
+              "RelativeToolTip": "Utils.cpp",
+              "ViewState": "AgIAALMAAAAAAAAAAAAcwL0AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-27T20:51:57.006Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 10,
               "Title": "GameStructs.h",
               "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameStructs.h",
               "RelativeDocumentMoniker": "GameStructs.h",
               "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameStructs.h",
               "RelativeToolTip": "GameStructs.h",
-              "ViewState": "AgIAACsAAAAAAAAAAAAcwEQAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAcwFAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-27T18:28:19.848Z"
+              "WhenOpened": "2025-09-27T18:28:19.848Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Item.cpp",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.cpp",
-              "RelativeDocumentMoniker": "Item.cpp",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.cpp",
-              "RelativeToolTip": "Item.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAGYAAAAmAAAAAAAAAA==",
+              "DocumentIndex": 14,
+              "Title": "ItemDB.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\ItemDB.cpp",
+              "RelativeDocumentMoniker": "ItemDB.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\ItemDB.cpp",
+              "RelativeToolTip": "ItemDB.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-27T18:18:37.823Z",
+              "WhenOpened": "2025-09-28T17:09:15.568Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "GameEnums.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h",
+              "RelativeDocumentMoniker": "GameEnums.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\GameEnums.h",
+              "RelativeToolTip": "GameEnums.h",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-27T20:55:00.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\include\\vector",
+              "ViewState": "AgIAAAoIAAAAAAAAAAAvwB0IAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-27T22:54:58.788Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "Item.h",
-              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.h",
-              "RelativeDocumentMoniker": "Item.h",
-              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Item.h",
-              "RelativeToolTip": "Item.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
+              "Title": "Main.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp",
+              "RelativeDocumentMoniker": "Main.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Main.cpp",
+              "RelativeToolTip": "Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-27T22:56:45.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Diablo.cpp",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp",
+              "RelativeDocumentMoniker": "Diablo.cpp",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Diablo.cpp",
+              "RelativeToolTip": "Diablo.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-27T22:56:54.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Room.h",
+              "DocumentMoniker": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h",
+              "RelativeDocumentMoniker": "Room.h",
+              "ToolTip": "F:\\TheGameAssembly\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_4.2_Diablo_Loots\\Room.h",
+              "RelativeToolTip": "Room.h",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-27T18:18:35.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T19:42:55.73Z"
             }
           ]
         }
