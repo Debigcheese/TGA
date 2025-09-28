@@ -360,6 +360,7 @@ float Player::GetInventoryWeight() const
 void Player::AddItemToInventory(const Item& aItem)
 {
 	myInventory.push_back(aItem);
+
 	UpdateItemAttributes();
 }
 

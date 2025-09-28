@@ -3,6 +3,7 @@
 #include "Door.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "Chest.h"
 
 class WorldMap
 {
@@ -26,7 +27,13 @@ public:
 	//items
 	void GenerateItems();
 	void AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom);
-	std::vector<Item> GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const;
+	std::vector<Item> GetItemsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const;
+	//std::vector<Item> GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const;
+
+	//chests
+	void GenerateChests();
+	void CreateChests(int aRoomId, int aAmount, Rarity aRarity);
+	void AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsToRoom);
 
 private:
 	int myNextEnemyId;

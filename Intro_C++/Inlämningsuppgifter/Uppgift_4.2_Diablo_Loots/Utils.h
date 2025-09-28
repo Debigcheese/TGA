@@ -26,4 +26,5 @@ namespace Utils
 	TextColor GetColorFromRarity(Rarity rarity);
 	const char* RarityToString(Rarity rarity);
 	const char* GetPrefixSign(float aValue);
+	std::vector<Rarity> GetRaritiesFromMax(Rarity aRarity);
 }

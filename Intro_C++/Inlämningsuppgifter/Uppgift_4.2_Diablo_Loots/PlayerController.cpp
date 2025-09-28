@@ -56,7 +56,7 @@ void PlayerController::UpdateAction()
 			}
 			case Action::LookAround:
 			{
-				UpdateLookAround();
+				UpdateScavenge();
 				break;
 			}
 			case Action::Inventory:
@@ -251,7 +251,7 @@ void PlayerController::UpdateNavigation()
 	}
 }
 
-void PlayerController::UpdateLookAround()
+void PlayerController::UpdateScavenge()
 {
 	if (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
 	{
@@ -272,28 +272,31 @@ void PlayerController::UpdateLookAround()
 
 		bool enemiesNearby = (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost);
 
-		PrintLookAround();
+		PrintScavenge();
 
-		LookAround menuChoice = static_cast<LookAround>(ReadIntInRange(
-			static_cast<int>(LookAround::Scavenge),
-			static_cast<int>(LookAround::Return)));
+		Scavenge menuChoice = static_cast<Scavenge>(ReadIntInRange(
+			static_cast<int>(Scavenge::Floor),
+			static_cast<int>(Scavenge::Return)));
 
 		switch (menuChoice)
 		{
-			case LookAround::Scavenge:
+			case Scavenge::Floor:
 			{
 				UpdatePickupItem(myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->GetLootInRoom());
-
 				break;
 			}
-			case LookAround::OpenChest:
+			case Scavenge::Chests:
 			{
-				UpdateNavigation();
+				UpdateLootChests();
 				break;
 			}
-			case LookAround::Return:
+			case Scavenge::Spells:
 			{
-				//lookl around
+				//UpdateLootChests(); spells
+				break;
+			}
+			case Scavenge::Return:
+			{
 				return;
 			}
 		}
@@ -304,40 +307,111 @@ void PlayerController::UpdatePickupItem(std::vector<Item>& aItems) const
 {
 	while (true && !myPlayer.IsDead())
 	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+
 		PrintPickupMenu(aItems);
 		if (aItems.empty())
 		{
-			std::cout << "(No loot here...)\n";
+			std::cout << "\n(No loot here...)\n";
 			system("pause");
 			return;
 		}
 
-		int menuChoice = ReadIntInRange(1, static_cast<int>(aItems.size()) + 1);
-		Item itemToPickup = aItems[menuChoice - 1];
+		const int CHEST_COUNT = static_cast<int>(aItems.size());
+		const int RETURN_INDEX = CHEST_COUNT + 1;
 
-		for (int i = 0; i < static_cast<int>(aItems.size()); ++i)
+		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
 		{
-			if (menuChoice == static_cast<int>(aItems.size()) + 1)
-			{
-				return;
-			}
-			if (menuChoice == i)
-			{
-				if (myPlayer.CanPickupItem(aItems[menuChoice - 1]))
-				{
-					myPlayer.AddItemToInventory(itemToPickup);
-					std::cout << "\n[" << itemToPickup.GetName() << "}"
-						<< " has been added to your inventory!\n";
-					system("pause");
-					return;
-				}
-				else
-				{
-					std::cout << "\n(Item too heavy to pickup)\n";
-					system("pause");
-				}
-			}
+			return;
 		}
+
+		const int CHEST_INDEX = menuChoice - 1;
+
+		Item& itemToPickup = aItems[CHEST_INDEX];
+
+		if (!myPlayer.CanPickupItem(itemToPickup))
+		{
+			std::cout << "\n(Item too heavy to pickup)\n";
+			system("pause");
+		}
+		else
+		{
+			myPlayer.AddItemToInventory(itemToPickup);
+			std::cout << "\n[" << itemToPickup.GetName() << "]"
+				<< " has been added to your inventory!\n";
+			currentRoom->GetLootInRoom().erase(currentRoom->GetLootInRoom().begin() + CHEST_INDEX);
+			system("pause");
+		}
+	}
+}
+
+//its 01:46 rn and when I first made this fucntion 10min ago
+//it looked like crap but then I discovered what
+//guard clausing is and it changed my life foerver.
+// i will try to guard clause and refactor everything else as much as possible
+//so i and u teachers can have an easier time looking through the code(:
+
+void PlayerController::UpdateLootChests() const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+		PrintChestMenu();
+
+		auto& chests = currentRoom->GetChestInRoom();
+
+		if (chests.empty())
+		{
+			std::cout << "\n(No chests here...)\n";
+			system("pause");
+			return;
+		}
+
+		const int CHEST_COUNT = static_cast<int>(chests.size());
+		const int RETURN_INDEX = CHEST_COUNT + 1;
+
+		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
+		{
+			return;
+		}
+
+		const int CHEST_INDEX = menuChoice - 1;
+		Chest& chest = chests[CHEST_INDEX];
+		if (chest.GetIsOpen())
+		{
+			std::cout << "\n(Chest already open)\n";
+			system("pause");
+			return;
+		}
+
+		const auto loot = chest.Open(); //returns items & empties chest
+
+		if (loot.empty())
+		{
+			std::cout << "\n|" << chest.GetName() << "|"
+				<< " has been opened but it was empty...\n";
+			system("pause");
+			return;
+		}
+
+		for (const auto& item : loot)
+		{
+			currentRoom->AddItemToRoom(item);
+		}
+		std::cout << "\n|" << chest.GetName() << "|"
+			<< " has been opened and dropped items on the floor!\n";
+
+		chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
+		system("pause");
+		return;
 	}
 }
 
@@ -383,7 +457,7 @@ void PlayerController::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) con
 
 	std::cout
 		<< "2) Navigate\n"
-		<< "3) Look Around\n"
+		<< "3) Scavenge\n"
 		<< "4) Inventory\n";
 	std::cout
 		<< "\n<--- Other --->\n"
@@ -400,20 +474,21 @@ void PlayerController::PrintActionMenu(bool aEnemiesExist, bool aShowCheats) con
 		<< "Choice: ";
 }
 
-void PlayerController::PrintLookAround() const
+void PlayerController::PrintScavenge() const
 {
 	std::cout
-		<< "\n<--- Loot --->\n"
-		<< "1) Scavenge\n"
-		<< "2) Open Chest\n"
-		<< "3) Return\n"
+		<< "\n<--- Scavenge --->\n"
+		<< "1) Floor\n"
+		<< "2) Chests\n"
+		<< "3) Spells\n"
+		<< "4) Return\n"
 		<< "Choice: ";
 }
 
 void PlayerController::PrintPickupMenu(const std::vector<Item>& aLoot) const
 {
 	std::cout
-		<< "\n<--- Pickup Loot --->\n";
+		<< "\n<--- Pickup --->\n";
 	if (aLoot.empty())
 	{
 		return;
@@ -425,6 +500,25 @@ void PlayerController::PrintPickupMenu(const std::vector<Item>& aLoot) const
 			<< "[" << aLoot[i].GetName() << "]" << "\n";
 	}
 
-	std::cout << static_cast<int>(aLoot.size()) + 2 << ") Return\n"
+	std::cout << static_cast<int>(aLoot.size()) + 1 << ") Return\n"
+		<< "Choice: ";
+}
+
+void PlayerController::PrintChestMenu() const
+{
+	std::cout
+		<< "\n<--- Open Chest --->\n";
+	if (currentRoom->GetChestInRoom().empty())
+	{
+		return;
+	}
+
+	for (int i = 0; i < static_cast<int>(currentRoom->GetChestInRoom().size()); ++i)
+	{
+		std::cout << (i + 1) << ") "
+			<< "[" << currentRoom->GetChestInRoom()[i].GetName() << "]" << "\n";
+	}
+
+	std::cout << static_cast<int>(currentRoom->GetChestInRoom().size()) + 1 << ") Return\n"
 		<< "Choice: ";
 }

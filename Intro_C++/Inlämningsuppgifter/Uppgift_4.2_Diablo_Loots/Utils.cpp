@@ -198,4 +198,17 @@ namespace Utils
 	{
 		return aValue > 0 ? "+" : "-";
 	}
+
+	std::vector<Rarity> GetRaritiesFromMax(Rarity aRarity)
+	{
+		std::vector<Rarity> out;
+		const int max = static_cast<int>(aRarity);
+		out.reserve(max + 1);
+		for (int i = 0; i <= max; ++i)
+		{
+			// note: <=
+			out.push_back(static_cast<Rarity>(i));
+		}
+		return out;
+	}
 }

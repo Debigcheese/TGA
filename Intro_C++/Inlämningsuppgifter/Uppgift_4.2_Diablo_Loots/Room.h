@@ -1,10 +1,10 @@
 #pragma once
 #include "Enemy.h"
 #include "GameStructs.h"
+#include "Item.h"
+#include "Chest.h"
 #include <string>
 #include <vector>
-
-class Item;
 
 class Room
 {
@@ -29,6 +29,9 @@ public:
 	const std::vector<Item>& GetLootInRoom() const;
 	std::vector<Item>& GetLootInRoom();
 
+	void AddChestToRoom(const Chest& aChestToAdd);
+	std::vector<Chest>& GetChestInRoom();
+
 	void PrintRoomName() const;
 	void PrintEnemies() const;
 	void PrintEnemiesWithTarget(const int& aTargetIndex) const;
@@ -39,4 +42,5 @@ private:
 	Position myPos;
 	std::vector<Enemy> myEnemies;
 	std::vector<Item> myLoot;
+	std::vector<Chest> myChests;
 };

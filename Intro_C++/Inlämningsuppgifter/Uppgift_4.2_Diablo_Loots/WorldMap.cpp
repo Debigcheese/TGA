@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "GameStructs.h"
+#include "Chest.h"
 #include "ItemDB.h"
 
 using namespace Utils;
@@ -61,6 +62,7 @@ void WorldMap::GenerateWorld()
 	GenerateRooms();
 	GenerateDoors();
 	GenerateItems();
+	GenerateChests();
 }
 
 Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
@@ -87,12 +89,21 @@ void WorldMap::GenerateDoors()
 	Door d5 = Door(ROOM_2_ID, ROOM_4_ID);
 	Door d6 = Door(ROOM_4_ID, ROOM_WIN_ID);
 
-	Lock doorLock;
-	doorLock.agilityReq.attributeValue = LOCK_1_AGILITY_REQ;
-	doorLock.strengthReq.attributeValue = LOCK_1_STRENGTH_REQ;
+	Lock l1;
+	l1.agilityReq.attributeValue = LOCK_1_AGILITY_REQ;
+	l1.strengthReq.attributeValue = LOCK_1_STRENGTH_REQ;
 
-	d5.AddDoorLock(doorLock);
-	d1.AddDoorLock(doorLock);
+	Lock l2;
+	l2.agilityReq.attributeValue = LOCK_1_STRENGTH_REQ;
+	l2.strengthReq.attributeValue = LOCK_1_AGILITY_REQ;
+
+	Lock l3;
+	l3.agilityReq.attributeValue = 20.0f;
+	l3.strengthReq.attributeValue = 20.0f;
+
+	d1.AddDoorLock(l1);
+	d5.AddDoorLock(l2);
+	d6.AddDoorLock(l3);
 
 	myDoors.push_back(d1);
 	myDoors.push_back(d2);
@@ -136,42 +147,50 @@ void WorldMap::GenerateRooms()
 	AddRoom(Room(ROOM_WIN_ID, "Eternal Abyss", {-1, 2}, enemiesR5));
 }
 
-std::vector<Item> WorldMap::GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const
+void WorldMap::GenerateChests()
 {
-	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(aItemRarities);
+	CreateChests(ROOM_0_ID, 1, Rarity::Bronze);
+	CreateChests(ROOM_1_ID, 3, Rarity::Gold);
+	CreateChests(ROOM_2_ID, 2, Rarity::Legendary);
+	CreateChests(ROOM_3_ID, 0, Rarity::None);
+	CreateChests(ROOM_4_ID, 1, Rarity::Legendary);
+}
 
-	const int RANDOM_SIZE = Utils::GenerateRandomNumber(0, 2);
+void WorldMap::CreateChests(int aRoomId, int aAmount, Rarity aRarity)
+{
+	std::vector<Chest> chests{};
 
-	std::vector<Item> itemsInRoom = {};
-
-	for (int i = 0; i < RANDOM_SIZE; ++i)
+	if (aAmount < 0)
 	{
-		int randomIndex = Utils::GenerateRandomNumber(0, static_cast<int>(itemIdPool.size() - 1));
-		int chosenId = itemIdPool[randomIndex];
-		itemsInRoom.emplace_back(chosenId);
+		return;
 	}
-	return itemsInRoom;
+
+	const int COUNT = aAmount;
+
+	chests.reserve(COUNT);
+	for (int i = 0; i < COUNT; ++i)
+	{
+		chests.emplace_back(aRoomId, GetItemsUpToRarity(0, 3, aRarity));
+	}
+	AddChestsToRoomId(aRoomId, chests);
+}
+
+void WorldMap::AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsToRoom)
+{
+	for (const auto& chest : aChestsToRoom)
+	{
+		GetRoomWithId(aRoomId)->AddChestToRoom(chest);
+	}
 }
 
 void WorldMap::GenerateItems()
 {
-	AddItemsToRoomId(ROOM_0_ID, GenerateItemsWithRarity({
-		                 Rarity::Bronze,
-	                 }));
-	AddItemsToRoomId(ROOM_1_ID, GenerateItemsWithRarity({
-		                 Rarity::Bronze, Rarity::Silver,
-	                 }));
-	AddItemsToRoomId(ROOM_2_ID, GenerateItemsWithRarity({
-		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold,
-	                 }));
-	AddItemsToRoomId(ROOM_3_ID, GenerateItemsWithRarity({
-		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
-	                 }));
-	AddItemsToRoomId(ROOM_4_ID, GenerateItemsWithRarity({
-		                 Rarity::Bronze, Rarity::Silver, Rarity::Gold, Rarity::Legendary
-	                 }));
+	AddItemsToRoomId(ROOM_0_ID, GetItemsUpToRarity(0, 2, Rarity::Bronze));
+	AddItemsToRoomId(ROOM_1_ID, GetItemsUpToRarity(0, 3, Rarity::Silver));
+	AddItemsToRoomId(ROOM_2_ID, GetItemsUpToRarity(0, 3, Rarity::Gold));
+	AddItemsToRoomId(ROOM_3_ID, GetItemsUpToRarity(1, 2, Rarity::Legendary));
+	AddItemsToRoomId(ROOM_4_ID, GetItemsUpToRarity(1, 3, Rarity::Legendary));
 }
-
 
 void WorldMap::AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom)
 {
@@ -180,6 +199,52 @@ void WorldMap::AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRo
 		GetRoomWithId(aRoomId)->AddItemToRoom(item);
 	}
 }
+
+std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const
+{
+	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
+	// random item pool with rarities up to "aRarity"
+
+	if (itemIdPool.empty() || aMaxAmount <= 0)
+	{
+		return {};
+	}
+
+	const int RANDOM_SIZE = Utils::GenerateRandomNumber(aMinAmount, aMaxAmount); // amount of items to get
+
+	std::vector<Item> itemsInRoom = {};
+	itemsInRoom.reserve(RANDOM_SIZE);
+
+	for (int i = 0; i < RANDOM_SIZE; ++i)
+	{
+		//generate random index to pick from my itemIdPool
+		int randomIndex = Utils::GenerateRandomNumber(0, static_cast<int>(itemIdPool.size() - 1));
+		int chosenId = itemIdPool[randomIndex];
+		itemsInRoom.emplace_back(chosenId);
+
+		itemIdPool[randomIndex] = itemIdPool.back();
+		itemIdPool.pop_back();
+	}
+	return itemsInRoom;
+}
+
+//OLD IMPLEMENTATION
+//std::vector<Item> WorldMap::GenerateItemsWithRarity(const std::vector<Rarity>& aItemRarities) const
+//{
+//	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(aItemRarities);
+//
+//	const int RANDOM_SIZE = Utils::GenerateRandomNumber(0, 2);
+//
+//	std::vector<Item> itemsInRoom = {};
+//
+//	for (int i = 0; i < RANDOM_SIZE; ++i)
+//	{
+//		int randomIndex = Utils::GenerateRandomNumber(0, static_cast<int>(itemIdPool.size() - 1));
+//		int chosenId = itemIdPool[randomIndex];
+//		itemsInRoom.emplace_back(chosenId);
+//	}
+//	return itemsInRoom;
+//}
 
 
 //Crypt of the Forgotten

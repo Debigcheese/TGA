@@ -35,11 +35,12 @@ enum class AttriMenu
 	Return = 3,
 };
 
-enum class LookAround
+enum class Scavenge
 {
-	Scavenge = 1,
-	OpenChest = 2,
-	Return = 3,
+	Floor = 1,
+	Chests = 2,
+	Spells = 3,
+	Return = 4,
 };
 
 enum class LockType
