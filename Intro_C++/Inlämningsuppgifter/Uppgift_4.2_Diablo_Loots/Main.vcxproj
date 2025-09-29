@@ -140,6 +140,8 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Spell.cpp" />
+    <ClCompile Include="SpellDB.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
@@ -157,6 +159,8 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Spell.h" />
+    <ClInclude Include="SpellDB.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>

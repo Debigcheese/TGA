@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "Spell.h"
+
 using namespace Cheats;
 
 class WorldMap;
@@ -23,7 +25,9 @@ public:
 	float GetInventoryWeight() const;
 	void AddItemToInventory(const Item& aItem);
 	void RemoveFromInventory(int aIndex);
-	void UpdateItemAttributes();
+	void UpdateAttributes();
+	void ApplySpell(const Spell& aSpell);
+	void RemoveSpell(int aIndex);
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
 	int GetRoomId() const;
@@ -49,6 +53,7 @@ public:
 	std::string GetName() const;
 	Position GetPosition() const;
 	std::vector<Item> GetInventory() const;
+	std::vector<Spell> GetSpells() const;
 
 	void PrintHealth() const;
 	void PrintUserName() const;
@@ -56,6 +61,7 @@ public:
 	void PrintAttributes() const;
 	void PrintBaseAttributes() const;
 	void PrintDerivedAttributes() const;
+	void PrintInventory() const;
 
 private:
 	//CONSTANTS
@@ -64,11 +70,12 @@ private:
 	WorldMap& myWorldMap;
 	std::string myName;
 	Attributes myAttributes{};
-	Attributes myItemAttributes{};
+	Attributes myBuffedAttributes{};
 	int myRoomId;
 	int myTargetIndex;
 	int myAttackIndex;
 	bool myIsDead;
 	Position myPos;
 	std::vector<Item> myInventory;
+	std::vector<Spell> mySpells;
 };

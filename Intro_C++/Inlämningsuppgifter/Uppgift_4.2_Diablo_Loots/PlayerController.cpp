@@ -45,41 +45,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-			{
-				UpdateCombat();
-				break;
-			}
+				{
+					UpdateCombat();
+					break;
+				}
 			case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+				{
+					UpdateNavigation();
+					break;
+				}
 			case Action::LookAround:
-			{
-				UpdateScavenge();
-				break;
-			}
+				{
+					UpdateScavenge();
+					break;
+				}
 			case Action::Inventory:
-			{
-				UpdateInventory();
-				break;
-			}
+				{
+					UpdateInventory();
+					break;
+				}
 			case Action::Attributes:
-			{
-				UpdateAttributes();
-				break;
-			}
+				{
+					UpdateAttributes();
+					break;
+				}
 			case Action::Cheats:
-			{
-				UpdateCheats();
-				break;
-			}
+				{
+					UpdateCheats();
+					break;
+				}
 			case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+				{
+					std::cout << "Quitting Game...\n";
+					system("pause");
+					return;
+				}
 		}
 	}
 }
@@ -278,45 +278,46 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-			{
-				UpdatePickupItem(myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->GetLootInRoom());
-				break;
-			}
+				{
+					UpdatePickupItem();
+					break;
+				}
 			case Scavenge::Chests:
-			{
-				UpdateLootChests();
-				break;
-			}
+				{
+					UpdateLootChests();
+					break;
+				}
 			case Scavenge::Spells:
-			{
-				//UpdateLootChests(); spells
-				break;
-			}
+				{
+					UpdateReadSpells();
+					break;
+				}
 			case Scavenge::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
 
-void PlayerController::UpdatePickupItem(std::vector<Item>& aItems) const
+void PlayerController::UpdatePickupItem() const
 {
 	while (true && !myPlayer.IsDead())
 	{
 		system("cls");
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemies();
+		auto& items = currentRoom->GetLootInRoom();
 
-		PrintPickupMenu(aItems);
-		if (aItems.empty())
+		PrintPickupMenu();
+		if (items.empty())
 		{
-			std::cout << "\n(No loot here...)\n";
+			std::cout << "(No loot here...)\n";
 			system("pause");
 			return;
 		}
 
-		const int CHEST_COUNT = static_cast<int>(aItems.size());
+		const int CHEST_COUNT = static_cast<int>(items.size());
 		const int RETURN_INDEX = CHEST_COUNT + 1;
 
 		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
@@ -328,7 +329,7 @@ void PlayerController::UpdatePickupItem(std::vector<Item>& aItems) const
 
 		const int CHEST_INDEX = menuChoice - 1;
 
-		Item& itemToPickup = aItems[CHEST_INDEX];
+		Item& itemToPickup = items[CHEST_INDEX];
 
 		if (!myPlayer.CanPickupItem(itemToPickup))
 		{
@@ -360,13 +361,14 @@ void PlayerController::UpdateLootChests() const
 		system("cls");
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemies();
+
 		PrintChestMenu();
 
 		auto& chests = currentRoom->GetChestInRoom();
 
 		if (chests.empty())
 		{
-			std::cout << "\n(No chests here...)\n";
+			std::cout << "(No chests here...)\n";
 			system("pause");
 			return;
 		}
@@ -413,6 +415,44 @@ void PlayerController::UpdateLootChests() const
 	}
 }
 
+void PlayerController::UpdateReadSpells() const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
+		auto& spells = currentRoom->GetSpellsInRoom();
+		PrintSpells();
+
+		if (spells.empty())
+		{
+			std::cout << "(No spells here...)\n";
+			system("pause");
+			return;
+		}
+
+		const int SPELLS_COUNT = static_cast<int>(spells.size());
+		const int RETURN_INDEX = SPELLS_COUNT + 1;
+		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
+		{
+			return;
+		}
+
+		const int SPELL_INDEX = menuChoice - 1;
+		Spell& spell = spells[SPELL_INDEX];
+
+		myPlayer.ApplySpell(spell);
+		std::cout << "\n";
+		spell.PrintSpellName();
+		std::cout << " spell buff has been applied!\n";
+		spells.erase(spells.begin() + SPELL_INDEX);
+		system("pause");
+	}
+}
+
 void PlayerController::UpdateInventory() const
 {
 	while (true && !myPlayer.IsDead())
@@ -421,7 +461,7 @@ void PlayerController::UpdateInventory() const
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemies();
 
-		PrintInventory();
+		myPlayer.PrintInventory();
 
 		const int OFFSET_INDEX = 1;
 		const int RETURN_INDEX = static_cast<int>(myPlayer.GetInventory().size()) + OFFSET_INDEX;
@@ -489,19 +529,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-			{
-				myPlayer.PrintDerivedAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintDerivedAttributes();
+					break;
+				}
 			case AttriMenu::DerivedAttributes:
-			{
-				myPlayer.PrintAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintAttributes();
+					break;
+				}
 			case AttriMenu::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 		return;
@@ -517,6 +557,7 @@ void PlayerController::Win() const
 	return;
 }
 
+//PRINTS
 void PlayerController::PrintNavigation() const
 {
 	std::cout
@@ -574,23 +615,24 @@ void PlayerController::PrintScavenge() const
 		<< "Choice: ";
 }
 
-void PlayerController::PrintPickupMenu(const std::vector<Item>& aLoot) const
+void PlayerController::PrintPickupMenu() const
 {
 	std::cout
 		<< "\n<--- Pickup --->\n";
-	if (aLoot.empty())
+	auto& items = currentRoom->GetLootInRoom();
+	if (items.empty())
 	{
 		return;
 	}
 
-	for (int i = 0; i < static_cast<int>(aLoot.size()); ++i)
+	for (int i = 0; i < static_cast<int>(items.size()); ++i)
 	{
 		std::cout << (i + 1) << ") ";
-		aLoot[i].PrintItemOnDisplay();
+		items[i].PrintItemOnDisplay();
 		std::cout << "\n";
 	}
 
-	std::cout << static_cast<int>(aLoot.size()) + 1 << ") Return\n"
+	std::cout << static_cast<int>(items.size()) + 1 << ") Return\n"
 		<< "Choice: ";
 }
 
@@ -613,26 +655,24 @@ void PlayerController::PrintChestMenu() const
 		<< "Choice: ";
 }
 
-void PlayerController::PrintInventory() const
+void PlayerController::PrintSpells() const
 {
-	std::cout << "\n<--- Inventory ("
-		<< static_cast<int>(myPlayer.GetInventoryWeight()) << "/"
-		<< static_cast<int>(myPlayer.GetCarryCapacity()) << "kg) --->\n";
+	std::cout << "\n<--- Read spell --->\n";
 
-	if (myPlayer.GetInventory().empty())
+	auto spells = currentRoom->GetSpellsInRoom();
+	if (spells.empty())
 	{
-		std::cout << "Empty...";
+		return;
 	}
 
-	const int INVENTORY_SIZE = static_cast<int>(myPlayer.GetInventory().size());
+	const int SPELLS_AMOUNT = static_cast<int>(spells.size());
 
-	for (int i = 0; i < INVENTORY_SIZE; ++i)
+	for (int i = 0; i < SPELLS_AMOUNT; ++i)
 	{
 		std::cout << (i + 1) << ") ";
-		std::cout << "";
-		myPlayer.GetInventory()[i].PrintItemOnDisplay();
+		spells[i].PrintSpellOnDisplay();
 		std::cout << "\n";
 	}
-	std::cout << INVENTORY_SIZE + 1 << ") Return\n"
+	std::cout << SPELLS_AMOUNT + 1 << ") Return\n"
 		<< "Choice: ";
 }

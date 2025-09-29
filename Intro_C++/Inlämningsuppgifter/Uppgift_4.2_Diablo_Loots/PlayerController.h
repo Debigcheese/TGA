@@ -14,8 +14,9 @@ public:
 	void UpdateNavigation();
 
 	void UpdateScavenge();
-	void UpdatePickupItem(std::vector<Item>& aItems) const;
+	void UpdatePickupItem() const;
 	void UpdateLootChests() const;
+	void UpdateReadSpells() const;
 	void UpdateInventory() const;
 	void UpdateAttributes() const;
 	void Win() const;
@@ -23,9 +24,10 @@ public:
 	void PrintNavigation() const;
 	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
 	void PrintScavenge() const;
-	void PrintPickupMenu(const std::vector<Item>& aLoot) const;
+	void PrintPickupMenu() const;
 	void PrintChestMenu() const;
-	void PrintInventory() const;
+
+	void PrintSpells() const;
 
 private:
 	Room* currentRoom;

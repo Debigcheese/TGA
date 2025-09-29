@@ -72,6 +72,14 @@ struct Attributes
 	}
 };
 
+struct SpellAttributes
+{
+	int id;
+	Rarity rarity;
+	const char* name;
+	Attributes attributes;
+};
+
 struct ItemAttributes
 {
 	int id;

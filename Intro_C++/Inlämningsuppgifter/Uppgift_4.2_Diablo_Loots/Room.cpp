@@ -88,6 +88,21 @@ std::vector<Chest>& Room::GetChestInRoom()
 	return myChests;
 }
 
+void Room::AddSpellToRoom(const Spell& aSpellToAdd)
+{
+	mySpells.push_back(aSpellToAdd);
+}
+
+const std::vector<Spell>& Room::GetSpellsInRoom() const
+{
+	return mySpells;
+}
+
+std::vector<Spell>& Room::GetSpellsInRoom()
+{
+	return mySpells;
+}
+
 void Room::PrintRoomName() const
 {
 	std::cout << "Room: " << myRoomName;

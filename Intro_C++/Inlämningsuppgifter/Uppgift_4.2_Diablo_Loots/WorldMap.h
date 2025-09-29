@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "Chest.h"
+#include "Spell.h"
 
 class WorldMap
 {
@@ -34,6 +35,10 @@ public:
 	void GenerateChests();
 	void CreateChests(int aRoomId, int aAmount, Rarity aRarity);
 	void AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsToRoom);
+
+	void GenerateSpells();
+	void AddSpellsToRoomId(int aRoomId, const std::vector<Spell>& aSpellsToRoom);
+	std::vector<Spell> GetSpellsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const;
 
 private:
 	int myNextEnemyId;

@@ -69,6 +69,12 @@
     <ClCompile Include="Chest.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellDB.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils.h">
@@ -114,6 +120,12 @@
       <Filter>Header Files\Types</Filter>
     </ClInclude>
     <ClInclude Include="Chest.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellDB.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>

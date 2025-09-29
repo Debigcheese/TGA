@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include "Spell.h"
+
 class Room
 {
 public:
@@ -32,6 +34,11 @@ public:
 	void AddChestToRoom(const Chest& aChestToAdd);
 	std::vector<Chest>& GetChestInRoom();
 
+	//spells
+	void AddSpellToRoom(const Spell& aSpellToAdd);
+	const std::vector<Spell>& GetSpellsInRoom() const;
+	std::vector<Spell>& GetSpellsInRoom();
+
 	void PrintRoomName() const;
 	void PrintEnemies() const;
 	void PrintEnemiesWithTarget(const int& aTargetIndex) const;
@@ -43,4 +50,5 @@ private:
 	std::vector<Enemy> myEnemies;
 	std::vector<Item> myLoot;
 	std::vector<Chest> myChests;
+	std::vector<Spell> mySpells;
 };

@@ -17,8 +17,8 @@ public:
 
 private:
 	int myRoomId = 0;
+	Rarity myRarity;
 	std::string myName;
 	bool myIsOpen;
-	Rarity myRarity;
 	std::vector<Item> myItems;
 };

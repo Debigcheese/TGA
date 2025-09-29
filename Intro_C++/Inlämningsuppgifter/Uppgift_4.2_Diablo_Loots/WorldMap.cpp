@@ -6,6 +6,7 @@
 #include "GameStructs.h"
 #include "Chest.h"
 #include "ItemDB.h"
+#include "SpellDB.h"
 
 using namespace Utils;
 using namespace EnemyDB;
@@ -63,6 +64,7 @@ void WorldMap::GenerateWorld()
 	GenerateDoors();
 	GenerateItems();
 	GenerateChests();
+	GenerateSpells();
 }
 
 Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
@@ -150,9 +152,9 @@ void WorldMap::GenerateRooms()
 void WorldMap::GenerateChests()
 {
 	CreateChests(ROOM_0_ID, 1, Rarity::Bronze);
-	CreateChests(ROOM_1_ID, 3, Rarity::Gold);
-	CreateChests(ROOM_2_ID, 2, Rarity::Legendary);
-	CreateChests(ROOM_3_ID, 0, Rarity::None);
+	CreateChests(ROOM_1_ID, 2, Rarity::Gold);
+	CreateChests(ROOM_2_ID, 1, Rarity::Legendary);
+	CreateChests(ROOM_3_ID, 1, Rarity::None);
 	CreateChests(ROOM_4_ID, 1, Rarity::Legendary);
 }
 
@@ -186,8 +188,8 @@ void WorldMap::AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsT
 void WorldMap::GenerateItems()
 {
 	AddItemsToRoomId(ROOM_0_ID, GetItemsUpToRarity(0, 2, Rarity::Bronze));
-	AddItemsToRoomId(ROOM_1_ID, GetItemsUpToRarity(0, 3, Rarity::Silver));
-	AddItemsToRoomId(ROOM_2_ID, GetItemsUpToRarity(0, 3, Rarity::Gold));
+	AddItemsToRoomId(ROOM_1_ID, GetItemsUpToRarity(0, 2, Rarity::Silver));
+	AddItemsToRoomId(ROOM_2_ID, GetItemsUpToRarity(0, 2, Rarity::Gold));
 	AddItemsToRoomId(ROOM_3_ID, GetItemsUpToRarity(1, 2, Rarity::Legendary));
 	AddItemsToRoomId(ROOM_4_ID, GetItemsUpToRarity(1, 3, Rarity::Legendary));
 }
@@ -226,6 +228,52 @@ std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, c
 		itemIdPool.pop_back();
 	}
 	return itemsInRoom;
+}
+
+//spells
+void WorldMap::GenerateSpells()
+{
+	AddSpellsToRoomId(ROOM_0_ID, GetSpellsUpToRarity(0, 2, Rarity::Bronze));
+	AddSpellsToRoomId(ROOM_1_ID, GetSpellsUpToRarity(0, 3, Rarity::Silver));
+	AddSpellsToRoomId(ROOM_2_ID, GetSpellsUpToRarity(2, 3, Rarity::Gold));
+	AddSpellsToRoomId(ROOM_3_ID, GetSpellsUpToRarity(1, 2, Rarity::Legendary));
+	AddSpellsToRoomId(ROOM_4_ID, GetSpellsUpToRarity(1, 3, Rarity::Legendary));
+}
+
+void WorldMap::AddSpellsToRoomId(int aRoomId, const std::vector<Spell>& aSpellsToRoom)
+{
+	for (auto spell : aSpellsToRoom)
+	{
+		GetRoomWithId(aRoomId)->AddSpellToRoom(spell);
+	}
+}
+
+std::vector<Spell> WorldMap::GetSpellsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const
+{
+	std::vector<int> spellIdPool = SpellDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
+	// random item pool with rarities up to "aRarity"
+
+	if (spellIdPool.empty() || aMaxAmount <= 0)
+	{
+		return {};
+	}
+
+	const int RANDOM_SIZE = Utils::GenerateRandomNumber(aMinAmount, aMaxAmount); // amount of items to get
+
+	std::vector<Spell> spellsInRoom = {};
+	spellsInRoom.reserve(RANDOM_SIZE);
+
+	for (int i = 0; i < RANDOM_SIZE; ++i)
+	{
+		//generate random index to pick from my itemIdPool
+		int randomIndex = Utils::GenerateRandomNumber(0, static_cast<int>(spellIdPool.size() - 1));
+		int chosenId = spellIdPool[randomIndex];
+		spellsInRoom.emplace_back(chosenId);
+
+		spellIdPool[randomIndex] = spellIdPool.back();
+		spellIdPool.pop_back();
+	}
+	return spellsInRoom;
 }
 
 //OLD IMPLEMENTATION

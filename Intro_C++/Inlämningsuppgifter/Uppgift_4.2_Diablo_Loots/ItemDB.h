@@ -31,14 +31,6 @@ namespace ItemDB
 			}
 		},
 		{
-			3, ItemType::Spell, Rarity::Silver, "Fireball", 1.0f,
-			{
-				0.0f, 0.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				100.0f, 0.0f
-			}
-		},
-		{
 			4, ItemType::Armor, Rarity::Gold, "Backpack", 1.0f,
 			{
 				0.0f, 0.0f, 0.0f,
@@ -63,14 +55,6 @@ namespace ItemDB
 			}
 		},
 		{
-			7, ItemType::Spell, Rarity::Legendary, "Chain Lightning", 2.0f,
-			{
-				0.0f, 5.0f, 0.0f,
-				10.0f, 0.0f, 0.0f,
-				250.0f, 0.0f
-			}
-		},
-		{
 			8, ItemType::Weapon, Rarity::Bronze, "Rusty Dagger", 0.5f,
 			{
 				0.0f, 2.0f, 0.0f,
@@ -84,14 +68,6 @@ namespace ItemDB
 				0.0f, 0.0f, 20.0f,
 				0.0f, 0.0f, 0.0f,
 				0.0f, 25.0f
-			}
-		},
-		{
-			10, ItemType::Spell, Rarity::Bronze, "Magic Missile", 0.8f,
-			{
-				0.0f, 10, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				30.0f, 0.0f
 			}
 		},
 		{
@@ -127,14 +103,6 @@ namespace ItemDB
 			}
 		},
 		{
-			15, ItemType::Spell, Rarity::Gold, "Meteor Strike", 3.0f,
-			{
-				0.0f, 0.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				175.0f, 0.0f
-			}
-		},
-		{
 			16, ItemType::Weapon, Rarity::Legendary, "Void Reaver", 3.5f,
 			{
 				15.0f, 15.0f, -10.0f,
@@ -156,14 +124,6 @@ namespace ItemDB
 				5.0f, 2.0f, 2.0f,
 				0.0f, 0.0f, 0.0f,
 				10.0f, 0.0f
-			}
-		},
-		{
-			19, ItemType::Spell, Rarity::Legendary, "Time Warp", 2.5f,
-			{
-				10.0f, 80.0f, 10.0f,
-				15.0f, 0.0f, 2.0f,
-				0.0f, 0.0f
 			}
 		},
 	};
