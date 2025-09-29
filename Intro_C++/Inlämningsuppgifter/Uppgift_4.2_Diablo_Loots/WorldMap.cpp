@@ -9,7 +9,6 @@
 #include "SpellDB.h"
 
 using namespace Utils;
-using namespace EnemyDB;
 
 WorldMap::WorldMap() : myNextEnemyId(ENEMY_ID_FIRST)
 {
@@ -41,7 +40,7 @@ Room* WorldMap::GetRoomWithId(const int aRoomId)
 	return nullptr;
 }
 
-Room* WorldMap::GetRoomWithId(int aRoomId) const
+const Room* WorldMap::GetRoomWithId(int aRoomId) const
 {
 	for (const Room& room : myRooms)
 	{
@@ -71,6 +70,7 @@ Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
 {
 	Enemy enemy(aEnemyType);
 	GiveEnemyUniqueId(enemy);
+	enemy.SetDropItems(GetItemsUpToRarity(0, 1, Rarity::Legendary));
 	return enemy;
 }
 
@@ -152,9 +152,9 @@ void WorldMap::GenerateRooms()
 void WorldMap::GenerateChests()
 {
 	CreateChests(ROOM_0_ID, 1, Rarity::Bronze);
-	CreateChests(ROOM_1_ID, 2, Rarity::Gold);
-	CreateChests(ROOM_2_ID, 1, Rarity::Legendary);
-	CreateChests(ROOM_3_ID, 1, Rarity::None);
+	CreateChests(ROOM_1_ID, 2, Rarity::Silver);
+	CreateChests(ROOM_2_ID, 1, Rarity::Gold);
+	CreateChests(ROOM_3_ID, 1, Rarity::Legendary);
 	CreateChests(ROOM_4_ID, 1, Rarity::Legendary);
 }
 

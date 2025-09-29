@@ -95,21 +95,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-			{
-				newDamage = GetAttributes().damage;
-				break;
-			}
+		{
+			newDamage = GetAttributes().damage;
+			break;
+		}
 		case AttackType::HeavyAttack:
-			{
-				const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
-				const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
-				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-				break;
-			}
+		{
+			const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
+			const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
+			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+			break;
+		}
 		case AttackType::None:
-			{
-				break;
-			}
+		{
+			break;
+		}
 	}
 	return newDamage;
 }
@@ -205,13 +205,13 @@ Attributes Player::GetAttributes() const
 	return {
 
 		GetBaseAttributes().strength + myBuffedAttributes.strength,
-		myAttributes.agility + myBuffedAttributes.agility,
-		myAttributes.endurance + myBuffedAttributes.endurance,
-		GetMaxHealth() + myBuffedAttributes.maxHealth,
-		myAttributes.currentHealth + myBuffedAttributes.currentHealth,
-		GetCarryCapacity() + myBuffedAttributes.carryCapacity,
-		GetDamage() + myBuffedAttributes.damage,
-		GetDefense() + myBuffedAttributes.defense
+		GetBaseAttributes().agility + myBuffedAttributes.agility,
+		GetBaseAttributes().endurance + myBuffedAttributes.endurance,
+		GetBaseAttributes().maxHealth + myBuffedAttributes.maxHealth,
+		GetBaseAttributes().currentHealth + myBuffedAttributes.currentHealth,
+		GetBaseAttributes().carryCapacity + myBuffedAttributes.carryCapacity,
+		GetBaseAttributes().damage + myBuffedAttributes.damage,
+		GetBaseAttributes().defense + myBuffedAttributes.defense
 	};
 }
 
@@ -232,7 +232,7 @@ std::vector<Spell> Player::GetSpells() const
 
 bool Player::CanPickupItem(const Item& aItem) const
 {
-	if (GetAttributes().carryCapacity + aItem.GetWeight() >= GetInventoryWeight())
+	if (GetAttributes().carryCapacity >= GetInventoryWeight() + aItem.GetWeight())
 	{
 		return true;
 	}
@@ -246,7 +246,7 @@ float Player::GetInventoryWeight() const
 	{
 		return totalWeight;
 	}
-	for (auto item : myInventory)
+	for (const auto& item : myInventory)
 	{
 		totalWeight += item.GetWeight();
 	}
@@ -331,7 +331,7 @@ void Player::PrintAttributes() const
 	std::cout << "[Derived Attributes] " << "\n";
 	std::cout << "Attack Damage: " << static_cast<int>(GetAttributes().damage) << " AD" << "\n";
 	std::cout << "Max-Health :   " << static_cast<int>(GetAttributes().maxHealth) << " hp" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetAttributes().defense) << "\n";
+	std::cout << "Defense:       " << static_cast<int>(GetAttributes().defense) << " def" << "\n";
 	std::cout << "Carry Capacity: " << static_cast<int>(GetAttributes().carryCapacity) << "kg" << "\n\n";
 }
 
@@ -347,7 +347,7 @@ void Player::PrintBaseAttributes() const
 	std::cout << "[Derived Attributes] " << "\n";
 	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << "\n";
 	std::cout << "Max-Health :   " << static_cast<int>(GetMaxHealth()) << " hp" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << "\n";
+	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " def" << "\n";
 	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg" << "\n\n";
 }
 
@@ -365,7 +365,7 @@ void Player::PrintDerivedAttributes() const
 	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << " (Strength * Agility)" << "\n";
 	std::cout << "Max-Health:    " << static_cast<int>(GetMaxHealth()) << " hp" <<
 		" (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " (Endurance + Agility)" << "\n";
+	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " def" << " (Endurance + Agility)" << "\n";
 	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg " << " (Strength + Agility / 3)" <<
 		"\n\n";
 }
@@ -373,8 +373,8 @@ void Player::PrintDerivedAttributes() const
 void Player::PrintInventory() const
 {
 	std::cout << "\n<--- Inventory ("
-		<< static_cast<int>(GetInventoryWeight()) << "/"
-		<< static_cast<int>(GetAttributes().carryCapacity) << "kg) --->\n";
+		<< std::lround(GetInventoryWeight()) << "/"
+		<< std::lround(GetAttributes().carryCapacity) << "kg) --->\n";
 
 	if (myInventory.empty())
 	{

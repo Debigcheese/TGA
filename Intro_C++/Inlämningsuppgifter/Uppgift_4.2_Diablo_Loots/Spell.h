@@ -21,7 +21,7 @@ public:
 
 private:
 	//CONSTANTS
-	static constexpr int DEFAULT_ON_HIT_COUNT = 5;
+	static constexpr int DEFAULT_ON_HIT_COUNT = 10;
 
 	int myOnHitCount;
 	SpellAttributes myAttributes;

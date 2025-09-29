@@ -3,6 +3,7 @@
 #include "GameStructs.h"
 #include "Item.h"
 #include "Chest.h"
+#include "Enemy.h"
 #include <string>
 #include <vector>
 
@@ -25,6 +26,7 @@ public:
 	void AddEnemyToRoom(const Enemy& aEnemyToAdd);
 	void RemoveEnemyFromRoom(int aEnemyID);
 	bool DoesEnemiesExist() const;
+
 
 	//items
 	void AddItemToRoom(const Item& aItemToAdd);

@@ -10,7 +10,8 @@ Room::Room() :
 }
 
 Room::Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies) :
-	myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies), myChests()
+	myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies), myChests(),
+	mySpells()
 {
 }
 

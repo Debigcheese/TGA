@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 using namespace Utils;
 
@@ -45,41 +46,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-				{
-					UpdateCombat();
-					break;
-				}
+			{
+				UpdateCombat();
+				break;
+			}
 			case Action::Navigation:
-				{
-					UpdateNavigation();
-					break;
-				}
+			{
+				UpdateNavigation();
+				break;
+			}
 			case Action::LookAround:
-				{
-					UpdateScavenge();
-					break;
-				}
+			{
+				UpdateScavenge();
+				break;
+			}
 			case Action::Inventory:
-				{
-					UpdateInventory();
-					break;
-				}
+			{
+				UpdateInventory();
+				break;
+			}
 			case Action::Attributes:
-				{
-					UpdateAttributes();
-					break;
-				}
+			{
+				UpdateAttributes();
+				break;
+			}
 			case Action::Cheats:
-				{
-					UpdateCheats();
-					break;
-				}
+			{
+				UpdateCheats();
+				break;
+			}
 			case Action::Quit:
-				{
-					std::cout << "Quitting Game...\n";
-					system("pause");
-					return;
-				}
+			{
+				std::cout << "Quitting Game...\n";
+				system("pause");
+				return;
+			}
 		}
 	}
 }
@@ -110,6 +111,8 @@ void PlayerController::UpdateCombat()
 			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_ZERO);
 		}
 
+		auto& targetEnemy = enemies[myPlayer.GetTargetIndex()];
+
 		myPlayer.PrintPlayerUI();
 		currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
 		myPlayer.ChooseAttack();
@@ -119,18 +122,23 @@ void PlayerController::UpdateCombat()
 
 		system("pause");
 
-		if (enemies[myPlayer.GetTargetIndex()].IsDead())
+		if (targetEnemy.IsDead())
 		{
-			std::cout << "\n" << enemies[myPlayer.GetTargetIndex()].GetName() << " has been slained!\n";
+			std::cout << "\n" << targetEnemy.GetName() << " has been slained!\n";
+			if (targetEnemy.HasItems())
+			{
+				std::cout << targetEnemy.GetName() << " dropped an item!\n";
+			}
+			targetEnemy.DropItem(currentRoom);
 			system("pause");
 		}
 
 		system("cls");
 		myPlayer.PrintPlayerUI();
 
-		if (enemies[myPlayer.GetTargetIndex()].IsDead())
+		if (targetEnemy.IsDead())
 		{
-			currentRoom->RemoveEnemyFromRoom(enemies[myPlayer.GetTargetIndex()].GetId());
+			currentRoom->RemoveEnemyFromRoom(targetEnemy.GetId());
 			enemies = currentRoom->GetEnemies();
 			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_INVALID);
 			currentRoom->PrintEnemies();
@@ -152,7 +160,10 @@ void PlayerController::UpdateCombat()
 		{
 			enemy.Attack(myPlayer);
 		}
-		system("pause");
+		if (!myPlayer.IsDead())
+		{
+			system("pause");
+		}
 	}
 }
 
@@ -240,6 +251,8 @@ void PlayerController::UpdateNavigation()
 		}
 
 		std::cout << "\nEntered room: " << currentRoom->GetRoomName() << "\n";
+		std::cout << "You healed to full hp: " << std::round(myPlayer.GetAttributes().currentHealth)
+			<< " -> " << std::round(myPlayer.GetAttributes().maxHealth) << "\n";
 
 		if (myPlayer.GetRoomId() == ROOM_WIN_ID)
 		{
@@ -278,24 +291,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-				{
-					UpdatePickupItem();
-					break;
-				}
+			{
+				UpdatePickupItem();
+				break;
+			}
 			case Scavenge::Chests:
-				{
-					UpdateLootChests();
-					break;
-				}
+			{
+				UpdateLootChests();
+				break;
+			}
 			case Scavenge::Spells:
-				{
-					UpdateReadSpells();
-					break;
-				}
+			{
+				UpdateReadSpells();
+				break;
+			}
 			case Scavenge::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 	}
 }
@@ -529,19 +542,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-				{
-					myPlayer.PrintDerivedAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintDerivedAttributes();
+				break;
+			}
 			case AttriMenu::DerivedAttributes:
-				{
-					myPlayer.PrintAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintAttributes();
+				break;
+			}
 			case AttriMenu::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 		return;

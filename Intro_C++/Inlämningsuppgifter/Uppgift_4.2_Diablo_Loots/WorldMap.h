@@ -15,7 +15,7 @@ public:
 	std::vector<Door>& GetDoors();
 	std::vector<Room>& GetRooms();
 	Room* GetRoomWithId(int aRoomId);
-	Room* GetRoomWithId(int aRoomId) const;
+	const Room* GetRoomWithId(int aRoomId) const;
 
 	void AddRoom(const Room& aRoomToAdd);
 

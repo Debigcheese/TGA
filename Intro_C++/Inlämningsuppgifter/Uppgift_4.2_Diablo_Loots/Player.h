@@ -1,10 +1,11 @@
 #pragma once
 #include "GameStructs.h"
 #include "Cheats.h"
+#include "Spell.h"
+
 #include <string>
 #include <vector>
-
-#include "Spell.h"
+#include <cmath>
 
 using namespace Cheats;
 
@@ -65,7 +66,7 @@ public:
 
 private:
 	//CONSTANTS
-	static constexpr float DEFAULT_BASE_ATTRIBUTE = 10.0f;
+	static constexpr float DEFAULT_BASE_ATTRIBUTE = 8.0f;
 
 	WorldMap& myWorldMap;
 	std::string myName;

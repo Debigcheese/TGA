@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "Utils.h"
-
+#include "Room.h"
 #include <iostream>
 
 using namespace Utils;
@@ -11,7 +11,8 @@ Enemy::Enemy(EnemyType aType) :
 	myId(),
 	myAttributes{GetDef(aType).myType, GetDef(aType).myName, GetDef(aType).myDamage, GetDef(aType).myMaxHealth},
 	myCurrentHealth(GetDef(aType).myMaxHealth),
-	myIsDead(false)
+	myIsDead(false),
+	myItems({})
 {
 }
 
@@ -19,7 +20,6 @@ const EnemyAttributes& EnemyDB::GetDef(EnemyType aType)
 {
 	return EnemyDef[static_cast<int>(aType)];
 }
-
 
 float Enemy::GetMaxHealth() const
 {
@@ -46,17 +46,39 @@ void Enemy::TakeDamage(const float aDamage)
 	}
 }
 
+void Enemy::DropItem(Room* aCurrentRoom)
+{
+	for (auto& item : myItems)
+	{
+		aCurrentRoom->AddItemToRoom(item);
+	}
+	myItems.clear();
+}
+
+void Enemy::SetDropItems(const std::vector<Item>& aItems)
+{
+	for (auto& item : aItems)
+	{
+		myItems.push_back(item);
+	}
+}
+
+bool Enemy::HasItems() const
+{
+	return !myItems.empty();
+}
+
 void Enemy::Attack(Player& player) const
 {
 	const float dmgFloat = GetDamage() / player.GetDefenseMultiplier();
 	const int dmg = static_cast<int>(dmgFloat);
 	const int blockedDmg = static_cast<int>(GetDamage()) - dmg;
 
-	player.TakeDamage(dmgFloat);
-
 	std::cout << myAttributes.myName << " dealt "
 		<< "" << static_cast<int>(dmg) << " dmg to you"
 		<< " [" << blockedDmg << " blocked damage]\n";
+
+	player.TakeDamage(dmgFloat);
 }
 
 bool Enemy::IsDead() const
