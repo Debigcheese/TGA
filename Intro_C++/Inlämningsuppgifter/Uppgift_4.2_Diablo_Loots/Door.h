@@ -8,7 +8,7 @@ class Player;
 class Door
 {
 public:
-	Door(int aRoomOneId, int aRoomTwoId);
+	Door(int aRoomOneId, int aRoomTwoId, Lock aLock);
 
 	void AddDoorLock(const Lock& aLock);
 	void UpdateDoorLock(const Player& aPlayer);

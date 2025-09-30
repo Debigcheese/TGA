@@ -18,7 +18,7 @@ Enemy::Enemy(EnemyType aType) :
 
 const EnemyAttributes& EnemyDB::GetDef(EnemyType aType)
 {
-	return EnemyDef[static_cast<int>(aType)];
+	return ENEMY_DEF[static_cast<int>(aType)];
 }
 
 float Enemy::GetMaxHealth() const

@@ -10,11 +10,7 @@
 
 using namespace Utils;
 
-WorldMap::WorldMap() : myNextEnemyId(ENEMY_ID_FIRST)
-{
-}
-
-WorldMap::WorldMap(std::vector<Room> myRooms) : myNextEnemyId(ENEMY_ID_FIRST)
+WorldMap::WorldMap() : myNextEnemyId(ENEMY_ID_FIRST), myRooms(), myDoors()
 {
 }
 
@@ -52,6 +48,16 @@ const Room* WorldMap::GetRoomWithId(int aRoomId) const
 	return nullptr;
 }
 
+std::vector<int> WorldMap::GetRoomIds() const
+{
+	std::vector<int> roomIds;
+	for (const auto& room : myRooms)
+	{
+		roomIds.push_back(room.GetRoomId());
+	}
+	return roomIds;
+}
+
 void WorldMap::AddRoom(const Room& aRoomToAdd)
 {
 	myRooms.push_back(aRoomToAdd);
@@ -66,12 +72,40 @@ void WorldMap::GenerateWorld()
 	GenerateSpells();
 }
 
+void WorldMap::GenerateDoors()
+{
+	myDoors.emplace_back(ROOM_0_ID, ROOM_2_ID, LOCK_ONE);
+	myDoors.emplace_back(ROOM_0_ID, ROOM_1_ID, LOCK_UNLOCKED);
+	myDoors.emplace_back(ROOM_1_ID, ROOM_3_ID, LOCK_UNLOCKED);
+	myDoors.emplace_back(ROOM_2_ID, ROOM_3_ID, LOCK_UNLOCKED);
+	myDoors.emplace_back(ROOM_2_ID, ROOM_4_ID, LOCK_TWO);
+	myDoors.emplace_back(ROOM_4_ID, ROOM_WIN_ID, LOCK_THREE);
+}
+
 Enemy WorldMap::GenerateEnemy(const EnemyType& aEnemyType)
 {
 	Enemy enemy(aEnemyType);
 	GiveEnemyUniqueId(enemy);
-	enemy.SetDropItems(GetItemsUpToRarity(0, 1, Rarity::Legendary));
+	enemy.SetDropItems(GetItemsUpToRarity(ENEMY_DROP_ITEM.min, ENEMY_DROP_ITEM.max, Rarity::Legendary));
 	return enemy;
+}
+
+std::vector<Enemy> WorldMap::GenerateEnemies(const EnemyRoom& aEnemyRoom)
+{
+	std::vector<Enemy> enemies;
+	if (aEnemyRoom.enemy_one != EnemyType::None)
+	{
+		enemies.push_back(GenerateEnemy(aEnemyRoom.enemy_one));
+	}
+	if (aEnemyRoom.enemy_two != EnemyType::None)
+	{
+		enemies.push_back(GenerateEnemy(aEnemyRoom.enemy_two));
+	}
+	if (aEnemyRoom.enemy_three != EnemyType::None)
+	{
+		enemies.push_back(GenerateEnemy(aEnemyRoom.enemy_three));
+	}
+	return enemies;
 }
 
 void WorldMap::GiveEnemyUniqueId(Enemy& aEnemy)
@@ -81,98 +115,58 @@ void WorldMap::GiveEnemyUniqueId(Enemy& aEnemy)
 	aEnemy.SetId(newId);
 }
 
-void WorldMap::GenerateDoors()
-{
-	//room 0
-	Door d1 = Door(ROOM_0_ID, ROOM_2_ID);
-	Door d2 = Door(ROOM_0_ID, ROOM_1_ID);
-	Door d3 = Door(ROOM_1_ID, ROOM_3_ID);
-	Door d4 = Door(ROOM_2_ID, ROOM_3_ID);
-	Door d5 = Door(ROOM_2_ID, ROOM_4_ID);
-	Door d6 = Door(ROOM_4_ID, ROOM_WIN_ID);
-
-	Lock l1;
-	l1.agilityReq.attributeValue = LOCK_1_AGILITY_REQ;
-	l1.strengthReq.attributeValue = LOCK_1_STRENGTH_REQ;
-
-	Lock l2;
-	l2.agilityReq.attributeValue = LOCK_1_STRENGTH_REQ;
-	l2.strengthReq.attributeValue = LOCK_1_AGILITY_REQ;
-
-	Lock l3;
-	l3.agilityReq.attributeValue = 20.0f;
-	l3.strengthReq.attributeValue = 20.0f;
-
-	d1.AddDoorLock(l1);
-	d5.AddDoorLock(l2);
-	d6.AddDoorLock(l3);
-
-	myDoors.push_back(d1);
-	myDoors.push_back(d2);
-	myDoors.push_back(d3);
-	myDoors.push_back(d4);
-	myDoors.push_back(d5);
-	myDoors.push_back(d6);
-}
-
 void WorldMap::GenerateRooms()
 {
-	std::vector<Enemy> enemiesR0;
-	std::vector<Enemy> enemiesR1;
-	std::vector<Enemy> enemiesR2;
-	std::vector<Enemy> enemiesR3;
-	std::vector<Enemy> enemiesR4;
-	std::vector<Enemy> enemiesR5;
+	myRooms.emplace_back(
+		ROOM_0_ID, "Withered Halls", ROOM_POS_FROM_ID[ROOM_0_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_0_ID]));
 
-	enemiesR0.push_back(GenerateEnemy(EnemyType::Bat));
-	enemiesR0.push_back(GenerateEnemy(EnemyType::Bat));
-	enemiesR0.push_back(GenerateEnemy(EnemyType::Skeleton));
+	myRooms.emplace_back(
+		ROOM_1_ID, "Obsidian Spire", ROOM_POS_FROM_ID[ROOM_1_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_1_ID]));
 
-	enemiesR1.push_back(GenerateEnemy(EnemyType::Skeleton));
-	enemiesR1.push_back(GenerateEnemy(EnemyType::Undead));
+	myRooms.emplace_back(
+		ROOM_2_ID, "Hollow Cavern", ROOM_POS_FROM_ID[ROOM_2_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_2_ID]));
 
-	enemiesR2.push_back(GenerateEnemy(EnemyType::Skeleton));
-	enemiesR2.push_back(GenerateEnemy(EnemyType::Beast));
-	enemiesR2.push_back(GenerateEnemy(EnemyType::Humanoid));
+	myRooms.emplace_back(
+		ROOM_3_ID, "Pits of Torment", ROOM_POS_FROM_ID[ROOM_3_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_3_ID]));
 
-	enemiesR3.push_back(GenerateEnemy(EnemyType::Beast));
-	enemiesR3.push_back(GenerateEnemy(EnemyType::Elemental));
-	enemiesR3.push_back(GenerateEnemy(EnemyType::Humanoid));
+	myRooms.emplace_back(
+		ROOM_4_ID, "Den of the Blighted", ROOM_POS_FROM_ID[ROOM_4_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_4_ID]));
 
-	enemiesR4.push_back(GenerateEnemy(EnemyType::Demon));
-
-	AddRoom(Room(ROOM_0_ID, "Withered Halls", {0, 0}, enemiesR0));
-	AddRoom(Room(ROOM_1_ID, "Obsidian Spire", {1, 0}, enemiesR1));
-	AddRoom(Room(ROOM_2_ID, "Hollow Cavern", {0, 1}, enemiesR2));
-	AddRoom(Room(ROOM_3_ID, "Pits of Torment", {1, 1}, enemiesR3));
-	AddRoom(Room(ROOM_4_ID, "Den of the Blighted", {0, 2}, enemiesR4));
-	AddRoom(Room(ROOM_WIN_ID, "Eternal Abyss", {-1, 2}, enemiesR5));
+	myRooms.emplace_back(
+		ROOM_WIN_ID, "Eternal Abyss", ROOM_POS_FROM_ID[ROOM_WIN_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_WIN_ID]));
 }
 
 void WorldMap::GenerateChests()
 {
-	CreateChests(ROOM_0_ID, 1, Rarity::Bronze);
-	CreateChests(ROOM_1_ID, 2, Rarity::Silver);
-	CreateChests(ROOM_2_ID, 1, Rarity::Gold);
-	CreateChests(ROOM_3_ID, 1, Rarity::Legendary);
-	CreateChests(ROOM_4_ID, 1, Rarity::Legendary);
+	for (const auto& roomIds : GetRoomIds())
+	{
+		if (roomIds == CHEST_FROM_ID->id)
+		{
+			int roomId = CHEST_FROM_ID->id;
+			AddItemsToRoomId(roomId,
+			                 GetItemsUpToRarity(
+				                 CHEST_FROM_ID[roomId].amount.min,
+				                 CHEST_FROM_ID[roomId].amount.max,
+				                 CHEST_FROM_ID[roomId].rarity));
+		}
+	}
 }
 
-void WorldMap::CreateChests(int aRoomId, int aAmount, Rarity aRarity)
+void WorldMap::CreateChests(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity)
 {
 	std::vector<Chest> chests{};
 
-	if (aAmount < 0)
+	if (aMinAmount < 0 || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
 	{
 		return;
 	}
 
-	const int COUNT = aAmount;
+	const int RANDOM_SIZE = Utils::GenerateRandomNumber(aMinAmount, aMaxAmount); // amount of items to get
 
-	chests.reserve(COUNT);
-	for (int i = 0; i < COUNT; ++i)
+	chests.reserve(RANDOM_SIZE);
+	for (int i = 0; i < RANDOM_SIZE; ++i)
 	{
-		chests.emplace_back(aRoomId, aRarity, GetItemsUpToRarity(0, 3, aRarity));
+		chests.emplace_back(aRoomId, aRarity, GetItemsUpToRarity(CHEST_DROP_ITEM.min, CHEST_DROP_ITEM.max, aRarity));
 	}
 	AddChestsToRoomId(aRoomId, chests);
 }
@@ -187,11 +181,18 @@ void WorldMap::AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsT
 
 void WorldMap::GenerateItems()
 {
-	AddItemsToRoomId(ROOM_0_ID, GetItemsUpToRarity(0, 2, Rarity::Bronze));
-	AddItemsToRoomId(ROOM_1_ID, GetItemsUpToRarity(0, 2, Rarity::Silver));
-	AddItemsToRoomId(ROOM_2_ID, GetItemsUpToRarity(0, 2, Rarity::Gold));
-	AddItemsToRoomId(ROOM_3_ID, GetItemsUpToRarity(1, 2, Rarity::Legendary));
-	AddItemsToRoomId(ROOM_4_ID, GetItemsUpToRarity(1, 3, Rarity::Legendary));
+	for (const auto& roomIds : GetRoomIds())
+	{
+		if (roomIds == ITEM_FROM_ID->id)
+		{
+			int roomId = ITEM_FROM_ID->id;
+			AddItemsToRoomId(roomId,
+			                 GetItemsUpToRarity(
+				                 ITEM_FROM_ID[roomId].amount.min,
+				                 ITEM_FROM_ID[roomId].amount.max,
+				                 ITEM_FROM_ID[roomId].rarity));
+		}
+	}
 }
 
 void WorldMap::AddItemsToRoomId(int aRoomId, const std::vector<Item>& aItemsToRoom)
@@ -207,7 +208,7 @@ std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, c
 	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
 	// random item pool with rarities up to "aRarity"
 
-	if (itemIdPool.empty() || aMaxAmount <= 0)
+	if (itemIdPool.empty() || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
 	{
 		return {};
 	}
@@ -233,11 +234,18 @@ std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, c
 //spells
 void WorldMap::GenerateSpells()
 {
-	AddSpellsToRoomId(ROOM_0_ID, GetSpellsUpToRarity(0, 2, Rarity::Bronze));
-	AddSpellsToRoomId(ROOM_1_ID, GetSpellsUpToRarity(0, 3, Rarity::Silver));
-	AddSpellsToRoomId(ROOM_2_ID, GetSpellsUpToRarity(2, 3, Rarity::Gold));
-	AddSpellsToRoomId(ROOM_3_ID, GetSpellsUpToRarity(1, 2, Rarity::Legendary));
-	AddSpellsToRoomId(ROOM_4_ID, GetSpellsUpToRarity(1, 3, Rarity::Legendary));
+	for (const auto& roomIds : GetRoomIds())
+	{
+		if (roomIds == SPELL_FROM_ID->id)
+		{
+			int roomId = SPELL_FROM_ID->id;
+			AddItemsToRoomId(roomId,
+			                 GetItemsUpToRarity(
+				                 SPELL_FROM_ID[roomId].amount.min,
+				                 SPELL_FROM_ID[roomId].amount.max,
+				                 SPELL_FROM_ID[roomId].rarity));
+		}
+	}
 }
 
 void WorldMap::AddSpellsToRoomId(int aRoomId, const std::vector<Spell>& aSpellsToRoom)
@@ -253,7 +261,7 @@ std::vector<Spell> WorldMap::GetSpellsUpToRarity(int aMinAmount, int aMaxAmount,
 	std::vector<int> spellIdPool = SpellDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
 	// random item pool with rarities up to "aRarity"
 
-	if (spellIdPool.empty() || aMaxAmount <= 0)
+	if (spellIdPool.empty() || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
 	{
 		return {};
 	}

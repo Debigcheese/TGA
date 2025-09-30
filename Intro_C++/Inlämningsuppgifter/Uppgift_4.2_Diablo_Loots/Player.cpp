@@ -95,21 +95,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-		{
-			newDamage = GetAttributes().damage;
-			break;
-		}
+			{
+				newDamage = GetAttributes().damage;
+				break;
+			}
 		case AttackType::HeavyAttack:
-		{
-			const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
-			const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
-			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-			break;
-		}
+			{
+				const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
+				const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
+				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+				break;
+			}
 		case AttackType::None:
-		{
-			break;
-		}
+			{
+				break;
+			}
 	}
 	return newDamage;
 }
@@ -279,6 +279,11 @@ void Player::RemoveSpell(int aIndex)
 	mySpells.erase(mySpells.begin() + aIndex);
 
 	UpdateAttributes();
+}
+
+void Player::HealFullHealth()
+{
+	myAttributes.currentHealth = GetAttributes().maxHealth;
 }
 
 void Player::UpdateAttributes()

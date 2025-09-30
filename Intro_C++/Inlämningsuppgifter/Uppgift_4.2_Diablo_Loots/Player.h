@@ -29,6 +29,7 @@ public:
 	void UpdateAttributes();
 	void ApplySpell(const Spell& aSpell);
 	void RemoveSpell(int aIndex);
+	void HealFullHealth();
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
 	int GetRoomId() const;

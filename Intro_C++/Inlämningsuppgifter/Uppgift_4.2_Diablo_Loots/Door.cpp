@@ -9,7 +9,7 @@
 using namespace GameConstants;
 using namespace Utils;
 
-Door::Door(int aRoomOneId, int aRoomTwoId) :
+Door::Door(int aRoomOneId, int aRoomTwoId, Lock aLock) :
 	myRoomOneId(aRoomOneId),
 	myRoomTwoId(aRoomTwoId),
 	myLock{
@@ -75,44 +75,44 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 
 		switch (tempLockType)
 		{
-		case LockType::Agility:
-			{
-				if (TryLockPick(aPlayer, LockType::Agility))
+			case LockType::Agility:
 				{
-					std::cout << "\nYou successfully lock-picked the door open!\n";
-					myLock.isLocked = false;
+					if (TryLockPick(aPlayer, LockType::Agility))
+					{
+						std::cout << "\nYou successfully lock-picked the door open!\n";
+						myLock.isLocked = false;
+						return;
+					}
+					else
+					{
+						std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
+							agilityReq.attributeValue << "\n";
+					}
+					break;
+				}
+			case LockType::Strength:
+				{
+					if (TryLockPick(aPlayer, LockType::Strength))
+					{
+						std::cout << "\nYou successfully broke the door open!\n";
+						myLock.isLocked = false;
+						return;
+					}
+					else
+					{
+						std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
+							strengthReq.attributeValue << "\n";
+					}
+					break;
+				}
+			case LockType::Unlocked:
+				{
 					return;
 				}
-				else
+			case LockType::None:
 				{
-					std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
-						agilityReq.attributeValue << "\n";
-				}
-				break;
-			}
-		case LockType::Strength:
-			{
-				if (TryLockPick(aPlayer, LockType::Strength))
-				{
-					std::cout << "\nYou successfully broke the door open!\n";
-					myLock.isLocked = false;
 					return;
 				}
-				else
-				{
-					std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
-						strengthReq.attributeValue << "\n";
-				}
-				break;
-			}
-		case LockType::Unlocked:
-			{
-				return;
-			}
-		case LockType::None:
-			{
-				return;
-			}
 		}
 		system("pause");
 	}

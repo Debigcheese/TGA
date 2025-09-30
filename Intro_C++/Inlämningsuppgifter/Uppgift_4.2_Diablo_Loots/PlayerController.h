@@ -10,7 +10,7 @@ public:
 	PlayerController(WorldMap& aWorldMap, Player& aPlayer);
 
 	void UpdateAction();
-	void UpdateCombat();
+	void UpdateCombat() const;
 	void UpdateNavigation();
 
 	void UpdateScavenge();

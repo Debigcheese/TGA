@@ -5,7 +5,7 @@
 
 namespace ItemDB
 {
-	const ItemAttributes ItemDef[] = {
+	const ItemAttributes ITEM_DEF[] = {
 		{
 			0, ItemType::Weapon, Rarity::Bronze, "Eclipse", 1.0f,
 			{

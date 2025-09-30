@@ -4,10 +4,6 @@
 
 using namespace Utils;
 
-Room::Room() :
-	myRoomId(), myRoomName(), myPos({0, 0}), myEnemies()
-{
-}
 
 Room::Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies) :
 	myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies), myChests(),
@@ -111,13 +107,13 @@ void Room::PrintRoomName() const
 
 void Room::PrintEnemies() const
 {
-	if (myEnemies.size() <= ARRAY_COUNT_ZERO)
+	if (static_cast<int>(myEnemies.size()) <= ARRAY_COUNT_ZERO)
 	{
 		std::cout << "\n[No monsters in room]\n";
 		return;
 	}
 	std::cout << "\n[Monsters in room]\n";
-	for (int i = 0; i < myEnemies.size(); i++)
+	for (int i = 0; i < static_cast<int>(myEnemies.size()); i++)
 	{
 		std::cout << "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
 			<< myEnemies[i].GetName() << ": "
@@ -129,7 +125,7 @@ void Room::PrintEnemies() const
 
 void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 {
-	if (myEnemies.size() <= ARRAY_COUNT_ZERO)
+	if (static_cast<int>(myEnemies.size()) <= ARRAY_COUNT_ZERO)
 	{
 		std::cout << "\n[No monsters in room]\n";
 		return;
@@ -138,7 +134,7 @@ void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 	const char* RED = "\x1b[31m";
 	const char* RESET = "\x1b[0m";
 	std::cout << "\n[Monsters in room]\n";
-	for (int i = 0; i < myEnemies.size(); i++)
+	for (int i = 0; i < static_cast<int>(myEnemies.size()); i++)
 	{
 		if (aTargetIndex == i)
 		{

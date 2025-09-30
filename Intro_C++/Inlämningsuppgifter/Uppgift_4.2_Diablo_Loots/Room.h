@@ -3,16 +3,14 @@
 #include "GameStructs.h"
 #include "Item.h"
 #include "Chest.h"
-#include "Enemy.h"
+#include "Spell.h"
+
 #include <string>
 #include <vector>
-
-#include "Spell.h"
 
 class Room
 {
 public:
-	Room();
 	Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies);
 
 	int GetRoomId() const;

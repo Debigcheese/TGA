@@ -1,7 +1,5 @@
 #pragma once
 #include "GameStructs.h"
-#include "GameEnums.h"
-#include <vector>
 
 class Player;
 

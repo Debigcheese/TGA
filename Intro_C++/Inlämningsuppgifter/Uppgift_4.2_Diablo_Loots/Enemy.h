@@ -4,13 +4,15 @@
 #include "GameConstants.h"
 #include "Item.h"
 
+#include <vector>
+
 using namespace GameConstants;
 class Player;
 class Room;
 
 namespace EnemyDB
 {
-	const EnemyAttributes EnemyDef[] = {
+	const EnemyAttributes ENEMY_DEF[] = {
 		// type , name, dmg, hp
 		{EnemyType::None, "None", 0.0f, 0.0f},
 		{EnemyType::Bat, "Bat", 5.0f, 40.0f},

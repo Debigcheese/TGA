@@ -46,46 +46,46 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-			{
-				UpdateCombat();
-				break;
-			}
+				{
+					UpdateCombat();
+					break;
+				}
 			case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+				{
+					UpdateNavigation();
+					break;
+				}
 			case Action::LookAround:
-			{
-				UpdateScavenge();
-				break;
-			}
+				{
+					UpdateScavenge();
+					break;
+				}
 			case Action::Inventory:
-			{
-				UpdateInventory();
-				break;
-			}
+				{
+					UpdateInventory();
+					break;
+				}
 			case Action::Attributes:
-			{
-				UpdateAttributes();
-				break;
-			}
+				{
+					UpdateAttributes();
+					break;
+				}
 			case Action::Cheats:
-			{
-				UpdateCheats();
-				break;
-			}
+				{
+					UpdateCheats();
+					break;
+				}
 			case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+				{
+					std::cout << "Quitting Game...\n";
+					system("pause");
+					return;
+				}
 		}
 	}
 }
 
-void PlayerController::UpdateCombat()
+void PlayerController::UpdateCombat() const
 {
 	if (!myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->DoesEnemiesExist())
 	{
@@ -253,8 +253,9 @@ void PlayerController::UpdateNavigation()
 		std::cout << "\nEntered room: " << currentRoom->GetRoomName() << "\n";
 		std::cout << "You healed to full hp: " << std::round(myPlayer.GetAttributes().currentHealth)
 			<< " -> " << std::round(myPlayer.GetAttributes().maxHealth) << "\n";
+		myPlayer.HealFullHealth();
 
-		if (myPlayer.GetRoomId() == ROOM_WIN_ID)
+		if (myPlayer.GetRoomId() == 5)
 		{
 			Win();
 		}
@@ -291,24 +292,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-			{
-				UpdatePickupItem();
-				break;
-			}
+				{
+					UpdatePickupItem();
+					break;
+				}
 			case Scavenge::Chests:
-			{
-				UpdateLootChests();
-				break;
-			}
+				{
+					UpdateLootChests();
+					break;
+				}
 			case Scavenge::Spells:
-			{
-				UpdateReadSpells();
-				break;
-			}
+				{
+					UpdateReadSpells();
+					break;
+				}
 			case Scavenge::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
@@ -542,19 +543,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-			{
-				myPlayer.PrintDerivedAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintDerivedAttributes();
+					break;
+				}
 			case AttriMenu::DerivedAttributes:
-			{
-				myPlayer.PrintAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintAttributes();
+					break;
+				}
 			case AttriMenu::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 		return;

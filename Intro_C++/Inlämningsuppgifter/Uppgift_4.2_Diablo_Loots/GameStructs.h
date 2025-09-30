@@ -4,7 +4,6 @@
 
 using namespace GameConstants;
 
-
 struct EnemyAttributes
 {
 	EnemyType myType;
@@ -22,8 +21,8 @@ struct LockRequirements
 struct Lock
 {
 	bool isLocked;
-	LockRequirements strengthReq{LockType::Strength, LOCK_1_STRENGTH_REQ_DECLARE};
-	LockRequirements agilityReq{LockType::Agility, LOCK_1_AGILITY_REQ_DECLARE};
+	LockRequirements strengthReq{LockType::Strength, 0};
+	LockRequirements agilityReq{LockType::Agility, 0};
 };
 
 struct Position
@@ -44,14 +43,14 @@ struct Position
 
 struct Attributes
 {
-	float strength = 0; //styrka (10-99)
-	float agility = 0; // smidighet (10-99)
-	float endurance = 0; // fysik (10-99)
-	float maxHealth = 0;
-	float currentHealth = 0;
-	float carryCapacity = 0;
-	float damage = 0;
-	float defense = 0;
+	float strength; //styrka (10-99)
+	float agility; // smidighet (10-99)
+	float endurance; // fysik (10-99)
+	float maxHealth;
+	float currentHealth;
+	float carryCapacity;
+	float damage;
+	float defense;
 
 	Attributes& operator+=(const Attributes& other)
 	{
@@ -88,4 +87,26 @@ struct ItemAttributes
 	const char* name;
 	float weight;
 	Attributes attributes;
+};
+
+struct AmountRange
+{
+	int min;
+	int max;
+};
+
+//world map constants
+
+struct EnemyRoom
+{
+	EnemyType enemy_one;
+	EnemyType enemy_two;
+	EnemyType enemy_three;
+};
+
+struct CreateObject
+{
+	int id;
+	AmountRange amount;
+	Rarity rarity;
 };
