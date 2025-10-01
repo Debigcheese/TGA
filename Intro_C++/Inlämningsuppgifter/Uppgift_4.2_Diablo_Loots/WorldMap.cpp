@@ -138,27 +138,24 @@ void WorldMap::GenerateRooms()
 
 void WorldMap::GenerateChests()
 {
-	for (const auto& roomIds : GetRoomIds())
+	for (int roomId : GetRoomIds())
 	{
-		if (roomIds == CHEST_FROM_ID->id)
-		{
-			int roomId = CHEST_FROM_ID->id;
-			AddItemsToRoomId(roomId,
-			                 GetItemsUpToRarity(
-				                 CHEST_FROM_ID[roomId].amount.min,
-				                 CHEST_FROM_ID[roomId].amount.max,
-				                 CHEST_FROM_ID[roomId].rarity));
-		}
+		const auto& data = CHEST_FROM_ID[roomId];
+		AddChestsToRoomId(roomId,
+		                  GetChestsUpToRarity(roomId,
+		                                      data.amount.min,
+		                                      data.amount.max,
+		                                      data.rarity));
 	}
 }
 
-void WorldMap::CreateChests(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity)
+std::vector<Chest> WorldMap::GetChestsUpToRarity(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity)
 {
 	std::vector<Chest> chests{};
 
-	if (aMinAmount < 0 || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
+	if (aMinAmount < 0 || aMaxAmount <= 0 || aMaxAmount < aMinAmount)
 	{
-		return;
+		return chests;
 	}
 
 	const int RANDOM_SIZE = Utils::GenerateRandomNumber(aMinAmount, aMaxAmount); // amount of items to get
@@ -168,7 +165,7 @@ void WorldMap::CreateChests(int aRoomId, int aMinAmount, int aMaxAmount, Rarity 
 	{
 		chests.emplace_back(aRoomId, aRarity, GetItemsUpToRarity(CHEST_DROP_ITEM.min, CHEST_DROP_ITEM.max, aRarity));
 	}
-	AddChestsToRoomId(aRoomId, chests);
+	return chests;
 }
 
 void WorldMap::AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsToRoom)
@@ -181,17 +178,13 @@ void WorldMap::AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsT
 
 void WorldMap::GenerateItems()
 {
-	for (const auto& roomIds : GetRoomIds())
+	for (int roomId : GetRoomIds())
 	{
-		if (roomIds == ITEM_FROM_ID->id)
-		{
-			int roomId = ITEM_FROM_ID->id;
-			AddItemsToRoomId(roomId,
-			                 GetItemsUpToRarity(
-				                 ITEM_FROM_ID[roomId].amount.min,
-				                 ITEM_FROM_ID[roomId].amount.max,
-				                 ITEM_FROM_ID[roomId].rarity));
-		}
+		const auto& data = ITEM_FROM_ID[roomId];
+		AddItemsToRoomId(roomId,
+		                 GetItemsUpToRarity(data.amount.min,
+		                                    data.amount.max,
+		                                    data.rarity));
 	}
 }
 
@@ -208,7 +201,7 @@ std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, c
 	std::vector<int> itemIdPool = ItemDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
 	// random item pool with rarities up to "aRarity"
 
-	if (itemIdPool.empty() || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
+	if (itemIdPool.empty() || aMaxAmount <= 0 || aMaxAmount < aMinAmount)
 	{
 		return {};
 	}
@@ -234,6 +227,16 @@ std::vector<Item> WorldMap::GetItemsUpToRarity(int aMinAmount, int aMaxAmount, c
 //spells
 void WorldMap::GenerateSpells()
 {
+	for (int roomId : GetRoomIds())
+	{
+		const auto& data = SPELL_FROM_ID[roomId];
+		AddSpellsToRoomId(roomId,
+		                  GetSpellsUpToRarity(data.amount.min,
+		                                      data.amount.max,
+		                                      data.rarity));
+	}
+
+
 	for (const auto& roomIds : GetRoomIds())
 	{
 		if (roomIds == SPELL_FROM_ID->id)
@@ -261,7 +264,7 @@ std::vector<Spell> WorldMap::GetSpellsUpToRarity(int aMinAmount, int aMaxAmount,
 	std::vector<int> spellIdPool = SpellDB::GetIdsFromRarities(GetRaritiesFromMax(aRarity));
 	// random item pool with rarities up to "aRarity"
 
-	if (spellIdPool.empty() || aMaxAmount <= 0 || aMaxAmount > aMinAmount)
+	if (spellIdPool.empty() || aMaxAmount <= 0 || aMaxAmount < aMinAmount)
 	{
 		return {};
 	}

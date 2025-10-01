@@ -34,8 +34,8 @@ void Player::Attack()
 	float damage = GetDamageFromAttackType(myAttackIndex);
 	float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
 	enemies[myTargetIndex].TakeDamage(damage);
-	std::cout << "\nYou dealt " << static_cast<int>(damage) << " dmg to " << enemies[myTargetIndex].GetName();
-	std::cout << " (" << static_cast<int>(enemyOldHp) << "hp -> " << static_cast<int>(enemies[myTargetIndex].
+	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to " << enemies[myTargetIndex].GetName();
+	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[myTargetIndex].
 		GetCurrentHealth()) << "hp)" << "\n";
 }
 
@@ -101,8 +101,8 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 			}
 		case AttackType::HeavyAttack:
 			{
-				const int heavyMinMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MIN);
-				const int heavyMaxMulti = static_cast<int>(GetAttributes().damage * HEAVY_MULTI_MAX);
+				const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
+				const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
 				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
 				break;
 			}

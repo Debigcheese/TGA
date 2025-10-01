@@ -6,7 +6,6 @@
 #include "Chest.h"
 #include "Spell.h"
 
-
 class WorldMap
 {
 public:
@@ -35,7 +34,7 @@ public:
 
 	//chests
 	void GenerateChests();
-	void CreateChests(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity);
+	std::vector<Chest> GetChestsUpToRarity(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity);
 	void AddChestsToRoomId(int aRoomId, const std::vector<Chest>& aChestsToRoom);
 
 	//spells
