@@ -135,6 +135,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="EnemyType.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="ItemType.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="SpellFactory.cpp" />
+    <ClCompile Include="SpellType.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
@@ -154,6 +156,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="EnemyType.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameEnums.h" />
     <ClInclude Include="GameStructs.h" />
@@ -165,6 +168,7 @@
     <ClInclude Include="Room.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="SpellFactory.h" />
+    <ClInclude Include="SpellType.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>

@@ -7,11 +7,10 @@ class Player;
 class Item
 {
 public:
-	Item(ItemType* myItemType);
+	Item(ItemType* aItemType);
 
-	//const char* GetName() const;
-	//float GetWeight() const;
-	//ItemAttributes GetAttributes() const;
+	ItemAttributes GetItemAttributes() const { return myItemType->GetItemAttributes(); }
+	Attributes GetAttributes() const { return GetItemAttributes().attributes; }
 
 	void PrintItemAttributes() const;
 	void PrintItemOnPickup() const;

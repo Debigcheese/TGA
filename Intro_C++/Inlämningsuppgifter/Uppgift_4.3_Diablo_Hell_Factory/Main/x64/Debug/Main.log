@@ -1,16 +1,12 @@
 ﻿  Diablo.cpp
+  Door.cpp
+  Enemy.cpp
+  EnemyFactory.cpp
   Main.cpp
-  PlayerController.cpp
   Player.cpp
+  PlayerController.cpp
+  Room.cpp
   WorldMap.cpp
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,29): error C3312: no callable 'begin' function found for type 'const EnemyRoom'
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,29): error C3312: no callable 'end' function found for type 'const EnemyRoom'
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,23): error C2530: 'key': references must be initialized
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,27): error C2143: syntax error: missing ';' before ':'
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,39): error C2143: syntax error: missing ';' before ')'
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,29): error C2451: a conditional expression of type 'const EnemyRoom' is not valid
-      D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\WorldMap.cpp(106,29):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
   Generating Code...
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\Player.cpp(190,1): warning C4172: returning address of local variable or temporary 
+D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\Player.cpp(191,1): warning C4172: returning address of local variable or temporary 
+  Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_4.3_Diablo_Hell_Factory\x64\Debug\Main.exe

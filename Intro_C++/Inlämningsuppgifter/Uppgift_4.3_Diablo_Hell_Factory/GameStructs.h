@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
 #include <array>
+#include <vector>
+
 #include "GameEnums.h"
 #include "GameConstants.h"
 
@@ -9,7 +10,6 @@ using namespace GameConstants;
 struct EnemyAttributes
 {
 	EnemyKey key;
-	EnemyType type;
 	const char* name;
 	float damage;
 	float maxHealth;
@@ -102,7 +102,7 @@ struct AmountRange
 
 struct EnemyRoom
 {
-	std::array<EnemyKey, 3> enemyKeys[3];
+	std::vector<EnemyKey> enemyKeys;
 };
 
 struct CreateObject

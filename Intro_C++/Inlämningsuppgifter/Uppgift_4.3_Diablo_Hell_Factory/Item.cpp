@@ -4,31 +4,15 @@
 
 using namespace Utils;
 
-Item::Item(ItemType* myItemType)
-	: myItemType(myItemType)
+Item::Item(ItemType* aItemType)
+	: myItemType(aItemType)
 {
 }
-
-//
-//const char* Item::GetName() const
-//{
-//	return myAttributes.name;
-//}
-//
-//float Item::GetWeight() const
-//{
-//	return myAttributes.weight;
-//}
-//
-//ItemAttributes Item::GetAttributes() const
-//{
-//	return myAttributes;
-//}
 
 void Item::PrintItemAttributes() const
 {
 	// Print non-zero attributes
-	const Attributes& a = myItemType->GetAttributes();
+	const Attributes& a = GetAttributes();
 	if (a.strength != 0.0f)
 	{
 		std::cout << "Strength: "
@@ -79,17 +63,17 @@ void Item::PrintItemAttributes() const
 	}
 
 	std::cout << "Weight: +"
-		<< static_cast<int>(myItemType->GetAttributes().weight)
+		<< static_cast<int>(GetItemAttributes().weight)
 		<< "kg\n";
 }
 
 void Item::PrintItemOnPickup() const
 {
-	std::cout << GetColorCode(GetColorFromRarity(myItemType->GetAttributes().rarity), true)
-		<< "\n<------ " << RarityToString(myItemType->GetAttributes().rarity) << " ------>"
-		<< GetColorCode(GetColorFromRarity(myItemType->GetAttributes().rarity), false)
+	std::cout << GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), true)
+		<< "\n<------ " << RarityToString(GetItemAttributes().rarity) << " ------>"
+		<< GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), false)
 		<< "\n"
-		<< "         [" << myItemType->GetAttributes().name << "]" << "\n";
+		<< "         [" << GetItemAttributes().name << "]" << "\n";
 
 	PrintItemAttributes();
 
@@ -105,7 +89,7 @@ void Item::PrintItemOnDisplay() const
 
 void Item::PrintItemName() const
 {
-	std::cout << GetColorCode(GetColorFromRarity(myItemType->GetAttributes().rarity), true)
-		<< "[" << myItemType->GetAttributes().name << "]"
-		<< GetColorCode(GetColorFromRarity(myItemType->GetAttributes().rarity), false);
+	std::cout << GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), true)
+		<< "[" << GetItemAttributes().name << "]"
+		<< GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), false);
 }

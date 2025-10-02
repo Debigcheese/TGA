@@ -4,25 +4,15 @@
 
 using namespace Utils;
 
-Spell::Spell(const SpellAttributes& aAttributes)
+Spell::Spell(SpellType* aSpellType)
 	: myOnHitCount(DEFAULT_ON_HIT_COUNT),
-	  myAttributes(aAttributes)
+	  mySpellType(aSpellType)
 {
 }
 
 void Spell::UpdateOnHitCount()
 {
 	myOnHitCount--;
-}
-
-const char* Spell::GetName() const
-{
-	return myAttributes.name;
-}
-
-SpellAttributes Spell::GetAttributes() const
-{
-	return myAttributes;
 }
 
 bool Spell::GetSpellFinished() const
@@ -37,7 +27,7 @@ bool Spell::GetSpellFinished() const
 void Spell::PrintSpellAttributes() const
 {
 	// Print non-zero attributes
-	const Attributes& a = myAttributes.attributes;
+	const Attributes& a = GetAttributes();
 	if (a.strength != 0.0f)
 	{
 		std::cout << "Strength: "
@@ -94,11 +84,11 @@ void Spell::PrintSpellAttributes() const
 
 void Spell::PrintSpellOnPickup() const
 {
-	std::cout << GetColorCode(GetColorFromRarity(myAttributes.rarity), true)
-		<< "\n<------ " << RarityToString(myAttributes.rarity) << " ------>"
-		<< GetColorCode(GetColorFromRarity(myAttributes.rarity), false)
+	std::cout << GetColorCode(GetColorFromRarity(GetSpellAttributes().rarity), true)
+		<< "\n<------ " << RarityToString(GetSpellAttributes().rarity) << " ------>"
+		<< GetColorCode(GetColorFromRarity(GetSpellAttributes().rarity), false)
 		<< "\n"
-		<< "         {" << myAttributes.name << "}" << "\n";
+		<< "         {" << GetSpellAttributes().name << "}" << "\n";
 
 	PrintSpellAttributes();
 
@@ -114,7 +104,7 @@ void Spell::PrintSpellOnDisplay() const
 
 void Spell::PrintSpellName() const
 {
-	std::cout << GetColorCode(GetColorFromRarity(myAttributes.rarity), true)
-		<< "{" << myAttributes.name << "}"
-		<< GetColorCode(GetColorFromRarity(myAttributes.rarity), false);
+	std::cout << GetColorCode(GetColorFromRarity(GetSpellAttributes().rarity), true)
+		<< "{" << GetSpellAttributes().name << "}"
+		<< GetColorCode(GetColorFromRarity(GetSpellAttributes().rarity), false);
 }

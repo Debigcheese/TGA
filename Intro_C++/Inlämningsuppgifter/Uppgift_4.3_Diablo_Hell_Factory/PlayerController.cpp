@@ -124,10 +124,10 @@ void PlayerController::UpdateCombat() const
 
 		if (targetEnemy.IsDead())
 		{
-			std::cout << "\n" << targetEnemy.GetName() << " has been slained!\n";
+			std::cout << "\n" << targetEnemy.GetEnemyAttributes().name << " has been slained!\n";
 			if (targetEnemy.HasItems())
 			{
-				std::cout << targetEnemy.GetName() << " dropped an item!\n";
+				std::cout << targetEnemy.GetEnemyAttributes().name << " dropped an item!\n";
 			}
 			targetEnemy.DropItem(currentRoom);
 			system("pause");

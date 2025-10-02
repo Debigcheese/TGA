@@ -1,13 +1,17 @@
 #include "WorldMap.h"
 #include "Utils.h"
 #include "GameStructs.h"
+
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "SpellFactory.h"
 
 using namespace Utils;
 
-WorldMap::WorldMap() : myRooms(), myDoors()
+WorldMap::WorldMap() :
+	myRooms(),
+	myDoors()
+
 {
 }
 
@@ -82,33 +86,41 @@ void WorldMap::GenerateDoors()
 void WorldMap::GenerateRooms()
 {
 	myRooms.emplace_back(
-		ROOM_0_ID, "Withered Halls", ROOM_POS_FROM_ID[ROOM_0_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_0_ID]));
+		ROOM_0_ID, "Withered Halls", ROOM_POS_FROM_ID[ROOM_0_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_0_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_1_ID, "Obsidian Spire", ROOM_POS_FROM_ID[ROOM_1_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_1_ID]));
+		ROOM_1_ID, "Obsidian Spire", ROOM_POS_FROM_ID[ROOM_1_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_1_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_2_ID, "Hollow Cavern", ROOM_POS_FROM_ID[ROOM_2_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_2_ID]));
+		ROOM_2_ID, "Hollow Cavern", ROOM_POS_FROM_ID[ROOM_2_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_2_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_3_ID, "Pits of Torment", ROOM_POS_FROM_ID[ROOM_3_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_3_ID]));
+		ROOM_3_ID, "Pits of Torment", ROOM_POS_FROM_ID[ROOM_3_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_3_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_4_ID, "Den of the Blighted", ROOM_POS_FROM_ID[ROOM_4_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_4_ID]));
+		ROOM_4_ID, "Den of the Blighted", ROOM_POS_FROM_ID[ROOM_4_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_4_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_WIN_ID, "Eternal Abyss", ROOM_POS_FROM_ID[ROOM_WIN_ID], GenerateEnemies(ENEMY_FROM_ID[ROOM_WIN_ID]));
+		ROOM_WIN_ID, "Eternal Abyss", ROOM_POS_FROM_ID[ROOM_WIN_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_WIN_ID].enemyKeys}));
 }
 
-std::vector<Enemy> WorldMap::GenerateEnemies(const EnemyRoom& aEnemyRoom)
+std::vector<Enemy> WorldMap::GenerateEnemies(const std::vector<EnemyKey> aEnemyKeys)
 {
 	std::vector<Enemy> enemies;
-	for (const EnemyKey& key : aEnemyRoom)
+
+	for (const auto& key : aEnemyKeys)
 	{
 		if (key == EnemyKey::None)
 		{
 			continue;
 		}
+
 		enemies.push_back(EnemyFactory::GetFactory().Create(key));
 		enemies.back().SetDropItems(ItemFactory::GetFactory().CreateItemsUpToRarity(0, 1, Rarity::Legendary));
 	}

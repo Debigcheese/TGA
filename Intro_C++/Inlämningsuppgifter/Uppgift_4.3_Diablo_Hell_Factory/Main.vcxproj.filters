@@ -103,7 +103,13 @@
       <Filter>Source Files\World\Level</Filter>
     </ClCompile>
     <ClCompile Include="ItemType.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\World\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyType.cpp">
+      <Filter>Source Files\World\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellType.cpp">
+      <Filter>Source Files\World\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +168,13 @@
       <Filter>Header Files\World</Filter>
     </ClInclude>
     <ClInclude Include="ItemType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\World\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyType.h">
+      <Filter>Header Files\World\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellType.h">
+      <Filter>Header Files\World\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

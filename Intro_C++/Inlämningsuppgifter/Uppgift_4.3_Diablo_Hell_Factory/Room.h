@@ -25,7 +25,6 @@ public:
 	void RemoveEnemyFromRoom(int aEnemyID);
 	bool DoesEnemiesExist() const;
 
-
 	//items
 	void AddItemToRoom(const Item& aItemToAdd);
 	const std::vector<Item>& GetLootInRoom() const;

@@ -1,19 +1,11 @@
 #include "EnemyFactory.h"
+#include "Utils.h"
+#include "EnemyType.h"
 
 EnemyFactory::EnemyFactory()
-	: myNextId(0), myTypes{
-		  {
-			  {EnemyKey::None, EnemyType::None, "None", 0.0f, 0.0f},
-			  {EnemyKey::Bat, EnemyType::Bat, "Bat", 5.0f, 40.0f},
-			  {EnemyKey::Skeleton, EnemyType::Skeleton, "Skeleton", 10.0f, 100.0f},
-			  {EnemyKey::Undead, EnemyType::Undead, "Undead", 12.0f, 130.0f},
-			  {EnemyKey::Beast, EnemyType::Beast, "Beast", 16.0f, 200},
-			  {EnemyKey::Humanoid, EnemyType::Humanoid, "Humanoid", 17.0f, 250.0f},
-			  {EnemyKey::Elemental, EnemyType::Elemental, "Elemental", 25.0f, 300.0f},
-			  {EnemyKey::Demon, EnemyType::Demon, "Demon", 40.0f, 1500.0f}
-		  }
-	  }
+	: myTypes({})
 {
+	InitFactory();
 }
 
 EnemyFactory& EnemyFactory::GetFactory()
@@ -22,7 +14,51 @@ EnemyFactory& EnemyFactory::GetFactory()
 	return instance;
 }
 
-Enemy EnemyFactory::Create(const EnemyKey aKey)
+Enemy EnemyFactory::Create(EnemyKey aKey)
 {
-	return Enemy(myTypes[static_cast<int>(aKey)], myNextId++);
+	if (aKey <= EnemyKey::None || aKey >= EnemyKey::Count || static_cast<int>(aKey) >= static_cast<int>(myTypes.size()))
+	{
+		aKey = static_cast<EnemyKey>(Utils::GenerateRandomNumber
+			(static_cast<int>(EnemyKey::None) + 1,
+			 static_cast<int>(myTypes.size()) - 1));
+	}
+	EnemyType& type = myTypes[static_cast<int>(aKey)];
+	return {(&type), myNextId++}; // returns Item address with pointer to type
+}
+
+void EnemyFactory::InitFactory()
+{
+	myTypes.resize(static_cast<int>(EnemyKey::Count));
+
+	myTypes[static_cast<int>(EnemyKey::None)].SetAttributes(
+		{EnemyKey::None, "None", 0.0f, 0.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Bat)].SetAttributes(
+		{EnemyKey::Bat, "Bat", 5.0f, 40.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Skeleton)].SetAttributes(
+		{EnemyKey::Skeleton, "Skeleton", 10.0f, 100.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Undead)].SetAttributes(
+		{EnemyKey::Undead, "Undead", 12.0f, 130.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Beast)].SetAttributes(
+		{EnemyKey::Beast, "Beast", 16.0f, 200.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Humanoid)].SetAttributes(
+		{EnemyKey::Humanoid, "Humanoid", 17.0f, 250.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Elemental)].SetAttributes(
+		{EnemyKey::Elemental, "Elemental", 25.0f, 300.0f}
+	);
+
+	myTypes[static_cast<int>(EnemyKey::Demon)].SetAttributes(
+		{EnemyKey::Demon, "Demon", 40.0f, 1000.0f}
+	);
 }

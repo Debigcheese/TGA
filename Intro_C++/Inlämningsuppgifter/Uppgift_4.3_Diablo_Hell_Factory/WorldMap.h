@@ -5,6 +5,7 @@
 #include "Item.h"
 #include "Chest.h"
 #include "Spell.h"
+
 #include "GameEnums.h"
 
 class WorldMap
@@ -25,7 +26,7 @@ public:
 	void GenerateRooms();
 
 	//generate enemies per room
-	std::vector<Enemy> GenerateEnemies(const EnemyRoom& aEnemyRoom);
+	std::vector<Enemy> GenerateEnemies(const std::vector<EnemyKey> aEnemyKeys);
 
 	//items per room
 	void GenerateItems();
@@ -90,7 +91,7 @@ private:
 	static constexpr AmountRange ENEMY_DROP_ITEM = {0, 1};
 
 	//ENEMY PER ROOM
-	static constexpr EnemyRoom ENEMY_FROM_ID[ROOM_SIZE] = {
+	const std::vector<EnemyRoom> ENEMY_FROM_ID = {
 		{{EnemyKey::Bat, EnemyKey::Bat, EnemyKey::Skeleton}},
 		{{EnemyKey::Skeleton, EnemyKey::Undead, EnemyKey::None}},
 		{{EnemyKey::Skeleton, EnemyKey::Beast, EnemyKey::Humanoid}},
@@ -98,7 +99,6 @@ private:
 		{{EnemyKey::Elemental, EnemyKey::Humanoid, EnemyKey::Beast}},
 		{{EnemyKey::None, EnemyKey::Demon, EnemyKey::None}}
 	};
-
 
 	//CHESTS
 	static constexpr CreateObject CHEST_FROM_ID[ROOM_SIZE] = {

@@ -34,7 +34,8 @@ void Player::Attack()
 	float damage = GetDamageFromAttackType(myAttackIndex);
 	float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
 	enemies[myTargetIndex].TakeDamage(damage);
-	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to " << enemies[myTargetIndex].GetName();
+	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to "
+		<< enemies[myTargetIndex].GetEnemyAttributes().name;
 	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[myTargetIndex].
 		GetCurrentHealth()) << "hp)" << "\n";
 }
@@ -232,7 +233,7 @@ std::vector<Spell> Player::GetSpells() const
 
 bool Player::CanPickupItem(const Item& aItem) const
 {
-	if (GetAttributes().carryCapacity >= GetInventoryWeight() + aItem.GetWeight())
+	if (GetAttributes().carryCapacity >= GetInventoryWeight() + aItem.GetItemAttributes().weight)
 	{
 		return true;
 	}
@@ -248,7 +249,7 @@ float Player::GetInventoryWeight() const
 	}
 	for (const auto& item : myInventory)
 	{
-		totalWeight += item.GetWeight();
+		totalWeight += item.GetItemAttributes().weight;
 	}
 	return totalWeight;
 }
@@ -289,13 +290,13 @@ void Player::HealFullHealth()
 void Player::UpdateAttributes()
 {
 	myBuffedAttributes.Clear();
-	for (auto item : myInventory)
+	for (const auto item : myInventory)
 	{
-		myBuffedAttributes += item.GetAttributes().attributes;
+		myBuffedAttributes += item.GetAttributes();
 	}
-	for (auto spell : mySpells)
+	for (const auto spell : mySpells)
 	{
-		myBuffedAttributes += spell.GetAttributes().attributes;
+		myBuffedAttributes += spell.GetAttributes();
 	}
 }
 

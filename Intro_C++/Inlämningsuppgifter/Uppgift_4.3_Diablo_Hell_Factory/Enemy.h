@@ -1,8 +1,7 @@
 #pragma once
-#include "GameStructs.h"
-#include "GameEnums.h"
 #include "GameConstants.h"
 #include "Item.h"
+#include "EnemyType.h"
 
 #include <vector>
 
@@ -13,26 +12,27 @@ class Room;
 class Enemy
 {
 public:
-	Enemy(const EnemyAttributes& aAttributes, int aId);
+	Enemy(EnemyType* aEnemyType, int aId);
 	void TakeDamage(const float aDamage);
 	void Attack(Player& player) const;
-	void SetId(int aId);
 
 	void DropItem(Room* aCurrentRoom);
 	void SetDropItems(const std::vector<Item>& aItems);
-	bool HasItems() const;
+	bool HasItems() const { return !myItems.empty(); }
 
-	float GetMaxHealth() const;
-	float GetDamage() const;
-	float GetCurrentHealth() const;
-	bool IsDead() const;
+	EnemyAttributes GetEnemyAttributes() const { return myEnemyType->GetAttributes(); }
+	float GetCurrentHealth() const { return myCurrentHealth; }
+	bool IsDead() const { return myIsDead; }
 	int GetId() const;
-	EnemyType GetType() const;
-	const char* GetName() const;
+
+	//void SetId(int aId);
+	//float GetMaxHealth() const;
+	//float GetDamage() const;
+	//const char* GetName() const;
 
 private:
 	int myId;
-	EnemyAttributes myAttributes;
+	EnemyType* myEnemyType;
 	float myCurrentHealth;
 	bool myIsDead;
 	std::vector<Item> myItems;

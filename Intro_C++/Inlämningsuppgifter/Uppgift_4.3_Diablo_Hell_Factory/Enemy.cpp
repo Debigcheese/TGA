@@ -6,29 +6,13 @@
 
 using namespace Utils;
 
-Enemy::Enemy(const EnemyAttributes& aAttributes, int aId)
+Enemy::Enemy(EnemyType* aEnemyType, int aId)
 	: myId(aId),
-	  myAttributes(aAttributes),
-	  myCurrentHealth(aAttributes.maxHealth),
 	  myIsDead(false),
 	  myItems({})
-
 {
-}
-
-float Enemy::GetMaxHealth() const
-{
-	return myAttributes.maxHealth;
-}
-
-float Enemy::GetDamage() const
-{
-	return myAttributes.damage;
-}
-
-float Enemy::GetCurrentHealth() const
-{
-	return myCurrentHealth;
+	myEnemyType = aEnemyType;
+	myCurrentHealth = myEnemyType->GetAttributes().maxHealth;
 }
 
 void Enemy::TakeDamage(const float aDamage)
@@ -58,45 +42,20 @@ void Enemy::SetDropItems(const std::vector<Item>& aItems)
 	}
 }
 
-bool Enemy::HasItems() const
-{
-	return !myItems.empty();
-}
-
-void Enemy::Attack(Player& player) const
-{
-	const float dmgFloat = GetDamage() / player.GetDefenseMultiplier();
-	const int dmg = static_cast<int>(dmgFloat);
-	const int blockedDmg = static_cast<int>(GetDamage()) - dmg;
-
-	std::cout << myAttributes.name << " dealt "
-		<< "" << static_cast<int>(dmg) << " dmg to you"
-		<< " [" << blockedDmg << " blocked damage]\n";
-
-	player.TakeDamage(dmgFloat);
-}
-
-bool Enemy::IsDead() const
-{
-	return myIsDead;
-}
-
-void Enemy::SetId(int aId)
-{
-	myId = aId;
-}
-
 int Enemy::GetId() const
 {
 	return myId;
 }
 
-EnemyType Enemy::GetType() const
+void Enemy::Attack(Player& player) const
 {
-	return myAttributes.type;
-}
+	const float dmgFloat = myEnemyType->GetAttributes().damage / player.GetDefenseMultiplier();
+	const int dmg = static_cast<int>(dmgFloat);
+	const int blockedDmg = static_cast<int>(myEnemyType->GetAttributes().damage) - dmg;
 
-const char* Enemy::GetName() const
-{
-	return myAttributes.name;
+	std::cout << myEnemyType->GetAttributes().name << " dealt "
+		<< "" << static_cast<int>(dmg) << " dmg to you"
+		<< " [" << blockedDmg << " blocked damage]\n";
+
+	player.TakeDamage(dmgFloat);
 }

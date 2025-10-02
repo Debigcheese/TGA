@@ -4,16 +4,12 @@
 class ItemType
 {
 public:
-	ItemType();
-	void SetAttributes(const ItemAttributes& aAttributes);
-	ItemAttributes GetAttributes() const;
+	ItemType() : myAttributes({})
+	{
+	}
 
-	//ItemKey key;
-	//ItemType type;
-	//Rarity rarity;
-	//const char* name;
-	//float weight;
-	//Attributes attributes;
+	void SetAttributes(const ItemAttributes& aAttributes) { myAttributes = aAttributes; }
+	ItemAttributes GetItemAttributes() const { return myAttributes; }
 
 private:
 	ItemAttributes myAttributes;

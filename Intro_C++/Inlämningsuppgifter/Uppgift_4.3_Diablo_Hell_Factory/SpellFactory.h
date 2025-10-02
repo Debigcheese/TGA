@@ -1,20 +1,21 @@
 #pragma once
-#include "GameStructs.h"
 #include "GameEnums.h"
 #include "Spell.h"
-#include "Utils.h"
+#include "SpellType.h"
 #include <vector>
 
 class SpellFactory
 {
 public:
-	static SpellFactory& GetFactory();
 	SpellFactory();
-	Spell Create(const SpellKey aKey);
+	void InitFactory();
+	Spell Create(SpellKey aKey);
+	static SpellFactory& GetFactory();
+
 
 	std::vector<SpellKey> GetSpellKeysFromRarities(const std::vector<Rarity>& aRarities) const;
 	std::vector<Spell> CreateSpellsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const;
 
 private:
-	std::vector<SpellAttributes> myTypes;
+	std::vector<SpellType> myTypes;
 };

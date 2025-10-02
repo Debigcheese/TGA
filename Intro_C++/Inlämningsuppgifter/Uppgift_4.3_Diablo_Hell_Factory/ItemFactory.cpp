@@ -1,130 +1,10 @@
 #include "ItemFactory.h"
+#include "Utils.h"
 
+ItemFactory::ItemFactory() : myTypes({})
 
-ItemFactory::ItemFactory()
-	: myItemAttributes{
-		{
-			ItemKey::Eclipse, ItemTypes::Weapon, Rarity::Bronze, "Eclipse", 1.0f,
-			{
-				10.0f, 5.0f, 5.0f,
-				0.0f, 0.0f, 0.0f,
-				40.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::GodSword, ItemTypes::Weapon, Rarity::Legendary, "GodSword", 3.0f,
-			{
-				15.0f, 10.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				100.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::Aegis, ItemTypes::Armor, Rarity::Bronze, "Aegis", 1.0f,
-			{
-				0.0f, -5.0f, 20.0f,
-				0.0f, 0.0f, 2.0f,
-				0.0f, 50.0f
-			}
-		},
-		{
-			ItemKey::Backpack, ItemTypes::Armor, Rarity::Gold, "Backpack", 0.0f,
-			{
-				0.0f, 0.0f, 0.0f,
-				0.0f, 0.0f, 3.0f,
-				0.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::StormBreaker, ItemTypes::Weapon, Rarity::Silver, "Storm Breaker", 2.0f,
-			{
-				12.0f, 5.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				55.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::DragonScale, ItemTypes::Armor, Rarity::Gold, "Dragon Scale", 3.0f,
-			{
-				5.0f, 0.0f, 50.0f,
-				0.0f, 0.0f, 0.0f,
-				0.0f, 150.0f
-			}
-		},
-		{
-			ItemKey::RustyDagger, ItemTypes::Weapon, Rarity::Bronze, "Rusty Dagger", 1.0f,
-			{
-				0.0f, 2.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				15.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::KnightHelm, ItemTypes::Armor, Rarity::Silver, "Knight Helm", 1.0f,
-			{
-				0.0f, 0.0f, 20.0f,
-				0.0f, 0.0f, 2.0f,
-				0.0f, 25.0f
-			}
-		},
-		{
-			ItemKey::BloodFang, ItemTypes::Weapon, Rarity::Gold, "Blood Fang", 2.0f,
-			{
-				8.0f, 8.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				90.0f, -10.0f
-			}
-		},
-		{
-			ItemKey::CelestialShield, ItemTypes::Armor, Rarity::Legendary, "Celestial Shield", 1.0f,
-			{
-				0.0f, 0.0f, 40.0f,
-				0.0f, 0.0f, 4.0f,
-				0.0f, 100.0f
-			}
-		},
-		{
-			ItemKey::WarAxe, ItemTypes::Weapon, Rarity::Silver, "War Axe", 2.0f,
-			{
-				15.0f, -2.0f, 0.0f,
-				0.0f, 0.0f, 0.0f,
-				60.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::LeatherBoots, ItemTypes::Armor, Rarity::Bronze, "Leather Boots", 1.0f,
-			{
-				0.0f, 3.0f, 5.0f,
-				0.0f, 0.0f, 2.0f,
-				0.0f, 10.0f
-			}
-		},
-		{
-			ItemKey::VoidReaver, ItemTypes::Weapon, Rarity::Legendary, "Void Reaver", 2.0f,
-			{
-				15.0f, 15.0f, -10.0f,
-				0.0f, 0.0f, 0.0f,
-				150.0f, 0.0f
-			}
-		},
-		{
-			ItemKey::IronChestplate, ItemTypes::Armor, Rarity::Silver, "Iron Chestplate", 2.0f,
-			{
-				-5.0f, 0.0f, 20.0f,
-				0.0f, 0.0f, 1.0f,
-				0.0f, 80.0f
-			}
-		},
-		{
-			ItemKey::TrainingSword, ItemTypes::Weapon, Rarity::Bronze, "Training Sword", 1.0f,
-			{
-				5.0f, 2.0f, 2.0f,
-				0.0f, 0.0f, 0.0f,
-				10.0f, 0.0f
-			}
-		}
-	}
 {
+	InitFactory();
 }
 
 ItemFactory& ItemFactory::GetFactory()
@@ -133,10 +13,16 @@ ItemFactory& ItemFactory::GetFactory()
 	return instance;
 }
 
-Item ItemFactory::Create(const ItemKey aKey)
+Item ItemFactory::Create(ItemKey aKey)
 {
-	ItemType item = ItemType(myTypes[static_cast< int >(aKey)]);
-	//return Item(myTypes[static_cast<int>(aKey)]);
+	if (aKey <= ItemKey::None || aKey >= ItemKey::Count || static_cast<int>(aKey) >= static_cast<int>(myTypes.size()))
+	{
+		aKey = static_cast<ItemKey>(Utils::GenerateRandomNumber
+			(static_cast<int>(ItemKey::None) + 1,
+			 static_cast<int>(myTypes.size()) - 1));
+	}
+	ItemType& type = myTypes[static_cast<int>(aKey)];
+	return {(&type)}; // returns Item address with pointer to type
 }
 
 void ItemFactory::InitFactory()
@@ -286,9 +172,9 @@ std::vector<ItemKey> ItemFactory::GetItemKeysFromRarities(const std::vector<Rari
 	{
 		for (const auto& r : aRarities)
 		{
-			if (a. == r)
+			if (a.GetItemAttributes().rarity == r)
 			{
-				keysWithRarity.push_back(a.key);
+				keysWithRarity.push_back(a.GetItemAttributes().key);
 			}
 		}
 	}

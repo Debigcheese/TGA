@@ -51,7 +51,7 @@ enum class LockType
 	Unlocked = 3,
 };
 
-enum class EnemyType
+enum class EnemyNames
 {
 	None = 0,
 	Bat = 1,

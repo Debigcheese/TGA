@@ -1,16 +1,17 @@
 #pragma once
 #include "GameStructs.h"
+#include "SpellType.h"
 
 class Player;
 
 class Spell
 {
 public:
-	Spell(const SpellAttributes& aAttributes);
+	Spell(SpellType* aSpellType);
 	void UpdateOnHitCount();
 
-	const char* GetName() const;
-	SpellAttributes GetAttributes() const;
+	SpellAttributes GetSpellAttributes() const { return mySpellType->GetSpellAttributes(); }
+	Attributes GetAttributes() const { return GetSpellAttributes().attributes; }
 	bool GetSpellFinished() const;
 
 	void PrintSpellAttributes() const;
@@ -23,5 +24,5 @@ private:
 	static constexpr int DEFAULT_ON_HIT_COUNT = 10;
 
 	int myOnHitCount;
-	SpellAttributes myAttributes;
+	SpellType* mySpellType;
 };

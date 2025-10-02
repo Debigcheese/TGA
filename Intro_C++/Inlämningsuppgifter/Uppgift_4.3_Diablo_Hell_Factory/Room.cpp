@@ -116,10 +116,10 @@ void Room::PrintEnemies() const
 	for (int i = 0; i < static_cast<int>(myEnemies.size()); i++)
 	{
 		std::cout << "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
-			<< myEnemies[i].GetName() << ": "
+			<< myEnemies[i].GetEnemyAttributes().name << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
-			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD" << "\n";
+			<< static_cast<int>(myEnemies[i].GetEnemyAttributes().maxHealth) << " hp | "
+			<< static_cast<int>(myEnemies[i].GetEnemyAttributes().damage) << " AD" << "\n";
 	}
 }
 
@@ -148,10 +148,10 @@ void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
 		}
 		std::cout << RED
 			<< "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
-			<< myEnemies[i].GetName() << ": "
+			<< myEnemies[i].GetEnemyAttributes().name << ": "
 			<< static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-			<< static_cast<int>(myEnemies[i].GetMaxHealth()) << " hp | "
-			<< static_cast<int>(myEnemies[i].GetDamage()) << " AD"
+			<< static_cast<int>(myEnemies[i].GetEnemyAttributes().maxHealth) << " hp | "
+			<< static_cast<int>(myEnemies[i].GetEnemyAttributes().damage) << " AD"
 			<< RESET << "\n";
 	}
 }
