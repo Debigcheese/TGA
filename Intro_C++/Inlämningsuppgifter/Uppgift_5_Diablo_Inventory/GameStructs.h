@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <string>
 #include <vector>
 
 #include "GameEnums.h"
@@ -96,6 +97,13 @@ struct AmountRange
 {
 	int min;
 	int max;
+};
+
+struct EquipmentSlot
+{
+	const EquipmentType type;
+	std::string name;
+	const int slotIdx;
 };
 
 

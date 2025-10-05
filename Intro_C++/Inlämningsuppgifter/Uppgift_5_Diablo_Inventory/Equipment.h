@@ -11,6 +11,9 @@ public:
 	bool CanEquipItem(const Item& aItem) const;
 	void AddItem(const Item& aItem);
 	void RemoveItem(int aIndex);
+	bool AutoEquip(const Item& item);
+	std::vector<int> FindPossibleSlotIdx(const Item& aItem) const;
+	bool IsSlotFree(const Item& aItem);
 
 	const std::vector<Item>& GetItems() const { return myItems; }
 	float GetItemsWeight() const;
@@ -23,20 +26,13 @@ public:
 	void PrintItemUnequipped(const Item& aItem) const;
 
 private:
-	struct EquipmentSlot
-	{
-		const EquipmentType type;
-		std::string name;
-		const int slotIdx;
-	};
+	static constexpr int EQUIP_SLOTS_SIZE = static_cast<int>(EquipmentType::Count);
 
 	Attributes myAttributes{};
-	std::vector<EquipmentSlot> myEquippedSlots;
+	std::array<int, EQUIP_SLOTS_SIZE> myEquippedIndex;
 	std::vector<Item> myItems;
 
 	//CONSTANTS
-	static constexpr int EQUIP_SLOTS_SIZE = static_cast<int>(EquipmentType::Count);
-
 	const EquipmentSlot SLOT_IDX[EQUIP_SLOTS_SIZE] =
 	{
 		{EquipmentType::Head, "Head", 0},
