@@ -9,8 +9,8 @@ class Item
 public:
 	Item(ItemType* aItemType);
 
-	ItemAttributes GetItemAttributes() const { return myItemType->GetItemAttributes(); }
-	Attributes GetAttributes() const { return GetItemAttributes().attributes; }
+	const ItemAttributes& GetItemAttributes() const { return myItemType->GetItemAttributes(); }
+	const Attributes& GetAttributes() const { return GetItemAttributes().attributes; }
 
 	void PrintItemAttributes() const;
 	void PrintItemOnPickup() const;

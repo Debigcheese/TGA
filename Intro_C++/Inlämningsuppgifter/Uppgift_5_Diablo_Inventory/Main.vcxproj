@@ -136,6 +136,8 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="EnemyType.cpp" />
+    <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="ItemType.cpp" />
@@ -157,9 +159,11 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="EnemyType.h" />
+    <ClInclude Include="Equipment.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameEnums.h" />
     <ClInclude Include="GameStructs.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemType.h" />

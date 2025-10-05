@@ -30,7 +30,7 @@ void ItemFactory::InitFactory()
 	myTypes.resize(static_cast<int>(ItemKey::Count));
 
 	myTypes[static_cast<int>(ItemKey::Eclipse)].SetAttributes({
-		ItemKey::Eclipse, EquipmentType::Weapon, Rarity::Bronze, "Eclipse", 1.0f,
+		ItemKey::Eclipse, EquipmentType::Hand, Rarity::Bronze, "Eclipse", 1.0f,
 		{
 			10.0f, 5.0f, 5.0f,
 			0.0f, 0.0f, 0.0f,
@@ -39,7 +39,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::GodSword)].SetAttributes({
-		ItemKey::GodSword, EquipmentType::Weapon, Rarity::Legendary, "GodSword", 3.0f,
+		ItemKey::GodSword, EquipmentType::Hand, Rarity::Legendary, "GodSword", 3.0f,
 		{
 			16.0f, 9.0f, 0.0f,
 			0.0f, 0.0f, 0.0f,
@@ -48,7 +48,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::Aegis)].SetAttributes({
-		ItemKey::Aegis, EquipmentType::Chest, Rarity::Bronze, "Aegis", 1.0f,
+		ItemKey::Aegis, EquipmentType::Body, Rarity::Bronze, "Aegis", 1.0f,
 		{
 			0.0f, -4.0f, 18.0f,
 			0.0f, 0.0f, 2.0f,
@@ -66,7 +66,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::StormBreaker)].SetAttributes({
-		ItemKey::StormBreaker, EquipmentType::Weapon, Rarity::Silver, "Storm Breaker", 2.0f,
+		ItemKey::StormBreaker, EquipmentType::Hand, Rarity::Silver, "Storm Breaker", 2.0f,
 		{
 			12.0f, 5.0f, 0.0f,
 			0.0f, 0.0f, 0.0f,
@@ -75,7 +75,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::DragonScale)].SetAttributes({
-		ItemKey::DragonScale, EquipmentType::Chest, Rarity::Gold, "Dragon Scale", 3.0f,
+		ItemKey::DragonScale, EquipmentType::Body, Rarity::Gold, "Dragon Scale", 3.0f,
 		{
 			5.0f, 0.0f, 45.0f,
 			0.0f, 0.0f, 0.0f,
@@ -84,7 +84,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::RustyDagger)].SetAttributes({
-		ItemKey::RustyDagger, EquipmentType::Weapon, Rarity::Bronze, "Rusty Dagger", 1.0f,
+		ItemKey::RustyDagger, EquipmentType::Hand, Rarity::Bronze, "Rusty Dagger", 1.0f,
 		{
 			0.0f, 2.0f, 0.0f,
 			0.0f, 0.0f, 0.0f,
@@ -93,7 +93,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::KnightHelm)].SetAttributes({
-		ItemKey::KnightHelm, EquipmentType::Helm, Rarity::Silver, "Knight Helm", 1.0f,
+		ItemKey::KnightHelm, EquipmentType::Head, Rarity::Silver, "Knight Helm", 1.0f,
 		{
 			0.0f, 0.0f, 18.0f,
 			0.0f, 0.0f, 2.0f,
@@ -102,7 +102,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::BloodFang)].SetAttributes({
-		ItemKey::BloodFang, EquipmentType::Weapon, Rarity::Gold, "Blood Fang", 2.0f,
+		ItemKey::BloodFang, EquipmentType::Hand, Rarity::Gold, "Blood Fang", 2.0f,
 		{
 			8.0f, 8.0f, -2.0f,
 			0.0f, 0.0f, 0.0f,
@@ -111,7 +111,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::CelestialShield)].SetAttributes({
-		ItemKey::CelestialShield, EquipmentType::Chest, Rarity::Legendary, "Celestial Shield", 2.0f,
+		ItemKey::CelestialShield, EquipmentType::Body, Rarity::Legendary, "Celestial Shield", 2.0f,
 		{
 			0.0f, 0.0f, 25.0f,
 			0.0f, 0.0f, 4.0f,
@@ -120,7 +120,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::WarAxe)].SetAttributes({
-		ItemKey::WarAxe, EquipmentType::Weapon, Rarity::Silver, "War Axe", 2.0f,
+		ItemKey::WarAxe, EquipmentType::Hand, Rarity::Silver, "War Axe", 2.0f,
 		{
 			15.0f, -2.0f, 0.0f,
 			0.0f, 0.0f, 0.0f,
@@ -129,7 +129,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::LeatherBoots)].SetAttributes({
-		ItemKey::LeatherBoots, EquipmentType::Boots, Rarity::Bronze, "Leather Boots", 1.0f,
+		ItemKey::LeatherBoots, EquipmentType::Feet, Rarity::Bronze, "Leather Boots", 1.0f,
 		{
 			0.0f, 3.0f, 4.0f,
 			0.0f, 0.0f, 2.0f,
@@ -138,7 +138,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::VoidReaver)].SetAttributes({
-		ItemKey::VoidReaver, EquipmentType::Weapon, Rarity::Legendary, "Void Reaver", 3.0f,
+		ItemKey::VoidReaver, EquipmentType::Hand, Rarity::Legendary, "Void Reaver", 3.0f,
 		{
 			15.0f, 15.0f, -8.0f,
 			0.0f, 0.0f, 0.0f,
@@ -147,7 +147,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::IronChestplate)].SetAttributes({
-		ItemKey::IronChestplate, EquipmentType::Chest, Rarity::Silver, "Iron Chestplate", 2.0f,
+		ItemKey::IronChestplate, EquipmentType::Body, Rarity::Silver, "Iron Chestplate", 2.0f,
 		{
 			-4.0f, 0.0f, 20.0f,
 			0.0f, 0.0f, 1.0f,
@@ -156,7 +156,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::TrainingSword)].SetAttributes({
-		ItemKey::TrainingSword, EquipmentType::Weapon, Rarity::Bronze, "Training Sword", 1.0f,
+		ItemKey::TrainingSword, EquipmentType::Hand, Rarity::Bronze, "Training Sword", 1.0f,
 		{
 			5.0f, 2.0f, 2.0f,
 			0.0f, 0.0f, 0.0f,
@@ -165,7 +165,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::HunterGloves)].SetAttributes({
-		ItemKey::HunterGloves, EquipmentType::Gloves, Rarity::Bronze, "Hunter Gloves", 0.0f,
+		ItemKey::HunterGloves, EquipmentType::Hand, Rarity::Bronze, "Hunter Gloves", 0.0f,
 		{
 			0.0f, 4.0f, 2.0f,
 			0.0f, 0.0f, 1.0f,
@@ -183,7 +183,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::TitanGauntlets)].SetAttributes({
-		ItemKey::TitanGauntlets, EquipmentType::Gloves, Rarity::Gold, "Titan Gauntlets", 1.0f,
+		ItemKey::TitanGauntlets, EquipmentType::Hand, Rarity::Gold, "Titan Gauntlets", 1.0f,
 		{
 			6.0f, -2.0f, 10.0f,
 			0.0f, 0.0f, 1.0f,
@@ -192,7 +192,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::RangerHood)].SetAttributes({
-		ItemKey::RangerHood, EquipmentType::Helm, Rarity::Bronze, "Ranger Hood", 1.0f,
+		ItemKey::RangerHood, EquipmentType::Head, Rarity::Bronze, "Ranger Hood", 1.0f,
 		{
 			0.0f, 5.0f, 3.0f,
 			0.0f, 0.0f, 0.0f,
@@ -201,7 +201,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::CrusaderPlate)].SetAttributes({
-		ItemKey::CrusaderPlate, EquipmentType::Chest, Rarity::Gold, "Crusader Plate", 3.0f,
+		ItemKey::CrusaderPlate, EquipmentType::Body, Rarity::Gold, "Crusader Plate", 3.0f,
 		{
 			4.0f, -2.0f, 30.0f,
 			0.0f, 0.0f, 0.0f,
@@ -210,7 +210,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::ShadowstepBoots)].SetAttributes({
-		ItemKey::ShadowstepBoots, EquipmentType::Boots, Rarity::Silver, "Shadowstep Boots", 1.0f,
+		ItemKey::ShadowstepBoots, EquipmentType::Feet, Rarity::Silver, "Shadowstep Boots", 1.0f,
 		{
 			0.0f, 8.0f, 2.0f,
 			0.0f, 0.0f, 2.0f,
@@ -237,7 +237,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::Frostbrand)].SetAttributes({
-		ItemKey::Frostbrand, EquipmentType::Weapon, Rarity::Silver, "Frostbrand", 2.0f,
+		ItemKey::Frostbrand, EquipmentType::Hand, Rarity::Silver, "Frostbrand", 2.0f,
 		{
 			9.0f, 4.0f, 0.0f,
 			0.0f, 0.0f, 0.0f,
@@ -246,7 +246,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::Sunpiercer)].SetAttributes({
-		ItemKey::Sunpiercer, EquipmentType::Weapon, Rarity::Gold, "Sunpiercer", 2.0f,
+		ItemKey::Sunpiercer, EquipmentType::Hand, Rarity::Gold, "Sunpiercer", 2.0f,
 		{
 			7.0f, 11.0f, -2.0f,
 			0.0f, 0.0f, 0.0f,
@@ -255,7 +255,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::ThunderMaul)].SetAttributes({
-		ItemKey::ThunderMaul, EquipmentType::Weapon, Rarity::Legendary, "Thunder Maul", 3.0f,
+		ItemKey::ThunderMaul, EquipmentType::Hand, Rarity::Legendary, "Thunder Maul", 3.0f,
 		{
 			20.0f, -6.0f, 6.0f,
 			0.0f, 0.0f, 0.0f,
@@ -273,7 +273,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::WardenGloves)].SetAttributes({
-		ItemKey::WardenGloves, EquipmentType::Gloves, Rarity::Silver, "Warden Gloves", 1.0f,
+		ItemKey::WardenGloves, EquipmentType::Hand, Rarity::Silver, "Warden Gloves", 1.0f,
 		{
 			3.0f, 0.0f, 8.0f,
 			0.0f, 0.0f, 1.0f,
@@ -282,7 +282,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::NightwatchHelm)].SetAttributes({
-		ItemKey::NightwatchHelm, EquipmentType::Helm, Rarity::Gold, "Nightwatch Helm", 1.0f,
+		ItemKey::NightwatchHelm, EquipmentType::Head, Rarity::Gold, "Nightwatch Helm", 1.0f,
 		{
 			0.0f, 6.0f, 10.0f,
 			0.0f, 0.0f, 0.0f,
@@ -291,7 +291,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::OakheartChest)].SetAttributes({
-		ItemKey::OakheartChest, EquipmentType::Chest, Rarity::Bronze, "Oakheart Chest", 2.0f,
+		ItemKey::OakheartChest, EquipmentType::Body, Rarity::Bronze, "Oakheart Chest", 2.0f,
 		{
 			2.0f, -2.0f, 16.0f,
 			0.0f, 0.0f, 1.0f,
@@ -300,7 +300,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::PilgrimBoots)].SetAttributes({
-		ItemKey::PilgrimBoots, EquipmentType::Boots, Rarity::Silver, "Pilgrim Boots", 1.0f,
+		ItemKey::PilgrimBoots, EquipmentType::Feet, Rarity::Silver, "Pilgrim Boots", 1.0f,
 		{
 			0.0f, 5.0f, 3.0f,
 			0.0f, 0.0f, 1.0f,
@@ -327,7 +327,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::VanguardHelm)].SetAttributes({
-		ItemKey::VanguardHelm, EquipmentType::Helm, Rarity::Legendary, "Vanguard Helm", 2.0f,
+		ItemKey::VanguardHelm, EquipmentType::Head, Rarity::Legendary, "Vanguard Helm", 2.0f,
 		{
 			4.0f, 4.0f, 18.0f,
 			0.0f, 0.0f, 0.0f,
@@ -336,7 +336,7 @@ void ItemFactory::InitFactory()
 	});
 
 	myTypes[static_cast<int>(ItemKey::ForgemasterGloves)].SetAttributes({
-		ItemKey::ForgemasterGloves, EquipmentType::Gloves, Rarity::Gold, "Forgemaster Gloves", 1.0f,
+		ItemKey::ForgemasterGloves, EquipmentType::Hand, Rarity::Gold, "Forgemaster Gloves", 1.0f,
 		{
 			6.0f, 2.0f, 8.0f,
 			0.0f, 0.0f, 0.0f,

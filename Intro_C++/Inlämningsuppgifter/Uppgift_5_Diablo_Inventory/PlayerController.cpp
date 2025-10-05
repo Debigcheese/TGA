@@ -22,13 +22,10 @@ void PlayerController::UpdateAction()
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
 		currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
 		myPlayer.SetRoomId(currentRoom->GetRoomId());
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 
-		bool enemiesNearby = false;
 		if (currentRoom->GetEnemies().empty())
 		{
 			PrintActionMenu(false, true);
@@ -36,7 +33,6 @@ void PlayerController::UpdateAction()
 		else
 		{
 			PrintActionMenu(true, true);
-			enemiesNearby = true;
 		}
 
 		Action actionChoice = static_cast<Action>(ReadIntInRange(
@@ -101,8 +97,7 @@ void PlayerController::UpdateCombat() const
 
 		if (myPlayer.IsInvalidAttackIndex() || enemies.size() > 1)
 		{
-			myPlayer.PrintPlayerUI();
-			currentRoom->PrintEnemies();
+			PrintUI();
 			myPlayer.ChooseTarget();
 			system("cls");
 		}
@@ -171,9 +166,7 @@ void PlayerController::UpdateNavigation()
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 		myWorldMap.PrintMap(myPlayer.GetPosition());
 		PrintNavigation();
 
@@ -280,9 +273,7 @@ void PlayerController::UpdateScavenge()
 	}
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 
 		PrintScavenge();
 
@@ -319,9 +310,7 @@ void PlayerController::UpdatePickupItem() const
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 		auto& items = currentRoom->GetLootInRoom();
 
 		PrintPickupMenu();
@@ -331,51 +320,40 @@ void PlayerController::UpdatePickupItem() const
 			system("pause");
 			return;
 		}
+		constexpr int OFFSET = 1;
+		const int ITEM_COUNT = static_cast<int>(items.size());
+		const int RETURN_INDEX = ITEM_COUNT + OFFSET;
 
-		const int CHEST_COUNT = static_cast<int>(items.size());
-		const int RETURN_INDEX = CHEST_COUNT + 1;
-
-		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(OFFSET, RETURN_INDEX);
 
 		if (menuChoice == RETURN_INDEX)
 		{
 			return;
 		}
 
-		const int CHEST_INDEX = menuChoice - 1;
+		const int ITEM_INDEX = menuChoice - 1;
 
-		Item& itemToPickup = items[CHEST_INDEX];
+		Item& itemToPickup = items[ITEM_INDEX];
 
 		if (!myPlayer.CanPickupItem(itemToPickup))
 		{
 			std::cout << "\n(Item too heavy to pickup)\n";
-			system("pause");
 		}
 		else
 		{
-			myPlayer.AddItemToInventory(itemToPickup);
-			std::cout << "\n";
-			itemToPickup.PrintItemName();
-			std::cout << " has been added to your inventory!\n";
-			currentRoom->GetLootInRoom().erase(currentRoom->GetLootInRoom().begin() + CHEST_INDEX);
-			system("pause");
+			myPlayer.PickupItem(itemToPickup);
+			items.erase(items.begin() + ITEM_INDEX);
 		}
+		system("pause");
 	}
 }
 
-//its 01:46 rn and when I first made this fucntion 10min ago
-//it looked like crap but then I discovered what
-//guard clausing is and it changed my life foerver.
-// i will try to guard clause and refactor everything else as much as possible
-//so i and u teachers can have an easier time looking through the code(:
-
+//its 01:46 rn and I discovered what guard clausing is and it changed my life foerver.
 void PlayerController::UpdateLootChests() const
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 
 		PrintChestMenu();
 
@@ -424,7 +402,7 @@ void PlayerController::UpdateLootChests() const
 		std::cout << "\n|" << chest.GetName() << "|"
 			<< " has been opened and dropped items on the floor!\n";
 
-		//chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
+		chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
 		system("pause");
 		return;
 	}
@@ -434,9 +412,7 @@ void PlayerController::UpdateReadSpells() const
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
 		auto& spells = currentRoom->GetSpellsInRoom();
 		PrintSpells();
 
@@ -472,14 +448,51 @@ void PlayerController::UpdateInventory() const
 {
 	while (true && !myPlayer.IsDead())
 	{
-		system("cls");
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		PrintUI();
+		PrintInventoryMenu();
 
-		myPlayer.PrintInventory();
+		const int EQUIPMENT_INDEX = 1;
+		const int RETURN_INDEX = 4;
 
-		const int OFFSET_INDEX = 1;
-		const int RETURN_INDEX = static_cast<int>(myPlayer.GetInventory().size()) + OFFSET_INDEX;
+		int menuChoice = ReadIntInRange(EQUIPMENT_INDEX, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
+		{
+			return;
+		}
+
+		switch (menuChoice)
+		{
+			case 1:
+			{
+				UpdateEquipment();
+				break;
+			}
+			case 2:
+			{
+				UpdateInventoryItems();
+				break;
+			}
+			case 3:
+			{
+				UpdateSpellBook();
+				break;
+			}
+		}
+	}
+}
+
+void PlayerController::UpdateEquipment() const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		PrintUI();
+
+		const auto& equipment = myPlayer.GetInventory().GetEquipment();
+		equipment.PrintEquipment();
+
+		constexpr int OFFSET_INDEX = 1;
+		const int RETURN_INDEX = static_cast<int>(equipment.GetItems().size()) + OFFSET_INDEX;
 
 		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
 
@@ -489,28 +502,119 @@ void PlayerController::UpdateInventory() const
 		}
 
 		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
-		Item item = myPlayer.GetInventory()[ITEM_INDEX];
+		Item item = equipment.GetItems()[ITEM_INDEX];
 
-		std::cout << "\nDrop item?\n"
+		std::cout << "\nUnequip item?\n"
 			<< "1) Yes\n"
 			<< "2) No\n"
 			<< "Choice: ";
 
-		int dropItemChoice = ReadIntInRange(1, 2);
+		int unequipChoice = ReadIntInRange(1, 2);
 
-		if (dropItemChoice == 2)
+		if (unequipChoice == 2)
 		{
 			return;
 		}
-		currentRoom->AddItemToRoom(item);
-		myPlayer.RemoveFromInventory(ITEM_INDEX);
 
-		std::cout << "\nYou dropped ";
-		item.PrintItemName();
-		std::cout << " on the floor\n";
+		myPlayer.UnequipItem(item, ITEM_INDEX);
 		system("pause");
-		return;
 	}
+}
+
+void PlayerController::UpdateInventoryItems() const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		PrintUI();
+		const auto& inventory = myPlayer.GetInventory();
+		inventory.PrintInventory(myPlayer.GetAttributes().carryCapacity);
+
+		const int OFFSET_INDEX = 1;
+		const int RETURN_INDEX = static_cast<int>(inventory.GetItems().size()) + OFFSET_INDEX;
+
+		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+
+		if (menuChoice == RETURN_INDEX)
+		{
+			return;
+		}
+
+		std::cout << "\nItem Action\n"
+			<< "1) Equip\n"
+			<< "2) Drop\n"
+			<< "3) Return\n"
+			<< "Choice: ";
+
+		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+		Item item = inventory.GetItems()[ITEM_INDEX];
+
+		int dropItemChoice = ReadIntInRange(1, 3);
+
+		switch (dropItemChoice)
+		{
+			case 1:
+			{
+				myPlayer.EquipItem(item, ITEM_INDEX);
+				break;
+			}
+			case 2:
+			{
+				currentRoom->AddItemToRoom(item);
+				myPlayer.DropItem(ITEM_INDEX);
+				break;
+			}
+			default:
+			{
+				return;
+			}
+		}
+		system("pause");
+	}
+}
+
+void PlayerController::UpdateSpellBook() const
+{
+	//while (true && !myPlayer.IsDead())
+	//{
+	//	system("cls");
+	//	myPlayer.PrintPlayerUI();
+	//	currentRoom->PrintEnemies();
+
+	//	myPlayer.PrintInventory();
+
+	//	const int OFFSET_INDEX = 1;
+	//	const int RETURN_INDEX = static_cast<int>(myPlayer.GetInventory().size()) + OFFSET_INDEX;
+
+	//	int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+
+	//	if (menuChoice == RETURN_INDEX)
+	//	{
+	//		return;
+	//	}
+
+	//	const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+	//	Item item = myPlayer.GetInventory()[ITEM_INDEX];
+
+	//	std::cout << "\nDrop item?\n"
+	//		<< "1) Yes\n"
+	//		<< "2) No\n"
+	//		<< "Choice: ";
+
+	//	int dropItemChoice = ReadIntInRange(1, 2);
+
+	//	if (dropItemChoice == 2)
+	//	{
+	//		return;
+	//	}
+	//	currentRoom->AddItemToRoom(item);
+	//	myPlayer.DropItem(ITEM_INDEX);
+
+	//	std::cout << "\nYou dropped ";
+	//	item.PrintItemName();
+	//	std::cout << " on the floor\n";
+	//	system("pause");
+	//	return;
+	//}
 }
 
 void PlayerController::UpdateAttributes() const
@@ -570,6 +674,13 @@ void PlayerController::Win() const
 	system("pause");
 	myPlayer.SetIsDead(true);
 	return;
+}
+
+void PlayerController::PrintUI() const
+{
+	system("cls");
+	myPlayer.PrintPlayerUI();
+	currentRoom->PrintEnemies();
 }
 
 //PRINTS
@@ -689,5 +800,16 @@ void PlayerController::PrintSpells() const
 		std::cout << "\n";
 	}
 	std::cout << SPELLS_AMOUNT + 1 << ") Return\n"
+		<< "Choice: ";
+}
+
+void PlayerController::PrintInventoryMenu() const
+{
+	std::cout
+		<< "\n<--- Inventory --->\n"
+		<< "1) Equipment\n"
+		<< "2) Items\n"
+		<< "3) Spells\n"
+		<< "4) Return\n"
 		<< "Choice: ";
 }

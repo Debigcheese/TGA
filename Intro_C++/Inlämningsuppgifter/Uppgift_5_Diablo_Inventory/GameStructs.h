@@ -98,6 +98,7 @@ struct AmountRange
 	int max;
 };
 
+
 //world map constants
 
 struct EnemyRoom

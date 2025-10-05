@@ -9,6 +9,13 @@ enum class Direction
 	South = 4,
 };
 
+enum class Choice
+{
+	None = 0,
+	Yes = 1,
+	No = 2
+};
+
 enum class Action
 {
 	None = 0,
@@ -87,13 +94,12 @@ enum class AttributeType
 enum class EquipmentType
 {
 	None = 0,
-	Weapon = 1,
-	Helm = 2,
-	Chest = 3,
-	Gloves = 4,
-	Legs = 5,
-	Boots = 6,
-	Amulet = 7,
+	Head = 1,
+	Hand = 2,
+	Body = 3,
+	Legs = 4,
+	Feet = 5,
+	Amulet = 6,
 	Count
 };
 

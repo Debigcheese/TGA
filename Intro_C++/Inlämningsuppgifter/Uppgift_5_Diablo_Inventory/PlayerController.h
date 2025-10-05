@@ -17,17 +17,23 @@ public:
 	void UpdatePickupItem() const;
 	void UpdateLootChests() const;
 	void UpdateReadSpells() const;
+
 	void UpdateInventory() const;
+	void UpdateEquipment() const;
+	void UpdateInventoryItems() const;
+	void UpdateSpellBook() const;
+
 	void UpdateAttributes() const;
 	void Win() const;
 
+	void PrintUI() const;
 	void PrintNavigation() const;
 	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
 	void PrintScavenge() const;
 	void PrintPickupMenu() const;
 	void PrintChestMenu() const;
-
 	void PrintSpells() const;
+	void PrintInventoryMenu() const;
 
 private:
 	Room* currentRoom;

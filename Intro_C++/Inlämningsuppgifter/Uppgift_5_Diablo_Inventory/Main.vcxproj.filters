@@ -96,6 +96,12 @@
     <ClCompile Include="SpellType.cpp">
       <Filter>Source Files\World\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Characters\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Equipment.cpp">
+      <Filter>Source Files\Characters\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Diablo.h">
@@ -160,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Source Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Source Files\Characters\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Source Files\Characters\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

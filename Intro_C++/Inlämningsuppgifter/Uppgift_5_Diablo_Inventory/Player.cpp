@@ -13,14 +13,13 @@ using namespace Utils;
 using namespace GameConstants;
 
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
-                                      myName("(-)"), myPos{0, 0}, myInventory()
+                                      myName("(-)"), myPos{0, 0}
 {
 	myAttributes.strength = DEFAULT_BASE_ATTRIBUTE;
 	myAttributes.agility = DEFAULT_BASE_ATTRIBUTE;
 	myAttributes.endurance = DEFAULT_BASE_ATTRIBUTE;
 
 	myAttributes.currentHealth = GetMaxHealth();
-	myBuffedAttributes = {};
 }
 
 void Player::Attack()
@@ -96,48 +95,23 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-			{
-				newDamage = GetAttributes().damage;
-				break;
-			}
+		{
+			newDamage = GetAttributes().damage;
+			break;
+		}
 		case AttackType::HeavyAttack:
-			{
-				const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
-				const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
-				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-				break;
-			}
+		{
+			const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
+			const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
+			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+			break;
+		}
 		case AttackType::None:
-			{
-				break;
-			}
+		{
+			break;
+		}
 	}
 	return newDamage;
-}
-
-int Player::GetRoomId() const
-{
-	return myRoomId;
-}
-
-void Player::SetRoomId(const int& aNewRoomId)
-{
-	myRoomId = aNewRoomId;
-}
-
-void Player::SetName(const std::string& aNewName)
-{
-	myName = aNewName;
-}
-
-void Player::SetIsDead(bool aIsDead)
-{
-	myIsDead = aIsDead;
-}
-
-void Player::SetPosition(const Position& aNewPosition)
-{
-	myPos = aNewPosition;
 }
 
 float Player::GetDamage() const
@@ -171,19 +145,9 @@ float Player::GetDefenseMultiplier() const
 	return (DEFENSE_BASE_MULTI + (GetAttributes().defense / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
 }
 
-bool Player::IsDead() const
-{
-	return myIsDead;
-}
-
 bool Player::IsInvalidAttackIndex() const
 {
 	return myAttackIndex < PLAYER_ATTACK_INDEX_ZERO;
-}
-
-std::string Player::GetName() const
-{
-	return myName;
 }
 
 const Attributes& Player::GetBaseAttributes() const
@@ -201,105 +165,85 @@ const Attributes& Player::GetBaseAttributes() const
 	};
 }
 
+const Attributes& Player::GetBuffedAttributes() const
+{
+	Attributes buffedAttributes = {};
+	buffedAttributes += myInventory.GetEquipment().GetAttributes();
+	for (const auto& spell : mySpells)
+	{
+		//buffedAttributes += spell.GetAttributes();
+	}
+	return buffedAttributes;
+}
+
 Attributes Player::GetAttributes() const
 {
 	return {
 
-		GetBaseAttributes().strength + myBuffedAttributes.strength,
-		GetBaseAttributes().agility + myBuffedAttributes.agility,
-		GetBaseAttributes().endurance + myBuffedAttributes.endurance,
-		GetBaseAttributes().maxHealth + myBuffedAttributes.maxHealth,
-		GetBaseAttributes().currentHealth + myBuffedAttributes.currentHealth,
-		GetBaseAttributes().carryCapacity + myBuffedAttributes.carryCapacity,
-		GetBaseAttributes().damage + myBuffedAttributes.damage,
-		GetBaseAttributes().defense + myBuffedAttributes.defense
+		GetBaseAttributes().strength + GetBuffedAttributes().strength,
+		GetBaseAttributes().agility + GetBuffedAttributes().agility,
+		GetBaseAttributes().endurance + GetBuffedAttributes().endurance,
+		GetBaseAttributes().maxHealth + GetBuffedAttributes().maxHealth,
+		GetBaseAttributes().currentHealth + GetBuffedAttributes().currentHealth,
+		GetBaseAttributes().carryCapacity + GetBuffedAttributes().carryCapacity,
+		GetBaseAttributes().damage + GetBuffedAttributes().damage,
+		GetBaseAttributes().defense + GetBuffedAttributes().defense
 	};
-}
-
-Position Player::GetPosition() const
-{
-	return myPos;
-}
-
-std::vector<Item> Player::GetInventory() const
-{
-	return myInventory;
-}
-
-std::vector<Spell> Player::GetSpells() const
-{
-	return mySpells;
 }
 
 bool Player::CanPickupItem(const Item& aItem) const
 {
-	if (GetAttributes().carryCapacity >= GetInventoryWeight() + aItem.GetItemAttributes().weight)
+	if (GetAttributes().carryCapacity >= myInventory.GetInventoryWeight() + aItem.GetItemAttributes().weight)
 	{
 		return true;
 	}
 	return false;
 }
 
-float Player::GetInventoryWeight() const
+void Player::PickupItem(const Item& aItem)
 {
-	float totalWeight = 0;
-	if (myInventory.empty())
+	if (!GetInventory().GetEquipment().CanEquipItem(aItem))
 	{
-		return totalWeight;
+		myInventory.PrintItemAdded(aItem);
 	}
-	for (const auto& item : myInventory)
-	{
-		totalWeight += item.GetItemAttributes().weight;
-	}
-	return totalWeight;
+
+	myInventory.AddItem(aItem);
 }
 
-void Player::AddItemToInventory(const Item& aItem)
+void Player::DropItem(int aIndex)
 {
-	myInventory.push_back(aItem);
+	const auto& item = myInventory.GetItems()[aIndex];
+	myInventory.RemoveItem(aIndex);
 
-	UpdateAttributes();
+	std::cout << "\nYou dropped ";
+	item.PrintItemName();
+	std::cout << " on the floor\n";
 }
 
-void Player::RemoveFromInventory(int aIndex)
+void Player::UnequipItem(const Item& aItem, int aIndex)
 {
-	myInventory.erase(myInventory.begin() + aIndex);
+	myInventory.UnequipItem(aItem, aIndex);
+}
 
-	UpdateAttributes();
+void Player::EquipItem(const Item& aItem, int aIndex)
+{
+	myInventory.AddItem(aItem);
 }
 
 void Player::ApplySpell(const Spell& aSpell)
 {
 	mySpells.push_back(aSpell);
-
-	UpdateAttributes();
 }
 
 void Player::RemoveSpell(int aIndex)
 {
 	mySpells.erase(mySpells.begin() + aIndex);
-
-	UpdateAttributes();
 }
 
 void Player::HealFullHealth()
 {
 	myAttributes.currentHealth = GetAttributes().maxHealth;
 }
-
-void Player::UpdateAttributes()
-{
-	myBuffedAttributes.Clear();
-	for (const auto item : myInventory)
-	{
-		myBuffedAttributes += item.GetAttributes();
-	}
-	for (const auto spell : mySpells)
-	{
-		myBuffedAttributes += spell.GetAttributes();
-	}
-}
-
 
 void Player::PrintHealth() const
 {
@@ -376,27 +320,8 @@ void Player::PrintDerivedAttributes() const
 		"\n\n";
 }
 
-void Player::PrintInventory() const
+void Player::PrintSpells() const
 {
-	std::cout << "\n<--- Inventory ("
-		<< std::lround(GetInventoryWeight()) << "/"
-		<< std::lround(GetAttributes().carryCapacity) << "kg) --->\n";
-
-	if (myInventory.empty())
-	{
-		std::cout << "Empty...\n";
-	}
-
-	const int INVENTORY_SIZE = static_cast<int>(myInventory.size());
-
-	for (int i = 0; i < INVENTORY_SIZE; ++i)
-	{
-		std::cout << (i + 1) << ") ";
-		std::cout << "";
-		myInventory[i].PrintItemOnDisplay();
-		std::cout << "\n";
-	}
-
 	std::cout << "\n<--- Active Spells --->\n";
 	if (mySpells.empty())
 	{
@@ -409,6 +334,6 @@ void Player::PrintInventory() const
 		std::cout << " \n";
 	}
 
-	std::cout << INVENTORY_SIZE + 1 << ") Return\n"
+	std::cout << mySpells.size() + 1 << ") Return\n"
 		<< "Choice: ";
 }
