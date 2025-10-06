@@ -95,21 +95,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-		{
-			newDamage = GetAttributes().damage;
-			break;
-		}
+			{
+				newDamage = GetAttributes().damage;
+				break;
+			}
 		case AttackType::HeavyAttack:
-		{
-			const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
-			const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
-			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-			break;
-		}
+			{
+				const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
+				const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
+				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+				break;
+			}
 		case AttackType::None:
-		{
-			break;
-		}
+			{
+				break;
+			}
 	}
 	return newDamage;
 }
@@ -213,11 +213,10 @@ void Player::PickupItem(const Item& aItem)
 void Player::DropItem(int aIndex)
 {
 	const auto& item = myInventory.GetItems()[aIndex];
-	myInventory.RemoveItem(aIndex);
-
 	std::cout << "\nYou dropped ";
 	item.PrintItemName();
 	std::cout << " on the floor\n";
+	myInventory.RemoveItem(aIndex);
 }
 
 void Player::UnequipItem(const Item& aItem, int aIndex)
@@ -225,9 +224,9 @@ void Player::UnequipItem(const Item& aItem, int aIndex)
 	myInventory.UnequipItem(aItem, aIndex);
 }
 
-void Player::EquipItem(const Item& aItem, int aIndex)
+void Player::TryEquipItem(const Item& aItem, int aIndex)
 {
-	myInventory.AddItem(aItem);
+	myInventory.TryEquipItem(aItem, aIndex);
 }
 
 void Player::ApplySpell(const Spell& aSpell)

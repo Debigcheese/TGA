@@ -9,7 +9,7 @@ public:
 	}
 
 	void SetAttributes(const ItemAttributes& aAttributes) { myAttributes = aAttributes; }
-	ItemAttributes GetItemAttributes() const { return myAttributes; }
+	const ItemAttributes& GetItemAttributes() const { return myAttributes; }
 
 private:
 	ItemAttributes myAttributes;

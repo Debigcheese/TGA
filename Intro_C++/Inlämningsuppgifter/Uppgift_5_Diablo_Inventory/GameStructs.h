@@ -99,13 +99,6 @@ struct AmountRange
 	int max;
 };
 
-struct EquipmentSlot
-{
-	const EquipmentType type;
-	std::string name;
-	const int slotIdx;
-};
-
 
 //world map constants
 

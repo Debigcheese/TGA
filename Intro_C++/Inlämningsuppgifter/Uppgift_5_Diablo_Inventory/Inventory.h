@@ -15,8 +15,8 @@ public:
 	float GetInventoryWeight() const;
 
 	void UnequipItem(const Item& aItem, int aIndex);
-	void EquipItem(const Item& aItem, int aIndex);
-	Equipment GetEquipment() const;
+	void TryEquipItem(const Item& aItem, int aIndex);
+	const Equipment& GetEquipment() const;
 
 	void PrintInventory(float aCarryCapacity) const;
 	void PrintItemAdded(const Item& aItem) const;

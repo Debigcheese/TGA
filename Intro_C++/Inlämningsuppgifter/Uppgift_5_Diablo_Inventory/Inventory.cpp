@@ -9,14 +9,7 @@ Inventory::Inventory()
 
 void Inventory::AddItem(const Item& aItem)
 {
-	if (myEquipment.CanEquipItem(aItem))
-	{
-		myEquipment.AddItem(aItem);
-	}
-	else
-	{
-		myItems.push_back(aItem);
-	}
+	myItems.push_back(aItem);
 }
 
 void Inventory::RemoveItem(int aIndex)
@@ -44,13 +37,18 @@ void Inventory::UnequipItem(const Item& aItem, int aIndex)
 	myEquipment.RemoveItem(aIndex);
 }
 
-void Inventory::EquipItem(const Item& aItem, int aIndex)
+void Inventory::TryEquipItem(const Item& aItem, int aIndex)
 {
-	myEquipment.AddItem(aItem);
-	RemoveItem(aIndex);
+	if (myEquipment.CanEquipItem(aItem))
+	{
+		myEquipment.AddItem(aItem);
+		RemoveItem(aIndex);
+	}
+
+	myItems.push_back(aItem);
 }
 
-Equipment Inventory::GetEquipment() const
+const Equipment& Inventory::GetEquipment() const
 {
 	return myEquipment;
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+
 #include "Item.h"
 #include "GameStructs.h"
 #include <vector>
@@ -8,39 +10,46 @@ class Equipment
 {
 public:
 	Equipment();
-	bool CanEquipItem(const Item& aItem) const;
 	void AddItem(const Item& aItem);
 	void RemoveItem(int aIndex);
-	bool AutoEquip(const Item& item);
-	std::vector<int> FindPossibleSlotIdx(const Item& aItem) const;
-	bool IsSlotFree(const Item& aItem);
 
-	const std::vector<Item>& GetItems() const { return myItems; }
 	float GetItemsWeight() const;
+	const Item& GetItemAt(int aIndex) const;
+	const std::vector<std::unique_ptr<Item>>& GetItems() const { return myItems; }
+	const std::array<Item*, static_cast<int>(EquipmentType::Count)>& GetEquipment() const { return myEquipment; }
+
+	bool CanEquipItem(const Item& aItem) const;
+	int FindFirstFreeSlot(EquipmentType t) const;
 
 	void UpdateAttributes();
 	const Attributes& GetAttributes() const;
 
 	void PrintEquipment() const;
-	void PrintItemEquipped(const Item& aItem) const;
-	void PrintItemUnequipped(const Item& aItem) const;
+	void PrintItemEquipped(int aIndex) const;
+	void PrintItemUnequipped(int aIndex) const;
 
 private:
 	static constexpr int EQUIP_SLOTS_SIZE = static_cast<int>(EquipmentType::Count);
 
+	struct EquipmentSlot
+	{
+		const EquipmentType type;
+		std::string name;
+	};
+
+	std::array<Item*, EQUIP_SLOTS_SIZE> myEquipment;
+	std::vector<std::unique_ptr<Item>> myItems;
 	Attributes myAttributes{};
-	std::array<int, EQUIP_SLOTS_SIZE> myEquippedIndex;
-	std::vector<Item> myItems;
 
 	//CONSTANTS
 	const EquipmentSlot SLOT_IDX[EQUIP_SLOTS_SIZE] =
 	{
-		{EquipmentType::Head, "Head", 0},
-		{EquipmentType::Hand, "Right Hand", 1},
-		{EquipmentType::Hand, "Left Hand", 2},
-		{EquipmentType::Body, "Body", 3},
-		{EquipmentType::Legs, "Legs", 4},
-		{EquipmentType::Feet, "Feet", 5},
-		{EquipmentType::Amulet, "Amulet", 6},
+		{EquipmentType::Head, "Head"},
+		{EquipmentType::Hand, "Right Hand"},
+		{EquipmentType::Hand, "Left Hand"},
+		{EquipmentType::Body, "Body"},
+		{EquipmentType::Legs, "Legs"},
+		{EquipmentType::Feet, "Feet"},
+		{EquipmentType::Amulet, "Amulet"},
 	};
 };

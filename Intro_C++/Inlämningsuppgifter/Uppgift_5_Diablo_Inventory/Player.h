@@ -45,7 +45,7 @@ public:
 	void PickupItem(const Item& aItem);
 	void DropItem(int aIndex);
 	void UnequipItem(const Item& aItem, int aIndex);
-	void EquipItem(const Item& aItem, int aIndex);
+	void TryEquipItem(const Item& aItem, int aIndex);
 	const Inventory& GetInventory() const { return myInventory; }
 
 	std::vector<Spell> GetSpells() const { return mySpells; }

@@ -42,41 +42,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-			{
-				UpdateCombat();
-				break;
-			}
+				{
+					UpdateCombat();
+					break;
+				}
 			case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+				{
+					UpdateNavigation();
+					break;
+				}
 			case Action::LookAround:
-			{
-				UpdateScavenge();
-				break;
-			}
+				{
+					UpdateScavenge();
+					break;
+				}
 			case Action::Inventory:
-			{
-				UpdateInventory();
-				break;
-			}
+				{
+					UpdateInventory();
+					break;
+				}
 			case Action::Attributes:
-			{
-				UpdateAttributes();
-				break;
-			}
+				{
+					UpdateAttributes();
+					break;
+				}
 			case Action::Cheats:
-			{
-				UpdateCheats();
-				break;
-			}
+				{
+					UpdateCheats();
+					break;
+				}
 			case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+				{
+					std::cout << "Quitting Game...\n";
+					system("pause");
+					return;
+				}
 		}
 	}
 }
@@ -284,24 +284,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-			{
-				UpdatePickupItem();
-				break;
-			}
+				{
+					UpdatePickupItem();
+					break;
+				}
 			case Scavenge::Chests:
-			{
-				UpdateLootChests();
-				break;
-			}
+				{
+					UpdateLootChests();
+					break;
+				}
 			case Scavenge::Spells:
-			{
-				UpdateReadSpells();
-				break;
-			}
+				{
+					UpdateReadSpells();
+					break;
+				}
 			case Scavenge::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
@@ -341,7 +341,8 @@ void PlayerController::UpdatePickupItem() const
 		}
 		else
 		{
-			myPlayer.PickupItem(itemToPickup);
+			//return if equipped else do pickup,  pickup need item index, then get item from item index and send that to equip, dont use same index as pickup (in inv)
+			myPlayer.TryEquipItem(itemToPickup, ITEM_INDEX);
 			items.erase(items.begin() + ITEM_INDEX);
 		}
 		system("pause");
@@ -464,20 +465,20 @@ void PlayerController::UpdateInventory() const
 		switch (menuChoice)
 		{
 			case 1:
-			{
-				UpdateEquipment();
-				break;
-			}
+				{
+					UpdateEquipment();
+					break;
+				}
 			case 2:
-			{
-				UpdateInventoryItems();
-				break;
-			}
+				{
+					UpdateInventoryItems();
+					break;
+				}
 			case 3:
-			{
-				UpdateSpellBook();
-				break;
-			}
+				{
+					UpdateSpellBook();
+					break;
+				}
 		}
 	}
 }
@@ -492,7 +493,9 @@ void PlayerController::UpdateEquipment() const
 		equipment.PrintEquipment();
 
 		constexpr int OFFSET_INDEX = 1;
-		const int RETURN_INDEX = static_cast<int>(equipment.GetItems().size()) + OFFSET_INDEX;
+		const int RETURN_INDEX = static_cast<int>(equipment.GetEquipment().size()) + OFFSET_INDEX;
+
+		std::cout << RETURN_INDEX << ") Return\n";
 
 		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
 
@@ -501,13 +504,13 @@ void PlayerController::UpdateEquipment() const
 			return;
 		}
 
-		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
-		Item item = equipment.GetItems()[ITEM_INDEX];
-
 		std::cout << "\nUnequip item?\n"
 			<< "1) Yes\n"
 			<< "2) No\n"
 			<< "Choice: ";
+
+		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+		const Item& item = equipment.GetItemAt(ITEM_INDEX);
 
 		int unequipChoice = ReadIntInRange(1, 2);
 
@@ -532,11 +535,23 @@ void PlayerController::UpdateInventoryItems() const
 		const int OFFSET_INDEX = 1;
 		const int RETURN_INDEX = static_cast<int>(inventory.GetItems().size()) + OFFSET_INDEX;
 
+		std::cout << RETURN_INDEX << ") Return\n";
+
 		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
 
 		if (menuChoice == RETURN_INDEX)
 		{
 			return;
+		}
+
+		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+		auto oneitem = inventory.GetItems()[ITEM_INDEX];
+		oneitem.PrintItemName();
+		system("pause");
+
+		if (ITEM_INDEX < 0 || ITEM_INDEX >= static_cast<int>(inventory.GetItems().size()))
+		{
+			continue;
 		}
 
 		std::cout << "\nItem Action\n"
@@ -545,28 +560,26 @@ void PlayerController::UpdateInventoryItems() const
 			<< "3) Return\n"
 			<< "Choice: ";
 
-		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
-		Item item = inventory.GetItems()[ITEM_INDEX];
-
 		int dropItemChoice = ReadIntInRange(1, 3);
+		auto item = inventory.GetItems()[ITEM_INDEX];
 
 		switch (dropItemChoice)
 		{
 			case 1:
-			{
-				myPlayer.EquipItem(item, ITEM_INDEX);
-				break;
-			}
+				{
+					myPlayer.TryEquipItem(item, ITEM_INDEX);
+					break;
+				}
 			case 2:
-			{
-				currentRoom->AddItemToRoom(item);
-				myPlayer.DropItem(ITEM_INDEX);
-				break;
-			}
+				{
+					currentRoom->AddItemToRoom(item);
+					myPlayer.DropItem(ITEM_INDEX);
+					break;
+				}
 			default:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 	}
@@ -648,19 +661,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-			{
-				myPlayer.PrintDerivedAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintDerivedAttributes();
+					break;
+				}
 			case AttriMenu::DerivedAttributes:
-			{
-				myPlayer.PrintAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintAttributes();
+					break;
+				}
 			case AttriMenu::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 		return;
