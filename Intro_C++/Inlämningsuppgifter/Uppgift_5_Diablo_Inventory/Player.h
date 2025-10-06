@@ -2,14 +2,11 @@
 #include "GameStructs.h"
 #include "Cheats.h"
 #include "Spell.h"
+#include "Inventory.h"
 
 #include <string>
 #include <vector>
 #include <cmath>
-
-#include "Inventory.h"
-
-using namespace Cheats;
 
 class WorldMap;
 class Enemy;
@@ -20,14 +17,14 @@ class Player
 public:
 	Player(WorldMap& aWorldMap);
 
-	void Attack();
+	void Attack() const;
 	void ChooseTarget();
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
 
-	void ApplySpell(const Spell& aSpell);
-	void RemoveSpell(int aIndex);
-	void HealFullHealth();
+	void ApplySpell(const Spell& aSpell) { mySpells.push_back(aSpell); }
+	void RemoveSpell(int aIndex) { mySpells.erase(mySpells.begin() + aIndex); }
+	void HealFullHealth() { myAttributes.currentHealth = GetAttributes().maxHealth; }
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
 	float GetDefenseMultiplier() const;
@@ -42,11 +39,12 @@ public:
 	Attributes GetAttributes() const;
 
 	bool CanPickupItem(const Item& aItem) const;
-	void PickupItem(const Item& aItem);
-	void DropItem(int aIndex);
-	void UnequipItem(const Item& aItem, int aIndex);
-	void TryEquipItem(const Item& aItem, int aIndex);
+	void PickupItem(const Item& aItem) { myInventory.AddItem(aItem); }
+	void DropItem(int aItemId) { myInventory.DropItem(aItemId); }
+	void UnequipItem(int aSlotIndex) { myInventory.UnequipItem(aSlotIndex); }
+	void EquipItem(int aItemId) { myInventory.EquipItem(aItemId); }
 	const Inventory& GetInventory() const { return myInventory; }
+	const Equipment& GetEquipment() const { return myInventory.GetEquipment(); }
 
 	std::vector<Spell> GetSpells() const { return mySpells; }
 

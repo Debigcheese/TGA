@@ -22,7 +22,7 @@ Item ItemFactory::Create(ItemKey aKey)
 			 static_cast<int>(myTypes.size()) - 1));
 	}
 	ItemType& type = myTypes[static_cast<int>(aKey)];
-	return {(&type)}; // returns Item address with pointer to type
+	return {(&type), myNextId++}; // returns Item address with pointer to type
 }
 
 void ItemFactory::InitFactory()

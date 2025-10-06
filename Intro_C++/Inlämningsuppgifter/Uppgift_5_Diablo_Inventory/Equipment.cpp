@@ -13,24 +13,23 @@ Equipment::Equipment()
 void Equipment::AddItem(const Item& aItem)
 {
 	int index = FindFirstFreeSlot(aItem.GetItemAttributes().type);
-	if (!CanEquipItem(aItem))
+	if (index < 0)
 	{
 		return;
 	}
-
 	myItems.push_back(std::make_unique<Item>(aItem));
 	myEquipment[index] = myItems.back().get();
 	PrintItemEquipped(index);
 	UpdateAttributes();
 }
 
-void Equipment::RemoveItem(int aIndex)
+void Equipment::RemoveItem(int aSlotIndex)
 {
-	if (aIndex < 0 || aIndex >= EQUIP_SLOTS_SIZE)
+	if (aSlotIndex < 0 || aSlotIndex >= EQUIP_SLOTS_SIZE)
 	{
 		return;
 	}
-	Item* ptr = myEquipment[aIndex];
+	Item* ptr = myEquipment[aSlotIndex];
 	if (!ptr)
 	{
 		return;
@@ -42,8 +41,8 @@ void Equipment::RemoveItem(int aIndex)
 		                       return item.get() == ptr;
 	                       });
 
-	PrintItemUnequipped(aIndex); // has to print before clearing
-	myEquipment[aIndex] = nullptr; // clear slot
+	PrintItemUnequipped(aSlotIndex); // has to print before clearing
+	myEquipment[aSlotIndex] = nullptr; // clear slot
 
 	if (it != myItems.end())
 	{
@@ -63,23 +62,6 @@ float Equipment::GetItemsWeight() const
 	return totalWeight;
 }
 
-const Item& Equipment::GetItemAt(int aIndex) const
-{
-	if (aIndex < 0 || aIndex >= EQUIP_SLOTS_SIZE)
-	{
-		std::cout << "error";
-		system("pause");
-	}
-
-	Item* p = myEquipment[aIndex];
-	if (!p)
-	{
-		std::cout << "slot empty";
-		system("pause");
-	}
-
-	return *p;
-}
 
 bool Equipment::CanEquipItem(const Item& aItem) const
 {
@@ -100,6 +82,16 @@ int Equipment::FindFirstFreeSlot(EquipmentType t) const
 	}
 
 	return -1;
+}
+
+const Item* Equipment::GetItemPtrAt(int slotIdx) const
+{
+	if (slotIdx < 0 || slotIdx >= Equipment::EQUIP_SLOTS_SIZE)
+	{
+		return nullptr;
+	}
+
+	return myEquipment[slotIdx];
 }
 
 void Equipment::UpdateAttributes()

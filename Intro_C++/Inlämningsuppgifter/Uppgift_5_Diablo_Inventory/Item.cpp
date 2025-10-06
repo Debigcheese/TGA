@@ -4,8 +4,8 @@
 
 using namespace Utils;
 
-Item::Item(ItemType* aItemType)
-	: myItemType(aItemType)
+Item::Item(ItemType* aItemType, int aId)
+	: myItemType(aItemType), myId(aId)
 {
 }
 

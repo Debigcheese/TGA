@@ -7,8 +7,9 @@ class Player;
 class Item
 {
 public:
-	Item(ItemType* aItemType);
+	Item(ItemType* aItemType, int aId);
 
+	int GetId() const { return myId; }
 	const ItemAttributes& GetItemAttributes() const { return myItemType->GetItemAttributes(); }
 	const Attributes& GetAttributes() const { return GetItemAttributes().attributes; }
 
@@ -19,4 +20,5 @@ public:
 
 private:
 	ItemType* myItemType;
+	int myId;
 };

@@ -1,5 +1,6 @@
 #include "Inventory.h"
 
+#include <algorithm>
 #include <iostream>
 
 Inventory::Inventory()
@@ -12,9 +13,29 @@ void Inventory::AddItem(const Item& aItem)
 	myItems.push_back(aItem);
 }
 
-void Inventory::RemoveItem(int aIndex)
+void Inventory::RemoveItem(int aItemId)
 {
-	myItems.erase(myItems.begin() + aIndex);
+	auto it = std::find_if(myItems.begin(), myItems.end(),
+	                       [&](const Item& item)
+	                       {
+		                       return item.GetId() == aItemId;
+	                       });
+	if (it != myItems.end())
+	{
+		myItems.erase(it);
+	}
+}
+
+const Item& Inventory::GetItemAt(int aIndex) const
+{
+	if (aIndex < 0 || aIndex >= static_cast<int>(myItems.size()))
+	{
+		std::cout << "\nIndex out of bounds";
+		system("pause");
+	}
+
+	const auto& item = myItems[aIndex];
+	return item;
 }
 
 float Inventory::GetItemsWeight() const
@@ -31,31 +52,55 @@ float Inventory::GetItemsWeight() const
 	return totalWeight;
 }
 
-void Inventory::UnequipItem(const Item& aItem, int aIndex)
+void Inventory::DropItem(int aItemId)
 {
-	AddItem(aItem);
-	myEquipment.RemoveItem(aIndex);
-}
-
-void Inventory::TryEquipItem(const Item& aItem, int aIndex)
-{
-	if (myEquipment.CanEquipItem(aItem))
+	auto it = std::find_if(myItems.begin(), myItems.end(),
+	                       [&](const Item& item)
+	                       {
+		                       return item.GetId() == aItemId;
+	                       });
+	if (it == myItems.end())
 	{
-		myEquipment.AddItem(aItem);
-		RemoveItem(aIndex);
+		return;
 	}
-
-	myItems.push_back(aItem);
+	std::cout << "\nYou dropped ";
+	it->PrintItemName();
+	std::cout << " on the floor\n";
+	myItems.erase(it);
 }
 
-const Equipment& Inventory::GetEquipment() const
+void Inventory::UnequipItem(int aSlotIndex)
 {
-	return myEquipment;
+	const auto* pEquipped = myEquipment.GetItemPtrAt(aSlotIndex);
+
+	if (!pEquipped)
+	{
+		return;
+	}
+	const auto& temp = *pEquipped;
+	AddItem(temp);
+	myEquipment.RemoveItem(aSlotIndex);
+}
+
+void Inventory::EquipItem(int aItemId)
+{
+	auto it = std::find_if(myItems.begin(), myItems.end(),
+	                       [&](const Item& item)
+	                       {
+		                       return item.GetId() == aItemId;
+	                       });
+	if (it == myItems.end())
+	{
+		return;
+	}
+	Item tempItem = *it;
+	myEquipment.AddItem(tempItem);
+	myItems.erase(it);
 }
 
 float Inventory::GetInventoryWeight() const
 {
-	return GetItemsWeight() + GetEquipment().GetItemsWeight();
+	return GetItemsWeight() + myEquipment.GetItemsWeight();
 }
 
 void Inventory::PrintInventory(float aCarryCapacity) const
@@ -75,6 +120,7 @@ void Inventory::PrintInventory(float aCarryCapacity) const
 		myItems[i].PrintItemName();
 		std::cout << "\n";
 	}
+	std::cout << myItems.size() + 1 << ") Return\n";
 }
 
 void Inventory::PrintItemAdded(const Item& aItem) const

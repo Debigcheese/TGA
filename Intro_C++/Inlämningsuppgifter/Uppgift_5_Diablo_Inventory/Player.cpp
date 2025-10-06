@@ -22,7 +22,7 @@ Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTarg
 	myAttributes.currentHealth = GetMaxHealth();
 }
 
-void Player::Attack()
+void Player::Attack() const
 {
 	Room* currentRoom = myWorldMap.GetRoomWithId(GetRoomId());
 	std::vector<Enemy>& enemies = currentRoom->GetEnemies();
@@ -95,21 +95,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-			{
-				newDamage = GetAttributes().damage;
-				break;
-			}
+		{
+			newDamage = GetAttributes().damage;
+			break;
+		}
 		case AttackType::HeavyAttack:
-			{
-				const int heavyMinMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MIN));
-				const int heavyMaxMulti = static_cast<int>(std::lround(GetAttributes().damage * HEAVY_MULTI_MAX));
-				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-				break;
-			}
+		{
+			const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
+			const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
+			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+			break;
+		}
 		case AttackType::None:
-			{
-				break;
-			}
+		{
+			break;
+		}
 	}
 	return newDamage;
 }
@@ -168,7 +168,7 @@ const Attributes& Player::GetBaseAttributes() const
 const Attributes& Player::GetBuffedAttributes() const
 {
 	Attributes buffedAttributes = {};
-	buffedAttributes += myInventory.GetEquipment().GetAttributes();
+	buffedAttributes += GetEquipment().GetAttributes();
 	for (const auto& spell : mySpells)
 	{
 		//buffedAttributes += spell.GetAttributes();
@@ -198,50 +198,6 @@ bool Player::CanPickupItem(const Item& aItem) const
 		return true;
 	}
 	return false;
-}
-
-void Player::PickupItem(const Item& aItem)
-{
-	if (!GetInventory().GetEquipment().CanEquipItem(aItem))
-	{
-		myInventory.PrintItemAdded(aItem);
-	}
-
-	myInventory.AddItem(aItem);
-}
-
-void Player::DropItem(int aIndex)
-{
-	const auto& item = myInventory.GetItems()[aIndex];
-	std::cout << "\nYou dropped ";
-	item.PrintItemName();
-	std::cout << " on the floor\n";
-	myInventory.RemoveItem(aIndex);
-}
-
-void Player::UnequipItem(const Item& aItem, int aIndex)
-{
-	myInventory.UnequipItem(aItem, aIndex);
-}
-
-void Player::TryEquipItem(const Item& aItem, int aIndex)
-{
-	myInventory.TryEquipItem(aItem, aIndex);
-}
-
-void Player::ApplySpell(const Spell& aSpell)
-{
-	mySpells.push_back(aSpell);
-}
-
-void Player::RemoveSpell(int aIndex)
-{
-	mySpells.erase(mySpells.begin() + aIndex);
-}
-
-void Player::HealFullHealth()
-{
-	myAttributes.currentHealth = GetAttributes().maxHealth;
 }
 
 void Player::PrintHealth() const

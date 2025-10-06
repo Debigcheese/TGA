@@ -16,5 +16,6 @@ public:
 	std::vector<Item> CreateItemsUpToRarity(int aMinAmount, int aMaxAmount, const Rarity aRarity) const;
 
 private:
+	int myNextId;
 	std::vector<ItemType> myTypes;
 };

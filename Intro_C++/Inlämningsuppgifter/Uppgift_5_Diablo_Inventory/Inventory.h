@@ -9,14 +9,16 @@ class Inventory
 public:
 	Inventory();
 	void AddItem(const Item& aItem);
-	void RemoveItem(int aIndex);
+	void RemoveItem(int aItemId);
+	const Item& GetItemAt(int aIndex) const;
 	const std::vector<Item>& GetItems() const { return myItems; }
 	float GetItemsWeight() const;
 	float GetInventoryWeight() const;
+	const Equipment& GetEquipment() const { return myEquipment; }
 
-	void UnequipItem(const Item& aItem, int aIndex);
-	void TryEquipItem(const Item& aItem, int aIndex);
-	const Equipment& GetEquipment() const;
+	void DropItem(int aItemId);
+	void UnequipItem(int aSlotIndex);
+	void EquipItem(int aItemId);
 
 	void PrintInventory(float aCarryCapacity) const;
 	void PrintItemAdded(const Item& aItem) const;

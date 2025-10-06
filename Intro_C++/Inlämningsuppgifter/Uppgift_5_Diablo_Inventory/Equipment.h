@@ -1,21 +1,21 @@
 #pragma once
-#include <memory>
-
 #include "Item.h"
 #include "GameStructs.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 class Equipment
 {
 public:
+	static constexpr int EQUIP_SLOTS_SIZE = static_cast<int>(EquipmentType::Count);
+
 	Equipment();
 	void AddItem(const Item& aItem);
-	void RemoveItem(int aIndex);
+	void RemoveItem(int aSlotIndex);
 
+	const Item* GetItemPtrAt(int slotIdx) const;
 	float GetItemsWeight() const;
-	const Item& GetItemAt(int aIndex) const;
-	const std::vector<std::unique_ptr<Item>>& GetItems() const { return myItems; }
 	const std::array<Item*, static_cast<int>(EquipmentType::Count)>& GetEquipment() const { return myEquipment; }
 
 	bool CanEquipItem(const Item& aItem) const;
@@ -29,8 +29,6 @@ public:
 	void PrintItemUnequipped(int aIndex) const;
 
 private:
-	static constexpr int EQUIP_SLOTS_SIZE = static_cast<int>(EquipmentType::Count);
-
 	struct EquipmentSlot
 	{
 		const EquipmentType type;
