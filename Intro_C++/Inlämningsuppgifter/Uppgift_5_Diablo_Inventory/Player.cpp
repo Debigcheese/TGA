@@ -69,14 +69,8 @@ void Player::TakeDamage(const float aDamage)
 	const float dmgFloat = aDamage / GetDefenseMultiplier();
 	myAttributes.currentHealth -= dmgFloat;
 
-	for (int i = 0; i < static_cast<int>(mySpells.size()); i++)
-	{
-		mySpells[i].UpdateOnHitCount();
-		if (mySpells[i].GetSpellFinished())
-		{
-			RemoveSpell(i);
-		}
-	}
+	mySpellBook.UpdateSpellsOnHitCount();
+
 	if (myAttributes.currentHealth <= HEALTH_ZERO)
 	{
 		myAttributes.currentHealth = HEALTH_ZERO;
@@ -95,21 +89,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-		{
-			newDamage = GetAttributes().damage;
-			break;
-		}
+			{
+				newDamage = GetAttributes().damage;
+				break;
+			}
 		case AttackType::HeavyAttack:
-		{
-			const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
-			const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
-			newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-			break;
-		}
+			{
+				const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
+				const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
+				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+				break;
+			}
 		case AttackType::None:
-		{
-			break;
-		}
+			{
+				break;
+			}
 	}
 	return newDamage;
 }
@@ -169,10 +163,7 @@ const Attributes& Player::GetBuffedAttributes() const
 {
 	Attributes buffedAttributes = {};
 	buffedAttributes += GetEquipment().GetAttributes();
-	for (const auto& spell : mySpells)
-	{
-		//buffedAttributes += spell.GetAttributes();
-	}
+	buffedAttributes += GetSpellBook().GetAttributes();
 	return buffedAttributes;
 }
 
@@ -273,22 +264,4 @@ void Player::PrintDerivedAttributes() const
 	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " def" << " (Endurance + Agility)" << "\n";
 	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg " << " (Strength + Agility / 3)" <<
 		"\n\n";
-}
-
-void Player::PrintSpells() const
-{
-	std::cout << "\n<--- Active Spells --->\n";
-	if (mySpells.empty())
-	{
-		std::cout << "Empty...\n";
-	}
-
-	for (const auto& spell : mySpells)
-	{
-		spell.PrintSpellOnDisplay();
-		std::cout << " \n";
-	}
-
-	std::cout << mySpells.size() + 1 << ") Return\n"
-		<< "Choice: ";
 }

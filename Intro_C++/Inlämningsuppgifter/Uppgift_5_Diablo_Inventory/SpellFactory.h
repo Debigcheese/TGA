@@ -18,4 +18,5 @@ public:
 
 private:
 	std::vector<SpellType> myTypes;
+	int myNextId;
 };

@@ -246,7 +246,7 @@ Spell SpellFactory::Create(SpellKey aKey)
 			 static_cast<int>(myTypes.size()) - 1));
 	}
 	SpellType& type = myTypes[static_cast<int>(aKey)];
-	return {(&type)};
+	return {(&type), myNextId++};
 }
 
 std::vector<SpellKey> SpellFactory::GetSpellKeysFromRarities(const std::vector<Rarity>& aRarities) const

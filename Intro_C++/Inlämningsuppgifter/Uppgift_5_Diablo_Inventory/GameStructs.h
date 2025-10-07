@@ -83,6 +83,12 @@ struct SpellAttributes
 	Attributes attributes;
 };
 
+struct SpellState
+{
+	bool isActive;
+	int hitCount;
+};
+
 struct ItemAttributes
 {
 	ItemKey key;

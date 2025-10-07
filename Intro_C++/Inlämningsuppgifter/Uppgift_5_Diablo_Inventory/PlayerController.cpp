@@ -42,41 +42,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-			{
-				UpdateCombat();
-				break;
-			}
+				{
+					UpdateCombat();
+					break;
+				}
 			case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+				{
+					UpdateNavigation();
+					break;
+				}
 			case Action::LookAround:
-			{
-				UpdateScavenge();
-				break;
-			}
+				{
+					UpdateScavenge();
+					break;
+				}
 			case Action::Inventory:
-			{
-				UpdateInventory();
-				break;
-			}
+				{
+					UpdateInventory();
+					break;
+				}
 			case Action::Attributes:
-			{
-				UpdateAttributes();
-				break;
-			}
+				{
+					UpdateAttributes();
+					break;
+				}
 			case Action::Cheats:
-			{
-				UpdateCheats();
-				break;
-			}
+				{
+					Cheats::UpdateCheats();
+					break;
+				}
 			case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+				{
+					std::cout << "Quitting Game...\n";
+					system("pause");
+					return;
+				}
 		}
 	}
 }
@@ -284,24 +284,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-			{
-				UpdatePickupItem();
-				break;
-			}
+				{
+					UpdatePickupItem();
+					break;
+				}
 			case Scavenge::Chests:
-			{
-				UpdateLootChests();
-				break;
-			}
+				{
+					UpdateLootChests();
+					break;
+				}
 			case Scavenge::Spells:
-			{
-				UpdateReadSpells();
-				break;
-			}
+				{
+					UpdateReadSpells();
+					break;
+				}
 			case Scavenge::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
@@ -320,20 +320,20 @@ void PlayerController::UpdatePickupItem() const
 			system("pause");
 			return;
 		}
-		constexpr int OFFSET = 1;
-		const int ITEM_COUNT = static_cast<int>(items.size());
-		const int RETURN_INDEX = ITEM_COUNT + OFFSET;
+		constexpr int offset = 1;
+		const int itemCount = static_cast<int>(items.size());
+		const int returnIndex = itemCount + offset;
 
-		int menuChoice = ReadIntInRange(OFFSET, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(offset, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
 
-		const int ITEM_INDEX = menuChoice - 1;
+		const int itemIndex = menuChoice - 1;
 
-		const auto& itemToPickup = items[ITEM_INDEX];
+		const auto& itemToPickup = items[itemIndex];
 
 		if (!myPlayer.CanPickupItem(itemToPickup))
 		{
@@ -348,7 +348,7 @@ void PlayerController::UpdatePickupItem() const
 				myPlayer.EquipItem(itemToPickup.GetId());
 			}
 
-			items.erase(items.begin() + ITEM_INDEX);
+			items.erase(items.begin() + itemIndex);
 		}
 		system("pause");
 	}
@@ -372,18 +372,18 @@ void PlayerController::UpdateLootChests() const
 			return;
 		}
 
-		const int CHEST_COUNT = static_cast<int>(chests.size());
-		const int RETURN_INDEX = CHEST_COUNT + 1;
+		const int chestCount = static_cast<int>(chests.size());
+		const int returnIndex = chestCount + 1;
 
-		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(1, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
 
-		const int CHEST_INDEX = menuChoice - 1;
-		Chest& chest = chests[CHEST_INDEX];
+		const int chestIndex = menuChoice - 1;
+		Chest& chest = chests[chestIndex];
 		if (chest.GetIsOpen())
 		{
 			std::cout << "\n(Chest already open)\n";
@@ -408,7 +408,7 @@ void PlayerController::UpdateLootChests() const
 		std::cout << "\n|" << chest.GetName() << "|"
 			<< " has been opened and dropped items on the floor!\n";
 
-		chests.erase(currentRoom->GetChestInRoom().begin() + CHEST_INDEX);
+		chests.erase(currentRoom->GetChestInRoom().begin() + chestIndex);
 		system("pause");
 		return;
 	}
@@ -429,23 +429,21 @@ void PlayerController::UpdateReadSpells() const
 			return;
 		}
 
-		const int SPELLS_COUNT = static_cast<int>(spells.size());
-		const int RETURN_INDEX = SPELLS_COUNT + 1;
-		int menuChoice = ReadIntInRange(1, RETURN_INDEX);
+		const int spellsCount = static_cast<int>(spells.size());
+		const int returnIndex = spellsCount + 1;
+		int menuChoice = ReadIntInRange(1, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
 
-		const int SPELL_INDEX = menuChoice - 1;
-		Spell& spell = spells[SPELL_INDEX];
+		const int spellIndex = menuChoice - 1;
+		const Spell& spell = spells[spellIndex];
 
-		myPlayer.ApplySpell(spell);
-		std::cout << "\n";
-		spell.PrintSpellName();
-		std::cout << " spell buff has been applied!\n";
-		spells.erase(spells.begin() + SPELL_INDEX);
+		myPlayer.AddSpell(spell);
+
+		spells.erase(spells.begin() + spellIndex);
 		system("pause");
 	}
 }
@@ -457,12 +455,12 @@ void PlayerController::UpdateInventory() const
 		PrintUI();
 		PrintInventoryMenu();
 
-		const int EQUIPMENT_INDEX = 1;
-		const int RETURN_INDEX = 4;
+		constexpr int equipmentIndex = 1;
+		constexpr int returnIndex = 4;
 
-		int menuChoice = ReadIntInRange(EQUIPMENT_INDEX, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(equipmentIndex, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
@@ -470,20 +468,20 @@ void PlayerController::UpdateInventory() const
 		switch (menuChoice)
 		{
 			case 1:
-			{
-				UpdateEquipment();
-				break;
-			}
+				{
+					UpdateEquipment();
+					break;
+				}
 			case 2:
-			{
-				UpdateInventoryItems();
-				break;
-			}
+				{
+					UpdateInventoryItems();
+					break;
+				}
 			case 3:
-			{
-				UpdateSpellBook();
-				break;
-			}
+				{
+					UpdateSpellBook();
+					break;
+				}
 		}
 	}
 }
@@ -497,14 +495,14 @@ void PlayerController::UpdateEquipment() const
 		const auto& equipment = myPlayer.GetEquipment();
 		equipment.PrintEquipment();
 
-		constexpr int OFFSET_INDEX = 1;
-		const int RETURN_INDEX = static_cast<int>(equipment.GetEquipment().size()) + OFFSET_INDEX;
+		constexpr int offsetIndex = 1;
+		const int returnIndex = static_cast<int>(equipment.GetEquipment().size()) + offsetIndex;
 
-		std::cout << RETURN_INDEX << ") Return\n";
+		std::cout << returnIndex << ") Return\n";
 
-		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(offsetIndex, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
@@ -514,7 +512,7 @@ void PlayerController::UpdateEquipment() const
 			<< "2) No\n"
 			<< "Choice: ";
 
-		const int ITEM_SLOT_INDEX = menuChoice - OFFSET_INDEX;
+		const int itemSlotIndex = menuChoice - offsetIndex;
 		int unequipChoice = ReadIntInRange(1, 2);
 
 		if (unequipChoice == 2)
@@ -522,7 +520,7 @@ void PlayerController::UpdateEquipment() const
 			return;
 		}
 
-		myPlayer.UnequipItem(ITEM_SLOT_INDEX);
+		myPlayer.UnequipItem(itemSlotIndex);
 		system("pause");
 	}
 }
@@ -535,19 +533,19 @@ void PlayerController::UpdateInventoryItems() const
 		const auto& inventory = myPlayer.GetInventory();
 		inventory.PrintInventory(myPlayer.GetAttributes().carryCapacity);
 
-		const int OFFSET_INDEX = 1;
-		const int RETURN_INDEX = static_cast<int>(inventory.GetItems().size()) + OFFSET_INDEX;
+		const int offsetIndex = 1;
+		const int returnIndex = static_cast<int>(inventory.GetItems().size()) + offsetIndex;
 
-		int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+		int menuChoice = ReadIntInRange(offsetIndex, returnIndex);
 
-		if (menuChoice == RETURN_INDEX)
+		if (menuChoice == returnIndex)
 		{
 			return;
 		}
 
-		const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
+		const int itemIndex = menuChoice - offsetIndex;
 
-		if (ITEM_INDEX < 0 || ITEM_INDEX >= static_cast<int>(inventory.GetItems().size()))
+		if (itemIndex < 0 || itemIndex >= static_cast<int>(inventory.GetItems().size()))
 		{
 			continue;
 		}
@@ -559,25 +557,25 @@ void PlayerController::UpdateInventoryItems() const
 			<< "Choice: ";
 
 		int dropItemChoice = ReadIntInRange(1, 3);
-		const auto& item = inventory.GetItems()[ITEM_INDEX];
+		const auto& item = inventory.GetItems()[itemIndex];
 
 		switch (dropItemChoice)
 		{
 			case 1:
-			{
-				myPlayer.EquipItem(item.GetId());
-				break;
-			}
+				{
+					myPlayer.EquipItem(item.GetId());
+					break;
+				}
 			case 2:
-			{
-				currentRoom->AddItemToRoom(item);
-				myPlayer.DropItem(item.GetId());
-				break;
-			}
+				{
+					currentRoom->AddItemToRoom(item);
+					myPlayer.DropItem(item.GetId());
+					break;
+				}
 			default:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 	}
@@ -585,47 +583,45 @@ void PlayerController::UpdateInventoryItems() const
 
 void PlayerController::UpdateSpellBook() const
 {
-	//while (true && !myPlayer.IsDead())
-	//{
-	//	system("cls");
-	//	myPlayer.PrintPlayerUI();
-	//	currentRoom->PrintEnemies();
+	while (true && !myPlayer.IsDead())
+	{
+		system("cls");
+		myPlayer.PrintPlayerUI();
+		currentRoom->PrintEnemies();
 
-	//	myPlayer.PrintInventory();
+		const auto& spellbook = myPlayer.GetSpellBook();
+		spellbook.PrintSpells();
 
-	//	const int OFFSET_INDEX = 1;
-	//	const int RETURN_INDEX = static_cast<int>(myPlayer.GetInventory().size()) + OFFSET_INDEX;
+		const int offsetIndex = 1;
+		int spellsUnactiveCount = static_cast<int>(spellbook.GetInactiveSpells().size());
 
-	//	int menuChoice = ReadIntInRange(OFFSET_INDEX, RETURN_INDEX);
+		const int returnIndex = spellsUnactiveCount + offsetIndex;
+		int menuChoice = ReadIntInRange(offsetIndex, returnIndex);
 
-	//	if (menuChoice == RETURN_INDEX)
-	//	{
-	//		return;
-	//	}
+		if (menuChoice == returnIndex)
+		{
+			return;
+		}
 
-	//	const int ITEM_INDEX = menuChoice - OFFSET_INDEX;
-	//	Item item = myPlayer.GetInventory()[ITEM_INDEX];
+		const int spellIndex = menuChoice - offsetIndex;
+		const auto* spell = spellbook.GetInactiveSpells()[spellIndex];
 
-	//	std::cout << "\nDrop item?\n"
-	//		<< "1) Yes\n"
-	//		<< "2) No\n"
-	//		<< "Choice: ";
+		std::cout << "\nRead spell?\n"
+			<< "1) Yes\n"
+			<< "2) No\n"
+			<< "Choice: ";
 
-	//	int dropItemChoice = ReadIntInRange(1, 2);
+		int spellChoiceInt = ReadIntInRange(static_cast<int>(Choice::Yes), static_cast<int>(Choice::No));
+		Choice spellChoice = static_cast<Choice>(spellChoiceInt);
 
-	//	if (dropItemChoice == 2)
-	//	{
-	//		return;
-	//	}
-	//	currentRoom->AddItemToRoom(item);
-	//	myPlayer.DropItem(ITEM_INDEX);
-
-	//	std::cout << "\nYou dropped ";
-	//	item.PrintItemName();
-	//	std::cout << " on the floor\n";
-	//	system("pause");
-	//	return;
-	//}
+		if (spellChoice == Choice::No)
+		{
+			return;
+		}
+		myPlayer.ActivateSpell(spell->GetId());
+		system("pause");
+		return;
+	}
 }
 
 void PlayerController::UpdateAttributes() const
@@ -659,19 +655,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-			{
-				myPlayer.PrintDerivedAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintDerivedAttributes();
+					break;
+				}
 			case AttriMenu::DerivedAttributes:
-			{
-				myPlayer.PrintAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintAttributes();
+					break;
+				}
 			case AttriMenu::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 		return;
@@ -794,7 +790,7 @@ void PlayerController::PrintChestMenu() const
 
 void PlayerController::PrintSpells() const
 {
-	std::cout << "\n<--- Read spell --->\n";
+	std::cout << "\n<--- Pickup spell --->\n";
 
 	auto spells = currentRoom->GetSpellsInRoom();
 	if (spells.empty())

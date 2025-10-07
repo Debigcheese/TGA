@@ -4,20 +4,29 @@
 
 using namespace Utils;
 
-Spell::Spell(SpellType* aSpellType)
-	: myOnHitCount(DEFAULT_ON_HIT_COUNT),
+Spell::Spell(SpellType* aSpellType, int aId)
+	: myId(aId),
+	  myState{false, DEFAULT_ON_HIT_COUNT},
 	  mySpellType(aSpellType)
 {
 }
 
 void Spell::UpdateOnHitCount()
 {
-	myOnHitCount--;
+	if (myState.isActive)
+	{
+		myState.hitCount--;
+	}
+}
+
+void Spell::ActivateSpell()
+{
+	myState.isActive = true;
 }
 
 bool Spell::GetSpellFinished() const
 {
-	if (myOnHitCount < 0)
+	if (myState.hitCount < 0)
 	{
 		return true;
 	}
@@ -77,7 +86,7 @@ void Spell::PrintSpellAttributes() const
 			<< a.defense << "\n";
 	}
 	std::cout << "Hit Count: "
-		<< myOnHitCount
+		<< myState.hitCount
 		<< "/"
 		<< DEFAULT_ON_HIT_COUNT << "\n";
 }

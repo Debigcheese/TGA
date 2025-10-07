@@ -8,6 +8,8 @@
 #include <vector>
 #include <cmath>
 
+#include "Spellbook.h"
+
 class WorldMap;
 class Enemy;
 class Item;
@@ -22,8 +24,8 @@ public:
 	void ChooseAttack();
 	void TakeDamage(const float aDamage);
 
-	void ApplySpell(const Spell& aSpell) { mySpells.push_back(aSpell); }
-	void RemoveSpell(int aIndex) { mySpells.erase(mySpells.begin() + aIndex); }
+	void AddSpell(const Spell& aSpell) { mySpellBook.AddSpell(aSpell); }
+	void ActivateSpell(int aSpellId) { mySpellBook.ApplySpell(aSpellId); }
 	void HealFullHealth() { myAttributes.currentHealth = GetAttributes().maxHealth; }
 
 	float GetDamageFromAttackType(int aAttackIndex) const;
@@ -45,8 +47,7 @@ public:
 	void EquipItem(int aItemId) { myInventory.EquipItem(aItemId); }
 	const Inventory& GetInventory() const { return myInventory; }
 	const Equipment& GetEquipment() const { return myInventory.GetEquipment(); }
-
-	std::vector<Spell> GetSpells() const { return mySpells; }
+	const Spellbook& GetSpellBook() const { return mySpellBook; }
 
 	void SetName(const std::string& aNewName) { myName = aNewName; }
 	std::string GetName() const { return myName; }
@@ -71,7 +72,6 @@ public:
 	void PrintAttributes() const;
 	void PrintBaseAttributes() const;
 	void PrintDerivedAttributes() const;
-	void PrintSpells() const;
 
 private:
 	//CONSTANTS
@@ -79,6 +79,7 @@ private:
 
 	WorldMap& myWorldMap;
 	Inventory myInventory;
+	Spellbook mySpellBook;
 	std::string myName;
 	Attributes myAttributes{};
 	int myRoomId;
@@ -86,5 +87,4 @@ private:
 	int myAttackIndex;
 	bool myIsDead;
 	Position myPos;
-	std::vector<Spell> mySpells;
 };
