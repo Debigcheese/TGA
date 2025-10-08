@@ -1,17 +1,13 @@
 #pragma once
 #include "GameStructs.h"
-#include "Cheats.h"
-#include "Spell.h"
 #include "Inventory.h"
-
-#include <string>
-#include <vector>
-#include <cmath>
-
 #include "Spellbook.h"
+#include <string>
+#include <cmath>
 
 class WorldMap;
 class Enemy;
+class Spell;
 class Item;
 
 class Player
@@ -76,7 +72,6 @@ public:
 private:
 	//CONSTANTS
 	static constexpr float DEFAULT_BASE_ATTRIBUTE = 8.0f;
-
 	WorldMap& myWorldMap;
 	Inventory myInventory;
 	Spellbook mySpellBook;

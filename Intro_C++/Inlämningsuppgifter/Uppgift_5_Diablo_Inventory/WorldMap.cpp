@@ -1,13 +1,12 @@
 #include "WorldMap.h"
-
-#include <iostream>
-
 #include "Utils.h"
 #include "GameStructs.h"
 
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "SpellFactory.h"
+
+#include <iostream>
 
 using namespace Utils;
 
@@ -46,7 +45,7 @@ const Room* WorldMap::GetRoomWithId(int aRoomId) const
 	{
 		if (room.GetRoomId() == aRoomId)
 		{
-			return const_cast<Room*>(&room);
+			return &room;
 		}
 	}
 	return nullptr;

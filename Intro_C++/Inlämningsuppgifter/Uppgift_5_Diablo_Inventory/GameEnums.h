@@ -28,6 +28,13 @@ enum class Action
 	Quit = 7,
 };
 
+enum class ItemAction
+{
+	Equip = 1,
+	Drop = 2,
+	Count,
+};
+
 enum class AttackType
 {
 	None = 0,

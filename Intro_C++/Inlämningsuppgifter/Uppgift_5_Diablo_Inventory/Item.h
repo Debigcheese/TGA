@@ -14,7 +14,6 @@ public:
 	const Attributes& GetAttributes() const { return GetItemAttributes().attributes; }
 
 	void PrintItemAttributes() const;
-	void PrintItemOnPickup() const;
 	void PrintItemOnDisplay() const;
 	void PrintItemName() const;
 

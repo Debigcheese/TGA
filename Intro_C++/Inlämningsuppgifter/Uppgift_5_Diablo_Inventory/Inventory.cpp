@@ -103,6 +103,41 @@ float Inventory::GetInventoryWeight() const
 	return GetItemsWeight() + myEquipment.GetItemsWeight();
 }
 
+std::string Inventory::ToString(EquipmentType type) const
+{
+	switch (type)
+	{
+		case EquipmentType::Head:
+		{
+			return "Head";
+		}
+		case EquipmentType::Hand:
+		{
+			return "Hand";
+		}
+		case EquipmentType::Body:
+		{
+			return "Body";
+		}
+		case EquipmentType::Legs:
+		{
+			return "Legs";
+		}
+		case EquipmentType::Feet:
+		{
+			return "Feet";
+		}
+		case EquipmentType::Amulet:
+		{
+			return "Amulet";
+		}
+		default:
+		{
+			return "Unknown";
+		}
+	}
+}
+
 void Inventory::PrintInventory(float aCarryCapacity) const
 {
 	std::cout << "\n<--- Inventory ("
@@ -118,6 +153,8 @@ void Inventory::PrintInventory(float aCarryCapacity) const
 	{
 		std::cout << i + 1 << ") ";
 		myItems[i].PrintItemName();
+		std::cout << " (" << ToString(myItems[i].GetItemAttributes().type);
+		std::cout << ")";
 		std::cout << "\n";
 	}
 	std::cout << myItems.size() + 1 << ") Return\n";

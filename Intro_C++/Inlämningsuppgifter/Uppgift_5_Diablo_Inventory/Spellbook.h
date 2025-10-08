@@ -15,8 +15,9 @@ public:
 	void UpdateSpellsOnHitCount();
 
 	const Attributes& GetAttributes() const { return myAttributes; }
-	Spell& GetSpellAt(int aSpellId);
-	std::vector<const Spell*> GetInactiveSpells() const; // make it into ids and make a getspells, dont use pointers
+
+	Spell& FindSpell(int aSpellId);
+	std::vector<const Spell*> GetInactiveSpells() const;
 	std::vector<const Spell*> GetActiveSpells() const;
 	void PrintSpells() const;
 

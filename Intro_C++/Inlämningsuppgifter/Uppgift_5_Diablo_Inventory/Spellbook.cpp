@@ -26,7 +26,7 @@ void Spellbook::AddSpell(const Spell& aSpell)
 
 void Spellbook::ApplySpell(int aSpellId)
 {
-	auto& spell = GetSpellAt(aSpellId);
+	auto& spell = FindSpell(aSpellId);
 	if (!spell.GetState().isActive)
 	{
 		spell.ActivateSpell();
@@ -61,7 +61,7 @@ void Spellbook::UpdateSpellsOnHitCount()
 	}
 }
 
-Spell& Spellbook::GetSpellAt(int aSpellId)
+Spell& Spellbook::FindSpell(int aSpellId)
 {
 	auto it = std::ranges::find_if(mySpells, [aSpellId](const Spell& spell)
 	{
@@ -74,7 +74,7 @@ Spell& Spellbook::GetSpellAt(int aSpellId)
 	return spell;
 }
 
-std::vector<int> Spellbook::GetInactiveSpells() const
+std::vector<const Spell*> Spellbook::GetInactiveSpells() const
 {
 	std::vector<const Spell*> spells;
 	spells.reserve(mySpells.size());
@@ -85,57 +85,56 @@ std::vector<int> Spellbook::GetInactiveSpells() const
 			spells.push_back(&spell);
 		}
 	}
-	spells.shrink_to_fit();
 	return spells;
 }
 
-std::vector<int> Spellbook::GetActiveSpells() const
+std::vector<const Spell*> Spellbook::GetActiveSpells() const
 {
 	std::vector<const Spell*> spells;
 	spells.reserve(mySpells.size());
-	for (auto spell : mySpells)
+	for (const auto& spell : mySpells)
 	{
 		if (spell.GetState().isActive)
 		{
 			spells.push_back(&spell);
 		}
 	}
-	spells.shrink_to_fit();
 	return spells;
 }
 
 void Spellbook::PrintSpells() const
 {
 	std::cout << "\n<--- Spellbook --->\n";
-	if (GetInactiveSpells().empty())
+	const auto inactive = GetInactiveSpells();
+	if (inactive.empty())
 	{
 		std::cout << "Empty...\n";
 	}
 	else
 	{
-		for (int i = 0; i < static_cast<int>(GetInactiveSpells().size()); i++)
+		for (int i = 0; i < static_cast<int>(inactive.size()); i++)
 		{
 			std::cout << i + 1 << ") ";
-			GetInactiveSpells()[i]->PrintSpellOnDisplay();
+			inactive[i]->PrintSpellOnDisplay();
 			std::cout << " \n";
 		}
 	}
 
 	std::cout << "\n<--- Active Spells --->\n";
-
-	if (GetActiveSpells().empty())
+	const auto active = GetActiveSpells();
+	if (active.empty())
 	{
 		std::cout << "Empty...\n";
 	}
 	else
 	{
-		for (const auto& spell : GetActiveSpells())
+		for (const auto* spell : active)
 		{
 			spell->PrintSpellOnDisplay();
 			std::cout << " \n";
 		}
 	}
 
-	std::cout << GetInactiveSpells().size() + 1 << ") Return\n"
+	std::cout << inactive.size() + 1 << ") Return\n"
 		<< "Choice: ";
 }

@@ -1,6 +1,5 @@
 #include "PlayerController.h"
 #include "WorldMap.h"
-#include "Room.h"
 #include "Door.h"
 #include "Enemy.h"
 #include "Utils.h"
@@ -42,41 +41,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-				{
-					UpdateCombat();
-					break;
-				}
+			{
+				UpdateCombat();
+				break;
+			}
 			case Action::Navigation:
-				{
-					UpdateNavigation();
-					break;
-				}
+			{
+				UpdateNavigation();
+				break;
+			}
 			case Action::LookAround:
-				{
-					UpdateScavenge();
-					break;
-				}
+			{
+				UpdateScavenge();
+				break;
+			}
 			case Action::Inventory:
-				{
-					UpdateInventory();
-					break;
-				}
+			{
+				UpdateInventory();
+				break;
+			}
 			case Action::Attributes:
-				{
-					UpdateAttributes();
-					break;
-				}
+			{
+				UpdateAttributes();
+				break;
+			}
 			case Action::Cheats:
-				{
-					Cheats::UpdateCheats();
-					break;
-				}
+			{
+				Cheats::UpdateCheats();
+				break;
+			}
 			case Action::Quit:
-				{
-					std::cout << "Quitting Game...\n";
-					system("pause");
-					return;
-				}
+			{
+				std::cout << "Quitting Game...\n";
+				system("pause");
+				return;
+			}
 		}
 	}
 }
@@ -284,24 +283,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-				{
-					UpdatePickupItem();
-					break;
-				}
+			{
+				UpdatePickupItem();
+				break;
+			}
 			case Scavenge::Chests:
-				{
-					UpdateLootChests();
-					break;
-				}
+			{
+				UpdateLootChests();
+				break;
+			}
 			case Scavenge::Spells:
-				{
-					UpdateReadSpells();
-					break;
-				}
+			{
+				UpdateReadSpells();
+				break;
+			}
 			case Scavenge::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 	}
 }
@@ -354,6 +353,7 @@ void PlayerController::UpdatePickupItem() const
 	}
 }
 
+//chests sometimes dissapear and sometimes not, items dissapear if slots are taken and trying to equip
 //its 01:46 rn and I discovered what guard clausing is and it changed my life foerver.
 void PlayerController::UpdateLootChests() const
 {
@@ -397,6 +397,7 @@ void PlayerController::UpdateLootChests() const
 		{
 			std::cout << "\n|" << chest.GetName() << "|"
 				<< " has been opened but it was empty...\n";
+			chests.erase(currentRoom->GetChestInRoom().begin() + chestIndex);
 			system("pause");
 			return;
 		}
@@ -468,20 +469,20 @@ void PlayerController::UpdateInventory() const
 		switch (menuChoice)
 		{
 			case 1:
-				{
-					UpdateEquipment();
-					break;
-				}
+			{
+				UpdateEquipment();
+				break;
+			}
 			case 2:
-				{
-					UpdateInventoryItems();
-					break;
-				}
+			{
+				UpdateInventoryItems();
+				break;
+			}
 			case 3:
-				{
-					UpdateSpellBook();
-					break;
-				}
+			{
+				UpdateSpellBook();
+				break;
+			}
 		}
 	}
 }
@@ -506,13 +507,16 @@ void PlayerController::UpdateEquipment() const
 		{
 			return;
 		}
+		const int itemSlotIndex = menuChoice - offsetIndex;
+		auto& item = equipment.GetEquipment()[itemSlotIndex];
+		std::cout << "\n";
+		item->PrintItemOnDisplay();
 
 		std::cout << "\nUnequip item?\n"
 			<< "1) Yes\n"
 			<< "2) No\n"
 			<< "Choice: ";
 
-		const int itemSlotIndex = menuChoice - offsetIndex;
 		int unequipChoice = ReadIntInRange(1, 2);
 
 		if (unequipChoice == 2)
@@ -544,11 +548,15 @@ void PlayerController::UpdateInventoryItems() const
 		}
 
 		const int itemIndex = menuChoice - offsetIndex;
+		const auto& item = inventory.GetItems()[itemIndex];
 
 		if (itemIndex < 0 || itemIndex >= static_cast<int>(inventory.GetItems().size()))
 		{
 			continue;
 		}
+
+		std::cout << "\n";
+		item.PrintItemOnDisplay();
 
 		std::cout << "\nItem Action\n"
 			<< "1) Equip\n"
@@ -556,26 +564,33 @@ void PlayerController::UpdateInventoryItems() const
 			<< "3) Return\n"
 			<< "Choice: ";
 
-		int dropItemChoice = ReadIntInRange(1, 3);
-		const auto& item = inventory.GetItems()[itemIndex];
+		menuChoice = ReadIntInRange(static_cast<int>(ItemAction::Equip), static_cast<int>(ItemAction::Count));
+		ItemAction itemAction = static_cast<ItemAction>(menuChoice);
 
-		switch (dropItemChoice)
+		switch (itemAction)
 		{
-			case 1:
+			case ItemAction::Equip:
+			{
+				if (myPlayer.GetEquipment().CanEquipItem(item))
 				{
 					myPlayer.EquipItem(item.GetId());
-					break;
 				}
-			case 2:
+				else
 				{
-					currentRoom->AddItemToRoom(item);
-					myPlayer.DropItem(item.GetId());
-					break;
+					std::cout << "\nCan't equip item if item slot is occupied!\n";
 				}
+				break;
+			}
+			case ItemAction::Drop:
+			{
+				currentRoom->AddItemToRoom(item);
+				myPlayer.DropItem(item.GetId());
+				break;
+			}
 			default:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 	}
@@ -604,7 +619,12 @@ void PlayerController::UpdateSpellBook() const
 		}
 
 		const int spellIndex = menuChoice - offsetIndex;
-		const auto* spell = spellbook.GetInactiveSpells()[spellIndex];
+		if (spellIndex < 0 || spellIndex >= spellsUnactiveCount)
+		{
+			continue;
+		}
+		const Spell* spell = spellbook.GetInactiveSpells()[spellIndex];
+		const int spellId = spell->GetId();
 
 		std::cout << "\nRead spell?\n"
 			<< "1) Yes\n"
@@ -618,7 +638,7 @@ void PlayerController::UpdateSpellBook() const
 		{
 			return;
 		}
-		myPlayer.ActivateSpell(spell->GetId());
+		myPlayer.ActivateSpell(spellId);
 		system("pause");
 		return;
 	}
@@ -655,19 +675,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-				{
-					myPlayer.PrintDerivedAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintDerivedAttributes();
+				break;
+			}
 			case AttriMenu::DerivedAttributes:
-				{
-					myPlayer.PrintAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintAttributes();
+				break;
+			}
 			case AttriMenu::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 		return;
@@ -792,7 +812,7 @@ void PlayerController::PrintSpells() const
 {
 	std::cout << "\n<--- Pickup spell --->\n";
 
-	auto spells = currentRoom->GetSpellsInRoom();
+	const auto& spells = currentRoom->GetSpellsInRoom();
 	if (spells.empty())
 	{
 		return;

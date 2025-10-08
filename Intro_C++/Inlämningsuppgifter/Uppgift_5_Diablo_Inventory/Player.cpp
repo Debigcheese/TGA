@@ -3,14 +3,11 @@
 #include "Enemy.h"
 #include "Utils.h"
 #include "Cheats.h"
-#include "GameConstants.h"
 #include "Item.h"
 
 #include <vector>
 #include <iostream>
 
-using namespace Utils;
-using namespace GameConstants;
 
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
                                       myName("(-)"), myPos{0, 0}
@@ -45,7 +42,7 @@ void Player::ChooseTarget()
 		<< "\n<--- Choose Target --->\n"
 		<< "Choice: ";
 	int enemyCount = static_cast<int>(myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size());
-	myTargetIndex = ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) - PLAYER_TARGET_INDEX_OFFSET;
+	myTargetIndex = Utils::ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) - PLAYER_TARGET_INDEX_OFFSET;
 }
 
 void Player::ChooseAttack()
@@ -55,7 +52,7 @@ void Player::ChooseAttack()
 		<< "1) Quick attack" << "\n"
 		<< "2) Heavy attack\n"
 		<< "Choice: ";
-	myAttackIndex = ReadIntInRange(
+	myAttackIndex = Utils::ReadIntInRange(
 		static_cast<int>(AttackType::QuickAttack),
 		static_cast<int>(AttackType::HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
 }
@@ -89,21 +86,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-			{
-				newDamage = GetAttributes().damage;
-				break;
-			}
+		{
+			newDamage = GetAttributes().damage;
+			break;
+		}
 		case AttackType::HeavyAttack:
-			{
-				const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
-				const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
-				newDamage = static_cast<float>(GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-				break;
-			}
+		{
+			const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
+			const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
+			newDamage = static_cast<float>(Utils::GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+			break;
+		}
 		case AttackType::None:
-			{
-				break;
-			}
+		{
+			break;
+		}
 	}
 	return newDamage;
 }

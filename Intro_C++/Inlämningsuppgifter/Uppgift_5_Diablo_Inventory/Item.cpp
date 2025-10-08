@@ -67,19 +67,6 @@ void Item::PrintItemAttributes() const
 		<< "kg\n";
 }
 
-void Item::PrintItemOnPickup() const
-{
-	std::cout << GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), true)
-		<< "\n<------ " << RarityToString(GetItemAttributes().rarity) << " ------>"
-		<< GetColorCode(GetColorFromRarity(GetItemAttributes().rarity), false)
-		<< "\n"
-		<< "         [" << GetItemAttributes().name << "]" << "\n";
-
-	PrintItemAttributes();
-
-	std::cout << "\n";
-}
-
 void Item::PrintItemOnDisplay() const
 {
 	PrintItemName();

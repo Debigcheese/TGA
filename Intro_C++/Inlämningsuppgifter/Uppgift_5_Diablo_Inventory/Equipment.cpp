@@ -4,11 +4,9 @@
 #include <iostream>
 
 Equipment::Equipment()
-
 {
 	myEquipment.fill(nullptr);
 }
-
 
 void Equipment::AddItem(const Item& aItem)
 {

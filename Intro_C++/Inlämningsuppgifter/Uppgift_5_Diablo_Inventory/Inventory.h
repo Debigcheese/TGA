@@ -15,6 +15,7 @@ public:
 	float GetItemsWeight() const;
 	float GetInventoryWeight() const;
 	const Equipment& GetEquipment() const { return myEquipment; }
+	std::string ToString(EquipmentType type) const;
 
 	void DropItem(int aItemId);
 	void UnequipItem(int aSlotIndex);
