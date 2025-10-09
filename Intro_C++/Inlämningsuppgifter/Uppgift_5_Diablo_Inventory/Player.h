@@ -5,6 +5,8 @@
 #include <string>
 #include <cmath>
 
+#include "WorldMap.h"
+
 class WorldMap;
 class Enemy;
 class Spell;
@@ -24,9 +26,7 @@ public:
 	void ActivateSpell(int aSpellId) { mySpellBook.ApplySpell(aSpellId); }
 	void HealFullHealth() { myAttributes.currentHealth = GetAttributes().maxHealth; }
 
-	float GetDamageFromAttackType(int aAttackIndex) const;
 	float GetDefenseMultiplier() const;
-	bool IsInvalidAttackIndex() const;
 
 	float GetDamage() const;
 	float GetMaxHealth() const;
@@ -48,11 +48,6 @@ public:
 	void SetName(const std::string& aNewName) { myName = aNewName; }
 	std::string GetName() const { return myName; }
 
-	//combat
-	void SetAttackIndex(int aAttackIndex) { myAttackIndex = aAttackIndex; }
-	void SetTargetIndex(int aTargetIndex) { myTargetIndex = aTargetIndex; }
-	int GetAttackIndex() const { return myAttackIndex; }
-	int GetTargetIndex() const { return myTargetIndex; }
 	bool IsDead() const { return myIsDead; }
 	void SetIsDead(bool aIsDead) { myIsDead = aIsDead; }
 
@@ -78,8 +73,6 @@ private:
 	std::string myName;
 	Attributes myAttributes{};
 	int myRoomId;
-	int myTargetIndex;
-	int myAttackIndex;
 	bool myIsDead;
 	Position myPos;
 };

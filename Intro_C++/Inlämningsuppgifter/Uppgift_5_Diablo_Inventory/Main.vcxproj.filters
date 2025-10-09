@@ -105,6 +105,9 @@
     <ClCompile Include="Spellbook.cpp">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="CombatManager.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Diablo.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Spellbook.h">
       <Filter>Source Files\Characters\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatManager.h">
+      <Filter>Source Files\Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

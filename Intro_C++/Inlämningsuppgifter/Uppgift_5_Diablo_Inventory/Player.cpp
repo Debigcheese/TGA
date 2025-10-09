@@ -8,8 +8,7 @@
 #include <vector>
 #include <iostream>
 
-
-Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myTargetIndex(-1), myIsDead(false),
+Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myIsDead(false),
                                       myName("(-)"), myPos{0, 0}
 {
 	myAttributes.strength = DEFAULT_BASE_ATTRIBUTE;
@@ -24,15 +23,17 @@ void Player::Attack() const
 	Room* currentRoom = myWorldMap.GetRoomWithId(GetRoomId());
 	std::vector<Enemy>& enemies = currentRoom->GetEnemies();
 
-	PrintPlayerUI();
-	currentRoom->PrintEnemiesWithTarget(myTargetIndex);
+	const AttackData& attackData = GetAttackData();
 
-	float damage = GetDamageFromAttackType(myAttackIndex);
-	float enemyOldHp = enemies[myTargetIndex].GetCurrentHealth();
-	enemies[myTargetIndex].TakeDamage(damage);
+	PrintPlayerUI();
+	currentRoom->PrintEnemiesWithTarget(attackData.targetIndex);
+
+	float damage = GetDamageFromAttackType(static_cast<int>(attackData.attackType));
+	float enemyOldHp = enemies[attackData.targetIndex].GetCurrentHealth();
+	enemies[attackData.targetIndex].TakeDamage(damage);
 	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to "
-		<< enemies[myTargetIndex].GetEnemyAttributes().name;
-	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[myTargetIndex].
+		<< enemies[attackData.targetIndex].GetEnemyAttributes().name;
+	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[attackData.targetIndex].
 		GetCurrentHealth()) << "hp)" << "\n";
 }
 
@@ -42,7 +43,9 @@ void Player::ChooseTarget()
 		<< "\n<--- Choose Target --->\n"
 		<< "Choice: ";
 	int enemyCount = static_cast<int>(myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size());
-	myTargetIndex = Utils::ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) - PLAYER_TARGET_INDEX_OFFSET;
+	int targetIndex = Utils::ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) -
+		PLAYER_TARGET_INDEX_OFFSET;
+	SetAttackData({targetIndex, GetAttackData().attackType});
 }
 
 void Player::ChooseAttack()
@@ -51,10 +54,12 @@ void Player::ChooseAttack()
 		<< "\n<--- Choose Attack --->\n"
 		<< "1) Quick attack" << "\n"
 		<< "2) Heavy attack\n"
+		<< "3) Slash attack\n"
 		<< "Choice: ";
-	myAttackIndex = Utils::ReadIntInRange(
+	int attackIndex = Utils::ReadIntInRange(
 		static_cast<int>(AttackType::QuickAttack),
 		static_cast<int>(AttackType::HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
+	SetAttackData({GetAttackData().targetIndex, static_cast<AttackType>(attackIndex)});
 }
 
 void Player::TakeDamage(const float aDamage)
@@ -86,21 +91,21 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-		{
-			newDamage = GetAttributes().damage;
-			break;
-		}
+			{
+				newDamage = GetAttributes().damage;
+				break;
+			}
 		case AttackType::HeavyAttack:
-		{
-			const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
-			const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
-			newDamage = static_cast<float>(Utils::GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-			break;
-		}
+			{
+				const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
+				const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
+				newDamage = static_cast<float>(Utils::GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+				break;
+			}
 		case AttackType::None:
-		{
-			break;
-		}
+			{
+				break;
+			}
 	}
 	return newDamage;
 }

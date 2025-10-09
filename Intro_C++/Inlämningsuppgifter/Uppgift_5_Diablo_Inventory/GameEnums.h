@@ -40,6 +40,7 @@ enum class AttackType
 	None = 0,
 	QuickAttack = 1,
 	HeavyAttack = 2,
+	SlashAttack = 3,
 };
 
 enum class AttriMenu

@@ -41,124 +41,48 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-			{
-				UpdateCombat();
-				break;
-			}
+				{
+					while (com)
+					UpdateCombat();
+					break;
+				}
 			case Action::Navigation:
-			{
-				UpdateNavigation();
-				break;
-			}
+				{
+					UpdateNavigation();
+					break;
+				}
 			case Action::LookAround:
-			{
-				UpdateScavenge();
-				break;
-			}
+				{
+					UpdateScavenge();
+					break;
+				}
 			case Action::Inventory:
-			{
-				UpdateInventory();
-				break;
-			}
+				{
+					UpdateInventory();
+					break;
+				}
 			case Action::Attributes:
-			{
-				UpdateAttributes();
-				break;
-			}
+				{
+					UpdateAttributes();
+					break;
+				}
 			case Action::Cheats:
-			{
-				Cheats::UpdateCheats();
-				break;
-			}
+				{
+					Cheats::UpdateCheats();
+					break;
+				}
 			case Action::Quit:
-			{
-				std::cout << "Quitting Game...\n";
-				system("pause");
-				return;
-			}
+				{
+					std::cout << "Quitting Game...\n";
+					system("pause");
+					return;
+				}
 		}
 	}
 }
 
 void PlayerController::UpdateCombat() const
 {
-	if (!myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->DoesEnemiesExist())
-	{
-		std::cout << "No monsters in this room...\n";
-		std::cout << "Choose another action.\n";
-		system("pause");
-		return;
-	}
-
-	while (true && !myPlayer.IsDead())
-	{
-		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
-
-		if (myPlayer.IsInvalidAttackIndex() || enemies.size() > 1)
-		{
-			PrintUI();
-			myPlayer.ChooseTarget();
-			system("cls");
-		}
-		else
-		{
-			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_ZERO);
-		}
-
-		auto& targetEnemy = enemies[myPlayer.GetTargetIndex()];
-
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
-		myPlayer.ChooseAttack();
-		system("cls");
-
-		myPlayer.Attack();
-
-		system("pause");
-
-		if (targetEnemy.IsDead())
-		{
-			std::cout << "\n" << targetEnemy.GetEnemyAttributes().name << " has been slained!\n";
-			if (targetEnemy.HasItems())
-			{
-				std::cout << targetEnemy.GetEnemyAttributes().name << " dropped an item!\n";
-			}
-			targetEnemy.DropItem(currentRoom);
-			system("pause");
-		}
-
-		system("cls");
-		myPlayer.PrintPlayerUI();
-
-		if (targetEnemy.IsDead())
-		{
-			currentRoom->RemoveEnemyFromRoom(targetEnemy.GetId());
-			enemies = currentRoom->GetEnemies();
-			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_INVALID);
-			currentRoom->PrintEnemies();
-		}
-		else
-		{
-			currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
-		}
-
-		if (enemies.empty())
-		{
-			std::cout << "\nYou have slain all enemies in this room!\n";
-			system("pause");
-			break;
-		}
-
-		std::cout << "\n";
-		for (Enemy& enemy : enemies)
-		{
-			enemy.Attack(myPlayer);
-		}
-		if (!myPlayer.IsDead())
-		{
-			system("pause");
-		}
-	}
 }
 
 void PlayerController::UpdateNavigation()
@@ -283,24 +207,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-			{
-				UpdatePickupItem();
-				break;
-			}
+				{
+					UpdatePickupItem();
+					break;
+				}
 			case Scavenge::Chests:
-			{
-				UpdateLootChests();
-				break;
-			}
+				{
+					UpdateLootChests();
+					break;
+				}
 			case Scavenge::Spells:
-			{
-				UpdateReadSpells();
-				break;
-			}
+				{
+					UpdateReadSpells();
+					break;
+				}
 			case Scavenge::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
@@ -469,20 +393,20 @@ void PlayerController::UpdateInventory() const
 		switch (menuChoice)
 		{
 			case 1:
-			{
-				UpdateEquipment();
-				break;
-			}
+				{
+					UpdateEquipment();
+					break;
+				}
 			case 2:
-			{
-				UpdateInventoryItems();
-				break;
-			}
+				{
+					UpdateInventoryItems();
+					break;
+				}
 			case 3:
-			{
-				UpdateSpellBook();
-				break;
-			}
+				{
+					UpdateSpellBook();
+					break;
+				}
 		}
 	}
 }
@@ -570,27 +494,27 @@ void PlayerController::UpdateInventoryItems() const
 		switch (itemAction)
 		{
 			case ItemAction::Equip:
-			{
-				if (myPlayer.GetEquipment().CanEquipItem(item))
 				{
-					myPlayer.EquipItem(item.GetId());
+					if (myPlayer.GetEquipment().CanEquipItem(item))
+					{
+						myPlayer.EquipItem(item.GetId());
+					}
+					else
+					{
+						std::cout << "\nCan't equip item if item slot is occupied!\n";
+					}
+					break;
 				}
-				else
-				{
-					std::cout << "\nCan't equip item if item slot is occupied!\n";
-				}
-				break;
-			}
 			case ItemAction::Drop:
-			{
-				currentRoom->AddItemToRoom(item);
-				myPlayer.DropItem(item.GetId());
-				break;
-			}
+				{
+					currentRoom->AddItemToRoom(item);
+					myPlayer.DropItem(item.GetId());
+					break;
+				}
 			default:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 	}
@@ -675,19 +599,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-			{
-				myPlayer.PrintDerivedAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintDerivedAttributes();
+					break;
+				}
 			case AttriMenu::DerivedAttributes:
-			{
-				myPlayer.PrintAttributes();
-				break;
-			}
+				{
+					myPlayer.PrintAttributes();
+					break;
+				}
 			case AttriMenu::Return:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 		return;

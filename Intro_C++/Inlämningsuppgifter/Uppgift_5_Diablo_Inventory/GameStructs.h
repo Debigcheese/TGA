@@ -105,6 +105,11 @@ struct AmountRange
 	int max;
 };
 
+struct AttackData
+{
+	int targetIndex;
+	AttackType attackType;
+};
 
 //world map constants
 

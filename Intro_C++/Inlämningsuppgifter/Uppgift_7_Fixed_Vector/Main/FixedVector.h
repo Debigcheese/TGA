@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <assert.h>
 
 /// <summary>
@@ -113,10 +114,55 @@ public:
 	}
 
 	//<--- insert element at position --->
-	void insert(iterator aIterator, const Type& aObject);
+	void insert(iterator aIterator, const Type& aObject)
+	{
+		assert(mySize < CAPACITY && "insert on full capacity FixedVector");
+		assert(aIterator >= begin() && aIterator <= end() && "insert iterator out of bounds");
+
+		for (auto it = end(); it != aIterator; --it)
+		{
+			*it = std::move(*(it - 1));
+		}
+
+		*aIterator = aObject;
+		++mySize;
+
+		//SizeType idx = static_cast<SizeType>(aIterator - begin());
+
+		//for (SizeType i = mySize; i > idx; --i) // i = mysize (mySize will index +1, like end())
+		//{
+		//	myStorage[i] = myStorage[i - 1]; //[3][2][1] -> [3-1][2-1][1-1]
+		//}
+
+		//myStorage[idx] = aObject;
+		//++mySize;
+	}
 
 	//<--- remove element at position e.g. (myVector.begin + 3) or (it) --->
-	void erase(iterator aIterator);
+	void erase(iterator aIterator)
+	{
+		assert(mySize > 0 && "erase on full capacity FixedVector");
+		assert(aIterator >= begin() && aIterator < end() && "erase iterator out of bounds");
+
+		for (auto it = aIterator; (it + 1) != end(); ++it)
+		{
+			*it = std::move(*(it + 1));
+		}
+
+		*aIterator = Type{};
+		--mySize;
+
+		//SizeType idx = static_cast<SizeType>(aIterator - begin());
+
+		//myStorage[mySize] = Type{};
+
+		//for (SizeType i = idx; i + 1 < mySize; ++i)
+		//{
+		//	myStorage[i] = myStorage[i + 1];
+		//}
+		//--mySize;
+		//myStorage[mySize] = Type{};
+	}
 
 	//<--- remove element at position if condition is met e.g. myVector.erase_if([](int x){ return x == 2; }); --->
 	template <class Pred>
@@ -136,7 +182,12 @@ public:
 		return removed; // return removed
 	}
 
-	void pop_back();
+	void pop_back()
+	{
+		assert(mySize > 0);
+		--mySize;
+		myStorage[mySize] = Type{};
+	}
 
 	iterator begin()
 	{
@@ -173,6 +224,10 @@ public:
 
 	void clear()
 	{
+		for (auto it = begin(); it != end(); ++it)
+		{
+			it->~T();
+		}
 		mySize = 0;
 	}
 

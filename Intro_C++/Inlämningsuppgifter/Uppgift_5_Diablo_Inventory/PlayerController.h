@@ -2,6 +2,7 @@
 #include "WorldMap.h"
 #include "Player.h"
 #include "Room.h"
+#include "CombatManager.h"
 
 // EVERY WHILE LOOP + READ INPUT (MENU CHOICES) IS HANDLED IN THIS CLASS
 class PlayerController
@@ -39,4 +40,5 @@ private:
 	Room* currentRoom;
 	WorldMap& myWorldMap;
 	Player& myPlayer;
+	CombatManager myCombatManager;
 };

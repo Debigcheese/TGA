@@ -7,7 +7,7 @@
 int main()
 {
 	std::vector<int> myvector;
-	myvector.emplace();
+	//myvector.emplace();
 	std::cout << "Hello World!\n";
 }
 
