@@ -82,7 +82,8 @@ void WorldMap::GenerateDoors()
 	myDoors.emplace_back(ROOM_1_ID, ROOM_3_ID, LOCK_UNLOCKED);
 	myDoors.emplace_back(ROOM_2_ID, ROOM_3_ID, LOCK_UNLOCKED);
 	myDoors.emplace_back(ROOM_2_ID, ROOM_4_ID, LOCK_TWO);
-	myDoors.emplace_back(ROOM_4_ID, ROOM_WIN_ID, LOCK_THREE);
+	myDoors.emplace_back(ROOM_4_ID, ROOM_5_ID, LOCK_UNLOCKED);
+	myDoors.emplace_back(ROOM_5_ID, ROOM_WIN_ID, LOCK_UNLOCKED);
 }
 
 void WorldMap::GenerateRooms()
@@ -108,7 +109,11 @@ void WorldMap::GenerateRooms()
 		GenerateEnemies({ENEMY_FROM_ID[ROOM_4_ID].enemyKeys}));
 
 	myRooms.emplace_back(
-		ROOM_WIN_ID, "Eternal Abyss", ROOM_POS_FROM_ID[ROOM_WIN_ID],
+		ROOM_5_ID, "Eternal Abyss", ROOM_POS_FROM_ID[ROOM_5_ID],
+		GenerateEnemies({ENEMY_FROM_ID[ROOM_5_ID].enemyKeys}));
+
+	myRooms.emplace_back(
+		ROOM_WIN_ID, "The Dungeon Passage", ROOM_POS_FROM_ID[ROOM_WIN_ID],
 		GenerateEnemies({ENEMY_FROM_ID[ROOM_WIN_ID].enemyKeys}));
 }
 
@@ -126,8 +131,8 @@ bool WorldMap::HasRoom(int x, int y)
 
 void WorldMap::PrintMap(const Position player)
 {
-	const int minX = -1, maxX = 1;
-	const int minY = 0, maxY = 2;
+	const int minX = -2, maxX = 2;
+	const int minY = -1, maxY = 3;
 
 	std::cout << '\n';
 	for (int y = maxY; y >= minY; --y)
@@ -139,7 +144,14 @@ void WorldMap::PrintMap(const Position player)
 				std::cout << "   ";
 				continue;
 			}
-			std::cout << ((player.X == x && player.Y == y) ? "[X]" : "[ ]");
+			if (ROOM_POS_FROM_ID[ROOM_WIN_ID] == Position{x, y})
+			{
+				std::cout << "[X]";
+			}
+			else
+			{
+				std::cout << ((player.X == x && player.Y == y) ? "[O]" : "[ ]");
+			}
 		}
 		std::cout << '\n';
 	}

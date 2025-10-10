@@ -85,39 +85,33 @@ void CombatManager::Attack() const
 	float damage = GetDamageFromAttackType();
 	float enemyOldHp = enemies[targetIndex].GetCurrentHealth();
 
-
+	std::vector<int> targetIdx = {};
 	if (GetAttackData().attackType == AttackType::SlashAttack)
 	{
 		for (int i = 0; i < enemies.size(); i++)
 		{
-			enemies[i].TakeDamage(damage);
-			std::cout << "\nYou dealt "
-				<< damage
-				<< " dmg to "
-				<< enemies[targetIndex].GetEnemyAttributes().name;
-			std::cout << " ("
-				<< std::lround(enemyOldHp)
-				<< "hp -> "
-				<< std::lround(enemies[targetIndex].GetCurrentHealth())
-				<< "hp)";
+			targetIdx.push_back(i);
 		}
 	}
 	else
 	{
-		enemies[targetIndex].TakeDamage(damage);
+		targetIdx.push_back(targetIndex);
+	}
 
+	for (const int idx : targetIdx)
+	{
+		enemies[idx].TakeDamage(damage);
 		std::cout << "\nYou dealt "
-			<< damage
+			<< std::round_to_nearest(damage)
 			<< " dmg to "
-			<< enemies[targetIndex].GetEnemyAttributes().name;
+			<< enemies[idx].GetEnemyAttributes().name;
 		std::cout << " ("
-			<< std::lround(enemyOldHp)
+			<< std::round_to_nearest(enemyOldHp)
 			<< "hp -> "
-			<< std::lround(enemies[targetIndex].GetCurrentHealth())
+			<< std::round_to_nearest(enemies[idx].GetCurrentHealth())
 			<< "hp)"
 			<< "\n";
 	}
-
 
 	system("pause");
 }
@@ -163,25 +157,25 @@ float CombatManager::GetDamageFromAttackType() const
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
-			{
-				newDamage = myPlayer.GetAttributes().damage;
-				break;
-			}
+		{
+			newDamage = myPlayer.GetAttributes().damage;
+			break;
+		}
 		case AttackType::HeavyAttack:
-			{
-				newDamage = static_cast<float>(Utils::GenerateRandomNumber(
-					GetHeavyDamageRange().min, GetHeavyDamageRange().max));
-				break;
-			}
+		{
+			newDamage = static_cast<float>(Utils::GenerateRandomNumber(
+				GetHeavyDamageRange().min, GetHeavyDamageRange().max));
+			break;
+		}
 		case AttackType::SlashAttack:
-			{
-				newDamage = GetSlashDamage();
-				break;
-			}
+		{
+			newDamage = GetSlashDamage();
+			break;
+		}
 		default:
-			{
-				break;
-			}
+		{
+			break;
+		}
 	}
 	return newDamage;
 }

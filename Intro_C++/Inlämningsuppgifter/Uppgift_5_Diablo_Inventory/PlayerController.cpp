@@ -41,41 +41,41 @@ void PlayerController::UpdateAction()
 		switch (actionChoice)
 		{
 			case Action::Combat:
-				{
-					myCombatManager.UpdateCombat(myCurrentRoom);
-					break;
-				}
+			{
+				myCombatManager.UpdateCombat(myCurrentRoom);
+				break;
+			}
 			case Action::Navigation:
-				{
-					UpdateNavigation();
-					break;
-				}
+			{
+				UpdateNavigation();
+				break;
+			}
 			case Action::LookAround:
-				{
-					UpdateScavenge();
-					break;
-				}
+			{
+				UpdateScavenge();
+				break;
+			}
 			case Action::Inventory:
-				{
-					UpdateInventory();
-					break;
-				}
+			{
+				UpdateInventory();
+				break;
+			}
 			case Action::Attributes:
-				{
-					UpdateAttributes();
-					break;
-				}
+			{
+				UpdateAttributes();
+				break;
+			}
 			case Action::Cheats:
-				{
-					Cheats::UpdateCheats();
-					break;
-				}
+			{
+				Cheats::UpdateCheats();
+				break;
+			}
 			case Action::Quit:
-				{
-					std::cout << "Quitting Game...\n";
-					system("pause");
-					return;
-				}
+			{
+				std::cout << "Quitting Game...\n";
+				system("pause");
+				return;
+			}
 		}
 	}
 }
@@ -167,12 +167,14 @@ void PlayerController::UpdateNavigation()
 			<< " -> " << std::round(myPlayer.GetAttributes().maxHealth) << "\n";
 		myPlayer.HealFullHealth();
 
-		if (myPlayer.GetRoomId() == 5)
+		if (myPlayer.GetRoomId() == WorldMap::GetWinRoomID())
 		{
 			Win();
 		}
-
-		system("pause");
+		else
+		{
+			system("pause");
+		}
 		break;
 	}
 }
@@ -202,24 +204,24 @@ void PlayerController::UpdateScavenge()
 		switch (menuChoice)
 		{
 			case Scavenge::Floor:
-				{
-					UpdatePickupItem();
-					break;
-				}
+			{
+				UpdatePickupItem();
+				break;
+			}
 			case Scavenge::Chests:
-				{
-					UpdateLootChests();
-					break;
-				}
+			{
+				UpdateLootChests();
+				break;
+			}
 			case Scavenge::Spells:
-				{
-					UpdateReadSpells();
-					break;
-				}
+			{
+				UpdateReadSpells();
+				break;
+			}
 			case Scavenge::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 	}
 }
@@ -388,20 +390,20 @@ void PlayerController::UpdateInventory() const
 		switch (menuChoice)
 		{
 			case 1:
-				{
-					UpdateEquipment();
-					break;
-				}
+			{
+				UpdateEquipment();
+				break;
+			}
 			case 2:
-				{
-					UpdateInventoryItems();
-					break;
-				}
+			{
+				UpdateInventoryItems();
+				break;
+			}
 			case 3:
-				{
-					UpdateSpellBook();
-					break;
-				}
+			{
+				UpdateSpellBook();
+				break;
+			}
 		}
 	}
 }
@@ -489,27 +491,27 @@ void PlayerController::UpdateInventoryItems() const
 		switch (itemAction)
 		{
 			case ItemAction::Equip:
+			{
+				if (myPlayer.GetEquipment().CanEquipItem(item))
 				{
-					if (myPlayer.GetEquipment().CanEquipItem(item))
-					{
-						myPlayer.EquipItem(item.GetId());
-					}
-					else
-					{
-						std::cout << "\nCan't equip item if item slot is occupied!\n";
-					}
-					break;
+					myPlayer.EquipItem(item.GetId());
 				}
+				else
+				{
+					std::cout << "\nCan't equip item if item slot is occupied!\n";
+				}
+				break;
+			}
 			case ItemAction::Drop:
-				{
-					myCurrentRoom->AddItemToRoom(item);
-					myPlayer.DropItem(item.GetId());
-					break;
-				}
+			{
+				myCurrentRoom->AddItemToRoom(item);
+				myPlayer.DropItem(item.GetId());
+				break;
+			}
 			default:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 	}
@@ -594,19 +596,19 @@ void PlayerController::UpdateAttributes() const
 		switch (menuChoice)
 		{
 			case AttriMenu::Attributes:
-				{
-					myPlayer.PrintDerivedAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintDerivedAttributes();
+				break;
+			}
 			case AttriMenu::DerivedAttributes:
-				{
-					myPlayer.PrintAttributes();
-					break;
-				}
+			{
+				myPlayer.PrintAttributes();
+				break;
+			}
 			case AttriMenu::Return:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 		return;

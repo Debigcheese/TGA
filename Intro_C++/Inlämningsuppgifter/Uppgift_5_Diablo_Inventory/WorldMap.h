@@ -27,6 +27,7 @@ public:
 
 	bool HasRoom(int x, int y);
 	void PrintMap(const Position player);
+	static constexpr int GetWinRoomID() { return ROOM_WIN_ID; }
 
 	std::vector<Position> GetRoomPositions() const;
 
@@ -57,9 +58,10 @@ private:
 	static constexpr int ROOM_2_ID = 2;
 	static constexpr int ROOM_3_ID = 3;
 	static constexpr int ROOM_4_ID = 4;
-	static constexpr int ROOM_WIN_ID = 5;
+	static constexpr int ROOM_5_ID = 5;
+	static constexpr int ROOM_WIN_ID = 6;
 
-	static constexpr int ROOM_SIZE = 6;
+	static constexpr int ROOM_SIZE = 7;
 
 	static constexpr Position ROOM_POS_FROM_ID[ROOM_SIZE] = {
 		{0, 0},
@@ -67,7 +69,8 @@ private:
 		{0, 1},
 		{1, 1},
 		{0, 2},
-		{-1, 2}
+		{-1, 2},
+		{-1, 3}
 	};
 
 	//LOCK_DEF
@@ -99,10 +102,11 @@ private:
 	const std::vector<EnemyRoom> ENEMY_FROM_ID = {
 		{{EnemyKey::Bat, EnemyKey::Bat, EnemyKey::Skeleton}},
 		{{EnemyKey::Skeleton, EnemyKey::Undead, EnemyKey::None}},
-		{{EnemyKey::Skeleton, EnemyKey::Beast, EnemyKey::Humanoid}},
+		{{EnemyKey::Skeleton, EnemyKey::Beast, EnemyKey::Bat}},
+		{{EnemyKey::None, EnemyKey::Humanoid, EnemyKey::Beast}},
 		{{EnemyKey::Elemental, EnemyKey::Humanoid, EnemyKey::Beast}},
-		{{EnemyKey::Elemental, EnemyKey::Humanoid, EnemyKey::Beast}},
-		{{EnemyKey::None, EnemyKey::Demon, EnemyKey::None}}
+		{{EnemyKey::None, EnemyKey::Demon, EnemyKey::None}},
+		{{EnemyKey::None, EnemyKey::None, EnemyKey::None}}
 	};
 
 	//CHESTS
@@ -111,6 +115,7 @@ private:
 		{ROOM_1_ID, {0, 2}, Rarity::Silver},
 		{ROOM_2_ID, {0, 1}, Rarity::Gold},
 		{ROOM_3_ID, {0, 1}, Rarity::Legendary},
+		{ROOM_4_ID, {0, 1}, Rarity::Legendary},
 		{ROOM_4_ID, {0, 1}, Rarity::Legendary},
 	};
 
@@ -123,6 +128,7 @@ private:
 		{ROOM_2_ID, {0, 2}, Rarity::Gold},
 		{ROOM_3_ID, {0, 2}, Rarity::Legendary},
 		{ROOM_4_ID, {1, 3}, Rarity::Legendary},
+		{ROOM_4_ID, {1, 3}, Rarity::Legendary},
 	};
 
 	//SPELLS
@@ -131,6 +137,7 @@ private:
 		{ROOM_1_ID, {0, 3}, Rarity::Silver},
 		{ROOM_2_ID, {2, 3}, Rarity::Gold},
 		{ROOM_3_ID, {1, 2}, Rarity::Legendary},
+		{ROOM_4_ID, {1, 3}, Rarity::Legendary},
 		{ROOM_4_ID, {1, 3}, Rarity::Legendary},
 	};
 };
