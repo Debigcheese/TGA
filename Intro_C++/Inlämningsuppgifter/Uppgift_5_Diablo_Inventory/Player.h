@@ -8,7 +8,6 @@
 #include "WorldMap.h"
 
 class WorldMap;
-class Enemy;
 class Spell;
 class Item;
 
@@ -17,10 +16,7 @@ class Player
 public:
 	Player(WorldMap& aWorldMap);
 
-	void Attack() const;
-	void ChooseTarget();
-	void ChooseAttack();
-	void TakeDamage(const float aDamage);
+	void TakeDamage(const float aDamage, const std::string aEnemyName);
 
 	void AddSpell(const Spell& aSpell) { mySpellBook.AddSpell(aSpell); }
 	void ActivateSpell(int aSpellId) { mySpellBook.ApplySpell(aSpellId); }

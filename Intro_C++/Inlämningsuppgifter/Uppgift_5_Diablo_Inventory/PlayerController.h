@@ -11,7 +11,6 @@ public:
 	PlayerController(WorldMap& aWorldMap, Player& aPlayer);
 
 	void UpdateAction();
-	void UpdateCombat() const;
 	void UpdateNavigation();
 
 	void UpdateScavenge();
@@ -37,7 +36,7 @@ public:
 	void PrintInventoryMenu() const;
 
 private:
-	Room* currentRoom;
+	Room* myCurrentRoom;
 	WorldMap& myWorldMap;
 	Player& myPlayer;
 	CombatManager myCombatManager;

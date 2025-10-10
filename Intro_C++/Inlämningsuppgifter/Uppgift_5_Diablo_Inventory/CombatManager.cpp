@@ -1,23 +1,22 @@
 #include "CombatManager.h"
 #include "Player.h"
 #include "Enemy.h"
-
 #include "Utils.h"
-#include "Cheats.h"
 
 #include <vector>
 #include <iostream>
 
-CombatManager::CombatManager(Player& aPlayer, Room* aCurrentRoom) :
+CombatManager::CombatManager(Player& aPlayer) :
 	myPlayer(aPlayer),
-	myCurrentRoom(aCurrentRoom),
+	myCurrentRoom(nullptr),
 	myAttackData()
 {
 }
 
-void CombatManager::UpdateCombat()
+void CombatManager::UpdateCombat(Room* aCurrentRoom)
 {
-	if (!myWorldMap.GetRoomWithId(myPlayer.GetRoomId())->DoesEnemiesExist())
+	myCurrentRoom = aCurrentRoom;
+	if (!myCurrentRoom->DoesEnemiesExist())
 	{
 		std::cout << "No monsters in this room...\n";
 		std::cout << "Choose another action.\n";
@@ -27,38 +26,23 @@ void CombatManager::UpdateCombat()
 
 	while (true && !myPlayer.IsDead())
 	{
-		std::vector<Enemy>& enemies = currentRoom->GetEnemies();
+		PrintCombatUI();
+		ChooseTarget();
 
-		if (myPlayer.IsInvalidAttackIndex() || enemies.size() > 1)
-		{
-			PrintUI();
-			myPlayer.ChooseTarget();
-			system("cls");
-		}
-		else
-		{
-			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_ZERO);
-		}
+		PrintCombatUI();
+		ChooseAttack();
 
-		auto& targetEnemy = enemies[myPlayer.GetTargetIndex()];
+		PrintCombatUI();
+		Attack();
 
-		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
-		myPlayer.ChooseAttack();
-		system("cls");
-
-		myPlayer.Attack();
-
-		system("pause");
-
+		std::vector<Enemy>& enemies = myCurrentRoom->GetEnemies();
+		auto& targetEnemy = enemies[GetAttackData().targetIndex];
 		if (targetEnemy.IsDead())
 		{
-			std::cout << "\n" << targetEnemy.GetEnemyAttributes().name << " has been slained!\n";
-			if (targetEnemy.HasItems())
-			{
-				std::cout << targetEnemy.GetEnemyAttributes().name << " dropped an item!\n";
-			}
-			targetEnemy.DropItem(currentRoom);
+			targetEnemy.OnDeath(myCurrentRoom);
+			myCurrentRoom->RemoveEnemyFromRoom(targetEnemy.GetId());
+			enemies = myCurrentRoom->GetEnemies();
+			SetAttackData({PLAYER_ATTACK_INDEX_INVALID, GetAttackData().attackType});
 			system("pause");
 		}
 
@@ -67,14 +51,11 @@ void CombatManager::UpdateCombat()
 
 		if (targetEnemy.IsDead())
 		{
-			currentRoom->RemoveEnemyFromRoom(targetEnemy.GetId());
-			enemies = currentRoom->GetEnemies();
-			myPlayer.SetTargetIndex(PLAYER_ATTACK_INDEX_INVALID);
-			currentRoom->PrintEnemies();
+			myCurrentRoom->PrintEnemies();
 		}
 		else
 		{
-			currentRoom->PrintEnemiesWithTarget(myPlayer.GetTargetIndex());
+			myCurrentRoom->PrintEnemiesWithTarget(GetAttackData().targetIndex);
 		}
 
 		if (enemies.empty())
@@ -83,9 +64,9 @@ void CombatManager::UpdateCombat()
 			system("pause");
 			break;
 		}
-
+		PrintCombatUI();
 		std::cout << "\n";
-		for (Enemy& enemy : enemies)
+		for (const Enemy& enemy : enemies)
 		{
 			enemy.Attack(myPlayer);
 		}
@@ -96,91 +77,108 @@ void CombatManager::UpdateCombat()
 	}
 }
 
-void Player::Attack() const
+void CombatManager::Attack() const
 {
-	Room* currentRoom = myWorldMap.GetRoomWithId(GetRoomId());
-	std::vector<Enemy>& enemies = currentRoom->GetEnemies();
+	std::vector<Enemy>& enemies = myCurrentRoom->GetEnemies();
+	int targetIndex = GetAttackData().targetIndex;
 
-	const AttackData& attackData = GetAttackData();
+	float damage = GetDamageFromAttackType();
+	float enemyOldHp = enemies[targetIndex].GetCurrentHealth();
 
-	PrintPlayerUI();
-	currentRoom->PrintEnemiesWithTarget(attackData.targetIndex);
 
-	float damage = GetDamageFromAttackType(static_cast<int>(attackData.attackType));
-	float enemyOldHp = enemies[attackData.targetIndex].GetCurrentHealth();
-	enemies[attackData.targetIndex].TakeDamage(damage);
-	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to "
-		<< enemies[attackData.targetIndex].GetEnemyAttributes().name;
-	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[attackData.targetIndex].
-		GetCurrentHealth()) << "hp)" << "\n";
+	if (GetAttackData().attackType == AttackType::SlashAttack)
+	{
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			enemies[i].TakeDamage(damage);
+			std::cout << "\nYou dealt "
+				<< damage
+				<< " dmg to "
+				<< enemies[targetIndex].GetEnemyAttributes().name;
+			std::cout << " ("
+				<< std::lround(enemyOldHp)
+				<< "hp -> "
+				<< std::lround(enemies[targetIndex].GetCurrentHealth())
+				<< "hp)";
+		}
+	}
+	else
+	{
+		enemies[targetIndex].TakeDamage(damage);
+
+		std::cout << "\nYou dealt "
+			<< damage
+			<< " dmg to "
+			<< enemies[targetIndex].GetEnemyAttributes().name;
+		std::cout << " ("
+			<< std::lround(enemyOldHp)
+			<< "hp -> "
+			<< std::lround(enemies[targetIndex].GetCurrentHealth())
+			<< "hp)"
+			<< "\n";
+	}
+
+
+	system("pause");
 }
 
-void Player::ChooseTarget()
+void CombatManager::ChooseTarget()
 {
+	if (!IsInvalidAttackIndex() || myCurrentRoom->GetEnemies().size() <= 1)
+	{
+		SetAttackData({PLAYER_ATTACK_INDEX_ZERO, GetAttackData().attackType});
+		return;
+	}
+
 	std::cout
 		<< "\n<--- Choose Target --->\n"
 		<< "Choice: ";
-	int enemyCount = static_cast<int>(myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size());
-	int targetIndex = Utils::ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) -
+	int enemyCount = static_cast<int>(myCurrentRoom->GetEnemies().size());
+	int targetIndex = Utils::ReadIntInRange(
+			PLAYER_TARGET_ENEMY_MIN,
+			enemyCount) -
 		PLAYER_TARGET_INDEX_OFFSET;
 	SetAttackData({targetIndex, GetAttackData().attackType});
 }
 
-void Player::ChooseAttack()
+void CombatManager::ChooseAttack()
 {
 	std::cout
 		<< "\n<--- Choose Attack --->\n"
-		<< "1) Quick attack" << "\n"
-		<< "2) Heavy attack\n"
-		<< "3) Slash attack\n"
+		<< "1) Quick attack [" << myPlayer.GetAttributes().damage << "] AD" << "\n"
+		<< "2) Heavy attack [" << GetHeavyDamageRange().min << " - " << GetHeavyDamageRange().max << "] AD" << "\n"
+		<< "3) Slash attack [" << static_cast<int>(GetSlashDamage()) << "] AD" << "\n"
+		<< "4) Attack Info\n"
 		<< "Choice: ";
 	int attackIndex = Utils::ReadIntInRange(
 		static_cast<int>(AttackType::QuickAttack),
-		static_cast<int>(AttackType::HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
+		static_cast<int>(AttackType::SlashAttack));
 	SetAttackData({GetAttackData().targetIndex, static_cast<AttackType>(attackIndex)});
 }
 
-void Player::TakeDamage(const float aDamage)
-{
-	if (Cheats::GetCheats().invincible)
-	{
-		return;
-	}
-	const float dmgFloat = aDamage / GetDefenseMultiplier();
-	myAttributes.currentHealth -= dmgFloat;
-
-	mySpellBook.UpdateSpellsOnHitCount();
-
-	if (myAttributes.currentHealth <= HEALTH_ZERO)
-	{
-		myAttributes.currentHealth = HEALTH_ZERO;
-		myIsDead = true;
-		std::cout << "\n" << "You died!";
-		std::cout << "\n" << "Quitting game...\n";
-		system("pause");
-		return;
-	}
-}
-
-float Player::GetDamageFromAttackType(int aAttackIndex) const
+float CombatManager::GetDamageFromAttackType() const
 {
 	float newDamage = DAMAGE_ZERO;
-	AttackType atkType = static_cast<AttackType>(aAttackIndex + PLAYER_ATTACK_INDEX_OFFSET);
+	AttackType atkType = GetAttackData().attackType;
 	switch (atkType)
 	{
 		case AttackType::QuickAttack:
 			{
-				newDamage = GetAttributes().damage;
+				newDamage = myPlayer.GetAttributes().damage;
 				break;
 			}
 		case AttackType::HeavyAttack:
 			{
-				const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
-				const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
-				newDamage = static_cast<float>(Utils::GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
+				newDamage = static_cast<float>(Utils::GenerateRandomNumber(
+					GetHeavyDamageRange().min, GetHeavyDamageRange().max));
 				break;
 			}
-		case AttackType::None:
+		case AttackType::SlashAttack:
+			{
+				newDamage = GetSlashDamage();
+				break;
+			}
+		default:
 			{
 				break;
 			}
@@ -188,38 +186,42 @@ float Player::GetDamageFromAttackType(int aAttackIndex) const
 	return newDamage;
 }
 
-float Player::GetDamage() const
+const AmountRange& CombatManager::GetHeavyDamageRange() const
 {
-	if (Cheats::GetCheats().oneShot)
+	AmountRange heavyDamageRange;
+	heavyDamageRange.min = static_cast<int>(
+		std::round(myPlayer.GetAttributes().damage * HEAVY_MULTI_MIN));
+	heavyDamageRange.max = static_cast<int>(
+		std::round(myPlayer.GetAttributes().damage * HEAVY_MULTI_MAX));
+
+	return heavyDamageRange;
+}
+
+float CombatManager::GetDefenseMultiplier() const
+{
+	return (DEFENSE_BASE_MULTI + (myPlayer.GetAttributes().defense / DEFENSE_SCALING_FACTOR));
+	// (defense {20-198} /200) 
+}
+
+bool CombatManager::IsInvalidAttackIndex() const
+{
+	return GetAttackData().targetIndex < PLAYER_ATTACK_INDEX_ZERO;
+}
+
+void CombatManager::PrintCombatUI() const
+{
+	system("cls");
+	myPlayer.PrintPlayerUI();
+	const std::vector<Enemy>& enemies = myCurrentRoom->GetEnemies();
+	if (IsInvalidAttackIndex())
 	{
-		return myAttributes.strength * myAttributes.agility * CHEATS_ONESHOT_MULTI;
+		myCurrentRoom->PrintEnemies();
+		return;
 	}
-	return myAttributes.strength * myAttributes.agility;
-}
-
-float Player::GetMaxHealth() const
-{
-	return (myAttributes.endurance * ATTRI_GET_HEALTH_ENDURANCE_MULTI) +
-		(myAttributes.strength * ATTRI_GET_HEALTH_STRENGTH_MULTI) +
-		(myAttributes.agility * ATTRI_GET_HEALTH_AGILITY_MULTI);
-}
-
-float Player::GetCarryCapacity() const
-{
-	return myAttributes.strength + (myAttributes.agility / ATTRI_GET_CARRY_AGILITY_DIV);
-}
-
-float Player::GetDefense() const
-{
-	return myAttributes.endurance + myAttributes.agility;
-}
-
-float Player::GetDefenseMultiplier() const
-{
-	return (DEFENSE_BASE_MULTI + (GetAttributes().defense / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
-}
-
-bool Player::IsInvalidAttackIndex() const
-{
-	return myAttackIndex < PLAYER_ATTACK_INDEX_ZERO;
+	const auto& targetEnemy = enemies[GetAttackData().targetIndex];
+	if (targetEnemy.IsDead())
+	{
+		return;
+	}
+	myCurrentRoom->PrintEnemiesWithTarget(GetAttackData().targetIndex);
 }

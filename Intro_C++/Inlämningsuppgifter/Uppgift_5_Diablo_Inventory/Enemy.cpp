@@ -1,8 +1,10 @@
 #include "Enemy.h"
+
+#include <iostream>
+
 #include "Player.h"
 #include "Utils.h"
 #include "Room.h"
-#include <iostream>
 
 using namespace Utils;
 
@@ -12,7 +14,7 @@ Enemy::Enemy(EnemyType* aEnemyType, int aId)
 	  myItems({})
 {
 	myEnemyType = aEnemyType;
-	myCurrentHealth = myEnemyType->GetAttributes().maxHealth;
+	myCurrentHealth = GetEnemyAttributes().maxHealth;
 }
 
 void Enemy::TakeDamage(const float aDamage)
@@ -23,6 +25,16 @@ void Enemy::TakeDamage(const float aDamage)
 		myCurrentHealth = HEALTH_ZERO;
 		myIsDead = true;
 	}
+}
+
+void Enemy::OnDeath(Room* aCurrentRoom)
+{
+	std::cout << "\n" << GetEnemyAttributes().name << " has been slained!\n";
+	if (HasItems())
+	{
+		std::cout << GetEnemyAttributes().name << " dropped an item!\n";
+	}
+	DropItem(aCurrentRoom);
 }
 
 void Enemy::DropItem(Room* aCurrentRoom)
@@ -49,13 +61,5 @@ int Enemy::GetId() const
 
 void Enemy::Attack(Player& player) const
 {
-	const float dmgFloat = myEnemyType->GetAttributes().damage / player.GetDefenseMultiplier();
-	const int dmg = static_cast<int>(dmgFloat);
-	const int blockedDmg = static_cast<int>(myEnemyType->GetAttributes().damage) - dmg;
-
-	std::cout << myEnemyType->GetAttributes().name << " dealt "
-		<< "" << static_cast<int>(dmg) << " dmg to you"
-		<< " [" << blockedDmg << " blocked damage]\n";
-
-	player.TakeDamage(dmgFloat);
+	player.TakeDamage(GetEnemyAttributes().damage, GetEnemyAttributes().name);
 }

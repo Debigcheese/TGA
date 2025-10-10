@@ -1,34 +1,28 @@
 #pragma once
 #include "Player.h"
 
-class WorldMap;
 class Enemy;
 
 class CombatManager
 {
 public:
-	CombatManager(Player& aPlayer, Room* aCurrentRoom);
-
-	void UpdateCombat();
+	CombatManager(Player& aPlayer);
+	void UpdateCombat(Room* aCurrentRoom);
 
 	void Attack() const;
 	void ChooseTarget();
 	void ChooseAttack();
-	void TakeDamage(const float aDamage);
 
-	float GetDamageFromAttackType(int aAttackIndex) const;
+	float GetDamageFromAttackType() const;
+	const AmountRange& GetHeavyDamageRange() const;
+	float GetSlashDamage() const { return myPlayer.GetAttributes().damage / 2.5f; }
 	bool IsInvalidAttackIndex() const;
+	float GetDefenseMultiplier() const;
 
-	//combat
 	void SetAttackData(AttackData aAttackData) { myAttackData = aAttackData; }
-	AttackData GetAttackData() const { return myAttackData; }
+	const AttackData& GetAttackData() const { return myAttackData; }
 
-	void PrintHealth() const;
-	void PrintUserName() const;
-	void PrintPlayerUI() const;
-	void PrintAttributes() const;
-	void PrintBaseAttributes() const;
-	void PrintDerivedAttributes() const;
+	void PrintCombatUI() const;
 
 private:
 	//CONSTANTS

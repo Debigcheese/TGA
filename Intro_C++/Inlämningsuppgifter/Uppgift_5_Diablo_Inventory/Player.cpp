@@ -1,11 +1,9 @@
 #include "Player.h"
 #include "WorldMap.h"
-#include "Enemy.h"
 #include "Utils.h"
 #include "Cheats.h"
 #include "Item.h"
 
-#include <vector>
 #include <iostream>
 
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myIsDead(false),
@@ -18,59 +16,22 @@ Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myIsDe
 	myAttributes.currentHealth = GetMaxHealth();
 }
 
-void Player::Attack() const
-{
-	Room* currentRoom = myWorldMap.GetRoomWithId(GetRoomId());
-	std::vector<Enemy>& enemies = currentRoom->GetEnemies();
-
-	const AttackData& attackData = GetAttackData();
-
-	PrintPlayerUI();
-	currentRoom->PrintEnemiesWithTarget(attackData.targetIndex);
-
-	float damage = GetDamageFromAttackType(static_cast<int>(attackData.attackType));
-	float enemyOldHp = enemies[attackData.targetIndex].GetCurrentHealth();
-	enemies[attackData.targetIndex].TakeDamage(damage);
-	std::cout << "\nYou dealt " << std::lround(damage) << " dmg to "
-		<< enemies[attackData.targetIndex].GetEnemyAttributes().name;
-	std::cout << " (" << std::lround(enemyOldHp) << "hp -> " << std::lround(enemies[attackData.targetIndex].
-		GetCurrentHealth()) << "hp)" << "\n";
-}
-
-void Player::ChooseTarget()
-{
-	std::cout
-		<< "\n<--- Choose Target --->\n"
-		<< "Choice: ";
-	int enemyCount = static_cast<int>(myWorldMap.GetRoomWithId(myRoomId)->GetEnemies().size());
-	int targetIndex = Utils::ReadIntInRange(PLAYER_TARGET_ENEMY_MIN, enemyCount) -
-		PLAYER_TARGET_INDEX_OFFSET;
-	SetAttackData({targetIndex, GetAttackData().attackType});
-}
-
-void Player::ChooseAttack()
-{
-	std::cout
-		<< "\n<--- Choose Attack --->\n"
-		<< "1) Quick attack" << "\n"
-		<< "2) Heavy attack\n"
-		<< "3) Slash attack\n"
-		<< "Choice: ";
-	int attackIndex = Utils::ReadIntInRange(
-		static_cast<int>(AttackType::QuickAttack),
-		static_cast<int>(AttackType::HeavyAttack)) - PLAYER_ATTACK_INDEX_OFFSET;
-	SetAttackData({GetAttackData().targetIndex, static_cast<AttackType>(attackIndex)});
-}
-
-void Player::TakeDamage(const float aDamage)
+void Player::TakeDamage(const float aDamage, const std::string aEnemyName)
 {
 	if (Cheats::GetCheats().invincible)
 	{
 		return;
 	}
-	const float dmgFloat = aDamage / GetDefenseMultiplier();
-	myAttributes.currentHealth -= dmgFloat;
 
+	const float dmgFloat = aDamage / GetDefenseMultiplier();
+	const int dmg = static_cast<int>(dmgFloat);
+	const int blockedDmg = static_cast<int>(aDamage) - dmg;
+
+	std::cout << aEnemyName << " dealt "
+		<< "" << static_cast<int>(dmg) << " dmg to you"
+		<< " [" << blockedDmg << " blocked damage]\n";
+
+	myAttributes.currentHealth -= dmgFloat;
 	mySpellBook.UpdateSpellsOnHitCount();
 
 	if (myAttributes.currentHealth <= HEALTH_ZERO)
@@ -82,32 +43,6 @@ void Player::TakeDamage(const float aDamage)
 		system("pause");
 		return;
 	}
-}
-
-float Player::GetDamageFromAttackType(int aAttackIndex) const
-{
-	float newDamage = DAMAGE_ZERO;
-	AttackType atkType = static_cast<AttackType>(aAttackIndex + PLAYER_ATTACK_INDEX_OFFSET);
-	switch (atkType)
-	{
-		case AttackType::QuickAttack:
-			{
-				newDamage = GetAttributes().damage;
-				break;
-			}
-		case AttackType::HeavyAttack:
-			{
-				const int heavyMinMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MIN));
-				const int heavyMaxMulti = static_cast<int>(std::round(GetAttributes().damage * HEAVY_MULTI_MAX));
-				newDamage = static_cast<float>(Utils::GenerateRandomNumber(heavyMinMulti, heavyMaxMulti));
-				break;
-			}
-		case AttackType::None:
-			{
-				break;
-			}
-	}
-	return newDamage;
 }
 
 float Player::GetDamage() const
@@ -139,11 +74,6 @@ float Player::GetDefense() const
 float Player::GetDefenseMultiplier() const
 {
 	return (DEFENSE_BASE_MULTI + (GetAttributes().defense / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
-}
-
-bool Player::IsInvalidAttackIndex() const
-{
-	return myAttackIndex < PLAYER_ATTACK_INDEX_ZERO;
 }
 
 const Attributes& Player::GetBaseAttributes() const

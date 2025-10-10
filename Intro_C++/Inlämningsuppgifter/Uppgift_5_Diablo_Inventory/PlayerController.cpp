@@ -13,7 +13,7 @@
 using namespace Utils;
 
 PlayerController::PlayerController(WorldMap& aWorldMap, Player& aPlayer)
-	: myWorldMap(aWorldMap), myPlayer(aPlayer), currentRoom(nullptr)
+	: myWorldMap(aWorldMap), myPlayer(aPlayer), myCurrentRoom(nullptr), myCombatManager(myPlayer)
 {
 }
 
@@ -21,11 +21,11 @@ void PlayerController::UpdateAction()
 {
 	while (true && !myPlayer.IsDead())
 	{
-		currentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
-		myPlayer.SetRoomId(currentRoom->GetRoomId());
+		myCurrentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
+		myPlayer.SetRoomId(myCurrentRoom->GetRoomId());
 		PrintUI();
 
-		if (currentRoom->GetEnemies().empty())
+		if (myCurrentRoom->GetEnemies().empty())
 		{
 			PrintActionMenu(false, true);
 		}
@@ -42,8 +42,7 @@ void PlayerController::UpdateAction()
 		{
 			case Action::Combat:
 				{
-					while (com)
-					UpdateCombat();
+					myCombatManager.UpdateCombat(myCurrentRoom);
 					break;
 				}
 			case Action::Navigation:
@@ -81,10 +80,6 @@ void PlayerController::UpdateAction()
 	}
 }
 
-void PlayerController::UpdateCombat() const
-{
-}
-
 void PlayerController::UpdateNavigation()
 {
 	while (true && !myPlayer.IsDead())
@@ -103,10 +98,10 @@ void PlayerController::UpdateNavigation()
 			break;
 		}
 
-		if (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
+		if (!myCurrentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
 		{
 			std::cout << "You try walking to the door but get attacked!\n\n";
-			for (Enemy& enemy : currentRoom->GetEnemies())
+			for (Enemy& enemy : myCurrentRoom->GetEnemies())
 			{
 				enemy.Attack(myPlayer);
 			}
@@ -142,7 +137,7 @@ void PlayerController::UpdateNavigation()
 		{
 			if (door.HasMatchingRoomIds(
 				lookForRoom->GetRoomId(),
-				currentRoom->GetRoomId())) // does door exist between my room and look for room
+				myCurrentRoom->GetRoomId())) // does door exist between my room and look for room
 			{
 				doorFound = true;
 				if (door.HasLock())
@@ -156,7 +151,7 @@ void PlayerController::UpdateNavigation()
 			{
 				myPlayer.SetPosition(lookForRoom->GetPosition());
 				myPlayer.SetRoomId(lookForRoom->GetRoomId());
-				currentRoom = myWorldMap.GetRoomWithId(lookForRoom->GetRoomId());
+				myCurrentRoom = myWorldMap.GetRoomWithId(lookForRoom->GetRoomId());
 				break;
 			}
 		}
@@ -167,7 +162,7 @@ void PlayerController::UpdateNavigation()
 			continue;
 		}
 
-		std::cout << "\nEntered room: " << currentRoom->GetRoomName() << "\n";
+		std::cout << "\nEntered room: " << myCurrentRoom->GetRoomName() << "\n";
 		std::cout << "You healed to full hp: " << std::round(myPlayer.GetAttributes().currentHealth)
 			<< " -> " << std::round(myPlayer.GetAttributes().maxHealth) << "\n";
 		myPlayer.HealFullHealth();
@@ -184,10 +179,10 @@ void PlayerController::UpdateNavigation()
 
 void PlayerController::UpdateScavenge()
 {
-	if (!currentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
+	if (!myCurrentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
 	{
 		std::cout << "You try scavenging the room but get attacked!\n\n";
-		for (Enemy& enemy : currentRoom->GetEnemies())
+		for (Enemy& enemy : myCurrentRoom->GetEnemies())
 		{
 			enemy.Attack(myPlayer);
 		}
@@ -234,7 +229,7 @@ void PlayerController::UpdatePickupItem() const
 	while (true && !myPlayer.IsDead())
 	{
 		PrintUI();
-		auto& items = currentRoom->GetLootInRoom();
+		auto& items = myCurrentRoom->GetLootInRoom();
 
 		PrintPickupMenu();
 		if (items.empty())
@@ -287,7 +282,7 @@ void PlayerController::UpdateLootChests() const
 
 		PrintChestMenu();
 
-		auto& chests = currentRoom->GetChestInRoom();
+		auto& chests = myCurrentRoom->GetChestInRoom();
 
 		if (chests.empty())
 		{
@@ -321,19 +316,19 @@ void PlayerController::UpdateLootChests() const
 		{
 			std::cout << "\n|" << chest.GetName() << "|"
 				<< " has been opened but it was empty...\n";
-			chests.erase(currentRoom->GetChestInRoom().begin() + chestIndex);
+			chests.erase(myCurrentRoom->GetChestInRoom().begin() + chestIndex);
 			system("pause");
 			return;
 		}
 
 		for (const auto& item : loot)
 		{
-			currentRoom->AddItemToRoom(item);
+			myCurrentRoom->AddItemToRoom(item);
 		}
 		std::cout << "\n|" << chest.GetName() << "|"
 			<< " has been opened and dropped items on the floor!\n";
 
-		chests.erase(currentRoom->GetChestInRoom().begin() + chestIndex);
+		chests.erase(myCurrentRoom->GetChestInRoom().begin() + chestIndex);
 		system("pause");
 		return;
 	}
@@ -344,7 +339,7 @@ void PlayerController::UpdateReadSpells() const
 	while (true && !myPlayer.IsDead())
 	{
 		PrintUI();
-		auto& spells = currentRoom->GetSpellsInRoom();
+		auto& spells = myCurrentRoom->GetSpellsInRoom();
 		PrintSpells();
 
 		if (spells.empty())
@@ -507,7 +502,7 @@ void PlayerController::UpdateInventoryItems() const
 				}
 			case ItemAction::Drop:
 				{
-					currentRoom->AddItemToRoom(item);
+					myCurrentRoom->AddItemToRoom(item);
 					myPlayer.DropItem(item.GetId());
 					break;
 				}
@@ -526,7 +521,7 @@ void PlayerController::UpdateSpellBook() const
 	{
 		system("cls");
 		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		myCurrentRoom->PrintEnemies();
 
 		const auto& spellbook = myPlayer.GetSpellBook();
 		spellbook.PrintSpells();
@@ -574,7 +569,7 @@ void PlayerController::UpdateAttributes() const
 	{
 		system("cls");
 		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		myCurrentRoom->PrintEnemies();
 
 		std::cout
 			<< "\n<--- Attributes --->\n"
@@ -594,7 +589,7 @@ void PlayerController::UpdateAttributes() const
 
 		system("cls");
 		myPlayer.PrintPlayerUI();
-		currentRoom->PrintEnemies();
+		myCurrentRoom->PrintEnemies();
 
 		switch (menuChoice)
 		{
@@ -631,7 +626,7 @@ void PlayerController::PrintUI() const
 {
 	system("cls");
 	myPlayer.PrintPlayerUI();
-	currentRoom->PrintEnemies();
+	myCurrentRoom->PrintEnemies();
 }
 
 //PRINTS
@@ -642,7 +637,7 @@ void PlayerController::PrintNavigation() const
 		<< "1) West\n"
 		<< "2) North\n"
 		<< "3) East\n"
-		<< "4) South\n\n"
+		<< "4) South\n"
 		<< "5) Return\n"
 		<< "Choice: ";
 }
@@ -696,7 +691,7 @@ void PlayerController::PrintPickupMenu() const
 {
 	std::cout
 		<< "\n<--- Pickup --->\n";
-	auto& items = currentRoom->GetLootInRoom();
+	auto& items = myCurrentRoom->GetLootInRoom();
 	if (items.empty())
 	{
 		return;
@@ -717,18 +712,18 @@ void PlayerController::PrintChestMenu() const
 {
 	std::cout
 		<< "\n<--- Open Chest --->\n";
-	if (currentRoom->GetChestInRoom().empty())
+	if (myCurrentRoom->GetChestInRoom().empty())
 	{
 		return;
 	}
 
-	for (int i = 0; i < static_cast<int>(currentRoom->GetChestInRoom().size()); ++i)
+	for (int i = 0; i < static_cast<int>(myCurrentRoom->GetChestInRoom().size()); ++i)
 	{
 		std::cout << (i + 1) << ") "
-			<< "|" << currentRoom->GetChestInRoom()[i].GetName() << "|" << "\n";
+			<< "|" << myCurrentRoom->GetChestInRoom()[i].GetName() << "|" << "\n";
 	}
 
-	std::cout << static_cast<int>(currentRoom->GetChestInRoom().size()) + 1 << ") Return\n"
+	std::cout << static_cast<int>(myCurrentRoom->GetChestInRoom().size()) + 1 << ") Return\n"
 		<< "Choice: ";
 }
 
@@ -736,7 +731,7 @@ void PlayerController::PrintSpells() const
 {
 	std::cout << "\n<--- Pickup spell --->\n";
 
-	const auto& spells = currentRoom->GetSpellsInRoom();
+	const auto& spells = myCurrentRoom->GetSpellsInRoom();
 	if (spells.empty())
 	{
 		return;

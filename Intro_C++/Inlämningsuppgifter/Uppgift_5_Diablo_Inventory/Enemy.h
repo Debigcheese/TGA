@@ -16,6 +16,7 @@ public:
 	void TakeDamage(const float aDamage);
 	void Attack(Player& player) const;
 
+	void OnDeath(Room* aCurrentRoom);
 	void DropItem(Room* aCurrentRoom);
 	void SetDropItems(const std::vector<Item>& aItems);
 	bool HasItems() const { return !myItems.empty(); }
@@ -24,11 +25,6 @@ public:
 	float GetCurrentHealth() const { return myCurrentHealth; }
 	bool IsDead() const { return myIsDead; }
 	int GetId() const;
-
-	//void SetId(int aId);
-	//float GetMaxHealth() const;
-	//float GetDamage() const;
-	//const char* GetName() const;
 
 private:
 	int myId;
