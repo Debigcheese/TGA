@@ -28,8 +28,8 @@ public:
 	float GetMaxHealth() const;
 	float GetCarryCapacity() const;
 	float GetDefense() const;
-	const Attributes& GetBaseAttributes() const;
-	const Attributes& GetBuffedAttributes() const;
+	Attributes GetBaseAttributes() const;
+	Attributes GetBuffedAttributes() const;
 	Attributes GetAttributes() const;
 
 	bool CanPickupItem(const Item& aItem) const;

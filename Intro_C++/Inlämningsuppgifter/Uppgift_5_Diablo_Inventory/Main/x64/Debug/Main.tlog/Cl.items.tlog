@@ -1,6 +1,7 @@
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Cheats.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Cheats.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Chest.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Chest.obj
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatManager.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\CombatManager.obj
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatController.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\CombatController.obj
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\ConsoleUI.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\ConsoleUI.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Diablo.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Diablo.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Door.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Door.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Enemy.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Enemy.obj
@@ -12,9 +13,10 @@ F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\ItemFactory.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\ItemFactory.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\ItemType.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\ItemType.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Main.obj
-F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\PlayerController.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\PlayerController.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Player.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Player.obj
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\PlayerController.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\PlayerController.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Room.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Room.obj
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\ScavengeController.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\ScavengeController.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Spell.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Spell.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Spellbook.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\Spellbook.obj
 F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\SpellFactory.cpp;F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\Main\x64\Debug\SpellFactory.obj

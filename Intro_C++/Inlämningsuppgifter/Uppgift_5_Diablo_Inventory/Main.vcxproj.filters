@@ -105,8 +105,14 @@
     <ClCompile Include="Spellbook.cpp">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="CombatManager.cpp">
-      <Filter>Source Files\Characters</Filter>
+    <ClCompile Include="ConsoleUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Controllers\CombatController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Controllers\ScavengeController.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,8 +188,17 @@
     <ClInclude Include="Spellbook.h">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="CombatManager.h">
-      <Filter>Source Files\Characters</Filter>
+    <ClInclude Include="ConsoleUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Files\Controllers\CombatController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Files\Controllers\ScavengeController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatController.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

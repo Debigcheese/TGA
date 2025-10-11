@@ -76,10 +76,9 @@ float Player::GetDefenseMultiplier() const
 	return (DEFENSE_BASE_MULTI + (GetAttributes().defense / DEFENSE_SCALING_FACTOR)); // (defense {20-198} /200) 
 }
 
-const Attributes& Player::GetBaseAttributes() const
+Attributes Player::GetBaseAttributes() const
 {
 	return {
-
 		myAttributes.strength,
 		myAttributes.agility,
 		myAttributes.endurance,
@@ -91,7 +90,7 @@ const Attributes& Player::GetBaseAttributes() const
 	};
 }
 
-const Attributes& Player::GetBuffedAttributes() const
+Attributes Player::GetBuffedAttributes() const
 {
 	Attributes buffedAttributes = {};
 	buffedAttributes += GetEquipment().GetAttributes();

@@ -2,42 +2,30 @@
 #include "WorldMap.h"
 #include "Player.h"
 #include "Room.h"
-#include "CombatManager.h"
+#include "CombatController.h"
+#include "ScavengeController.h"
 
 // EVERY WHILE LOOP + READ INPUT (MENU CHOICES) IS HANDLED IN THIS CLASS
 class PlayerController
 {
 public:
-	PlayerController(WorldMap& aWorldMap, Player& aPlayer);
+    PlayerController(WorldMap& aWorldMap, Player& aPlayer);
 
-	void UpdateAction();
-	void UpdateNavigation();
+    void UpdateAction();
+    void UpdateNavigation();
 
-	void UpdateScavenge();
-	void UpdatePickupItem() const;
-	void UpdateLootChests() const;
-	void UpdateReadSpells() const;
+    void UpdateInventory() const;
+    void UpdateEquipment() const;
+    void UpdateInventoryItems() const;
+    void UpdateSpellBook() const;
 
-	void UpdateInventory() const;
-	void UpdateEquipment() const;
-	void UpdateInventoryItems() const;
-	void UpdateSpellBook() const;
-
-	void UpdateAttributes() const;
-	void Win() const;
-
-	void PrintUI() const;
-	void PrintNavigation() const;
-	void PrintActionMenu(bool aEnemiesExist, bool aShowCheats) const;
-	void PrintScavenge() const;
-	void PrintPickupMenu() const;
-	void PrintChestMenu() const;
-	void PrintSpells() const;
-	void PrintInventoryMenu() const;
+    void UpdateAttributes() const;
+    void Win() const;
 
 private:
-	Room* myCurrentRoom;
-	WorldMap& myWorldMap;
-	Player& myPlayer;
-	CombatManager myCombatManager;
+    Room* myCurrentRoom;
+    WorldMap& myWorldMap;
+    Player& myPlayer;
+    CombatController myCombatController;
+    ScavengeController myScavengeController;
 };
