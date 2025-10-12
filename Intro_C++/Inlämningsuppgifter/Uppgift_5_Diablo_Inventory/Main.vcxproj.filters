@@ -28,14 +28,17 @@
     <Filter Include="Source Files\Extra">
       <UniqueIdentifier>{25cda52f-7ee3-41d1-9819-a2dc237e7c49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\World\Objects">
-      <UniqueIdentifier>{5a979bc3-dd21-41ce-8ff8-e726e51d7bf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\World\Level">
       <UniqueIdentifier>{6e855f76-1cf6-4060-922d-d3b4123cde64}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Characters\Inventory">
       <UniqueIdentifier>{9e522239-0362-44ad-98ca-06786c666e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{b14e13c3-f6da-4e20-b00d-8a94c92f8e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{5a979bc3-dd21-41ce-8ff8-e726e51d7bf0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,9 +52,6 @@
       <Filter>Source Files\World</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files\Characters</Filter>
     </ClCompile>
     <ClCompile Include="ItemFactory.cpp">
@@ -73,10 +73,10 @@
       <Filter>Source Files\Extra</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Spell.cpp">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Chest.cpp">
       <Filter>Source Files\World\Level</Filter>
@@ -88,13 +88,13 @@
       <Filter>Source Files\World\Level</Filter>
     </ClCompile>
     <ClCompile Include="ItemType.cpp">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="EnemyType.cpp">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="SpellType.cpp">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Source Files\Characters\Inventory</Filter>
@@ -105,14 +105,23 @@
     <ClCompile Include="Spellbook.cpp">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="CombatController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="ScavengeController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
     <ClCompile Include="ConsoleUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Extra</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Controllers\CombatController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="LoadoutController.cpp">
+      <Filter>Source Files\Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Controllers\ScavengeController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="NavigationController.cpp">
+      <Filter>Source Files\Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,19 +147,19 @@
       <Filter>Source Files\World\Factories</Filter>
     </ClInclude>
     <ClInclude Include="EnemyType.h">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ItemType.h">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Spell.h">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="SpellType.h">
-      <Filter>Source Files\World\Objects</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Cheats.h">
       <Filter>Source Files\Extra</Filter>
@@ -176,9 +185,6 @@
     <ClInclude Include="Player.h">
       <Filter>Source Files\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Source Files\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClInclude>
@@ -188,17 +194,23 @@
     <ClInclude Include="Spellbook.h">
       <Filter>Source Files\Characters\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source Files\Controllers\CombatController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source Files\Controllers\ScavengeController.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Source Files\Controllers</Filter>
     </ClInclude>
     <ClInclude Include="CombatController.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScavengeController.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleUI.h">
+      <Filter>Source Files\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadoutController.h">
+      <Filter>Source Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="NavigationController.h">
+      <Filter>Source Files\Controllers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

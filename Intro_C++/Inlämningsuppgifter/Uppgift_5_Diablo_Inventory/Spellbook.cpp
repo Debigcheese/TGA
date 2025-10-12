@@ -107,6 +107,7 @@ std::vector<const Spell*> Spellbook::GetActiveSpells() const
 void Spellbook::PrintSpells() const
 {
     std::cout << "\n<--- Spellbook --->\n";
+    std::cout << "  <- Read spell? ->\n";
     const auto inactive = GetInactiveSpells();
     if (inactive.empty())
     {

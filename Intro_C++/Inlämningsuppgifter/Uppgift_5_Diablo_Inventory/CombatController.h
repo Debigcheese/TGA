@@ -40,7 +40,7 @@ public:
     bool IsInvalidAttackIndex() const;
 
 private:
-    Player& myPlayer; // owning game’s player (non-owning reference)
-    Room* myCurrentRoom; // set each UpdateCombat call (non-owning; must be valid)
-    AttackData myAttackData; // current target+attack selection
+    Player& myPlayer;
+    Room* myCurrentRoom;
+    AttackData myAttackData;
 };

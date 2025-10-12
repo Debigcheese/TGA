@@ -41,7 +41,6 @@ void Player::TakeDamage(const float aDamage, const std::string aEnemyName)
 		std::cout << "\n" << "You died!";
 		std::cout << "\n" << "Quitting game...\n";
 		system("pause");
-		return;
 	}
 }
 

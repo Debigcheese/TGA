@@ -22,10 +22,14 @@ Door::Door(int aRoomOneId, int aRoomTwoId, Lock aLock) :
 
 int Door::GetOtherRoomId(const int aCurrentRoomId) const
 {
-	if (aCurrentRoomId == myRoomOneId) return myRoomTwoId;
-	if (aCurrentRoomId == myRoomTwoId) return myRoomOneId;
-	std::cout << ("fromId not connected to this door");
-	system("pause");
+	if (aCurrentRoomId == myRoomOneId)
+	{
+		return myRoomTwoId;
+	}
+	if (aCurrentRoomId == myRoomTwoId)
+	{
+		return myRoomOneId;
+	}
 	return 0;
 }
 
@@ -76,43 +80,43 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 		switch (tempLockType)
 		{
 			case LockType::Agility:
+			{
+				if (TryLockPick(aPlayer, LockType::Agility))
 				{
-					if (TryLockPick(aPlayer, LockType::Agility))
-					{
-						std::cout << "\nYou successfully lock-picked the door open!\n";
-						myLock.isLocked = false;
-						return;
-					}
-					else
-					{
-						std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
-							agilityReq.attributeValue << "\n";
-					}
-					break;
+					std::cout << "\nYou successfully lock-picked the door open!\n";
+					myLock.isLocked = false;
+					return;
 				}
+				else
+				{
+					std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
+						agilityReq.attributeValue << "\n";
+				}
+				break;
+			}
 			case LockType::Strength:
+			{
+				if (TryLockPick(aPlayer, LockType::Strength))
 				{
-					if (TryLockPick(aPlayer, LockType::Strength))
-					{
-						std::cout << "\nYou successfully broke the door open!\n";
-						myLock.isLocked = false;
-						return;
-					}
-					else
-					{
-						std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
-							strengthReq.attributeValue << "\n";
-					}
-					break;
+					std::cout << "\nYou successfully broke the door open!\n";
+					myLock.isLocked = false;
+					return;
 				}
+				else
+				{
+					std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
+						strengthReq.attributeValue << "\n";
+				}
+				break;
+			}
 			case LockType::Unlocked:
-				{
-					return;
-				}
+			{
+				return;
+			}
 			case LockType::None:
-				{
-					return;
-				}
+			{
+				return;
+			}
 		}
 		system("pause");
 	}

@@ -1,31 +1,30 @@
 #pragma once
-#include "WorldMap.h"
-#include "Player.h"
-#include "Room.h"
 #include "CombatController.h"
+#include "LoadoutController.h"
+#include "NavigationController.h"
 #include "ScavengeController.h"
 
-// EVERY WHILE LOOP + READ INPUT (MENU CHOICES) IS HANDLED IN THIS CLASS
+class Player;
+class WorldMap;
+
+// MASTER CONTROLLER FOR MENU CHOICES
 class PlayerController
 {
 public:
-    PlayerController(WorldMap& aWorldMap, Player& aPlayer);
+	PlayerController(WorldMap& aWorldMap, Player& aPlayer);
 
-    void UpdateAction();
-    void UpdateNavigation();
+	void UpdateAction();
+	void UpdateAttributes() const;
 
-    void UpdateInventory() const;
-    void UpdateEquipment() const;
-    void UpdateInventoryItems() const;
-    void UpdateSpellBook() const;
-
-    void UpdateAttributes() const;
-    void Win() const;
+	bool IsInFinalRoom() const;
+	void Win() const;
 
 private:
-    Room* myCurrentRoom;
-    WorldMap& myWorldMap;
-    Player& myPlayer;
-    CombatController myCombatController;
-    ScavengeController myScavengeController;
+	Room* myCurrentRoom;
+	WorldMap& myWorldMap;
+	Player& myPlayer;
+	CombatController myCombatController;
+	ScavengeController myScavengeController;
+	LoadoutController myLoadoutController;
+	NavigationController myNavController;
 };
