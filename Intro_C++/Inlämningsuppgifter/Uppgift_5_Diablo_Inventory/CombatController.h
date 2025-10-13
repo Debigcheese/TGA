@@ -18,6 +18,7 @@ public:
     static constexpr float DAMAGE_ZERO = 0.0f;
     static constexpr float HEAVY_MULTI_MIN = 0.75f;
     static constexpr float HEAVY_MULTI_MAX = 1.50f;
+    static constexpr float SLASH_DMG_MULTI = 2.50f;
     static constexpr float DEFENSE_BASE_MULTI = 0.0f;
     static constexpr float DEFENSE_SCALING_FACTOR = 200.0f;
 
@@ -35,7 +36,7 @@ public:
     // ---- Calculations & checks ----
     float GetDamageFromAttackType() const;
     const AmountRange& GetHeavyDamageRange() const;
-    float GetSlashDamage() const { return myPlayer.GetAttributes().damage / 2.5f; }
+    float GetSlashDamage() const { return myPlayer.GetAttributes().damage / SLASH_DMG_MULTI; }
     float GetDefenseMultiplier() const;
     bool IsInvalidAttackIndex() const;
 

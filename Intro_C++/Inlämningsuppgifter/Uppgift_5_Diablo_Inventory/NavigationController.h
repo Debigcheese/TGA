@@ -12,7 +12,7 @@ public:
 
 	void UpdateNavigation(Room* aRoom);
 	Room* GetLookForRoom(const Position& aLookForPos) const;
-	bool HandleOnEnemyAggro() const;
+	bool HandleEnemyAggro() const;
 
 private:
 	Player& myPlayer;

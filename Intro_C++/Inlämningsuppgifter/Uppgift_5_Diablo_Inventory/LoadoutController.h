@@ -16,6 +16,8 @@ public:
     Player& GetPlayer() const { return myPlayer; }
 
 private:
+    static constexpr int RETURN_INDEX_OFFSET = 1;
+
     Player& myPlayer;
     Room* myCurrentRoom;
 };

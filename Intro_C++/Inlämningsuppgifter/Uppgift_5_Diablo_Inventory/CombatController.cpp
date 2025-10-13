@@ -6,6 +6,8 @@
 #include <vector>
 #include <iostream>
 
+#include "ConsoleUI.h"
+
 CombatController::CombatController(Player& aPlayer) :
     myPlayer(aPlayer),
     myCurrentRoom(nullptr),
@@ -20,7 +22,7 @@ void CombatController::UpdateCombat(Room* aCurrentRoom)
     {
         std::cout << "No monsters in this room...\n";
         std::cout << "Choose another action.\n";
-        system("pause");
+        ConsoleUI::Pause();
         return;
     }
 
@@ -43,10 +45,10 @@ void CombatController::UpdateCombat(Room* aCurrentRoom)
             myCurrentRoom->RemoveEnemyFromRoom(targetEnemy.GetId());
             enemies = myCurrentRoom->GetEnemies();
             SetAttackData({PLAYER_ATTACK_INDEX_INVALID, GetAttackData().attackType});
-            system("pause");
+            ConsoleUI::Pause();
         }
 
-        system("cls");
+        ConsoleUI::Clear();
         myPlayer.PrintPlayerUI();
 
         if (targetEnemy.IsDead())
@@ -61,7 +63,7 @@ void CombatController::UpdateCombat(Room* aCurrentRoom)
         if (enemies.empty())
         {
             std::cout << "\nYou have slain all enemies in this room!\n";
-            system("pause");
+            ConsoleUI::Pause();
             break;
         }
         PrintCombatUI();
@@ -72,7 +74,7 @@ void CombatController::UpdateCombat(Room* aCurrentRoom)
         }
         if (!myPlayer.IsDead())
         {
-            system("pause");
+            ConsoleUI::Pause();
         }
     }
 }
@@ -113,12 +115,12 @@ void CombatController::Attack() const
             << "\n";
     }
 
-    system("pause");
+    ConsoleUI::Pause();
 }
 
 void CombatController::ChooseTarget()
 {
-    if (!IsInvalidAttackIndex() || myCurrentRoom->GetEnemies().size() <= 1)
+    if (!IsInvalidAttackIndex() || myCurrentRoom->GetEnemies().size() <= PLAYER_ATTACK_INDEX_INVALID)
     {
         SetAttackData({PLAYER_ATTACK_INDEX_ZERO, GetAttackData().attackType});
         return;
@@ -204,7 +206,7 @@ bool CombatController::IsInvalidAttackIndex() const
 
 void CombatController::PrintCombatUI() const
 {
-    system("cls");
+    ConsoleUI::Clear();
     myPlayer.PrintPlayerUI();
     const std::vector<Enemy>& enemies = myCurrentRoom->GetEnemies();
     if (IsInvalidAttackIndex())

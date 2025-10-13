@@ -29,7 +29,7 @@ void LoadoutController::UpdateLoadout(Room* aCurrentRoom)
         PrintUI(myPlayer, *myCurrentRoom);
         PrintInventoryMenu();
 
-        constexpr int returnIndex = static_cast<int>(InventoryChoice::SpellBook) + 1;
+        constexpr int returnIndex = static_cast<int>(InventoryChoice::SpellBook) + RETURN_INDEX_OFFSET;
 
         auto choiceIndex = Utils::ReadIntInRange(
             static_cast<int>(InventoryChoice::Equipment),
@@ -72,18 +72,16 @@ void LoadoutController::UpdateEquipment() const
         const auto& equipment = myPlayer.GetEquipment();
         equipment.PrintEquipment();
 
-        constexpr int offsetIndex = 1;
-        const int returnIndex = static_cast<int>(equipment.GetEquipment().size()) + offsetIndex;
-
+        const int returnIndex = static_cast<int>(equipment.GetEquipment().size()) + RETURN_INDEX_OFFSET;
         std::cout << returnIndex << ") Return\n";
 
-        int menuChoice = Utils::ReadIntInRange(offsetIndex, returnIndex);
-
+        int menuChoice = Utils::ReadIntInRange(RETURN_INDEX_OFFSET, returnIndex);
         if (menuChoice == returnIndex)
         {
             return;
         }
-        const int itemSlotIndex = menuChoice - offsetIndex;
+
+        const int itemSlotIndex = menuChoice - RETURN_INDEX_OFFSET;
         auto& item = equipment.GetEquipment()[itemSlotIndex];
         std::cout << "\n";
         item->PrintItemOnDisplay();
@@ -93,9 +91,11 @@ void LoadoutController::UpdateEquipment() const
             << "2) No\n"
             << "Choice: ";
 
-        int unequipChoice = Utils::ReadIntInRange(1, 2);
+        auto unequipChoice = static_cast<Choice>(Utils::ReadIntInRange(
+            static_cast<int>(Choice::Yes),
+            static_cast<int>(Choice::No)));
 
-        if (unequipChoice == 2)
+        if (unequipChoice == Choice::No)
         {
             return;
         }
@@ -113,17 +113,16 @@ void LoadoutController::UpdateInventory() const
         const auto& inventory = myPlayer.GetInventory();
         inventory.PrintInventory(myPlayer.GetAttributes().carryCapacity);
 
-        constexpr int offsetIndex = 1;
-        const int returnIndex = static_cast<int>(inventory.GetItems().size()) + offsetIndex;
+        const int returnIndex = static_cast<int>(inventory.GetItems().size()) + RETURN_INDEX_OFFSET;
 
-        int menuChoice = Utils::ReadIntInRange(offsetIndex, returnIndex);
+        int menuChoice = Utils::ReadIntInRange(RETURN_INDEX_OFFSET, returnIndex);
 
         if (menuChoice == returnIndex)
         {
             return;
         }
 
-        const int itemIndex = menuChoice - offsetIndex;
+        const int itemIndex = menuChoice - RETURN_INDEX_OFFSET;
         const auto& item = inventory.GetItems()[itemIndex];
 
         if (itemIndex < 0 || itemIndex >= static_cast<int>(inventory.GetItems().size()))
@@ -134,11 +133,7 @@ void LoadoutController::UpdateInventory() const
         std::cout << "\n";
         item.PrintItemOnDisplay();
 
-        std::cout << "\nItem Action\n"
-            << "1) Equip\n"
-            << "2) Drop\n"
-            << "3) Return\n"
-            << "Choice: ";
+        PrintItemActionMenu();
 
         menuChoice = Utils::ReadIntInRange(static_cast<int>(ItemAction::Equip), static_cast<int>(ItemAction::Count));
         auto itemAction = static_cast<ItemAction>(menuChoice);
@@ -181,18 +176,17 @@ void LoadoutController::UpdateSpellBook() const
         const auto& spellbook = myPlayer.GetSpellBook();
         spellbook.PrintSpells();
 
-        constexpr int offsetIndex = 1;
         int spellsUnactiveCount = static_cast<int>(spellbook.GetInactiveSpells().size());
 
-        const int returnIndex = spellsUnactiveCount + offsetIndex;
-        int menuChoice = Utils::ReadIntInRange(offsetIndex, returnIndex);
+        const int returnIndex = spellsUnactiveCount + RETURN_INDEX_OFFSET;
+        int menuChoice = Utils::ReadIntInRange(RETURN_INDEX_OFFSET, returnIndex);
 
         if (menuChoice == returnIndex)
         {
             return;
         }
 
-        const int spellIndex = menuChoice - offsetIndex;
+        const int spellIndex = menuChoice - RETURN_INDEX_OFFSET;
         if (spellIndex < 0 || spellIndex >= spellsUnactiveCount)
         {
             continue;
