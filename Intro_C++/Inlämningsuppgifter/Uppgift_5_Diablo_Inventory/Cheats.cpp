@@ -25,45 +25,45 @@ void Cheats::UpdateCheats()
 		switch (cheatType)
 		{
 			case CheatType::Invincible:
-			{
-				if (!myCheats.invincible)
 				{
-					myCheats.invincible = true;
+					if (!myCheats.invincible)
+					{
+						myCheats.invincible = true;
+					}
+					else
+					{
+						myCheats.invincible = false;
+					}
+					break;
 				}
-				else
-				{
-					myCheats.invincible = false;
-				}
-				break;
-			}
 			case CheatType::OneShot:
-			{
-				if (!myCheats.oneShot)
 				{
-					myCheats.oneShot = true;
+					if (!myCheats.oneShot)
+					{
+						myCheats.oneShot = true;
+					}
+					else
+					{
+						myCheats.oneShot = false;
+					}
+					break;
 				}
-				else
-				{
-					myCheats.oneShot = false;
-				}
-				break;
-			}
 			case CheatType::Ghost:
-			{
-				if (!myCheats.ghost)
 				{
-					myCheats.ghost = true;
+					if (!myCheats.ghost)
+					{
+						myCheats.ghost = true;
+					}
+					else
+					{
+						myCheats.ghost = false;
+					}
+					break;
 				}
-				else
-				{
-					myCheats.ghost = false;
-				}
-				break;
-			}
 			case CheatType::None:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 	}
 }
@@ -75,9 +75,9 @@ void Cheats::PrintCheatMenu()
 	if (myCheats.invincible)
 	{
 		std::cout
-			<< PrintRedText(true)
+			<< GetColorCode(TextColor::Red, true)
 			<< "1) Invincible"
-			<< PrintRedText(false)
+			<< GetColorCode(TextColor::Red, false)
 			<< "\n";
 	}
 	else
@@ -89,9 +89,9 @@ void Cheats::PrintCheatMenu()
 	if (myCheats.oneShot)
 	{
 		std::cout
-			<< PrintRedText(true)
+			<< GetColorCode(TextColor::Red, true)
 			<< "2) One-Shot"
-			<< PrintRedText(false)
+			<< GetColorCode(TextColor::Red, false)
 			<< "\n";
 	}
 	else
@@ -103,9 +103,9 @@ void Cheats::PrintCheatMenu()
 	if (myCheats.ghost)
 	{
 		std::cout
-			<< PrintRedText(true)
+			<< GetColorCode(TextColor::Red, true)
 			<< "3) Ghost"
-			<< PrintRedText(false)
+			<< GetColorCode(TextColor::Red, false)
 			<< "\n";
 	}
 	else

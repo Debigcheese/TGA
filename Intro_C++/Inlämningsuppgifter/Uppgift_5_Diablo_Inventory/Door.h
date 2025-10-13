@@ -2,6 +2,8 @@
 #include "GameEnums.h"
 #include "GameStructs.h"
 
+#include <string>
+
 class Room;
 class Player;
 
@@ -18,6 +20,8 @@ public:
 	int GetOtherRoomId(const int aCurrentRoom) const;
 	bool HasLock() const;
 	bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
+
+	static std::string LockTypeToString(const LockType& aLockType);
 
 private:
 	int myRoomOneId; //Room on one side of door

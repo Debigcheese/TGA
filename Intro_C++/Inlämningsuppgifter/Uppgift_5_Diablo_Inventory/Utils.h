@@ -16,12 +16,8 @@ namespace Utils
 	static RandomGeneratorState myRng;
 	int ReadIntInRange(int aMinValue, int aMaxValue);
 	int GenerateRandomNumber(int aMin, int aMaxValue);
-	Direction GetDoorPOSFromIndex(const int& aIndex);
 	Position GetPosFromDirection(const Direction& aDirection);
-	int GetIndexFromDoorPOS(const Direction& aDoorPosition);
-	const char* PrintRedText(bool aStart);
-	const char* LockTypeToString(const LockType& aLockType);
-	Direction Opposite(const Direction& d);
+
 	const char* GetColorCode(TextColor color, bool aStart);
 	TextColor GetColorFromRarity(Rarity rarity);
 	const char* RarityToString(Rarity rarity);

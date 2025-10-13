@@ -63,6 +63,30 @@ void Door::PrintDoorLock() const
 		<< myLock.strengthReq.attributeValue << " to break open the door\n";
 }
 
+std::string LockTypeToString(const LockType& aLockType)
+{
+	switch (aLockType)
+	{
+		case LockType::Unlocked:
+			{
+				return "Unlocked";
+			}
+		case LockType::Agility:
+			{
+				return "Agility";
+			}
+		case LockType::Strength:
+			{
+				return "Strength";
+			}
+		case LockType::None:
+			{
+				return "none";
+			}
+	}
+	return "";
+}
+
 void Door::UpdateDoorLock(const Player& aPlayer)
 {
 	PrintDoorLock();
@@ -80,43 +104,43 @@ void Door::UpdateDoorLock(const Player& aPlayer)
 		switch (tempLockType)
 		{
 			case LockType::Agility:
-			{
-				if (TryLockPick(aPlayer, LockType::Agility))
 				{
-					std::cout << "\nYou successfully lock-picked the door open!\n";
-					myLock.isLocked = false;
-					return;
+					if (TryLockPick(aPlayer, LockType::Agility))
+					{
+						std::cout << "\nYou successfully lock-picked the door open!\n";
+						myLock.isLocked = false;
+						return;
+					}
+					else
+					{
+						std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
+							agilityReq.attributeValue << "\n";
+					}
+					break;
 				}
-				else
-				{
-					std::cout << "Your agility is too low: " << aPlayer.GetAttributes().agility << "/" << myLock.
-						agilityReq.attributeValue << "\n";
-				}
-				break;
-			}
 			case LockType::Strength:
-			{
-				if (TryLockPick(aPlayer, LockType::Strength))
 				{
-					std::cout << "\nYou successfully broke the door open!\n";
-					myLock.isLocked = false;
+					if (TryLockPick(aPlayer, LockType::Strength))
+					{
+						std::cout << "\nYou successfully broke the door open!\n";
+						myLock.isLocked = false;
+						return;
+					}
+					else
+					{
+						std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
+							strengthReq.attributeValue << "\n";
+					}
+					break;
+				}
+			case LockType::Unlocked:
+				{
 					return;
 				}
-				else
-				{
-					std::cout << "Your Strength is too low: " << aPlayer.GetAttributes().strength << "/" << myLock.
-						strengthReq.attributeValue << "\n";
-				}
-				break;
-			}
-			case LockType::Unlocked:
-			{
-				return;
-			}
 			case LockType::None:
-			{
-				return;
-			}
+				{
+					return;
+				}
 		}
 		system("pause");
 	}

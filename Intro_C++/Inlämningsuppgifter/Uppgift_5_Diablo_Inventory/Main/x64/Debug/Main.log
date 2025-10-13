@@ -1,2 +1,35 @@
-﻿  NavigationController.cpp
-  Main.vcxproj -> F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\x64\Debug\Main.exe
+﻿  Cheats.cpp
+  Chest.cpp
+  CombatController.cpp
+  ConsoleUI.cpp
+  Diablo.cpp
+  Door.cpp
+  Enemy.cpp
+  EnemyFactory.cpp
+  EnemyType.cpp
+  Equipment.cpp
+  Inventory.cpp
+  Item.cpp
+  ItemFactory.cpp
+  ItemType.cpp
+  LoadoutController.cpp
+  Main.cpp
+  NavigationController.cpp
+  Player.cpp
+  PlayerController.cpp
+  Room.cpp
+  Generating Code...
+D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatController.cpp(193,1): warning C4172: returning address of local variable or temporary : heavyDamageRange
+  Compiling...
+  ScavengeController.cpp
+  Spell.cpp
+  Spellbook.cpp
+  SpellFactory.cpp
+  SpellType.cpp
+  Utils.cpp
+  WorldMap.cpp
+D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\WorldMap.cpp(134,12): warning C4141: 'constexpr': used more than once
+D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\WorldMap.cpp(135,12): warning C4141: 'constexpr': used more than once
+  Generating Code...
+  LINK : D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\x64\Debug\Main.exe not found or not built by the last incremental link; performing full link
+  Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\x64\Debug\Main.exe
