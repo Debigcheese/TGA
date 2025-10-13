@@ -15,27 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FixedVector.cpp">
+    <ClCompile Include="..\..\Main\FixedVectorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FixedVectorTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="..\..\Main\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="..\..\Main\FixedVector.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="UtilityFunctions.h">
+    <ClInclude Include="..\..\Main\UtilityFunctions.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FixedVector.h">
+    <ClInclude Include="..\..\Main\pch.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

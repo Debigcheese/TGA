@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "FixedVector.h"
+
 int main()
 {
 	std::vector<int> myvector;
