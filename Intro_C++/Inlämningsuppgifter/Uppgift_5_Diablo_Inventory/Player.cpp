@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "ConsoleUI.h"
+
 Player::Player(WorldMap& aWorldMap) : myWorldMap(aWorldMap), myRoomId(0), myIsDead(false),
                                       myName("(-)"), myPos{0, 0}
 {
@@ -121,77 +123,5 @@ bool Player::CanPickupItem(const Item& aItem) const
 	return false;
 }
 
-void Player::PrintHealth() const
-{
-	std::cout << "Health: "
-		<< static_cast<int>(GetAttributes().currentHealth) << "/"
-		<< static_cast<int>(GetAttributes().maxHealth) << " hp";
-}
 
-void Player::PrintUserName() const
-{
-	std::cout << "Username: " << myName;
-}
 
-void Player::PrintPlayerUI() const
-{
-	system("cls");
-	PrintUserName();
-	std::cout << "\n";
-	PrintHealth();
-	std::cout << "\n";
-	std::cout << "Room: " << myWorldMap.GetRoomWithId(myRoomId)->GetRoomName();
-	std::cout << "\n";
-}
-
-//prints attributes after items + buffs
-void Player::PrintAttributes() const
-{
-	std::cout << "Player Username: " << myName << "\n\n";
-
-	std::cout << "[Base Attributes] " << "\n";
-	std::cout << "Strength:  " << static_cast<int>(GetAttributes().strength) << "/99" << "\n";
-	std::cout << "Agility:   " << static_cast<int>(GetAttributes().agility) << "/99" << "\n";
-	std::cout << "Endurance: " << static_cast<int>(GetAttributes().endurance) << "/99" << "\n\n";
-
-	std::cout << "[Derived Attributes] " << "\n";
-	std::cout << "Attack Damage: " << static_cast<int>(GetAttributes().damage) << " AD" << "\n";
-	std::cout << "Max-Health :   " << static_cast<int>(GetAttributes().maxHealth) << " hp" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetAttributes().defense) << " def" << "\n";
-	std::cout << "Carry Capacity: " << static_cast<int>(GetAttributes().carryCapacity) << "kg" << "\n\n";
-}
-
-void Player::PrintBaseAttributes() const
-{
-	std::cout << "Player Username: " << myName << "\n\n";
-
-	std::cout << "[Base Attributes] " << "\n";
-	std::cout << "Strength:  " << static_cast<int>(myAttributes.strength) << "/99" << "\n";
-	std::cout << "Agility:   " << static_cast<int>(myAttributes.agility) << "/99" << "\n";
-	std::cout << "Endurance: " << static_cast<int>(myAttributes.endurance) << "/99" << "\n\n";
-
-	std::cout << "[Derived Attributes] " << "\n";
-	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << "\n";
-	std::cout << "Max-Health :   " << static_cast<int>(GetMaxHealth()) << " hp" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " def" << "\n";
-	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg" << "\n\n";
-}
-
-//prints base attributes + derived calculation
-void Player::PrintDerivedAttributes() const
-{
-	std::cout << "Player Username: " << myName << "\n\n";
-
-	std::cout << "[Base Attributes] " << "\n";
-	std::cout << "Strength:  " << static_cast<int>(myAttributes.strength) << "/99" << "\n";
-	std::cout << "Agility:   " << static_cast<int>(myAttributes.agility) << "/99" << "\n";
-	std::cout << "Endurance: " << static_cast<int>(myAttributes.endurance) << "/99" << "\n\n";
-
-	std::cout << "[Derived Attributes] " << "\n";
-	std::cout << "Attack Damage: " << static_cast<int>(GetDamage()) << " AD" << " (Strength * Agility)" << "\n";
-	std::cout << "Max-Health:    " << static_cast<int>(GetMaxHealth()) << " hp" <<
-		" (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
-	std::cout << "Defense:       " << static_cast<int>(GetDefense()) << " def" << " (Endurance + Agility)" << "\n";
-	std::cout << "Carry Capacity: " << static_cast<int>(GetCarryCapacity()) << "kg " << " (Strength + Agility / 3)" <<
-		"\n\n";
-}

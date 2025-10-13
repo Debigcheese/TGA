@@ -63,7 +63,7 @@ void Door::PrintDoorLock() const
 		<< myLock.strengthReq.attributeValue << " to break open the door\n";
 }
 
-std::string LockTypeToString(const LockType& aLockType)
+std::string Door::LockTypeToString(const LockType& aLockType) const
 {
 	switch (aLockType)
 	{

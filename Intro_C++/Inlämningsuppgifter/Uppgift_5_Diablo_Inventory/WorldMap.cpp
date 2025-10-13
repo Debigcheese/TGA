@@ -131,9 +131,11 @@ bool WorldMap::HasRoom(int x, int y)
 
 void WorldMap::PrintMap(const Position player)
 {
-	constexpr constexpr int minX = -2, maxX = 2;
-	constexpr constexpr int minY = -1, maxY = 3;
-
+	constexpr int minX = -2;
+	constexpr int maxX = 2;
+	constexpr int minY = -1;
+	constexpr int maxY = 3;
+	
 	std::cout << '\n';
 	for (int y = maxY; y >= minY; --y)
 	{

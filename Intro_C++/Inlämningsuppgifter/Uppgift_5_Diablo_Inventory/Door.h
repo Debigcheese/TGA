@@ -21,7 +21,7 @@ public:
 	bool HasLock() const;
 	bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
 
-	static std::string LockTypeToString(const LockType& aLockType);
+	std::string LockTypeToString(const LockType& aLockType) const;
 
 private:
 	int myRoomOneId; //Room on one side of door

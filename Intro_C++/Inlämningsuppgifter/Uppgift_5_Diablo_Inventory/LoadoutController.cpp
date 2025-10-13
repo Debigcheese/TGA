@@ -26,7 +26,7 @@ void LoadoutController::UpdateLoadout(Room* aCurrentRoom)
     myCurrentRoom = aCurrentRoom;
     while (true && !myPlayer.IsDead())
     {
-        PrintUI(myPlayer, *myCurrentRoom);
+        PrintUI(myPlayer, myCurrentRoom);
         PrintInventoryMenu();
 
         constexpr int returnIndex = static_cast<int>(InventoryChoice::SpellBook) + RETURN_INDEX_OFFSET;
@@ -67,7 +67,7 @@ void LoadoutController::UpdateEquipment() const
 {
     while (true && !myPlayer.IsDead())
     {
-        PrintUI(myPlayer, *myCurrentRoom);
+        PrintUI(myPlayer, myCurrentRoom);
 
         const auto& equipment = myPlayer.GetEquipment();
         equipment.PrintEquipment();
@@ -109,7 +109,7 @@ void LoadoutController::UpdateInventory() const
 {
     while (true && !myPlayer.IsDead())
     {
-        PrintUI(myPlayer, *myCurrentRoom);
+        PrintUI(myPlayer, myCurrentRoom);
         const auto& inventory = myPlayer.GetInventory();
         inventory.PrintInventory(myPlayer.GetAttributes().carryCapacity);
 
@@ -171,7 +171,7 @@ void LoadoutController::UpdateSpellBook() const
 {
     while (true && !myPlayer.IsDead())
     {
-        PrintUI(myPlayer, *myCurrentRoom);
+        PrintUI(myPlayer, myCurrentRoom);
 
         const auto& spellbook = myPlayer.GetSpellBook();
         spellbook.PrintSpells();

@@ -30,7 +30,7 @@ void ScavengeController::UpdateScavenge(Room* aCurrentRoom)
 	}
 	while (true && !myPlayer.IsDead())
 	{
-		PrintUI(myPlayer, *myCurrentRoom);
+		PrintUI(myPlayer, myCurrentRoom);
 
 		PrintScavengeMenu();
 
@@ -68,7 +68,7 @@ void ScavengeController::UpdatePickupItem() const
 	while (true && !myPlayer.IsDead())
 	{
 		auto& items = myCurrentRoom->GetLootInRoom();
-		PrintUI(myPlayer, *myCurrentRoom);
+		PrintUI(myPlayer, myCurrentRoom);
 		PrintPickupMenu(items);
 
 		if (items.empty())
@@ -119,7 +119,7 @@ void ScavengeController::UpdateLootChests() const
 	while (true && !myPlayer.IsDead())
 	{
 		auto& chests = myCurrentRoom->GetChestInRoom();
-		PrintUI(myPlayer, *myCurrentRoom);
+		PrintUI(myPlayer, myCurrentRoom);
 		PrintChestMenu(chests);
 
 		if (chests.empty())
@@ -177,7 +177,7 @@ void ScavengeController::UpdateReadSpells() const
 	while (true && !myPlayer.IsDead())
 	{
 		auto& spells = myCurrentRoom->GetSpellsInRoom();
-		PrintUI(myPlayer, *myCurrentRoom);
+		PrintUI(myPlayer, myCurrentRoom);
 		PrintSpellBookMenu(spells);
 
 		if (spells.empty())

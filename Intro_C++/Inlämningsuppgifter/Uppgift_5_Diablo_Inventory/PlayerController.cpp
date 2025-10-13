@@ -26,7 +26,7 @@ void PlayerController::UpdateAction()
             return;
         }
 
-        ConsoleUI::PrintUI(myPlayer, *myCurrentRoom);
+        ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
         ConsoleUI::PrintActionMenu(myCurrentRoom);
 
         auto actionChoice = static_cast<Action>(Utils::ReadIntInRange(
@@ -83,7 +83,7 @@ void PlayerController::UpdateAttributes() const
 {
     while (true)
     {
-        ConsoleUI::PrintUI(myPlayer, *myCurrentRoom);
+        ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
         ConsoleUI::PrintAttributesMenu();
 
         auto menuChoice = static_cast<AttriMenu>(Utils::ReadIntInRange(
@@ -96,19 +96,18 @@ void PlayerController::UpdateAttributes() const
         }
 
         ConsoleUI::Clear();
-        myPlayer.PrintPlayerUI();
-        myCurrentRoom->PrintEnemies();
+        ConsoleUI::PrintPlayerUI(myPlayer, myCurrentRoom);
 
         switch (menuChoice)
         {
             case AttriMenu::Attributes:
             {
-                myPlayer.PrintDerivedAttributes();
+                ConsoleUI::PrintDerivedAttributes(myPlayer);
                 break;
             }
             case AttriMenu::DerivedAttributes:
             {
-                myPlayer.PrintAttributes();
+                ConsoleUI::PrintAttributes(myPlayer);
                 break;
             }
             case AttriMenu::Return:

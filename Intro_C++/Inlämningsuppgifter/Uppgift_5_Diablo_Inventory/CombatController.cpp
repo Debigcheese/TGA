@@ -49,7 +49,7 @@ void CombatController::UpdateCombat(Room* aCurrentRoom)
         }
 
         ConsoleUI::Clear();
-        myPlayer.PrintPlayerUI();
+        ConsoleUI::PrintPlayerUI(myPlayer, myCurrentRoom);
 
         if (targetEnemy.IsDead())
         {
@@ -207,7 +207,7 @@ bool CombatController::IsInvalidAttackIndex() const
 void CombatController::PrintCombatUI() const
 {
     ConsoleUI::Clear();
-    myPlayer.PrintPlayerUI();
+    ConsoleUI::PrintPlayerUI(myPlayer, myCurrentRoom);
     const std::vector<Enemy>& enemies = myCurrentRoom->GetEnemies();
     if (IsInvalidAttackIndex())
     {

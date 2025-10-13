@@ -18,7 +18,7 @@ void NavigationController::UpdateNavigation(Room* aRoom)
     while (true && !myPlayer.IsDead())
     {
         myCurrentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
-        ConsoleUI::PrintUI(myPlayer, *myCurrentRoom);
+        ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
         ConsoleUI::PrintMap(myPlayer.GetPosition(), myWorldMap.GetWinRoomPos());
         ConsoleUI::PrintNavigationMenu();
 

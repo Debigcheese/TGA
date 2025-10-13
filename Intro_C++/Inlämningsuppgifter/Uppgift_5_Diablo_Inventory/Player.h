@@ -53,13 +53,6 @@ public:
 	Position GetPosition() const { return myPos; }
 	void SetPosition(const Position& aNewPosition) { myPos = aNewPosition; }
 
-	void PrintHealth() const;
-	void PrintUserName() const;
-	void PrintPlayerUI() const;
-	void PrintAttributes() const;
-	void PrintBaseAttributes() const;
-	void PrintDerivedAttributes() const;
-
 private:
 	//CONSTANTS
 	static constexpr float DEFAULT_BASE_ATTRIBUTE = 8.0f;

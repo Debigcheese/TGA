@@ -14,7 +14,7 @@ namespace ConsoleUI
 	void Clear();
 	void Pause();
 
-	void PrintUI(const Player& aPlayer, const Room& aCurrentRoom);
+	void PrintUI(const Player& aPlayer, const Room* aCurrentRoom);
 	void PrintActionMenu(Room* aCurrentRoom);
 	void PrintPlayerWin(const Player& aPlayer);
 
@@ -31,6 +31,13 @@ namespace ConsoleUI
 	void PrintAttributesMenu();
 	void PrintQuitGame();
 	void PrintMap(const Position& aPlayerPos, Position aWinPosition);
+
+	//player
+	void PrintUserName(const Player& aPlayer);
+	void PrintPlayerUI(const Player& aPlayer, const Room* aCurrentRoom);
+	void PrintAttributes(const Player& aPlayer);
+	void PrintBaseAttributes(const Player& aPlayer);
+	void PrintDerivedAttributes(const Player& aPlayer);
 
 	// // Player Info
 	// void PrintPlayerAttributes(const Attributes& aAttributes);

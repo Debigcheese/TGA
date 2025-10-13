@@ -4,6 +4,8 @@
 #include "GameConstants.h"
 #include <iostream>
 
+#include "ConsoleUI.h"
+
 using namespace GameConstants;
 
 Diablo::Diablo() : myWorldMap(), myPlayer(myWorldMap), myPlayerController(myWorldMap, myPlayer)
@@ -25,12 +27,12 @@ void Diablo::RunDiablo()
 void Diablo::Intro(const Player& aPlayer)
 {
 	std::cout << "You wake up in a dungeon...\n";
-	system("pause");
+	ConsoleUI::Pause();
 	std::cout << "\nSlay the enemies in this room (" << myWorldMap.GetRoomWithId(0)->GetRoomName() <<
 		") in order to proceed.\n";
-	system("pause");
+	ConsoleUI::Pause();
 	std::cout << "\nAnd try your best to get the hell out of here " << aPlayer.GetName() << "!\n";
-	system("pause");
+	ConsoleUI::Pause();
 }
 
 void Diablo::Welcome()
