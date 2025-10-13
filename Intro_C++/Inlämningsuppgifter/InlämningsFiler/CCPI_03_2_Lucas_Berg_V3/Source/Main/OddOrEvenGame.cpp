@@ -1,0 +1,62 @@
+#include "Casino.h"
+#include "OddOrEvenGame.h"
+#include "Helpers.h"
+#include "Print.h"
+
+#include <iostream>
+
+using namespace Helpers;
+using namespace Print;
+
+OddOrEvenGame::OddOrEvenGame()
+	: myMoneyEarned(0)
+{
+}
+
+int OddOrEvenGame::GetMoneyEarned() const
+{
+	return myMoneyEarned;
+}
+
+void OddOrEvenGame::SetMoneyEarned(int aNewMoney)
+{
+	myMoneyEarned = aNewMoney;
+}
+
+bool OddOrEvenGame::IsDiceOdd(const int aDice) const
+{
+	return (aDice % EVEN_DIVISOR == REMAINDER_ODD);
+}
+
+// ---------- Odd or Even ----------
+void OddOrEvenGame::PlayOddEvenRound(Account& aAccount)
+{
+	std::cout << "\nChoose: Odd (1) or Even (2): ";
+	int pick = ReadIntInRange(static_cast<int>(OddOrEven::Odd), static_cast<int>(OddOrEven::Even));
+
+	int dice1 = Casino::RollDice();
+	int dice2 = Casino::RollDice();
+	std::cout << "Dice 1: " << dice1 << ", Dice 2: " << dice2 << "\n";
+
+	bool dice1Odd = IsDiceOdd(dice1);
+	bool dice2Odd = IsDiceOdd(dice2);
+
+	bool bothOdd = dice1Odd && dice2Odd;
+	bool bothEven = !dice1Odd && !dice2Odd;
+
+	bool pickedOdd = (pick == static_cast<int>(OddOrEven::Odd));
+	bool playerWins = (pickedOdd && bothOdd) || (!pickedOdd && bothEven);
+
+	if (playerWins)
+	{
+		myMoneyEarned += Casino::Payout(aAccount, myBetMulti);
+		Casino::UpdateStats(true);
+	}
+	else
+	{
+		myMoneyEarned -= Casino::DeductBet(aAccount);
+		Casino::UpdateStats(false);
+	}
+
+	system("pause");
+}
