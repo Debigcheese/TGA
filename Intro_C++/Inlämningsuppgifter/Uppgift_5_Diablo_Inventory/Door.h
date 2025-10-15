@@ -10,21 +10,16 @@ class Player;
 class Door
 {
 public:
-	Door(int aRoomOneId, int aRoomTwoId, Lock aLock);
+    Door(int aRoomOneId, int aRoomTwoId, const Lock& aLock);
 
-	void AddDoorLock(const Lock& aLock);
-	void UpdateDoorLock(const Player& aPlayer);
-	void PrintDoorLock() const;
-
-	bool HasMatchingRoomIds(int aRoomIdOne, int aRoomIdTwo) const;
-	int GetOtherRoomId(const int aCurrentRoom) const;
-	bool HasLock() const;
-	bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
-
-	std::string LockTypeToString(const LockType& aLockType) const;
+    bool HasMatchingRoomIds(int aRoomIdOne, int aRoomIdTwo) const;
+    bool HasLock() const;
+    bool TryLockPick(const Player& aPlayer, const LockType& aType) const;
+    const Lock& GetLock() const;
+    void SetLock(const Lock& aLock);
 
 private:
-	int myRoomOneId; //Room on one side of door
-	int myRoomTwoId; //Room on other side of door
-	Lock myLock{};
+    int myRoomOneId;
+    int myRoomTwoId;
+    Lock myLock{};
 };

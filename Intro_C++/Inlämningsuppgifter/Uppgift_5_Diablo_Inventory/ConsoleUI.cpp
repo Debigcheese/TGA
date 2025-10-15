@@ -20,6 +20,11 @@ namespace ConsoleUI
         system("pause");
     }
 
+    void PrintOneLiner(std::string Line)
+    {
+        std::cout << Line;
+    }
+
     void PrintUI(const Player& aPlayer, const Room* aCurrentRoom)
     {
         Clear();
@@ -216,15 +221,16 @@ namespace ConsoleUI
         Clear();
         //Username
         PrintUserName(aPlayer);
+        std::cout << "\n";
         //Health
         std::cout << "Health: "
             << static_cast<int>(aPlayer.GetAttributes().currentHealth) << "/"
             << static_cast<int>(aPlayer.GetAttributes().maxHealth) << " hp" << "\n";
-	
+
         std::cout << "Room: " << aCurrentRoom->GetRoomName() << "\n";
     }
-    
-    
+
+
     //prints attributes after items + buffs
     void PrintAttributes(const Player& aPlayer)
     {
@@ -242,7 +248,7 @@ namespace ConsoleUI
         std::cout << "Carry Capacity: " << static_cast<int>(aPlayer.GetAttributes().carryCapacity) << "kg" << "\n\n";
     }
 
-    
+
     void PrintBaseAttributes(const Player& aPlayer)
     {
         std::cout << "Player Username: " << aPlayer.GetName() << "\n\n";
@@ -256,7 +262,8 @@ namespace ConsoleUI
         std::cout << "Attack Damage: " << static_cast<int>(aPlayer.GetBaseAttributes().damage) << " AD" << "\n";
         std::cout << "Max-Health :   " << static_cast<int>(aPlayer.GetBaseAttributes().maxHealth) << " hp" << "\n";
         std::cout << "Defense:       " << static_cast<int>(aPlayer.GetBaseAttributes().defense) << " def" << "\n";
-        std::cout << "Carry Capacity: " << static_cast<int>(aPlayer.GetBaseAttributes().carryCapacity) << "kg" << "\n\n";
+        std::cout << "Carry Capacity: " << static_cast<int>(aPlayer.GetBaseAttributes().carryCapacity) << "kg" <<
+            "\n\n";
     }
 
     //prints base attributes + derived calculation
@@ -270,13 +277,37 @@ namespace ConsoleUI
         std::cout << "Endurance: " << static_cast<int>(aPlayer.GetBaseAttributes().endurance) << "/99" << "\n\n";
 
         std::cout << "[Derived Attributes] " << "\n";
-        std::cout << "Attack Damage: " << static_cast<int>(aPlayer.GetBaseAttributes().damage) << " AD" << " (Strength * Agility)" << "\n";
+        std::cout << "Attack Damage: " << static_cast<int>(aPlayer.GetBaseAttributes().damage) << " AD" <<
+            " (Strength * Agility)" << "\n";
         std::cout << "Max-Health:    " << static_cast<int>(aPlayer.GetBaseAttributes().maxHealth) << " hp" <<
             " (Endurance * 4 + Strength * 6 + Agility * 3)" << "\n";
-        std::cout << "Defense:       " << static_cast<int>(aPlayer.GetBaseAttributes().defense) << " def" << " (Endurance + Agility)" << "\n";
-        std::cout << "Carry Capacity: " << static_cast<int>(aPlayer.GetBaseAttributes().carryCapacity) << "kg " << " (Strength + Agility / 3)" <<
+        std::cout << "Defense:       " << static_cast<int>(aPlayer.GetBaseAttributes().defense) << " def" <<
+            " (Endurance + Agility)" << "\n";
+        std::cout << "Carry Capacity: " << static_cast<int>(aPlayer.GetBaseAttributes().carryCapacity) << "kg " <<
+            " (Strength + Agility / 3)" <<
             "\n\n";
     }
+
+    void PrintDoorLock(const Lock& aLock)
+    {
+        std::cout << "\n<--- Door is Locked --->\n";
+        std::cout << "Required " << LockTypeToString(aLock.agilityReq.lockType) << ": "
+            << aLock.agilityReq.attributeValue << " to lock-pick the door\n";
+
+        std::cout << "Required " << LockTypeToString(aLock.strengthReq.lockType) << ": "
+            << aLock.strengthReq.attributeValue << " to break open the door\n";
+    }
+
+    void PrintLockMenu()
+    {
+        std::cout
+            << "1) Try Lock-Pick\n"
+            << "2) Try Breaking\n"
+            << "3) Return\n"
+            << "Choice: ";
+    }
+
+
     // void PrintPlayerAttributes(const Attributes& aAttributes)
     // {
     //     PrintHeader("Player Attributes");

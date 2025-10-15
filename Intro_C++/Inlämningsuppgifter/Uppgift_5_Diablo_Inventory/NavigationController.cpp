@@ -59,8 +59,7 @@ void NavigationController::UpdateNavigation(Room* aRoom)
                 doorFound = true;
                 if (door.HasLock())
                 {
-                    doorHasLock = true;
-                    door.UpdateDoorLock(myPlayer);
+                    UpdateDoorLock(door);
                     doorHasLock = door.HasLock();
                 }
             }
@@ -114,4 +113,59 @@ bool NavigationController::HandleEnemyAggro() const
         return true;
     }
     return false;
+}
+
+void NavigationController::UpdateDoorLock(Door& aDoor) const
+{
+    while (true && !myPlayer.IsDead())
+    {
+        const auto& lock = aDoor.GetLock();
+
+        ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
+        ConsoleUI::PrintMap(myPlayer.GetPosition(), myWorldMap.GetWinRoomPos());
+        ConsoleUI::PrintNavigationMenu();
+
+        ConsoleUI::PrintDoorLock(aDoor.GetLock());
+        ConsoleUI::PrintLockMenu();
+
+        int lockChoice = Utils::ReadIntInRange(
+            static_cast<int>(LockType::Agility),
+            static_cast<int>(LockType::Unlocked));
+
+        const auto& tempLockType = static_cast<LockType>(lockChoice);
+        switch (tempLockType)
+        {
+            case LockType::Agility:
+            {
+                if (aDoor.TryLockPick(myPlayer, LockType::Agility))
+                {
+                    std::cout << "\nYou successfully lock-picked the door open!\n";
+                    aDoor.SetLock({false, lock.strengthReq, lock.agilityReq});
+                    return;
+                }
+                std::cout << "Your agility is too low: "
+                    << myPlayer.GetAttributes().agility << "/"
+                    << lock.agilityReq.attributeValue << "\n";
+                break;
+            }
+            case LockType::Strength:
+            {
+                if (aDoor.TryLockPick(myPlayer, LockType::Strength))
+                {
+                    std::cout << "\nYou successfully broke the door open!\n";
+                    aDoor.SetLock({false, lock.strengthReq, lock.agilityReq});
+                    return;
+                }
+                std::cout << "Your Strength is too low: "
+                    << myPlayer.GetAttributes().strength << "/"
+                    << lock.strengthReq.attributeValue << "\n";
+                break;
+            }
+            default:
+            {
+                return;
+            }
+        }
+        ConsoleUI::Pause();
+    }
 }

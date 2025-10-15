@@ -4,18 +4,20 @@
 class Player;
 class Room;
 class WorldMap;
+class Door;
 
 class NavigationController
 {
 public:
-	NavigationController(WorldMap& aWorldMap, Player& aPlayer);
+    NavigationController(WorldMap& aWorldMap, Player& aPlayer);
 
-	void UpdateNavigation(Room* aRoom);
-	Room* GetLookForRoom(const Position& aLookForPos) const;
-	bool HandleEnemyAggro() const;
+    void UpdateDoorLock(Door& aDoor) const;
+    void UpdateNavigation(Room* aRoom);
+    Room* GetLookForRoom(const Position& aLookForPos) const;
+    bool HandleEnemyAggro() const;
 
 private:
-	Player& myPlayer;
-	WorldMap& myWorldMap;
-	Room* myCurrentRoom;
+    Player& myPlayer;
+    WorldMap& myWorldMap;
+    Room* myCurrentRoom;
 };

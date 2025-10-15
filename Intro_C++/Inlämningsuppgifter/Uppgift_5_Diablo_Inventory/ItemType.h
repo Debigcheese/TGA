@@ -4,13 +4,13 @@
 class ItemType
 {
 public:
-	ItemType() : myAttributes({})
-	{
-	}
+    ItemType() : myItemAttributes({})
+    {
+    }
 
-	void SetAttributes(const ItemAttributes& aAttributes) { myAttributes = aAttributes; }
-	const ItemAttributes& GetItemAttributes() const { return myAttributes; }
+    void SetItemAttributes(const ItemAttributes& aAttributes) { myItemAttributes = aAttributes; }
+    const ItemAttributes& GetItemAttributes() const { return myItemAttributes; }
 
 private:
-	ItemAttributes myAttributes;
+    ItemAttributes myItemAttributes;
 };
