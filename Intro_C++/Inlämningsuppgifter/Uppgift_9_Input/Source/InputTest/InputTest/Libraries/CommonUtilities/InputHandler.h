@@ -18,58 +18,58 @@ namespace CommonUtilities
 			switch (aMessage)
 			{
 				case WM_KEYDOWN:
-				{
-					myCurrentState[wParam] = true;
-					myLastKeyDown = static_cast<int>(wParam);
-					return true;
-				}
+					{
+						myCurrentState[wParam] = true;
+						myLastKeyDown = static_cast<int>(wParam);
+						return true;
+					}
 				case WM_KEYUP:
-				{
-					myCurrentState[wParam] = false;
-					myLastKeyUp = static_cast<int>(wParam);
-					return true;
-				}
+					{
+						myCurrentState[wParam] = false;
+						myLastKeyUp = static_cast<int>(wParam);
+						return true;
+					}
 				case WM_MOUSEMOVE:
-				{
-					myCurrentMousePos.x = GET_X_LPARAM(lParam);
-					myCurrentMousePos.y = GET_Y_LPARAM(lParam);
-					return true;
-				}
+					{
+						myCurrentMousePos.x = GET_X_LPARAM(lParam);
+						myCurrentMousePos.y = GET_Y_LPARAM(lParam);
+						return true;
+					}
 				case WM_LBUTTONDOWN:
-				{
-					myCurrentState[VK_LBUTTON] = true;
-					return true;
-				}
+					{
+						myCurrentState[VK_LBUTTON] = true;
+						return true;
+					}
 
 				case WM_LBUTTONUP:
-				{
-					myCurrentState[VK_LBUTTON] = false;
-					return true;
-				}
+					{
+						myCurrentState[VK_LBUTTON] = false;
+						return true;
+					}
 
 				case WM_RBUTTONDOWN:
-				{
-					myCurrentState[VK_RBUTTON] = true;
-					return true;
-				}
+					{
+						myCurrentState[VK_RBUTTON] = true;
+						return true;
+					}
 
 				case WM_RBUTTONUP:
-				{
-					myCurrentState[VK_RBUTTON] = false;
-					return true;
-				}
+					{
+						myCurrentState[VK_RBUTTON] = false;
+						return true;
+					}
 
 				case WM_MBUTTONDOWN:
-				{
-					myCurrentState[VK_MBUTTON] = true;
-					return true;
-				}
+					{
+						myCurrentState[VK_MBUTTON] = true;
+						return true;
+					}
 
 				case WM_MBUTTONUP:
-				{
-					myCurrentState[VK_MBUTTON] = false;
-					return true;
-				}
+					{
+						myCurrentState[VK_MBUTTON] = false;
+						return true;
+					}
 			}
 			return false;
 		}

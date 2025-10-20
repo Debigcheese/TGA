@@ -1,15 +1,20 @@
 #pragma once
 #include <iostream>
 #include "InputHandler.h"
+#include "InputTest.h"
 
 using input = CommonUtilities::InputHandler;
 
-namespace Print
+
+
+namespace PrintInput
 {
 	void PrintLastKeyPressed(const input& inputHandler)
 	{
+		globalInputHandler
 		if (inputHandler.IsKeyPressed(inputHandler.GetLastKeyPressed()))
 		{
+			
 			std::cout << static_cast<char>(inputHandler.GetLastKeyPressed());
 		}
 	}
@@ -36,5 +41,25 @@ namespace Print
 		{
 			std::cout << "{" << inputHandler.GetMousePosition().x << "x," << inputHandler.GetMousePosition().y << "y}";
 		}
+	}
+
+	void PrintMouseDelta(const input& inputHandler)
+	{
+		std::cout << "{" << inputHandler.GetMouseDelta().x << "x," << inputHandler.GetMouseDelta().y << "y}";
+	}
+
+	void PrintLMouseButton()
+	{
+		std::cout << IsLButtonDown();
+	}
+
+	void PrintRMouseButton()
+	{
+		std::cout << IsRButtonDown();
+	}
+
+	void PrintMMouseButton()
+	{
+		std::cout << IsMButtonDown();
 	}
 }

@@ -15,10 +15,10 @@ HINSTANCE hInst; // current instance
 WCHAR szTitle[MAX_LOADSTRING]; // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING]; // the main window class name
 
-using input = CommonUtilities::InputHandler;
-static input inputHandler;
+using namespace PrintInput;
 
-using namespace Print;
+using input = CommonUtilities::InputHandler;
+extern input globalInputHandler;
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
@@ -67,10 +67,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		//my input handler
 
-		//PrintLastKeyPressed(inputHandler);
-		PrintLastKeyReleased(inputHandler);
-		inputHandler.UpdateInput();
-		//PrintMousePOS(inputHandler);
+		//PrintLMouseButton();
+		//PrintRMouseButton();
+		//PrintMMouseButton();
+		//PrintLastKeyPressed(globalInputHandler);
+		//PrintLastKeyReleased(globalInputHandler);
+		//PrintLastKeyDown(globalInputHandler);
+		PrintMouseDelta(globalInputHandler);
+		globalInputHandler.UpdateInput();
+		//PrintMousePOS(globalInputHandler);
 	}
 
 	return (int)msg.wParam;
@@ -143,7 +148,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if (inputHandler.UpdateEvents(message, wParam, lParam))
+	if (globalInputHandler.UpdateEvents(message, wParam, lParam))
 	{
 		return 0;
 	}
@@ -151,30 +156,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 		case WM_COMMAND:
-		{
-			int wmId = LOWORD(wParam);
-			// Parse the menu selections:
-			switch (wmId)
 			{
-				case IDM_ABOUT:
-					DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-					break;
-				case IDM_EXIT:
-					DestroyWindow(hWnd);
-					break;
-				default:
-					return DefWindowProc(hWnd, message, wParam, lParam);
+				int wmId = LOWORD(wParam);
+				// Parse the menu selections:
+				switch (wmId)
+				{
+					case IDM_ABOUT:
+						DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+						break;
+					case IDM_EXIT:
+						DestroyWindow(hWnd);
+						break;
+					default:
+						return DefWindowProc(hWnd, message, wParam, lParam);
+				}
 			}
-		}
-		break;
+			break;
 		case WM_PAINT:
-		{
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code that uses hdc here...
-			EndPaint(hWnd, &ps);
-		}
-		break;
+			{
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hWnd, &ps);
+				// TODO: Add any drawing code that uses hdc here...
+				EndPaint(hWnd, &ps);
+			}
+			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
