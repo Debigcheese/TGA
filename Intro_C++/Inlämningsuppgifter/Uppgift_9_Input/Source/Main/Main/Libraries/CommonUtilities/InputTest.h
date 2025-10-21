@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
 #include "InputHandler.h"
-#include "Print.h"
 #include <Windows.h>
 
-namespace InputTests
+namespace InputTest
 {
 	using input = CommonUtilities::InputHandler;
 

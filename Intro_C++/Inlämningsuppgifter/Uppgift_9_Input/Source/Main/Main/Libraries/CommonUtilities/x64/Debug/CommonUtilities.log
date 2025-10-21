@@ -1,8 +1,2 @@
-﻿  Timer.cpp
-  InputHandler.cpp
-  InputTest.cpp
-  pch.cpp
-  Generating Code...
-InputTest.obj : warning LNK4006: "void __cdecl PrintInput::PrintMousePOS(void)" (?PrintMousePOS@PrintInput@@YAXXZ) already defined in Timer.obj; second definition ignored
-InputTest.obj : warning LNK4006: "void __cdecl PrintInput::PrintMouseDelta(void)" (?PrintMouseDelta@PrintInput@@YAXXZ) already defined in Timer.obj; second definition ignored
-  CommonUtilities.vcxproj -> F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\Main\Main\x64\Debug\CommonUtilities.lib
+﻿  InputTest.cpp
+  CommonUtilities.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\Main\Main\x64\Debug\CommonUtilities.lib

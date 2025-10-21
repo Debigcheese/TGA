@@ -14,6 +14,7 @@
 #include "UtilityFunctions.h"
 #include "InputHandler.h"
 #include "InputTest.h"
+#include "Print.h"
 
 #endif //PCH_H
 

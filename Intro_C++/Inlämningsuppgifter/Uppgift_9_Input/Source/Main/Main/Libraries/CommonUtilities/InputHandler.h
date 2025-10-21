@@ -3,8 +3,14 @@
 #include <windowsx.h>
 #include <array>
 
+static const int KEY_SHIFT = VK_SHIFT;
+static const int KEY_CTRL = VK_CONTROL;
+static const int KEY_SPACE = VK_SPACE;
+static const int KEY_ESCAPE = VK_ESCAPE;
+
 namespace CommonUtilities
 {
+	//global variable declared here
 	class InputHandler
 	{
 	public:

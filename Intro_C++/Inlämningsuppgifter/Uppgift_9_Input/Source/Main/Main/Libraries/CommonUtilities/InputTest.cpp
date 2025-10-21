@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "InputTest.h"
+#include <iostream>
+#include "Print.h"
 
 namespace InputTest
 {
@@ -22,13 +24,14 @@ namespace InputTest
 		return center;
 	}
 
+
 	void PrintInstructions()
 	{
 		std::cout <<
 			"=== Input Test Controls ===\n"
-			"[Tangent]  SPACE: KeyPressed-test\n"
-			"[Tangent]  LSHIFT: KeyDown/held-test\n"
-			"[Tangent]  LCTRL: KeyReleased-test\n"
+			"[Tangent]  Any key: KeyPressed-test\n"
+			"[Tangent]  Any key: KeyDown/held-test\n"
+			"[Tangent]  Any key: KeyReleased-test\n"
 			"[Mus]      L/R/M-knapp: Down/Pressed/Released\n"
 			"[Mus]      Rör musen: pos/delta\n"
 			"[Hjul]     Scrolla: wheel-delta\n"
@@ -43,17 +46,38 @@ namespace InputTest
 	{
 		auto& inputRef = *myInputHandler;
 
-		// === Tangenter ===
-		if (inputRef.IsKeyPressed(VK_SPACE))
+		// === Buttons ===
+		if (inputRef.IsKeyPressed(KEY_SPACE))
+		{
 			std::cout << "[KeyPressed] SPACE\n";
+		}
 
-		if (inputRef.IsKeyDown(VK_LSHIFT))
-			std::cout << "[KeyDown] LSHIFT\n";
+		if (inputRef.IsKeyDown(KEY_SHIFT))
+		{
+			std::cout << "[KeyDown] SHIFT\n";
+		}
 
-		if (inputRef.IsKeyReleased(VK_LCONTROL))
-			std::cout << "[KeyReleased] LCTRL\n";
+		if (inputRef.IsKeyReleased(KEY_CTRL))
+		{
+			std::cout << "[KeyReleased] CTRL\n";
+		}
 
-		// === Musknappar ===
+		if (globalInputHandler.IsKeyPressed(globalInputHandler.GetLastKeyPressed()))
+		{
+			std::cout << "[KeyPressed] " << static_cast<char>(globalInputHandler.GetLastKeyPressed()) << "\n";
+		}
+
+		if (globalInputHandler.IsKeyDown(globalInputHandler.GetLastKeyPressed()))
+		{
+			std::cout << "[KeyDown] " << static_cast<char>(globalInputHandler.GetLastKeyPressed()) << "\n";
+		}
+
+		if (globalInputHandler.IsKeyReleased(globalInputHandler.GetLastKeyReleased()))
+		{
+			std::cout << "[KeyReleased] " << static_cast<char>(globalInputHandler.GetLastKeyReleased()) << "\n";
+		}
+
+		// === Mouse Buttons ===
 		if (inputRef.IsKeyPressed(VK_LBUTTON)) std::cout << "[Pressed] LMB\n";
 		if (inputRef.IsKeyPressed(VK_RBUTTON)) std::cout << "[Pressed] RMB\n";
 		if (inputRef.IsKeyPressed(VK_MBUTTON)) std::cout << "[Pressed] MMB\n";
@@ -66,7 +90,7 @@ namespace InputTest
 		if (inputRef.IsKeyDown(VK_RBUTTON)) std::cout << "[Down] RMB\n";
 		if (inputRef.IsKeyDown(VK_MBUTTON)) std::cout << "[Down] MMB\n";
 
-		// === Musrörelse ===
+		// === Mouse ===
 		if (inputRef.GetMouseDelta().x != 0 || inputRef.GetMouseDelta().y != 0)
 		{
 			std::cout << "[MousePos] ";
@@ -76,7 +100,7 @@ namespace InputTest
 			std::cout << "\n";
 		}
 
-		// === Hjul ===
+		// === Wheel ===
 		if (inputRef.GetWheelDelta() != 0)
 			std::cout << "[Wheel] delta=" << inputRef.GetWheelDelta() << "\n";
 

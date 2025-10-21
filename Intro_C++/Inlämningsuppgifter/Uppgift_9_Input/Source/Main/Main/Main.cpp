@@ -1,14 +1,10 @@
 // Main.cpp : Defines the entry point for the application.
 //
-
-#include "framework.h"
 #include "Main.h"
-
 #include <iostream>
-#include "Print.h"
 #include "InputHandler.h"
 #include "InputTest.h"
-#include "Timer.h"
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -16,10 +12,7 @@ HINSTANCE hInst; // current instance
 WCHAR szTitle[MAX_LOADSTRING]; // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING]; // the main window class name
 
-using namespace PrintInput;
-
-extern CommonUtilities::InputHandler globalInputHandler;
-HWND gMainWnd = nullptr;
+HWND globalMainWnd;
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
@@ -48,7 +41,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	gMainWnd = hWnd;
+	InputTest::myInputHandler = &globalInputHandler;
+	InputTest::myMainWindowHandle = globalMainWnd;
+	InputTest::myMouseLocked = false;
 
 	//makes console window for input testing
 	AllocConsole();
@@ -60,9 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	MSG msg;
 	bool running = true;
 
-	CommonUtilities::Timer timer;
-	timer.Start();
-	timer.Update();
+	InputTest::PrintInstructions();
 
 	while (running)
 	{
@@ -80,12 +73,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
 		}
 
+		InputTest::RunTests();
 		globalInputHandler.UpdateInput();
-		InputTests::RunTests();
-		Sleep(1);
+		Sleep(100);
 	}
 
-	return (int)msg.wParam;
+	InputTest::myInputHandler->UnlockFromWindow();
+
+	return static_cast<int>(msg.wParam);
 }
 
 
@@ -137,10 +132,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		return FALSE;
 	}
 
+	globalMainWnd = hWnd;
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-
-	globalInputHandler.LockMouseToWindow(hWnd);
 
 	return TRUE;
 }
@@ -165,30 +159,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 		case WM_COMMAND:
-		{
-			int wmId = LOWORD(wParam);
-			// Parse the menu selections:
-			switch (wmId)
 			{
-				case IDM_ABOUT:
-					DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-					break;
-				case IDM_EXIT:
-					DestroyWindow(hWnd);
-					break;
-				default:
-					return DefWindowProc(hWnd, message, wParam, lParam);
+				int wmId = LOWORD(wParam);
+				// Parse the menu selections:
+				switch (wmId)
+				{
+					case IDM_ABOUT:
+						DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+						break;
+					case IDM_EXIT:
+						DestroyWindow(hWnd);
+						break;
+					default:
+						return DefWindowProc(hWnd, message, wParam, lParam);
+				}
 			}
-		}
-		break;
+			break;
 		case WM_PAINT:
-		{
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code that uses hdc here...
-			EndPaint(hWnd, &ps);
-		}
-		break;
+			{
+				PAINTSTRUCT ps;
+				HDC hdc = BeginPaint(hWnd, &ps);
+				// TODO: Add any drawing code that uses hdc here...
+				EndPaint(hWnd, &ps);
+			}
+			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
