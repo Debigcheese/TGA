@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Print.h"
 #include "InputHandler.h"
+#include "InputTest.h"
 #include "Timer.h"
 #define MAX_LOADSTRING 100
 
@@ -17,8 +18,8 @@ WCHAR szWindowClass[MAX_LOADSTRING]; // the main window class name
 
 using namespace PrintInput;
 
-using input = CommonUtilities::InputHandler;
-extern input globalInputHandler;
+extern CommonUtilities::InputHandler globalInputHandler;
+HWND gMainWnd = nullptr;
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
@@ -47,6 +48,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
+	gMainWnd = hWnd;
+
 	//makes console window for input testing
 	AllocConsole();
 	FILE* fp;
@@ -71,34 +74,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
+			if (msg.message == WM_QUIT)
+			{
+				running = false;
+			}
 		}
-
-		//my input handler
-		//globalInputHandler.CaptureMouse();
-		//PrintLMouseButton();
-		//PrintRMouseButton();
-		//PrintMMouseButton();
-		//PrintLastKeyPressed();
-		//PrintLastKeyReleased();
-		//PrintLastKeyDown();
-		//PrintMouseDelta();
-		//PrintMousePOS();
-		//PrintWheelDelta();
-		//PrintRMouseButtonPressed();
-		//PrintLMouseButtonPressed();
-		//PrintLMouseButtonReleased();
-		//globalInputHandler.SetMousePosition({500, 500});
 
 		globalInputHandler.UpdateInput();
-		Sleep(1000);
-
-		if (timer.GetTotalTime() >= 10)
-		{
-			running = false;
-		}
+		InputTests::RunTests();
+		Sleep(1);
 	}
-
-	globalInputHandler.UnlockFromWindow();
 
 	return (int)msg.wParam;
 }
@@ -180,30 +165,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 		case WM_COMMAND:
+		{
+			int wmId = LOWORD(wParam);
+			// Parse the menu selections:
+			switch (wmId)
 			{
-				int wmId = LOWORD(wParam);
-				// Parse the menu selections:
-				switch (wmId)
-				{
-					case IDM_ABOUT:
-						DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-						break;
-					case IDM_EXIT:
-						DestroyWindow(hWnd);
-						break;
-					default:
-						return DefWindowProc(hWnd, message, wParam, lParam);
-				}
+				case IDM_ABOUT:
+					DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+					break;
+				case IDM_EXIT:
+					DestroyWindow(hWnd);
+					break;
+				default:
+					return DefWindowProc(hWnd, message, wParam, lParam);
 			}
-			break;
+		}
+		break;
 		case WM_PAINT:
-			{
-				PAINTSTRUCT ps;
-				HDC hdc = BeginPaint(hWnd, &ps);
-				// TODO: Add any drawing code that uses hdc here...
-				EndPaint(hWnd, &ps);
-			}
-			break;
+		{
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hWnd, &ps);
+			// TODO: Add any drawing code that uses hdc here...
+			EndPaint(hWnd, &ps);
+		}
+		break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;

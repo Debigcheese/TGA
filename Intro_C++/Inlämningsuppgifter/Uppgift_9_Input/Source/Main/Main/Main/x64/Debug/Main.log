@@ -1,2 +1,2 @@
 ﻿  Main.cpp
-  Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\Main\Main\x64\Debug\Main.exe
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\Main\Main\Main.cpp(51,13): error C2065: 'hWnd': undeclared identifier

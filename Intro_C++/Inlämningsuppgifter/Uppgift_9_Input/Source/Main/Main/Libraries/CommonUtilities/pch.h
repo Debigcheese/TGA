@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "UtilityFunctions.h"
 #include "InputHandler.h"
+#include "InputTest.h"
 
 #endif //PCH_H
 
