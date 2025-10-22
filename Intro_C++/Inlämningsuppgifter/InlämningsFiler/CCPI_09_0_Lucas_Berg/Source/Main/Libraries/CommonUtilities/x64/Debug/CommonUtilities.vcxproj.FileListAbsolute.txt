@@ -1,0 +1,5 @@
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_8_Timer\TestTimer\TimerTest\Libraries\CommonUtilities\x64\Debug\CommonUtilities.lib
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Tutorial\TestTimer\TimerTest\Libraries\CommonUtilities\x64\Debug\CommonUtilities.lib
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_8_Timer\TimerTest\Libraries\CommonUtilities\x64\Debug\CommonUtilities.lib
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\InputTest\InputTest\Libraries\CommonUtilities\x64\Debug\CommonUtilities.lib
+F:\TheGameAssembly\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_9_Input\Source\Main\Main\Libraries\CommonUtilities\x64\Debug\CommonUtilities.lib
