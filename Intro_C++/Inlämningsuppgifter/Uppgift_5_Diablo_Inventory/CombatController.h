@@ -28,7 +28,6 @@ public:
     void ChooseTarget();
     void ChooseAttack();
     void Attack() const;
-    void PrintCombatUI() const;
 
     const AttackData& GetAttackData() const { return myAttackData; }
     void SetAttackData(const AttackData& aData) { myAttackData = aData; }

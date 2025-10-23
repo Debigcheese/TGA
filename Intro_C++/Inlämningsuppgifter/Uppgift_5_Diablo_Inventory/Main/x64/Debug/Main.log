@@ -19,7 +19,7 @@
   PlayerController.cpp
   Room.cpp
   Generating Code...
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatController.cpp(193,1): warning C4172: returning address of local variable or temporary : heavyDamageRange
+D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatController.cpp(219,1): warning C4172: returning address of local variable or temporary : heavyDamageRange
   Compiling...
   ScavengeController.cpp
   Spell.cpp
@@ -28,8 +28,5 @@ D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\CombatCo
   SpellType.cpp
   Utils.cpp
   WorldMap.cpp
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\WorldMap.cpp(134,12): warning C4141: 'constexpr': used more than once
-D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\WorldMap.cpp(135,12): warning C4141: 'constexpr': used more than once
   Generating Code...
-  LINK : D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\x64\Debug\Main.exe not found or not built by the last incremental link; performing full link
   Main.vcxproj -> D:\Github\TGA\Intro_C++\Inlämningsuppgifter\Uppgift_5_Diablo_Inventory\x64\Debug\Main.exe

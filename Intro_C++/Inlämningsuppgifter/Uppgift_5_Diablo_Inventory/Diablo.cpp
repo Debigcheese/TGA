@@ -22,6 +22,8 @@ void Diablo::RunDiablo()
 	//Intro(myPlayer);
 
 	myPlayerController.UpdateAction();
+
+	ConsoleUI::Pause();
 }
 
 void Diablo::Intro(const Player& aPlayer)

@@ -1,0 +1,171 @@
+#include "NavigationController.h"
+#include "Cheats.h"
+#include "ConsoleUI.h"
+#include "Door.h"
+#include "Enemy.h"
+#include "Utils.h"
+#include "WorldMap.h"
+
+#include <iostream>
+
+NavigationController::NavigationController(WorldMap& aWorldMap, Player& aPlayer)
+	: myPlayer(aPlayer), myWorldMap(aWorldMap), myCurrentRoom(nullptr)
+{
+}
+
+void NavigationController::UpdateNavigation()
+{
+	while (true && !myPlayer.IsDead())
+	{
+		myCurrentRoom = myWorldMap.GetRoomWithId(myPlayer.GetRoomId());
+		ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
+		ConsoleUI::PrintMap(myPlayer.GetPosition(), myWorldMap.GetWinRoomPos());
+		ConsoleUI::PrintNavigationMenu();
+
+		int navChoice = Utils::ReadIntInRange(
+			static_cast<int>(Direction::West),
+			static_cast<int>(Direction::South) +
+			NAV_DIRECTION_CHOICE_OFFSET);
+
+		if (navChoice == static_cast<int>(Direction::South) + NAV_DIRECTION_CHOICE_OFFSET)
+		{
+			return;
+		}
+
+		Position lookForPos = myPlayer.GetPosition() + Utils::GetPosFromDirection(static_cast<Direction>(navChoice));
+		Room* lookForRoom = GetLookForRoom(lookForPos);
+
+		if (lookForRoom == nullptr)
+		{
+			std::cout << "\nThere is no door in that direction.\n";
+			ConsoleUI::Pause();
+			continue;
+		}
+
+		if (HandleEnemyAggro())
+		{
+			return;
+		}
+
+		bool doorHasLock = false;
+		bool doorFound = false;
+
+		for (Door& door : myWorldMap.GetDoors())
+		{
+			if (door.HasMatchingRoomIds(
+				lookForRoom->GetRoomId(),
+				myCurrentRoom->GetRoomId())) // does door exist between my room and look for room
+			{
+				doorFound = true;
+				if (door.HasLock())
+				{
+					UpdateDoorLock(door);
+					doorHasLock = door.HasLock();
+				}
+			}
+			if (doorFound && !doorHasLock)
+			{
+				myPlayer.SetPosition(lookForRoom->GetPosition());
+				myPlayer.SetRoomId(lookForRoom->GetRoomId());
+				myCurrentRoom = myWorldMap.GetRoomWithId(lookForRoom->GetRoomId());
+				break;
+			}
+		}
+
+		if (doorHasLock)
+		{
+			ConsoleUI::Pause();
+			continue;
+		}
+
+		std::cout << "\nEntered room: " << myCurrentRoom->GetRoomName() << "\n";
+		std::cout << "You healed to full hp: " << std::round(myPlayer.GetAttributes().currentHealth)
+			<< " -> " << std::round(myPlayer.GetAttributes().maxHealth) << "\n";
+		myPlayer.HealFullHealth();
+
+		ConsoleUI::Pause();
+		return;
+	}
+}
+
+Room* NavigationController::GetLookForRoom(const Position& aLookForPos) const
+{
+	for (Room& room : myWorldMap.GetRooms())
+	{
+		if (aLookForPos == room.GetPosition()) // find room position in direction we want to go
+		{
+			return &room;
+		}
+	}
+	return nullptr;
+}
+
+bool NavigationController::HandleEnemyAggro() const
+{
+	if (!myCurrentRoom->GetEnemies().empty() && !Cheats::GetCheats().ghost)
+	{
+		std::cout << "You try walking to the door but get attacked!\n\n";
+		for (Enemy& enemy : myCurrentRoom->GetEnemies())
+		{
+			enemy.Attack(myPlayer);
+		}
+		ConsoleUI::Pause();
+		return true;
+	}
+	return false;
+}
+
+void NavigationController::UpdateDoorLock(Door& aDoor) const
+{
+	while (true && !myPlayer.IsDead())
+	{
+		const auto& lock = aDoor.GetLock();
+
+		ConsoleUI::PrintUI(myPlayer, myCurrentRoom);
+		ConsoleUI::PrintMap(myPlayer.GetPosition(), myWorldMap.GetWinRoomPos());
+		ConsoleUI::PrintNavigationMenu();
+
+		ConsoleUI::PrintDoorLock(aDoor.GetLock());
+		ConsoleUI::PrintLockMenu();
+
+		int lockChoice = Utils::ReadIntInRange(
+			static_cast<int>(LockType::Agility),
+			static_cast<int>(LockType::Unlocked));
+
+		const auto& tempLockType = static_cast<LockType>(lockChoice);
+		switch (tempLockType)
+		{
+			case LockType::Agility:
+				{
+					if (aDoor.TryLockPick(myPlayer, LockType::Agility))
+					{
+						std::cout << "\nYou successfully lock-picked the door open!\n";
+						aDoor.SetLock({false, lock.strengthReq, lock.agilityReq});
+						return;
+					}
+					std::cout << "Your agility is too low: "
+						<< myPlayer.GetAttributes().agility << "/"
+						<< lock.agilityReq.attributeValue << "\n";
+					break;
+				}
+			case LockType::Strength:
+				{
+					if (aDoor.TryLockPick(myPlayer, LockType::Strength))
+					{
+						std::cout << "\nYou successfully broke the door open!\n";
+						aDoor.SetLock({false, lock.strengthReq, lock.agilityReq});
+						return;
+					}
+					std::cout << "Your Strength is too low: "
+						<< myPlayer.GetAttributes().strength << "/"
+						<< lock.strengthReq.attributeValue << "\n";
+					break;
+				}
+			default:
+				{
+					return;
+				}
+		}
+		ConsoleUI::Pause();
+	}
+}
