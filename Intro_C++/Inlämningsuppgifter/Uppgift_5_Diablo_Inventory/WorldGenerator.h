@@ -1,34 +1,34 @@
 #pragma once
 #include "Room.h"
 #include "Door.h"
+#include "Enemy.h"
+#include "Item.h"
+#include "Chest.h"
+#include "Spell.h"
+
 #include "GameEnums.h"
 #include "Player.h"
 
-class WorldMap
+class WorldGenerator
 {
 public:
-    WorldMap();
-    void InitWorldMap(std::vector<Room> aRooms, std::vector<Door> aDoors);
+    WorldGenerator();
 
-    //rooms & doors
-    std::vector<Door>& GetDoors();
-    std::vector<Room>& GetRooms();
-    Room* GetRoomWithId(int aRoomId);
-    const Room* GetRoomWithId(int aRoomId) const;
-    std::vector<int> GetRoomIds() const;
+    void GenerateDoors(std::vector<Door>& aDoors);
+    void GenerateRooms(std::vector<Room>& aRooms);
 
-    static bool HasRoom(int x, int y);
-    void PrintMap(Position player);
+    Room GenerateRoom(int aRoomId);
 
-    Position GetWinRoomPos() const { return GetRoomWithId(ROOM_WIN_ID)->GetPosition(); }
-    bool GetReachedWinRoom(const Position& aPosition) const;
+    //generate enemies per room
+    const std::vector<Enemy>& GenerateEnemies(std::vector<EnemyKey> aEnemyKeys) const;
 
-    std::vector<Position> GetRoomPositions() const;
+    std::vector<Item> GenerateItems(int aRoomId);
+    std::vector<Chest> GenerateChests(int aRoomId);
+    std::vector<Spell> GenerateSpells(int aRoomId);
+
+    std::vector<Chest> CreateChestsUpToRarity(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity);
 
 private:
-    std::vector<Room> myRooms;
-    std::vector<Door> myDoors;
-
     //constants
     //ROOMS
     static constexpr int ROOM_0_ID = 0;
@@ -41,6 +41,15 @@ private:
 
     static constexpr int ROOM_SIZE = 7;
 
+    const std::string myRoomNameFromID[ROOM_SIZE] = {
+        "Withered Halls",
+        "Obsidian Spire",
+        "Hollow Cavern",
+        "Pits of Torment",
+        "Den of the Blighted",
+        "Eternal Abyss",
+        "The Dungeon Passage"
+    };
     static constexpr Position ROOM_POS_FROM_ID[ROOM_SIZE] = {
         {0, 0},
         {1, 0},
@@ -77,7 +86,7 @@ private:
     static constexpr AmountRange ENEMY_DROP_ITEM = {0, 1};
 
     //ENEMY PER ROOM
-    const std::vector<EnemyRoom> ENEMY_FROM_ID = {
+    const std::vector<EnemyRoom> myEnemyFromID = {
         {{EnemyKey::Bat, EnemyKey::Bat, EnemyKey::Skeleton}},
         {{EnemyKey::Skeleton, EnemyKey::Undead, EnemyKey::None}}, // east first
         {{EnemyKey::Skeleton, EnemyKey::Beast, EnemyKey::Bat}}, //north first
