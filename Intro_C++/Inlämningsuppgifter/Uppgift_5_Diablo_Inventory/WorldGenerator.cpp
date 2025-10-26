@@ -13,15 +13,6 @@ WorldGenerator::WorldGenerator()
 {
 }
 
-// void WorldGenerator::GenerateWorld()
-// {
-//     //GenerateRooms();
-//     //GenerateDoors();
-//     // GenerateItems();
-//     // GenerateChests();
-//     // GenerateSpells();
-// }
-
 void WorldGenerator::GenerateDoors(std::vector<Door>& aDoors)
 {
     aDoors.reserve(ROOM_SIZE);
@@ -50,9 +41,9 @@ Room WorldGenerator::GenerateRoom(int aRoomId)
 {
     return {
         {
-            aRoomId,
-            myRoomNameFromID[aRoomId],
-            ROOM_POS_FROM_ID[aRoomId]
+            myRoomMeta[aRoomId].ID,
+            myRoomMeta[aRoomId].roomName,
+            myRoomMeta[aRoomId].pos
         },
         {
             GenerateEnemies({myEnemyFromID[aRoomId].enemyKeys}),
@@ -61,6 +52,23 @@ Room WorldGenerator::GenerateRoom(int aRoomId)
             GenerateSpells(aRoomId)
         }
     };
+}
+
+std::vector<Enemy> WorldGenerator::GenerateEnemies(const std::vector<EnemyKey>& aEnemyKeys)
+{
+    std::vector<Enemy> enemies{};
+    enemies.reserve(ENEMIES_PER_ROOM_MAX);
+
+    for (const auto& key : aEnemyKeys)
+    {
+        if (key == EnemyKey::None)
+        {
+            continue;
+        }
+        enemies.emplace_back(EnemyFactory::GetFactory().Create(key));
+        enemies.back().SetDropItems(ItemFactory::GetFactory().CreateItemsUpToRarity(0, 1, Rarity::Legendary));
+    }
+    return enemies;
 }
 
 std::vector<Item> WorldGenerator::GenerateItems(int aRoomId)
@@ -92,24 +100,6 @@ std::vector<Spell> WorldGenerator::GenerateSpells(int aRoomId)
             data.amount.min,
             data.amount.max,
             data.rarity));
-}
-
-const std::vector<Enemy>& WorldGenerator::GenerateEnemies(const std::vector<EnemyKey> aEnemyKeys) const
-{
-    std::vector<Enemy> enemies{};
-
-    for (const auto& key : aEnemyKeys)
-    {
-        if (key == EnemyKey::None)
-        {
-            continue;
-        }
-
-        enemies.push_back(EnemyFactory::GetFactory().Create(key));
-        enemies.back().SetDropItems(ItemFactory::GetFactory().CreateItemsUpToRarity(0, 1, Rarity::Legendary));
-    }
-
-    return enemies;
 }
 
 std::vector<Chest> WorldGenerator::CreateChestsUpToRarity(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity)

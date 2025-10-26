@@ -1,8 +1,8 @@
 #include "Spellbook.h"
+#include "ConsoleUI.h"
 
 #include <algorithm>
 #include <iostream>
-
 
 Spellbook::Spellbook() : mySpells(), myAttributes()
 {
@@ -20,7 +20,7 @@ void Spellbook::UpdateAttributes()
 void Spellbook::AddSpell(const Spell& aSpell)
 {
     std::cout << "\n";
-    aSpell.PrintSpellName();
+    ConsoleUI::PrintSpellName(aSpell);
     std::cout << " has been added to Spellbook!\n";
     mySpells.push_back(aSpell);
 }
@@ -32,7 +32,7 @@ void Spellbook::ApplySpell(int aSpellId)
     {
         spell.ActivateSpell();
         std::cout << "\n";
-        spell.PrintSpellName();
+        ConsoleUI::PrintSpellName(spell);
         std::cout << " spell buff has been applied\n";
         UpdateAttributes();
     }
@@ -118,7 +118,7 @@ void Spellbook::PrintSpells() const
         for (int i = 0; i < static_cast<int>(inactive.size()); i++)
         {
             std::cout << i + 1 << ") ";
-            inactive[i]->PrintSpellOnDisplay();
+            ConsoleUI::PrintSpellOnDisplay(*inactive[i]);
             std::cout << " \n";
         }
     }
@@ -133,7 +133,7 @@ void Spellbook::PrintSpells() const
     {
         for (const auto* spell : active)
         {
-            spell->PrintSpellOnDisplay();
+            ConsoleUI::PrintSpellOnDisplay(*spell);
             std::cout << " \n";
         }
     }

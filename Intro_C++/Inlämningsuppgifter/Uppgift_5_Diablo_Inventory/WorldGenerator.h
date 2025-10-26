@@ -19,9 +19,7 @@ public:
 
     Room GenerateRoom(int aRoomId);
 
-    //generate enemies per room
-    const std::vector<Enemy>& GenerateEnemies(std::vector<EnemyKey> aEnemyKeys) const;
-
+    std::vector<Enemy> GenerateEnemies(const std::vector<EnemyKey>& aEnemyKeys);
     std::vector<Item> GenerateItems(int aRoomId);
     std::vector<Chest> GenerateChests(int aRoomId);
     std::vector<Spell> GenerateSpells(int aRoomId);
@@ -29,6 +27,19 @@ public:
     std::vector<Chest> CreateChestsUpToRarity(int aRoomId, int aMinAmount, int aMaxAmount, Rarity aRarity);
 
 private:
+    //world map constants
+    struct EnemyRoom
+    {
+        std::vector<EnemyKey> enemyKeys;
+    };
+
+    struct CreateObject
+    {
+        int id;
+        AmountRange amount;
+        Rarity rarity;
+    };
+
     //constants
     //ROOMS
     static constexpr int ROOM_0_ID = 0;
@@ -41,23 +52,14 @@ private:
 
     static constexpr int ROOM_SIZE = 7;
 
-    const std::string myRoomNameFromID[ROOM_SIZE] = {
-        "Withered Halls",
-        "Obsidian Spire",
-        "Hollow Cavern",
-        "Pits of Torment",
-        "Den of the Blighted",
-        "Eternal Abyss",
-        "The Dungeon Passage"
-    };
-    static constexpr Position ROOM_POS_FROM_ID[ROOM_SIZE] = {
-        {0, 0},
-        {1, 0},
-        {0, 1},
-        {1, 1},
-        {0, 2},
-        {-1, 2},
-        {-1, 3}
+    RoomMeta myRoomMeta[ROOM_SIZE] = {
+        {ROOM_0_ID, "Withered Halls", {0, 0}},
+        {ROOM_1_ID, "Obsidian Spire", {1, 0}},
+        {ROOM_2_ID, "Hollow Cavern", {0, 1}},
+        {ROOM_3_ID, "Pits of Torment", {1, 1}},
+        {ROOM_4_ID, "Den of the Blighted", {0, 2}},
+        {ROOM_5_ID, "Eternal Abyss", {-1, 2}},
+        {ROOM_WIN_ID, "The Dungeon Passage", {-1, 3}},
     };
 
     //LOCK_DEF
@@ -84,6 +86,8 @@ private:
 
     //ENEMIES
     static constexpr AmountRange ENEMY_DROP_ITEM = {0, 1};
+
+    static constexpr int ENEMIES_PER_ROOM_MAX = 3;
 
     //ENEMY PER ROOM
     const std::vector<EnemyRoom> myEnemyFromID = {

@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include <string>
 #include <vector>
 
@@ -116,17 +115,17 @@ struct AttackData
     AttackType attackType;
 };
 
-
-//world map constants
-
-struct EnemyRoom
+struct RoomMeta
 {
-    std::vector<EnemyKey> enemyKeys;
+    int ID;
+    std::string roomName;
+    Position pos;
 };
 
-struct CreateObject
+struct RoomObjects
 {
-    int id;
-    AmountRange amount;
-    Rarity rarity;
+    std::vector<Enemy> enemies;
+    std::vector<Item> items;
+    std::vector<Chest> chests;
+    std::vector<Spell> spells;
 };

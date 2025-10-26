@@ -1,8 +1,4 @@
 #include "Room.h"
-#include "Utils.h"
-#include <iostream>
-
-using namespace Utils;
 
 Room::Room(const RoomMeta& aRoomMeta, const RoomObjects& aRoomObjects) :
     myRoomId(aRoomMeta.ID),
@@ -12,14 +8,6 @@ Room::Room(const RoomMeta& aRoomMeta, const RoomObjects& aRoomObjects) :
     myItems(aRoomObjects.items),
     myChests(aRoomObjects.chests),
     mySpells(aRoomObjects.spells)
-{
-}
-
-Room::Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies) :
-    myRoomId(aRoomId), myRoomName(aRoomName), myPos{aPosition.X, aPosition.Y}, myEnemies(aEnemies),
-    myItems(),
-    myChests(),
-    mySpells()
 {
 }
 
@@ -110,60 +98,4 @@ const std::vector<Spell>& Room::GetSpellsInRoom() const
 std::vector<Spell>& Room::GetSpellsInRoom()
 {
     return mySpells;
-}
-
-void Room::PrintRoomName() const
-{
-    std::cout << "Room: " << myRoomName;
-}
-
-void Room::PrintEnemies() const
-{
-    if (static_cast<int>(myEnemies.size()) <= ARRAY_COUNT_ZERO)
-    {
-        std::cout << "\n[No monsters in room]\n";
-        return;
-    }
-    std::cout << "\n[Monsters in room]\n";
-    for (int i = 0; i < static_cast<int>(myEnemies.size()); i++)
-    {
-        std::cout << "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
-            << myEnemies[i].GetEnemyAttributes().name << ": "
-            << static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-            << static_cast<int>(myEnemies[i].GetEnemyAttributes().maxHealth) << " hp | "
-            << static_cast<int>(myEnemies[i].GetEnemyAttributes().damage) << " AD" << "\n";
-    }
-}
-
-void Room::PrintEnemiesWithTarget(const int& aTargetIndex) const
-{
-    if (static_cast<int>(myEnemies.size()) <= ARRAY_COUNT_ZERO)
-    {
-        std::cout << "\n[No monsters in room]\n";
-        return;
-    }
-
-    auto RED = "\x1b[31m";
-    auto RESET = "\x1b[0m";
-    std::cout << "\n[Monsters in room]\n";
-    for (int i = 0; i < static_cast<int>(myEnemies.size()); i++)
-    {
-        if (aTargetIndex == i)
-        {
-            RED = "\x1b[31m";
-            RESET = "\x1b[0m";
-        }
-        else
-        {
-            RED = "";
-            RESET = "";
-        }
-        std::cout << RED
-            << "[" << i + ARRAY_INDEX_OFFSET << "]" << " - "
-            << myEnemies[i].GetEnemyAttributes().name << ": "
-            << static_cast<int>(myEnemies[i].GetCurrentHealth()) << "/"
-            << static_cast<int>(myEnemies[i].GetEnemyAttributes().maxHealth) << " hp | "
-            << static_cast<int>(myEnemies[i].GetEnemyAttributes().damage) << " AD"
-            << RESET << "\n";
-    }
 }

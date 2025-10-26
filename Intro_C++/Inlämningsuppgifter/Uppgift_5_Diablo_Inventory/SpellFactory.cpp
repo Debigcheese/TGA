@@ -54,38 +54,6 @@ void SpellFactory::InitFactory()
         }
     );
 
-    myTypes[static_cast<int>(SpellKey::FrostBolt)].SetAttributes(
-        {
-            SpellKey::FrostBolt, Rarity::Silver, "Frost Bolt",
-            {
-                0.0f, 0.0f, 5.0f,
-                0.0f, 0.0f, 0.0f,
-                60.0f, 10.0f
-            }
-        }
-    );
-
-    myTypes[static_cast<int>(SpellKey::Blizzard)].SetAttributes(
-        {
-            SpellKey::Blizzard, Rarity::Gold, "Blizzard",
-            {
-                0.0f, 0.0f, 10.0f,
-                20.0f, 0.0f, 0.0f,
-                50.0f, 15.0f
-            }
-        }
-    );
-
-    myTypes[static_cast<int>(SpellKey::PoisonDart)].SetAttributes(
-        {
-            SpellKey::PoisonDart, Rarity::Bronze, "Poison Dart",
-            {
-                0.0f, 2.0f, 0.0f,
-                0.0f, 0.0f, 0.0f,
-                20.0f, -5.0f
-            }
-        }
-    );
 
     myTypes[static_cast<int>(SpellKey::AcidSpray)].SetAttributes(
         {
@@ -98,16 +66,6 @@ void SpellFactory::InitFactory()
         }
     );
 
-    myTypes[static_cast<int>(SpellKey::TimeWarp)].SetAttributes(
-        {
-            SpellKey::TimeWarp, Rarity::Legendary, "Time Warp",
-            {
-                10.0f, 60.0f, 10.0f,
-                15.0f, 0.0f, 0.0f,
-                0.0f, 0.0f
-            }
-        }
-    );
 
     myTypes[static_cast<int>(SpellKey::Earthquake)].SetAttributes(
         {
@@ -215,17 +173,6 @@ void SpellFactory::InitFactory()
                 0.0f, 0.0f, -20.0f,
                 0.0f, 0.0f, 0.0f,
                 250.0f, 0.0f
-            }
-        }
-    );
-
-    myTypes[static_cast<int>(SpellKey::NecroticGrasp)].SetAttributes(
-        {
-            SpellKey::NecroticGrasp, Rarity::Gold, "Necrotic Grasp",
-            {
-                0.0f, 0.0f, 0.0f,
-                20.0f, 0.0f, 0.0f,
-                100.0f, 0.0f
             }
         }
     );

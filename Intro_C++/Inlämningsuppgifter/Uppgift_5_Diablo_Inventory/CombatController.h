@@ -34,7 +34,7 @@ public:
 
     // ---- Calculations & checks ----
     float GetDamageFromAttackType() const;
-    const AmountRange& GetHeavyDamageRange() const;
+    AmountRange GetHeavyDamageRange() const;
     float GetSlashDamage() const { return myPlayer.GetAttributes().damage / SLASH_DMG_MULTI; }
     float GetDefenseMultiplier() const;
     bool IsInvalidAttackIndex() const;

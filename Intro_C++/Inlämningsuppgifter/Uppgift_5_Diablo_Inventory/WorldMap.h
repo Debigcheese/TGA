@@ -1,7 +1,6 @@
 #pragma once
 #include "Room.h"
 #include "Door.h"
-#include "GameEnums.h"
 #include "Player.h"
 
 class WorldMap
@@ -49,73 +48,5 @@ private:
         {0, 2},
         {-1, 2},
         {-1, 3}
-    };
-
-    //LOCK_DEF
-    static constexpr Lock LOCK_UNLOCKED = {
-        false,
-        {LockType::Strength, 0.0f},
-        {LockType::Agility, 0.0f}
-    };
-    static constexpr Lock LOCK_ONE = {
-        true,
-        {LockType::Strength, 8.0f},
-        {LockType::Agility, 10.0f}
-    };
-    static constexpr Lock LOCK_TWO = {
-        true,
-        {LockType::Strength, 10.0f},
-        {LockType::Agility, 15.0f}
-    };
-    static constexpr Lock LOCK_THREE = {
-        true,
-        {LockType::Strength, 30.0f},
-        {LockType::Agility, 30.0f}
-    };
-
-    //ENEMIES
-    static constexpr AmountRange ENEMY_DROP_ITEM = {0, 1};
-
-    //ENEMY PER ROOM
-    const std::vector<EnemyRoom> ENEMY_FROM_ID = {
-        {{EnemyKey::Bat, EnemyKey::Bat, EnemyKey::Skeleton}},
-        {{EnemyKey::Skeleton, EnemyKey::Undead, EnemyKey::None}}, // east first
-        {{EnemyKey::Skeleton, EnemyKey::Beast, EnemyKey::Bat}}, //north first
-        {{EnemyKey::None, EnemyKey::Humanoid, EnemyKey::Beast}},
-        {{EnemyKey::Elemental, EnemyKey::Humanoid, EnemyKey::None}},
-        {{EnemyKey::None, EnemyKey::Demon, EnemyKey::None}},
-        {{EnemyKey::None, EnemyKey::None, EnemyKey::None}}
-    };
-
-    //CHESTS
-    static constexpr CreateObject CHEST_FROM_ID[ROOM_SIZE] = {
-        {ROOM_0_ID, {0, 1}, Rarity::Bronze},
-        {ROOM_1_ID, {0, 2}, Rarity::Silver},
-        {ROOM_2_ID, {0, 1}, Rarity::Gold},
-        {ROOM_3_ID, {0, 1}, Rarity::Legendary},
-        {ROOM_4_ID, {0, 1}, Rarity::Legendary},
-        {ROOM_4_ID, {0, 1}, Rarity::Legendary},
-    };
-
-    static constexpr AmountRange CHEST_DROP_ITEM = {0, 3};
-
-    //ITEMS
-    static constexpr CreateObject ITEM_FROM_ID[ROOM_SIZE] = {
-        {ROOM_0_ID, {1, 2}, Rarity::Bronze},
-        {ROOM_1_ID, {0, 2}, Rarity::Silver},
-        {ROOM_2_ID, {0, 2}, Rarity::Gold},
-        {ROOM_3_ID, {0, 2}, Rarity::Legendary},
-        {ROOM_4_ID, {1, 3}, Rarity::Legendary},
-        {ROOM_4_ID, {1, 3}, Rarity::Legendary},
-    };
-
-    //SPELLS
-    static constexpr CreateObject SPELL_FROM_ID[ROOM_SIZE] = {
-        {ROOM_0_ID, {0, 2}, Rarity::Bronze},
-        {ROOM_1_ID, {0, 3}, Rarity::Silver},
-        {ROOM_2_ID, {2, 3}, Rarity::Gold},
-        {ROOM_3_ID, {1, 2}, Rarity::Legendary},
-        {ROOM_4_ID, {1, 3}, Rarity::Legendary},
-        {ROOM_4_ID, {1, 3}, Rarity::Legendary},
     };
 };

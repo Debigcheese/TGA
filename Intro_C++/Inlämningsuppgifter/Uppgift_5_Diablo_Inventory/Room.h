@@ -11,24 +11,7 @@
 class Room
 {
 public:
-    struct RoomMeta
-    {
-        int ID;
-        std::string roomName;
-        Position pos;
-    };
-
-    struct RoomObjects
-    {
-        std::vector<Enemy> enemies;
-        std::vector<Item> items;
-        std::vector<Chest> chests;
-        std::vector<Spell> spells;
-    };
-
     Room(const RoomMeta& aRoomMeta, const RoomObjects& aRoomObjects);
-    Room(int aRoomId, std::string aRoomName, Position aPosition, std::vector<Enemy> aEnemies);
-
 
     int GetRoomId() const;
     void SetRoomId(int aRoomId);
@@ -54,10 +37,6 @@ public:
     void AddSpellToRoom(const Spell& aSpellToAdd);
     const std::vector<Spell>& GetSpellsInRoom() const;
     std::vector<Spell>& GetSpellsInRoom();
-
-    void PrintRoomName() const;
-    void PrintEnemies() const;
-    void PrintEnemiesWithTarget(const int& aTargetIndex) const;
 
 private:
     int myRoomId;
