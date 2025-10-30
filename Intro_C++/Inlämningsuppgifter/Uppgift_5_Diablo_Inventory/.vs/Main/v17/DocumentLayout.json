@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:GameStructs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\CombatController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9FFD8BB5-8415-4ED6-AE6A-0D4E9414EBAF}|Main.vcxproj|solutionrelative:CombatController.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -34,11 +46,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GameStructs.h",
+              "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\GameStructs.h",
+              "RelativeDocumentMoniker": "GameStructs.h",
+              "ToolTip": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\GameStructs.h",
+              "RelativeToolTip": "GameStructs.h",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-28T12:47:09.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Utils.h",
+              "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.h",
+              "RelativeDocumentMoniker": "Utils.h",
+              "ToolTip": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.h",
+              "RelativeToolTip": "Utils.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-28T12:43:57.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Utils.cpp",
+              "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.cpp",
+              "RelativeDocumentMoniker": "Utils.cpp",
+              "ToolTip": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Utils.cpp",
+              "RelativeToolTip": "Utils.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-28T12:43:54.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Enemy.cpp",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Enemy.cpp",
               "RelativeDocumentMoniker": "Enemy.cpp",
@@ -46,12 +97,11 @@
               "RelativeToolTip": "Enemy.cpp",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-22T11:32:45.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:32:45.819Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Enemy.h",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\Enemy.h",
               "RelativeDocumentMoniker": "Enemy.h",
@@ -59,12 +109,11 @@
               "RelativeToolTip": "Enemy.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:32:45.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:32:45.199Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ConsoleUI.h",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\ConsoleUI.h",
               "RelativeDocumentMoniker": "ConsoleUI.h",
@@ -72,12 +121,11 @@
               "RelativeToolTip": "ConsoleUI.h",
               "ViewState": "AgIAABUAAAAAAAAAAAAAAC8AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:23:35.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:23:35.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "ConsoleUI.cpp",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\ConsoleUI.cpp",
               "RelativeDocumentMoniker": "ConsoleUI.cpp",
@@ -85,25 +133,24 @@
               "RelativeToolTip": "ConsoleUI.cpp",
               "ViewState": "AgIAADkBAAAAAAAAAAAiwE0BAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-22T11:23:34.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:23:34.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "CombatController.cpp",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\CombatController.cpp",
               "RelativeDocumentMoniker": "CombatController.cpp",
               "ToolTip": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\CombatController.cpp",
               "RelativeToolTip": "CombatController.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEkAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-22T11:20:58.458Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "CombatController.h",
               "DocumentMoniker": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\CombatController.h",
               "RelativeDocumentMoniker": "CombatController.h",
@@ -111,8 +158,7 @@
               "RelativeToolTip": "CombatController.h",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:20:57.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:20:57.843Z"
             }
           ]
         }

@@ -23,7 +23,8 @@ namespace InputTest
 		};
 		return center;
 	}
-//
+
+	//
 
 	void PrintInstructions()
 	{

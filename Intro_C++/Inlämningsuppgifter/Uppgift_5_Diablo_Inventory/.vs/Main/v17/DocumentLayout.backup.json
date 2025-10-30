@@ -46,8 +46,7 @@
               "RelativeToolTip": "Enemy.cpp",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-22T11:32:45.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:32:45.819Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Enemy.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:32:45.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:32:45.199Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "ConsoleUI.h",
               "ViewState": "AgIAABUAAAAAAAAAAAAAAC8AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:23:35.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:23:35.64Z"
             },
             {
               "$type": "Document",
@@ -85,8 +82,7 @@
               "RelativeToolTip": "ConsoleUI.cpp",
               "ViewState": "AgIAADkBAAAAAAAAAAAiwE0BAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-22T11:23:34.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:23:34.717Z"
             },
             {
               "$type": "Document",
@@ -96,7 +92,7 @@
               "RelativeDocumentMoniker": "CombatController.cpp",
               "ToolTip": "D:\\Github\\TGA\\Intro_C\u002B\u002B\\Inl\u00E4mningsuppgifter\\Uppgift_5_Diablo_Inventory\\CombatController.cpp",
               "RelativeToolTip": "CombatController.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAC0AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-22T11:20:58.458Z",
               "EditorCaption": ""
@@ -111,8 +107,7 @@
               "RelativeToolTip": "CombatController.h",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-22T11:20:57.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T11:20:57.843Z"
             }
           ]
         }
