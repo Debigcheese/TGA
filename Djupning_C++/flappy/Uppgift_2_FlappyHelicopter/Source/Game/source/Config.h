@@ -1,0 +1,66 @@
+#pragma once
+#include <tge/sprite/sprite.h>
+
+enum class Actor
+{
+	None,
+	Player,
+	Enemy,
+};
+
+struct SpriteData
+{
+	Tga::Sprite2DInstanceData instance{};
+	Tga::SpriteSharedData sharedData{};
+	std::string texturePath;
+};
+
+struct Score
+{
+	int playerScore;
+	int enemyScore;
+};
+
+struct Bounds
+{
+	float maxY;
+	float minY;
+	float maxX;
+	float minX;
+};
+
+enum class Direction
+{
+	None,
+	Up = 1,
+	Down = -1
+};
+
+struct LerpData
+{
+	float current = 1.0f;
+	float defaultValue = 1.0f;
+	float target = 1.0f;
+	float timer = 0.0f;
+	float duration = 1.0f;
+	float lerpValue = 1.0f;
+	bool isLerping = false;
+};
+
+struct JumpData
+{
+	bool isJumping;
+	float jumpHeight;
+	float jumpDuration;
+	float timer = 0.0f;
+};
+
+struct MovementData
+{
+	Tga::Vector2f speed;
+	Tga::Vector2f acceleration;
+	Tga::Vector2f maxSpeed;
+	Tga::Vector2f direction;
+
+	float accelerationTime;
+};
