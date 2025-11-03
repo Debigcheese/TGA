@@ -39,14 +39,11 @@ void Helicopter::Init(Tga::Engine& aEngine)
 
 void Helicopter::Update(float aTimeDelta)
 {
-	float velocity = GetVelocity(aTimeDelta, Direction::Down);
+	CalculateVelocity(aTimeDelta);
 
-	if (myJumpData.isJumping)
-	{
-		velocity = GetVelocity(aTimeDelta, Direction::Up);
-	}
+	float desiredPos = CheckBounds(aTimeDelta);
 
-	myPosition.y = velocity;
+	myPosition.y = desiredPos;
 	mySprite.instance.myPosition.y = myPosition.y;
 }
 
@@ -59,12 +56,12 @@ void Helicopter::Render(Tga::SpriteDrawer& aSpriteDrawer) const
 	aSpriteDrawer.Draw(mySprite.sharedData, mySprite.instance);
 }
 
-void Helicopter::SetDirection(Tga::Vector2f aDirection)
+void Helicopter::SetDirection(Direction aDirection)
 {
 	if (myMovement.direction != aDirection)
 	{
 		myMovement.direction = aDirection;
-		myMovement.accelerationTime = 0;
+		myMovement.accelerationTime = 0.5f;
 	}
 }
 
@@ -74,38 +71,32 @@ void Helicopter::SetPosition(Tga::Vector2f aPosition)
 	mySprite.instance.myPosition = myPosition;
 }
 
-float Helicopter::GetVelocity(float aTimeDelta, Direction aDirection)
+float Helicopter::CalculateVelocity(float aTimeDelta)
 {
-	float dy = 0;
-
-	float acceleration = myMovement.accelerationTime;
-	Tga::Vector2f direction = myMovement.direction;
 	Tga::Vector2f speed = myMovement.speed;
 
-	acceleration += aTimeDelta;
+	myMovement.accelerationTime = CommonUtilities::Clamp(
+		myMovement.accelerationTime + aTimeDelta, 0.5f, 1.0f);
 
-	if (acceleration >= 1.0f)
-	{
-		acceleration = 1.0f;
-	}
+	float dir = static_cast<float>(myMovement.direction);
 
-	if (aDirection == Direction::Down)
-	{
-		dy = speed.y * direction.y * aTimeDelta * acceleration;
-	}
-	else if (aDirection == Direction::Up)
-	{
-		dy = speed.y * direction.y * aTimeDelta * acceleration;
-	}
+	myMovement.velocity.y += speed.y * dir * myMovement.accelerationTime * aTimeDelta;
 
-	float desiredPos = myPosition.y + dy;
+	return myMovement.velocity.y;
+}
+
+float Helicopter::CheckBounds(float aTimeDelta)
+{
+	float desiredPos = myPosition.y + myMovement.velocity.y * aTimeDelta;
 
 	if (desiredPos >= myBounds.minY)
 	{
+		myMovement.velocity = 0;
 		desiredPos = myBounds.minY;
 	}
 	else if (desiredPos <= myBounds.maxY)
 	{
+		myMovement.velocity = 0;
 		desiredPos = myBounds.maxY;
 	}
 	return desiredPos;

@@ -31,7 +31,7 @@ struct Bounds
 
 enum class Direction
 {
-	None,
+	None = 0,
 	Up = 1,
 	Down = -1
 };
@@ -60,7 +60,9 @@ struct MovementData
 	Tga::Vector2f speed;
 	Tga::Vector2f acceleration;
 	Tga::Vector2f maxSpeed;
-	Tga::Vector2f direction;
+	Tga::Vector2f velocity;
 
+	Direction direction;
+	//bool is
 	float accelerationTime;
 };

@@ -14,7 +14,7 @@ namespace CommonUtilities
 		T y;
 		//Creates a null-vector
 		Vector2();
-		//Creates a vector (aX, aY, aZ)
+		//Creates a vector (aX, aY)
 		Vector2(const T& aX, const T& aY);
 		//Copy constructor (compiler generated)
 		Vector2(const Vector2<T>& aVector) = default;

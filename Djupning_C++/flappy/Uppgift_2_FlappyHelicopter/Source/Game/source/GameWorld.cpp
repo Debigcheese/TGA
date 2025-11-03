@@ -62,6 +62,9 @@ void GameWorld::Init()
 	myHelicopter->Init(engine);
 
 	myPlayer->Possess(myHelicopter);
+
+	myTerrain = new Terrain;
+	myTerrain->Init(engine);
 }
 
 void GameWorld::Update(float aTimeDelta)
@@ -84,11 +87,12 @@ void GameWorld::Update(float aTimeDelta)
 	myPlayer->Update(aTimeDelta);
 	myHud->Update(aTimeDelta, *myGameState);
 	myHelicopter->Update(aTimeDelta);
+	myTerrain->Update(aTimeDelta);
 
 	HandleCollision();
 	HandleScore();
 
-	GenerateTerrain();
+	//GenerateTerrain();
 
 	if (myGameState->GameOver())
 	{
@@ -96,16 +100,6 @@ void GameWorld::Update(float aTimeDelta)
 	}
 
 	UNREFERENCED_PARAMETER(aTimeDelta);
-}
-
-void GameWorld::GenerateTerrain(float aTimeDelta)
-{
-	Tga::Engine& engine = *Tga::Engine::GetInstance();
-
-	Terrain* t1 = new Terrain;
-	t1->Init(engine);
-
-	Terrain terrain1 = new Terrain();
 }
 
 void GameWorld::CheckInit()
@@ -210,6 +204,7 @@ void GameWorld::Render() const
 	myPlayer->Render(spriteDrawer);
 	myHelicopter->Render(spriteDrawer);
 	myPlayer->GetHelicopter()->Render(spriteDrawer);
+	myTerrain->Render(spriteDrawer);
 
 	myHud->Render();
 

@@ -20,12 +20,13 @@ public:
 	void SetVisibility(bool aVisible) { myIsVisible = aVisible; }
 	bool IsVisible() const { return myIsVisible; }
 
-	void SetDirection(Tga::Vector2f aDirection);
+	void SetDirection(Direction aDirection);
 	void SetPosition(Tga::Vector2f aPosition);
 	Tga::Vector2f GetPosition() const { return myPosition; }
 	Tga::Vector2f GetSize() const { return mySprite.instance.mySize; }
 
-	float GetVelocity(float aTimeDelta, Direction aDirection);
+	float CalculateVelocity(float aTimeDelta);
+	float CheckBounds(float aTimeDelta);
 
 	MovementData GetMovementData() const { return myMovement; }
 	JumpData GetJumpData() const { return myJumpData; }

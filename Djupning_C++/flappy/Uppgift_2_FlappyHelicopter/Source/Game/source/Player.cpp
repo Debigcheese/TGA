@@ -23,12 +23,10 @@ void Player::CheckInit()
 	if (!myInputHandler)
 	{
 		std::cout << "Player has no input handler!" << std::endl;
-		return;
 	}
 	if (!myHelicopter)
 	{
 		std::cout << "Player has no helicopter possessed!" << std::endl;
-		return;
 	}
 }
 
@@ -38,11 +36,11 @@ void Player::Update(float aTimeDelta)
 
 	if (myInputHandler->IsKeyDown(KEY_SPACE) && !myHelicopter->GetJumpData().isJumping)
 	{
-		myHelicopter->SetDirection({0, 1});
+		myHelicopter->SetDirection(Direction::Up);
 	}
 	else
 	{
-		myHelicopter->SetDirection({0, -1});
+		myHelicopter->SetDirection(Direction::Down);
 	}
 
 	myHelicopter->Update(aTimeDelta);

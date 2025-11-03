@@ -16,7 +16,6 @@ public:
 	void Init();
 	void CheckInit();
 	void Update(float aTimeDelta);
-	void GenerateTerrain(float aTimeDelta);
 
 	void StartGame();
 
@@ -36,8 +35,7 @@ private:
 	GameState* myGameState;
 	HUD* myHud;
 
-
-	float terrainTimer = 0;
 	Player* myPlayer;
 	Helicopter* myHelicopter;
+	Terrain* myTerrain;
 };
