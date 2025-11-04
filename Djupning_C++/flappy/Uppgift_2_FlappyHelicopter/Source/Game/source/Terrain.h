@@ -15,16 +15,24 @@ public:
 	void Update(float aTimeDelta);
 	void Render(Tga::SpriteDrawer& aSpriteDrawer) const;
 
-private:
-	SpriteData mySprite = {{}, {}, "Sprites/Paddle.png"};
+	void ResetTerrain();
+	void StopTerrainMovement();
 
-	Tga::Vector2f myPosition;
+	std::vector<TerrainPiece*> GetPieces() const { return myPieces; }
+
+private:
 	Tga::Vector2f myScreenResolution;
 	Tga::Engine* myEngine;
 
 	std::vector<TerrainPiece*> myPieces;
 	Bounds myBounds;
+
 	float myTimer;
 
-	MovementData myMovement;
+	float myFloorSpawn;
+	float myCeilingSpawn;
+
+	float offset = -100;
+
+	int myNextId;
 };

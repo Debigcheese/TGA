@@ -27,7 +27,6 @@ void HUD::Init(Tga::Engine& aEngine)
 void HUD::InitTextData()
 {
 	myScoreStr = "0";
-	myEnemyScoreStr = "0";
 
 	myScoreTx = {"Text/arial.ttf", Tga::FontSize_36};
 	myScoreTx.SetText("");
@@ -77,13 +76,11 @@ void HUD::Render()
 
 void HUD::Update(float aTimeDelta, GameState& aGameState)
 {
-	int playerScore = aGameState.GetScore(Actor::Player);
-	int enemyScore = aGameState.GetScore(Actor::Enemy);
+	int playerScore = aGameState.GetScore();
 
 	myScoreStr = std::to_string(playerScore);
-	myEnemyScoreStr = std::to_string(enemyScore);
 
-	myScoreTx.SetText(myScoreStr + " - " + myEnemyScoreStr);
+	myScoreTx.SetText(myScoreStr);
 
 	if (myScoreLerpData.isLerping && myScoreLerpData.timer <= myScoreLerpData.duration)
 	{

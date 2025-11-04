@@ -19,7 +19,7 @@ public:
 
 	void StartGame();
 
-	void HandleCollision() const;
+	void HandleCollision();
 	void HandleScore() const;
 	void HandleGameOver();
 

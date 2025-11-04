@@ -22,7 +22,7 @@ void TerrainPiece::Init(Tga::Engine& aEngine)
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
-	myPosition = {myScreenResolution.x, myScreenResolution.y / 2};
+	myPosition = {myScreenResolution.x, myScreenResolution.y};
 
 	mySprite.instance.myPosition = myPosition;
 	mySprite.instance.myPivot = {0.5f, 0.5f};
@@ -46,6 +46,11 @@ void TerrainPiece::Update(float aTimeDelta)
 void TerrainPiece::Render(Tga::SpriteDrawer& aSpriteDrawer) const
 {
 	aSpriteDrawer.Draw(mySprite.sharedData, mySprite.instance);
+}
+
+void TerrainPiece::SetId(int aId)
+{
+	myId = aId;
 }
 
 void TerrainPiece::SetSpawn(float aHeight, Direction aDirection)

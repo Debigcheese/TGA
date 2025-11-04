@@ -17,6 +17,7 @@ Helicopter::~Helicopter()
 
 void Helicopter::Init(Tga::Engine& aEngine)
 {
+	myEngine = &aEngine;
 	mySprite.sharedData.myTexture = Utils::GetTextureFromPath(aEngine, mySprite.texturePath);
 	//Utils::GetTextureFromPath(aEngine, mySprite.texturePath);
 
@@ -25,20 +26,44 @@ void Helicopter::Init(Tga::Engine& aEngine)
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
 	myPosition = {300, myScreenResolution.y / 2};
+	mySpawnPosition = myPosition;
 
 	mySprite.instance.myPosition = myPosition;
 	mySprite.instance.myPivot = {0.5f, 0.5f};
-	mySprite.instance.mySize = mySprite.sharedData.myTexture->CalculateTextureSize() / 7;
+	mySprite.instance.mySize = mySprite.sharedData.myTexture->CalculateTextureSize() / 5;
 	mySprite.instance.myColor = Tga::Color(1, 1, 1, 1);
 
 	myBounds.maxY = 45.0f;
 	myBounds.minY = myScreenResolution.y - 45.0f;
 
-	SetVisibility(true);
+	SetActive(true);
 }
 
 void Helicopter::Update(float aTimeDelta)
 {
+	if (!myIsActive)
+	{
+		return;
+	}
+	myAnimTimer += aTimeDelta;
+
+	if (myAnimTimer < 0.1f)
+	{
+		mySprite.sharedData.myTexture = Utils::GetTextureFromPath(*myEngine, myTextures[0]);
+	}
+	else if (myAnimTimer > 0.1f && myAnimTimer < 0.2f)
+	{
+		mySprite.sharedData.myTexture = Utils::GetTextureFromPath(*myEngine, myTextures[1]);
+	}
+	else if (myAnimTimer <= 0.3f)
+	{
+		mySprite.sharedData.myTexture = Utils::GetTextureFromPath(*myEngine, myTextures[2]);
+	}
+	else
+	{
+		myAnimTimer = 0.0f;
+	}
+
 	CalculateVelocity(aTimeDelta);
 
 	float desiredPos = CheckBounds(aTimeDelta);
@@ -49,11 +74,19 @@ void Helicopter::Update(float aTimeDelta)
 
 void Helicopter::Render(Tga::SpriteDrawer& aSpriteDrawer) const
 {
-	if (!myIsVisible)
+	if (!myIsActive)
 	{
 		return;
 	}
 	aSpriteDrawer.Draw(mySprite.sharedData, mySprite.instance);
+}
+
+void Helicopter::Reset()
+{
+	myPosition = mySpawnPosition;
+	mySprite.instance.myPosition = myPosition;
+	myMovement.velocity = 0;
+	myMovement.accelerationTime = 0;
 }
 
 void Helicopter::SetDirection(Direction aDirection)

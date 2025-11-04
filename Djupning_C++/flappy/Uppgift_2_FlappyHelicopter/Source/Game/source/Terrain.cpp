@@ -1,28 +1,34 @@
 #include "Terrain.h"
 #include "Utils.h"
-#include "tge/Graphics/TextureResource.h"
+#include "CommonUtilities/Random.h"
+#include "CommonUtilities/UtilityFunctions.h"
 
 Terrain::Terrain()
 {
-	myMovement.speed = {400.0f, 400.0f};
-	myPosition = {0.0f, 0.0f};
 	myScreenResolution = {1920.0f, 1080.0f};
 	myEngine = nullptr;
 }
 
 Terrain::~Terrain()
 {
+	for (auto* piece : myPieces)
+	{
+		delete piece;
+	}
+	myPieces.clear();
 }
 
 void Terrain::Init(Tga::Engine& aEngine)
 {
 	myEngine = &aEngine;
-	mySprite.sharedData.myTexture = Utils::GetTextureFromPath(aEngine, mySprite.texturePath);
 
 	//center Helicopter in middle of screen
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
+	myNextId = 0;
+	myCeilingSpawn = -230;
+	myFloorSpawn = -230;
 	myTimer = 0;
 }
 
@@ -36,30 +42,37 @@ void Terrain::Update(float aTimeDelta)
 
 		TerrainPiece* upperPiece = new TerrainPiece;
 		upperPiece->Init(*myEngine);
-		upperPiece->SetSpawn(50, Direction::Up);
+		upperPiece->SetId(myNextId++);
+
+		myCeilingSpawn = sin(upperPiece->GetId() * 18.0f) * 100 + offset;
+		upperPiece->SetSpawn(myCeilingSpawn, Direction::Up);
+
 
 		TerrainPiece* lowerPiece = new TerrainPiece;
 		lowerPiece->Init(*myEngine);
-		lowerPiece->SetSpawn(50, Direction::Down);
+		lowerPiece->SetId(myNextId++);
 
-		myPieces.push_back(upperPiece);
-		myPieces.push_back(lowerPiece);
+		myFloorSpawn = sin(lowerPiece->GetId() * 18.0f) * 100 + offset;
+		lowerPiece->SetSpawn(myFloorSpawn, Direction::Down);
+
+		myPieces.emplace_back(upperPiece);
+		myPieces.emplace_back(lowerPiece);
 	}
-	for (auto* piece : myPieces)
+
+	for (auto it = myPieces.begin(); it != myPieces.end();)
 	{
+		TerrainPiece* piece = *it;
+
 		piece->Update(aTimeDelta);
 
 		if (!piece->GetIsActive())
 		{
-			piece->Init(*myEngine);
-			if (piece->GetDirection() == Direction::Up)
-			{
-				piece->SetSpawn(50, Direction::Up);
-			}
-			else
-			{
-				piece->SetSpawn(50, Direction::Down);
-			}
+			delete piece;
+			it = myPieces.erase(it);
+		}
+		else
+		{
+			++it;
 		}
 	}
 }
@@ -70,5 +83,35 @@ void Terrain::Render(Tga::SpriteDrawer& aSpriteDrawer) const
 	{
 		piece->Render(aSpriteDrawer);
 	}
-	aSpriteDrawer.Draw(mySprite.sharedData, mySprite.instance);
 }
+
+void Terrain::ResetTerrain()
+{
+	myNextId = 0;
+	myCeilingSpawn = -230;
+	myFloorSpawn = -230;
+	myTimer = 0;
+
+	for (auto it = myPieces.begin(); it != myPieces.end();)
+	{
+		TerrainPiece* piece = *it;
+
+		delete piece;
+		it = myPieces.erase(it);
+	}
+}
+
+void Terrain::StopTerrainMovement()
+{
+	for (auto piece : myPieces)
+	{
+		piece->SetSpeed({0.0f, 0.0f});
+	}
+}
+
+//
+//float Terrain::GetRandomSpawn(float aHeight)
+//{
+//	//aHeight += globalRNG.RangeFloat(-10, 20);
+//	myFloorSpawn = CommonUtilities::Clamp(myFloorSpawn, -230.0f, 230.0f);
+//}

@@ -8,22 +8,17 @@ public:
 	GameState();
 
 	void Init(Tga::Engine& aEngine);
-	void Reset();
+	void Reset() { myPlayerScore = 0; }
 
 	void SetStartGame(bool aStartGame) { myGameStarted = aStartGame; }
 	bool HasGameStarted() const { return myGameStarted; }
 
-	int GetScore(Actor aActor) const;
-	int UpdateScore(Actor aActor);
-
-	bool GameOver() const;
-	Actor GetWinner() const;
+	int GetScore() const { return myPlayerScore; }
+	int UpdateScore() { return myPlayerScore++; }
 
 private:
 	Tga::Vector2f myScreenResolution;
 
 	bool myGameStarted;
-
 	int myPlayerScore;
-	int myEnemyScore;
 };

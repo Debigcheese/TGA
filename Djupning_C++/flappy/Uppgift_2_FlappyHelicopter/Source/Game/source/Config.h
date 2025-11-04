@@ -66,3 +66,20 @@ struct MovementData
 	//bool is
 	float accelerationTime;
 };
+
+struct Clamp
+{
+	float maxY;
+	float minY;
+};
+
+struct TerrainSpawn
+{
+	float myTimer;
+
+	float myFloorSpawn;
+	float myCeilingSpawn;
+	float offset = -100;
+
+	int nextId;
+};

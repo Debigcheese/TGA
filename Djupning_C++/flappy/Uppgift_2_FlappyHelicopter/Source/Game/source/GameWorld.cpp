@@ -94,10 +94,6 @@ void GameWorld::Update(float aTimeDelta)
 
 	//GenerateTerrain();
 
-	if (myGameState->GameOver())
-	{
-		HandleGameOver();
-	}
 
 	UNREFERENCED_PARAMETER(aTimeDelta);
 }
@@ -129,14 +125,25 @@ void GameWorld::StartGame()
 	myHud->ShowRestart(false);
 	myHud->ShowIntro(false);
 
-	myHelicopter->SetVisibility(true);
-	//myHelicopter->Reset();
-	myPlayer->GetHelicopter()->SetVisibility(true);
+	myHelicopter->Reset();
+	myHelicopter->SetActive(true);
+
 	myGameState->SetStartGame(true);
+	myTerrain->ResetTerrain();
 }
 
-void GameWorld::HandleCollision() const
+void GameWorld::HandleCollision()
 {
+	auto pieces = myTerrain->GetPieces();
+
+	for (auto piece : pieces)
+	{
+		if (myHelicopter->CheckCollision(piece->GetPosition(), piece->GetSize()))
+		{
+			HandleGameOver();
+		}
+	}
+
 	//auto playerPos = myPlayer->GetHelicopter()->GetPosition();
 	//auto playerSize = myPlayer->GetHelicopter()->GetSize();
 
@@ -160,6 +167,19 @@ void GameWorld::HandleCollision() const
 
 void GameWorld::HandleScore() const
 {
+	Vector2f playerPos = myHelicopter->GetPosition();
+	std::vector<TerrainPiece*> pieces = myTerrain->GetPieces();
+
+	for (auto piece : pieces)
+	{
+		if (playerPos.x >= piece->GetPosition().x && piece->GetId() % 2 == 0 && !piece->GetHasScored())
+		{
+			piece->SetHasScored();
+			myGameState->UpdateScore();
+		}
+	}
+
+
 	//Tga::Vector2f ballPos = myBall->GetPosition();
 
 	//if (ballPos.x > myBounds.maxX)
@@ -178,22 +198,11 @@ void GameWorld::HandleScore() const
 
 void GameWorld::HandleGameOver()
 {
-	//Actor winner = myGameState->GetWinner();
-
-	//if (winner == Actor::Player)
-	//{
-	//	myHud->SetGameOverStr("You Win!");
-	//}
-	//else if (winner == Actor::Enemy)
-	//{
-	//	myHud->SetGameOverStr("You Lose!");
-	//}
-	//myBall->Disable();
-
-	//myHud->ShowRestart(true);
+	myHelicopter->SetActive(false);
+	myHud->ShowRestart(true);
+	myTerrain->StopTerrainMovement();
+	myGameState->SetStartGame(false);
 	//myHud->ShowFinish(true);
-
-	//myGameStarted = false;
 }
 
 void GameWorld::Render() const

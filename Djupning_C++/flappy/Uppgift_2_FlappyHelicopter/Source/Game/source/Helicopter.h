@@ -4,6 +4,7 @@
 #include "tge/drawers/SpriteDrawer.h"
 #include "tge/sprite/sprite.h"
 #include "CommonUtilities/Timer.h"
+#include "tge/animation/AnimationPlayer.h"
 
 using Timer = CommonUtilities::Timer;
 
@@ -16,9 +17,10 @@ public:
 	void Init(Tga::Engine& aEngine);
 	void Update(float aTimeDelta);
 	void Render(Tga::SpriteDrawer& aSpriteDrawer) const;
+	void Reset();
 
-	void SetVisibility(bool aVisible) { myIsVisible = aVisible; }
-	bool IsVisible() const { return myIsVisible; }
+	void SetActive(bool aIsActive) { myIsActive = aIsActive; }
+	bool IsActive() const { return myIsActive; }
 
 	void SetDirection(Direction aDirection);
 	void SetPosition(Tga::Vector2f aPosition);
@@ -33,9 +35,18 @@ public:
 	bool CheckCollision(Tga::Vector2f aPosition, Tga::Vector2f aSize) const;
 
 private:
-	SpriteData mySprite = {{}, {}, "Sprites/FireBall.png"};
-	bool myIsVisible = true;
+	Tga::Engine* myEngine;
 
+	SpriteData mySprite = {{}, {}, "Sprites/Helic_1.png"};
+
+	std::string myTextures[3] = {"Sprites/Helic_1.png", "Sprites/Helic_2.png", "Sprites/Helic_3.png"};
+	Tga::TextureResource* [3] myTextures;
+
+	float myAnimTimer = 0;
+
+	bool myIsActive = true;
+
+	Tga::Vector2f mySpawnPosition;
 	Tga::Vector2f myPosition;
 	Tga::Vector2f myScreenResolution;
 
