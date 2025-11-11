@@ -1,0 +1,17 @@
+{
+    "TitleBorder": {
+        "path": "Sprites/Banner_3.png",
+        "posX": "0.54",
+        "posY": "0.91"
+    },
+    "TitleText": {
+        "text": "Flappy Helicopter",
+        "posX": "0.42",
+        "posY": "0.90"
+    },
+    "HelicopterData": {
+        "Gravity": 1.0,
+        "FlyPower": 400.0,
+        "CameraSpeed": 400.0
+    }
+}

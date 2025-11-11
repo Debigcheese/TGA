@@ -1,8 +1,0 @@
-﻿  InputHandler.cpp
-  InputTest.cpp
-  Print.cpp
-  Random.cpp
-  Timer.cpp
-  pch.cpp
-DXGI.lib(dxgi.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in libfbxsdk.lib(libfbxsdk.dll); second definition ignored
-  External.vcxproj -> D:\Github\TGA\Djupning_C++\flappy\CPPF_03_Lucas_Berg\Lib\External_Debug.lib
