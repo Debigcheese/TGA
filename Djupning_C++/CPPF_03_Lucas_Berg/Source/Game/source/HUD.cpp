@@ -1,5 +1,6 @@
 #include "HUD.h"
 
+#include "Config.h"
 #include "CommonUtilities/UtilityFunctions.h"
 #include "tge/drawers/SpriteDrawer.h"
 #include "tge/shaders/SpriteShader.h"
@@ -7,9 +8,6 @@
 #include "tge/texture/TextureManager.h"
 
 #include "nlohmann/json.hpp"
-#include "fstream"
-
-using json = nlohmann::json;
 
 HUD::HUD()
 {
@@ -21,31 +19,28 @@ HUD::~HUD()
 
 void HUD::Init(Tga::Engine& aEngine)
 {
-	std::ifstream file("Config.json", std::ifstream::in);
-
-	json j;
-	file >> j;
-
-	std::string titleText = j["TitleText"].at("text");
-	float titlePosX = j["TitleText"].at("posX");
-	float titlePosY = j["TitleText"].at("posY");
+	std::string titleText = Config::Get()["TitleText"]["text"];
+	float titlePosX = Config::Get()["TitleText"]["posX"];
+	float titlePosY = Config::Get()["TitleText"]["posY"];
 
 	myIntroTextPos = Tga::Vector2f{titlePosX, titlePosY};
 
-	std::string titleBorderText = j["TitleBorder"].at("path");
-	float titleBorderPosX = j["TitleText"].at("posX");
-	float titleBorderPosY = j["TitleText"].at("posY");
+	std::string titleBorderText = Config::Get()["TitleBorder"]["path"];
+	float titleBorderPosX = Config::Get()["TitleBorder"]["posX"];
+	float titleBorderPosY = Config::Get()["TitleBorder"]["posY"];
+
+	std::cout << titleBorderPosX;
 
 	//Get resolution
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
-	myTitleBorderPos = Tga::Vector2f{titleBorderPosX * myScreenResolution.x, titleBorderPosY * myScreenResolution.y};
-
 	myTitleBorderTexture = aEngine.GetTextureManager().GetTexture(titleBorderText.c_str());
-
 	mySprite.sharedData.myTexture = myTitleBorderTexture;
-	mySprite.instance.myPosition = myTitleBorderPos;
+
+	mySprite.instance.myPosition.x = titleBorderPosX * myScreenResolution.x;
+	mySprite.instance.myPosition.y = titleBorderPosY * myScreenResolution.y;
+
 	mySprite.instance.myPivot = {0.5f, 0.5f};
 	mySprite.instance.myColor = Tga::Color(1.0f, 1.0f, 1.0f, 1.0f);
 	mySprite.instance.mySize = mySprite.sharedData.myTexture->CalculateTextureSize(); // Tga::Vector2ui{5, 5};
@@ -62,6 +57,7 @@ void HUD::InitTextData()
 	myScoreStr = "0";
 
 	myScoreTx = {"Text/BoldPixels.ttf", Tga::FontSize_36};
+
 	myScoreTx.SetText("");
 	myScoreTx.SetPosition(Tga::Vector2f{0.49f, 0.82f} * myScreenResolution);
 	myScoreLerpData.defaultValue = myScoreTx.GetScale();

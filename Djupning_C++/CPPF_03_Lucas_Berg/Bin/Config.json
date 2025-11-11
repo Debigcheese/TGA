@@ -10,7 +10,7 @@
         "posY": 0.90
     },
     "HelicopterData": {
-        "Gravity": 1.0,
+        "Gravity": 200.0,
         "FlyPower": 400.0,
         "CameraSpeed": 400.0
     }

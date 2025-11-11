@@ -1,5 +1,5 @@
 #pragma once
-#include "Config.h"
+#include "SharedTypes.h"
 #include "tge/Engine.h"
 #include "tge/drawers/SpriteDrawer.h"
 #include "tge/sprite/sprite.h"

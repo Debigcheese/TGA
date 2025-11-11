@@ -1,23 +1,16 @@
 #include "TerrainPiece.h"
+
+#include "Config.h"
 #include "Utils.h"
 #include "tge/Graphics/TextureResource.h"
 #include "CommonUtilities/Random.h"
 #include "tge/texture/TextureManager.h"
 
 #include "nlohmann/json.hpp"
-#include "fstream"
-
-using json = nlohmann::json;
 
 TerrainPiece::TerrainPiece(Tga::Engine& aEngine, int aId) // for obstacles
 {
-	std::ifstream file("Config.json", std::ifstream::in);
-
-	json j;
-	file >> j;
-
-	float cameraSpeed = j["HelicopterData"].at("CameraSpeed");
-
+	float cameraSpeed = Config::Get()["HelicopterData"]["CameraSpeed"];
 	myCameraSpeed = cameraSpeed;
 
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
@@ -50,14 +43,10 @@ TerrainPiece::TerrainPiece(Tga::Engine& aEngine, int aId) // for obstacles
 
 TerrainPiece::TerrainPiece(Tga::Engine& aEngine, int aId, float aSpawnHeigth, Direction aDirection) // for terrain
 {
-	//std::ifstream file("Config.json", std::ifstream::in);
+	float cameraSpeed = Config::Get()["HelicopterData"]["CameraSpeed"];
+	myCameraSpeed = cameraSpeed;
 
-	//json j;
-	//file >> j;
-
-	//float cameraSpeed = j["HelicopterData"].at("CameraSpeed");
-
-	//myCameraSpeed = cameraSpeed;
+	myCameraSpeed = cameraSpeed;
 
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};

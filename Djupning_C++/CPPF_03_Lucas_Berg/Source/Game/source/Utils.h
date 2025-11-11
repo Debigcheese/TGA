@@ -1,5 +1,5 @@
 #pragma once
-#include "Config.h"
+#include "SharedTypes.h"
 #include "tge/Engine.h"
 
 namespace Utils

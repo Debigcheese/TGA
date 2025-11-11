@@ -3,7 +3,7 @@
 #include "tge/drawers/SpriteDrawer.h"
 #include "Helicopter.h"
 #include "CommonUtilities/InputHandler.h"
-#include "Config.h"
+#include "SharedTypes.h"
 
 using Input = CommonUtilities::InputHandler;
 

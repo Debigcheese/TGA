@@ -1,14 +1,10 @@
 #include "Helicopter.h"
 #include "tge/texture/TextureManager.h"
 #include "CommonUtilities/UtilityFunctions.h"
-#include "nlohmann/json.hpp"
-#include "fstream"
-
-using json = nlohmann::json;
+#include "Config.h"
 
 Helicopter::Helicopter()
 {
-	myMovement.speed = {400.0f, myFlyPower};
 	myMovement.velocity = {0.0f, 0.0f};
 	myMovement.accelerationTime = 0.0f;
 	myMovement.direction = Direction::None;
@@ -21,13 +17,8 @@ Helicopter::~Helicopter()
 
 void Helicopter::Init(Tga::Engine& aEngine, GameState* aGameState)
 {
-	std::ifstream file("Config.json"); // relative to working dir
-
-	json j;
-	file >> j;
-
-	float gravity = j["HelicopterData"].at("Gravity");
-	float flyPower = j["HelicopterData"].at("FlyPower");
+	float gravity = Config::Get()["HelicopterData"]["Gravity"];
+	float flyPower = Config::Get()["HelicopterData"]["FlyPower"];
 
 	myGravity = gravity;
 	myFlyPower = flyPower;
@@ -173,12 +164,12 @@ float Helicopter::GetVelocity(float aTimeDelta)
 	myMovement.accelerationTime = CommonUtilities::Clamp(
 		myMovement.accelerationTime + aTimeDelta, 0.5f, 1.0f);
 
-	const auto speed = myMovement.speed;
+	const auto speed = myFlyPower;
 	const float dir = static_cast<float>(myMovement.direction);
 	float velocity = myMovement.velocity.y;
 
-	velocity += speed.y * dir * myMovement.accelerationTime * aTimeDelta;
-	velocity -= (speed.y / 2) * myGravity * aTimeDelta;
+	velocity += speed * dir * myMovement.accelerationTime * aTimeDelta;
+	velocity -= myGravity * aTimeDelta;
 
 	return velocity;
 }
