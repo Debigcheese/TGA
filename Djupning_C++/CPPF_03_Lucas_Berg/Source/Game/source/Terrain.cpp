@@ -1,6 +1,5 @@
 #include "Terrain.h"
 #include "Utils.h"
-#include "CommonUtilities/UtilityFunctions.h"
 #include "CommonUtilities/Random.h"
 
 Terrain::Terrain()
@@ -97,6 +96,7 @@ void Terrain::ResetTerrain()
 	myTimer = 0;
 	myTerrainData = {14, 100};
 	myUpdateTerrainTimer = 0;
+	myGap = 0;
 
 	myObstacle.timer = 0;
 

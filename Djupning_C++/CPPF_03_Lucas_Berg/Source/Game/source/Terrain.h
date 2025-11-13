@@ -38,7 +38,7 @@ private:
 	float myTimer;
 	float myFloorSpawn;
 	float myCeilingSpawn;
-	float myOffset = -200;
+	float myOffset = -180;
 	float myGap = 0;
 
 	struct Obstacle

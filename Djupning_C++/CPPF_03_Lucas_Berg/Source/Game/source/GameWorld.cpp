@@ -59,8 +59,6 @@ void GameWorld::Init()
 
 void GameWorld::Update(float aTimeDelta)
 {
-	CheckInit();
-
 	auto input = myPlayer->GetInput();
 
 	if ((input->IsKeyPressed(KEY_ENTER) ||
@@ -78,7 +76,7 @@ void GameWorld::Update(float aTimeDelta)
 
 	myHelicopter->Update(aTimeDelta);
 	myPlayer->Update(aTimeDelta);
-	myHud->Update(aTimeDelta, *myGameState);
+	myHud->Update(*myGameState);
 
 	myTerrain->Update(aTimeDelta);
 
@@ -86,24 +84,6 @@ void GameWorld::Update(float aTimeDelta)
 	HandleScore();
 
 	UNREFERENCED_PARAMETER(aTimeDelta);
-}
-
-void GameWorld::CheckInit()
-{
-	if (!myPlayer)
-	{
-		std::cout << "\nNo player in game world!" << std::endl;
-	}
-
-	if (!myHelicopter)
-	{
-		std::cout << "\nNo helicopter in game world!" << std::endl;
-	}
-
-	if (!myGameState)
-	{
-		std::cout << "GameState does not exist";
-	}
 }
 
 void GameWorld::StartGame()
@@ -139,7 +119,9 @@ void GameWorld::HandleScore() const
 
 	for (auto& piece : pieces)
 	{
-		if (playerPos.x >= piece.GetPosition().x && piece.GetId() % 2 == 0 && !piece.GetHasScored())
+		if (playerPos.x >= piece.GetPosition().x &&
+			!piece.GetHasScored() &&
+			piece.GetId() >= 0)
 		{
 			piece.SetHasScored();
 			myGameState->UpdateScore();
@@ -147,25 +129,11 @@ void GameWorld::HandleScore() const
 	}
 }
 
-void GameWorld::HandlePause() const
-{
-	if (!myGameState->IsGamePaused())
-	{
-		//myHelicopter->SetActive(false);
-		myTerrain->StopTerrainMovement();
-		return;
-	}
-	else
-	{
-		//myHelicopter->SetActive(true);
-		myTerrain->ResumeTerrainMovement();
-	}
-}
-
 void GameWorld::HandleGameOver() const
 {
 	myHelicopter->OnDeath();
 	myHud->ShowRestart(true);
+	myHud->ShowFinish(true);
 	myTerrain->StopTerrainMovement();
 	myGameState->SetStartGame(false);
 	//myHud->ShowFinish(true);

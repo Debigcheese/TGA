@@ -3,7 +3,6 @@
 #include "tge/drawers/SpriteDrawer.h"
 #include "Helicopter.h"
 #include "CommonUtilities/InputHandler.h"
-#include "SharedTypes.h"
 
 using Input = CommonUtilities::InputHandler;
 
@@ -14,14 +13,12 @@ public:
 	~Player();
 
 	void Init(Tga::Engine& aEngine);
-	void CheckInit();
 	void Update(float aTimeDelta);
 	void Render(Tga::SpriteDrawer& aSpriteDrawer);
 	void Possess(Helicopter* aHelicopter);
 
 	Input* GetInput() const { return myInputHandler; }
 	Helicopter* GetHelicopter() const { return myHelicopter; }
-	Actor GetActor() const { return Actor::Player; }
 
 private:
 	Input* myInputHandler;

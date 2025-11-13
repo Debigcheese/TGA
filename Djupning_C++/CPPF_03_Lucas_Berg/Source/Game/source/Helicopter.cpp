@@ -21,7 +21,7 @@ void Helicopter::Init(Tga::Engine& aEngine, GameState* aGameState)
 	float flyPower = Config::Get()["HelicopterData"]["FlyPower"];
 
 	myGravity = gravity;
-	myFlyPower = flyPower;
+	myMovement.flyPower = flyPower;
 
 	for (int i = 0; i < std::size(myTextures); ++i)
 	{
@@ -94,13 +94,6 @@ void Helicopter::Update(float aTimeDelta)
 	mySprite.instance.myPosition.y = myPosition.y;
 }
 
-void Helicopter::UpdateIdle(float aTimeDelta)
-{
-	UpdateAnimation(aTimeDelta, myTextures, std::size(myTextures));
-	mySprite.instance.myRotation = 0.0f;
-	myMovement.velocity = {0.0f, 0.0f};
-	myMovement.accelerationTime = 0.0f;
-}
 
 void Helicopter::Render(Tga::SpriteDrawer& aSpriteDrawer) const
 {
@@ -164,7 +157,7 @@ float Helicopter::GetVelocity(float aTimeDelta)
 	myMovement.accelerationTime = CommonUtilities::Clamp(
 		myMovement.accelerationTime + aTimeDelta, 0.5f, 1.0f);
 
-	const auto speed = myFlyPower;
+	const auto speed = myMovement.flyPower;
 	const float dir = static_cast<float>(myMovement.direction);
 	float velocity = myMovement.velocity.y;
 

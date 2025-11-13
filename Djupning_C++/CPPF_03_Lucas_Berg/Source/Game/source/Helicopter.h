@@ -20,7 +20,6 @@ public:
 
 	void Init(Tga::Engine& aEngine, GameState* aGameState);
 	void Update(float aTimeDelta);
-	void UpdateIdle(float aTimeDelta);
 	void Render(Tga::SpriteDrawer& aSpriteDrawer) const;
 	void Reset();
 
@@ -36,7 +35,6 @@ public:
 	float GetRotation(float aDeltaTime);
 
 	MovementData GetMovementData() const { return myMovement; }
-	JumpData GetJumpData() const { return myJumpData; }
 	bool CheckCollision(Tga::Vector2f aPosition, Tga::Vector2f aSize) const;
 	float CheckBounds(float aTimeDelta);
 
@@ -63,8 +61,6 @@ private:
 	float myAnimTimer = 0;
 
 	float myRotationTimer = 0;
-	float myFlyPower = 400.0f;
 	float myGravity = 1.0f;
 	MovementData myMovement;
-	JumpData myJumpData = {false, 50.0f, 1.0f};
 };

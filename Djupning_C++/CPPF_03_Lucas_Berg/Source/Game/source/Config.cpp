@@ -13,6 +13,7 @@ Config::Config()
 			file >> j;
 		}
 		loaded = true;
+		file.close();
 	}
 }
 

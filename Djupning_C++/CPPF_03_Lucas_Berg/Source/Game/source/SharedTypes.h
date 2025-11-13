@@ -35,35 +35,17 @@ enum class Direction
 	Down = 0
 };
 
-struct LerpData
-{
-	float current = 1.0f;
-	float defaultValue = 1.0f;
-	float target = 1.0f;
-	float timer = 0.0f;
-	float duration = 1.0f;
-	float lerpValue = 1.0f;
-	bool isLerping = false;
-};
-
-struct JumpData
-{
-	bool isJumping;
-	float jumpHeight;
-	float jumpDuration;
-	float timer = 0.0f;
-};
-
 struct MovementData
 {
+	float flyPower;
+	float accelerationTime;
+
+	Direction direction;
+
 	Tga::Vector2f speed;
 	Tga::Vector2f acceleration;
 	Tga::Vector2f maxSpeed;
 	Tga::Vector2f velocity;
-
-	Direction direction;
-	//bool is
-	float accelerationTime;
 };
 
 struct Clamp

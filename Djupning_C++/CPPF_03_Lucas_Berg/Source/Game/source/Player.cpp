@@ -18,25 +18,11 @@ void Player::Init(Tga::Engine& aEngine)
 	myInputHandler = &globalInputHandler;
 }
 
-void Player::CheckInit()
-{
-	if (!myInputHandler)
-	{
-		std::cout << "Player has no input handler!" << std::endl;
-	}
-	if (!myHelicopter)
-	{
-		std::cout << "Player has no helicopter possessed!" << std::endl;
-	}
-}
-
 void Player::Update(float aTimeDelta)
 {
-	CheckInit();
-
 	auto input = myInputHandler;
 
-	if (input->IsKeyDown(KEY_SPACE) && !myHelicopter->GetJumpData().isJumping)
+	if (input->IsKeyDown(KEY_SPACE))
 	{
 		myHelicopter->SetDirection(Direction::Up);
 	}

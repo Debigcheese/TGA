@@ -19,133 +19,110 @@ HUD::~HUD()
 
 void HUD::Init(Tga::Engine& aEngine)
 {
-	std::string titleText = Config::Get()["TitleText"]["text"];
-	float titlePosX = Config::Get()["TitleText"]["posX"];
-	float titlePosY = Config::Get()["TitleText"]["posY"];
-
-	myIntroTextPos = Tga::Vector2f{titlePosX, titlePosY};
-
-	std::string titleBorderText = Config::Get()["TitleBorder"]["path"];
-	float titleBorderPosX = Config::Get()["TitleBorder"]["posX"];
-	float titleBorderPosY = Config::Get()["TitleBorder"]["posY"];
-
-	std::cout << titleBorderPosX;
-
 	//Get resolution
 	Tga::Vector2ui intResolution = aEngine.GetRenderSize();
 	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
-	myTitleBorderTexture = aEngine.GetTextureManager().GetTexture(titleBorderText.c_str());
-	mySprite.sharedData.myTexture = myTitleBorderTexture;
-
-	mySprite.instance.myPosition.x = titleBorderPosX * myScreenResolution.x;
-	mySprite.instance.myPosition.y = titleBorderPosY * myScreenResolution.y;
-
-	mySprite.instance.myPivot = {0.5f, 0.5f};
-	mySprite.instance.myColor = Tga::Color(1.0f, 1.0f, 1.0f, 1.0f);
-	mySprite.instance.mySize = mySprite.sharedData.myTexture->CalculateTextureSize(); // Tga::Vector2ui{5, 5};
-	mySprite.instance.mySizeMultiplier = 1.0f;
-
+	InitSpriteData(aEngine);
 	InitTextData();
 
 	// Create a new shader
 	myShader.Init("shaders/instanced_sprite_shader_VS", "shaders/custom_sprite_pixel_shader_PS");
 }
 
+void HUD::InitSpriteData(Tga::Engine& aEngine)
+{
+	auto& cfg = Config::Get();
+	auto& sprites = cfg["Sprites"];
+
+	mySprite.resize(sprites.size());
+
+	for (size_t i = 0; i < sprites.size(); ++i)
+	{
+		const auto& sCfg = sprites[i];
+
+		std::string path = sCfg["path"].get<std::string>();
+		float posX = sCfg["posX"].get<float>();
+		float posY = sCfg["posY"].get<float>();
+
+		mySprite[i].sharedData.myTexture = aEngine.GetTextureManager().GetTexture(path.c_str());
+
+		mySprite[i].instance.myPosition.x = posX * myScreenResolution.x;
+		mySprite[i].instance.myPosition.y = posY * myScreenResolution.y;
+
+		mySprite[i].instance.myPivot = {0.5f, 0.5f};
+		mySprite[i].instance.myColor = Tga::Color(1.f, 1.f, 1.f, 1.f);
+		mySprite[i].instance.mySize = mySprite[i].sharedData.myTexture->CalculateTextureSize();
+		mySprite[i].instance.mySizeMultiplier = 1.0f;
+	}
+	mySprite[0].instance.mySizeMultiplier.x = 1.15f;
+}
+
 void HUD::InitTextData()
 {
-	myScoreStr = "0";
+	auto& cfg = Config::Get();
+	auto& texts = cfg["Texts"];
 
-	myScoreTx = {"Text/BoldPixels.ttf", Tga::FontSize_36};
+	myTexts.resize(texts.size());
 
-	myScoreTx.SetText("");
-	myScoreTx.SetPosition(Tga::Vector2f{0.49f, 0.82f} * myScreenResolution);
-	myScoreLerpData.defaultValue = myScoreTx.GetScale();
+	for (size_t i = 0; i < texts.size(); ++i)
+	{
+		const auto& tCfg = texts[i];
 
-	myIntroText = {"Text/BoldPixels.ttf", Tga::FontSize_36};
-	myIntroText.SetText("Flappy Helicopter");
-	myIntroText.SetPosition(Tga::Vector2f{0.42f, 0.90f} * myScreenResolution);
-	myIntroText.SetColor(Tga::Color(1.0f, 0.5f, 0.5f, 1.0f));
+		std::string id = tCfg["id"].get<std::string>();
+		std::string text = tCfg["text"].get<std::string>();
+		float posX = tCfg["posX"].get<float>();
+		float posY = tCfg["posY"].get<float>();
+		int size = tCfg["size"].get<int>();
 
-	myPressStartText = {"Text/BoldPixels.ttf", Tga::FontSize_24};
-	myPressStartText.SetText("Press 'Enter' to Start");
-	myPressStartText.SetPosition(Tga::Vector2f{0.45f, 0.15f} * myScreenResolution);
-
-	myRestartText = {"Text/BoldPixels.ttf", Tga::FontSize_24};
-	myRestartText.SetText("Press 'Enter' to Restart");
-	myRestartText.SetPosition(Tga::Vector2f{0.425f, 0.15f} * myScreenResolution);
-
-	auto& text = myGameOverData.myGameOverText;
-	const auto str = myGameOverData.myGameOverStr;
-
-	text = {"Text/BoldPixels.ttf", Tga::FontSize_60};
-	text.SetText("");
-	text.SetPosition(Tga::Vector2f{0.4f, 0.5f} * myScreenResolution);
+		myTexts[i] = {"Text/BoldPixels.ttf", static_cast<Tga::FontSize>(size)};
+		myTexts[i].SetText(text);
+		myTexts[i].SetPosition(Tga::Vector2f{posX, posY} * myScreenResolution);
+	}
 }
 
 void HUD::Render(Tga::SpriteDrawer& aSpriteDrawer)
 {
-	myScoreTx.Render();
+	myTexts[3].Render();
 
 	if (myShowFinish)
 	{
-		myGameOverData.myGameOverText.Render();
+		myTexts[4].Render();
 	}
 
 	if (myShowIntro)
 	{
-		aSpriteDrawer.Draw(mySprite.sharedData, mySprite.instance);
-		myIntroText.Render();
-		myPressStartText.Render();
+		for (const auto& sprite : mySprite)
+		{
+			aSpriteDrawer.Draw(sprite.sharedData, sprite.instance);
+		}
+
+		for (int i = 0; i < myTexts.size(); ++i)
+		{
+			if (i > 1 && i < 5)
+			{
+				return;
+			}
+			myTexts[i].Render();
+		}
 	}
 
 	if (myShowRestart)
 	{
-		myRestartText.Render();
+		myTexts[2].Render();
 	}
 }
 
-void HUD::Update(float aTimeDelta, const GameState& aGameState)
+void HUD::Update(const GameState& aGameState)
 {
 	int playerScore = aGameState.GetScore();
 
-	myScoreStr = std::to_string(playerScore);
+	std::string scoreStr = std::to_string(playerScore);
 
-	myScoreTx.SetText(myScoreStr);
-
-	if (myScoreLerpData.isLerping && myScoreLerpData.timer <= myScoreLerpData.duration)
-	{
-		auto& data = myScoreLerpData;
-		data.timer += aTimeDelta;
-
-		data.lerpValue = CommonUtilities::Lerp(data.current, data.target, data.timer);
-		myScoreTx.SetScale(data.lerpValue);
-	}
-	else
-	{
-		myScoreLerpData.isLerping = false;
-		LerpTextSize(myScoreLerpData.defaultValue, 0.25f);
-	}
+	myTexts[3].SetText(scoreStr);
 }
 
 Tga::Text HUD::GetText()
 {
-	return myScoreTx;
-}
-
-void HUD::LerpTextSize(float aSize, float aDuration)
-{
-	auto& data = myScoreLerpData;
-
-	data.target = aSize;
-	data.duration = aDuration;
-	data.current = myScoreTx.GetScale();
-	data.timer = 0.0f;
-	data.isLerping = true;
-}
-
-void HUD::SetGameOverStr(const std::string& aString)
-{
-	myGameOverData.myGameOverStr = aString;
-	myGameOverData.myGameOverText.SetText(aString);
+	return myTexts[3];
 }

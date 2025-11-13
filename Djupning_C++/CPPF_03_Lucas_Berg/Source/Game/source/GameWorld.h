@@ -13,7 +13,6 @@ public:
 	~GameWorld();
 
 	void Init();
-	void CheckInit();
 	void Update(float aTimeDelta);
 	void Render() const;
 
@@ -22,7 +21,6 @@ public:
 	void HandleCollision();
 	void HandleGameOver() const;
 	void HandleScore() const;
-	void HandlePause() const;
 
 private:
 	Tga::Sprite2DInstanceData myTGELogoInstance = {};
