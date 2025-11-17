@@ -1,7 +1,7 @@
 {
-    
-    
-    
+
+
+
     "HelicopterData": {
         "Gravity": 200.0,
         "FlyPower": 400.0,
@@ -19,6 +19,7 @@
             "posX": 0.54,
             "posY": 0.91
         }
+
     ],
 
 
@@ -63,10 +64,9 @@
             "text": "Flappy Helicopter",
             "posX": 0.42,
             "posY": 0.90,
-            "size": 37
+            "size": 36
         }
     ]
-    
 
 
 

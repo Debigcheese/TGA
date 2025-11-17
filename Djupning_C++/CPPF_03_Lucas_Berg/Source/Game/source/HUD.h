@@ -39,7 +39,6 @@ private:
 
 	std::vector<SpriteData> mySprite;
 	std::vector<Tga::Text> myTexts;
-	std::vector<Tga::Text> myTextsToRender;
 
 	Tga::SpriteShader myShader;
 

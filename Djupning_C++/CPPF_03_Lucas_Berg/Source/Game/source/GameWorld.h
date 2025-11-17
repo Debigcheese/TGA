@@ -1,5 +1,4 @@
 #pragma once
-#include <tge/sprite/sprite.h>
 #include "GameState.h"
 #include "Helicopter.h"
 #include "HUD.h"
@@ -23,9 +22,6 @@ public:
 	void HandleScore() const;
 
 private:
-	Tga::Sprite2DInstanceData myTGELogoInstance = {};
-	Tga::SpriteSharedData mySharedData = {};
-
 	Tga::Vector2f myScreenResolution;
 
 	Bounds myBounds;
@@ -35,6 +31,4 @@ private:
 	Player* myPlayer;
 	Helicopter* myHelicopter;
 	Terrain* myTerrain;
-
-	bool myPrevEscDown = false;
 };

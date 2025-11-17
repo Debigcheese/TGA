@@ -1,3 +1,0 @@
-﻿  Main.cpp
-D:\Github\TGA\Djupning_C++\Optimize_Prime_CPPF_04\Main\Main.cpp(61,17): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
-  Main.vcxproj -> D:\Github\TGA\Djupning_C++\Optimize_Prime_CPPF_04\Main\x64\Debug\Main.exe

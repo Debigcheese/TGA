@@ -92,24 +92,37 @@ void HUD::Render(Tga::SpriteDrawer& aSpriteDrawer)
 
 	if (myShowIntro)
 	{
-		for (const auto& sprite : mySprite)
+		for (size_t i = 0; i < mySprite.size(); ++i)
 		{
-			aSpriteDrawer.Draw(sprite.sharedData, sprite.instance);
+			if (i <= 1)
+			{
+				aSpriteDrawer.Draw(mySprite[i].sharedData, mySprite[i].instance);
+			}
 		}
 
-		for (int i = 0; i < myTexts.size(); ++i)
-		{
-			if (i > 1 && i < 5)
-			{
-				return;
-			}
-			myTexts[i].Render();
-		}
+		myTexts[0].Render();
+		myTexts[1].Render();
 	}
 
 	if (myShowRestart)
 	{
 		myTexts[2].Render();
+	}
+
+	for (size_t i = 0; i < myTexts.size(); ++i)
+	{
+		if (i >= 5 && i < myTexts.size())
+		{
+			myTexts[i].Render();
+		}
+	}
+
+	for (size_t i = 0; i < mySprite.size(); ++i)
+	{
+		if (i >= 2)
+		{
+			aSpriteDrawer.Draw(mySprite[i].sharedData, mySprite[i].instance);
+		}
 	}
 }
 

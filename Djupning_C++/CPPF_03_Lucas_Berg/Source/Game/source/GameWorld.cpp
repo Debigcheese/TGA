@@ -32,8 +32,6 @@ void GameWorld::Init()
 	Tga::Vector2ui intResolution = engine.GetRenderSize();
 	myScreenResolution = {(float)intResolution.x, (float)intResolution.y};
 
-	Tga::LoadSettings(TGE_PROJECT_SETTINGS_FILE);
-
 	globalRNG.Seed(123456u);
 
 	myBounds.minX = 35.0f;
