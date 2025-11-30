@@ -25,7 +25,7 @@ namespace CommonUtilities
 		// Returns whether a point is inside the plane: it is inside when the point is on the plane or on the side the normal is pointing away from.
 		bool IsInside(const Vector3<T>& aPosition) const;
 		// Returns the normal of the plane.
-		const Vector3<T>& GetNormal() const;
+		const Vector3<T>& GetNormal() const { return myNormal; }
 
 	private:
 		Vector3<T> myNormal;
@@ -79,11 +79,5 @@ namespace CommonUtilities
 		Vector3<T> toPoint = aPosition - myPoint;
 		T dot = toPoint.Dot(myNormal);
 		return dot <= 0;
-	}
-
-	template <typename T>
-	const Vector3<T>& Plane<T>::GetNormal() const
-	{
-		return myNormal;
 	}
 }

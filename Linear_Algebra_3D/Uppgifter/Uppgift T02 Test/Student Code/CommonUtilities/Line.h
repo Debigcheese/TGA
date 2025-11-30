@@ -25,9 +25,9 @@ namespace CommonUtilities
 		//line or on the side the normal is pointing away from.
 		bool IsInside(const Vector2<T>& aPosition) const;
 		// Returns the direction of the line.
-		const Vector2<T>& GetDirection() const;
+		const Vector2<T>& GetDirection() const { return myDirection; }
 		// Returns the normal of the line, which is (-direction.y, direction.x).
-		const Vector2<T>& GetNormal() const;
+		const Vector2<T>& GetNormal() const { return myNormal; }
 
 	private:
 		Vector2<T> myPointOnLine;
@@ -86,19 +86,5 @@ namespace CommonUtilities
 		Vector2<T> lineToPoint = aPosition - myPointOnLine;
 		T dot = lineToPoint.Dot(myNormal);
 		return dot <= 0;
-	}
-
-	// Returns the direction of the line.
-	template <typename T>
-	const Vector2<T>& Line<T>::GetDirection() const
-	{
-		return myDirection;
-	}
-
-	// Returns the normal of the line, which is (-direction.y, direction.x).
-	template <typename T>
-	const Vector2<T>& Line<T>::GetNormal() const
-	{
-		return myNormal;
 	}
 }
