@@ -7,7 +7,6 @@ namespace CommonUtilities
 	using clock = std::chrono::high_resolution_clock;
 	using time_point = std::chrono::high_resolution_clock::time_point;
 
-
 	class Timer
 	{
 	public:

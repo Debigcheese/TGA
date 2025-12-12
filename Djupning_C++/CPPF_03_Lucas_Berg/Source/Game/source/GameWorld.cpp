@@ -1,13 +1,9 @@
 #include "GameWorld.h"
 
 #include <tge/graphics/GraphicsEngine.h>
-#include <tge/drawers/SpriteDrawer.h>
 #include <tge/texture/TextureManager.h>
-#include <tge/drawers/DebugDrawer.h>
 #include <tge/engine.h>
-
 #include <tge/settings/settings.h>
-
 #include "CommonUtilities/Random.h"
 
 using namespace Tga;
@@ -18,144 +14,183 @@ GameWorld::GameWorld()
 
 GameWorld::~GameWorld()
 {
-	delete myGameState;
-	delete myHud;
-	delete myPlayer;
-	delete myHelicopter;
+	//for (auto* fireball : myFireballs)
+	//{
+	//	delete fireball;
+	//}
+	//myFireballs.clear();
 }
 
-//Load all graphic, sounds, etc
 void GameWorld::Init()
 {
 	Tga::Engine& engine = *Tga::Engine::GetInstance();
 
 	Tga::Vector2ui intResolution = engine.GetRenderSize();
-	myScreenResolution = {(float)intResolution.x, (float)intResolution.y};
+	myScreenResolution = {static_cast<float>(intResolution.x), static_cast<float>(intResolution.y)};
 
-	globalRNG.Seed(123456u);
+	globalRNG.Seed(123456);
 
-	myBounds.minX = 35.0f;
-	myBounds.maxX = myScreenResolution.x - 35.0f;
+	myInput = &globalInputHandler;
+	myUIManager.Init();
 
-	myGameState = new GameState();
-	myGameState->Init(engine);
+	myPlayer.Init(myInput, myUIManager);
 
-	myHud = new HUD;
-	myHud->Init(engine);
+	myEnemySpawner.Init(myUIManager);
 
-	myPlayer = new Player();
-	myPlayer->Init(engine);
+	myGroundData.myTexture = engine.GetTextureManager().GetTexture("Sprites/Paratrooper/ground.png");
+	myGroundInstance.myPivot = {0.5f, 0.5f};
+	myGroundInstance.myPosition = {myScreenResolution.x / 2, 40.0f};
+	myGroundInstance.mySize = myGroundData.myTexture->CalculateTextureSize();
+	myGroundInstance.mySizeMultiplier = 3.0f;
 
-	myHelicopter = new Helicopter();
-	myHelicopter->Init(engine, myGameState);
+	myTowerData.myTexture = engine.GetTextureManager().GetTexture("Sprites/Paratrooper/CannonTower.png");
+	myTowerInstance.myPivot = {0.5f, 0.5f};
+	myTowerInstance.myPosition = {myScreenResolution.x / 2, 80.0f};
+	myTowerInstance.mySize = myTowerData.myTexture->CalculateTextureSize();
 
-	myPlayer->Possess(myHelicopter);
+	// Start the logic thread and calls Update() repeatedly
+	myThreadingManager.StartLogicThread([this](float dt)
+	{
+		this->Update(dt);
+		myInput->UpdateInput();
+	});
 
-	myTerrain = new Terrain;
-	myTerrain->Init(engine);
+	myPlayer.SetOnInputPressCallback([this](const char input)
+	{
+		if (input == 'S')
+		{
+			if (myPlayer.GetSmartBombs() <= 0) { return; }
+
+			myPlayer.SetSmartBombs(myPlayer.GetSmartBombs() - 1);
+
+			myUIManager.GainScore(myEnemySpawner.GetEnemyPointsCount());
+			myEnemySpawner.ClearAllEnemies();
+			myUIManager.SetSmartBombText(myPlayer.GetSmartBombs());
+		}
+
+		if (input == KEY_LMB)
+		{
+		}
+		if (input == KEY_SPACE)
+		{
+			myStartGame = true;
+			myUIManager.StartGame();
+		}
+		if (input == 'P')
+		{
+			myUIManager.PauseGame();
+		}
+		if (input == 'I')
+		{
+			myUIManager.ShowInstructions();
+		}
+		if (input == KEY_ESCAPE)
+		{
+			Tga::Engine& engine = *Tga::Engine::GetInstance();
+			engine.Shutdown(); // dont know any better way 
+		}
+	});
 }
 
 void GameWorld::Update(float aTimeDelta)
 {
-	auto input = myPlayer->GetInput();
-
-	if ((input->IsKeyPressed(KEY_ENTER) ||
-			input->IsKeyReleased(KEY_ENTER)) &&
-		!myGameState->HasGameStarted())
+	myUIManager.SetOnStartGameCallback([this]()
 	{
-		StartGame();
-	}
+		myStartGame = true;
+	});
 
-	if (!myGameState->HasGameStarted())
+	myUIManager.Update(aTimeDelta, myInput);
+
+	myPlayer.Update(aTimeDelta);
+
+	if (myUIManager.GetGameState() == GameState::InGame)
 	{
-		myHelicopter->Update(aTimeDelta);
-		return;
+		myEnemySpawner.Update(aTimeDelta);
 	}
-
-	myHelicopter->Update(aTimeDelta);
-	myPlayer->Update(aTimeDelta);
-	myHud->Update(*myGameState);
-
-	myTerrain->Update(aTimeDelta);
+	if (myUIManager.GetGameState() == GameState::Restart)
+	{
+		myEnemySpawner.Restart();
+		myUIManager.GameOver();
+		myPlayer.SetSmartBombs(3);
+	}
 
 	HandleCollision();
-	HandleScore();
-
-	UNREFERENCED_PARAMETER(aTimeDelta);
 }
 
-void GameWorld::StartGame()
+void GameWorld::Render()
 {
-	myHud->ShowFinish(false);
-	myHud->ShowRestart(false);
-	myHud->ShowIntro(false);
+	auto& spriteDrawer = Tga::Engine::GetInstance()->GetGraphicsEngine().GetSpriteDrawer();
+	myUIManager.Render(spriteDrawer);
+	myPlayer.Render(spriteDrawer);
+	myEnemySpawner.Render(spriteDrawer);
 
-	myHelicopter->Reset();
+	spriteDrawer.Draw(myGroundData, myGroundInstance);
+	spriteDrawer.Draw(myTowerData, myTowerInstance);
 
-	myGameState->Reset();
-	myGameState->SetStartGame(true);
-	myTerrain->ResetTerrain();
+	myThreadingManager.SyncAndSwap([this]()
+	{
+		myRenderCommand.Swap();
+	});
+
+	myRenderCommand.Execute();
+
+	myThreadingManager.SignalRenderDone();
 }
 
 void GameWorld::HandleCollision()
 {
-	auto& pieces = myTerrain->GetPieces();
+	auto& enemies = myEnemySpawner.GetEnemies();
 
-	for (auto& piece : pieces)
+	for (auto& enemy : enemies)
 	{
-		if (myHelicopter->CheckCollision(piece.GetPosition(), piece.GetSize()))
+		for (auto& bullet : myPlayer.GetBullets())
 		{
-			HandleGameOver();
+			AABB aabb_1({enemy->GetPosition(), enemy->GetSize()});
+			AABB aabb_2({bullet.GetPosition(), bullet.GetSize()});
+
+			if (enemy->GetType() == EnemyType::Paratrooper)
+			{
+				auto* trooper = static_cast<Paratrooper*>(enemy.get());
+				AABB aabb_3({trooper->GetParachutePosition(), trooper->GetParachuteSize()});
+				AABB aabb_4({bullet.GetPosition(), bullet.GetSize()});
+
+				if (CheckCollision(aabb_3, aabb_4))
+				{
+					trooper->SetState(State::Falling);
+				}
+			}
+
+			if (!CheckCollision(aabb_1, aabb_2))
+			{
+				continue;
+			}
+
+			if (enemy->GetLifeState() != LifeState::Alive)
+			{
+				continue;
+			}
+
+			enemy->OnDeath();
+
+			if (enemy->GetType() == EnemyType::Paratrooper)
+			{
+				myUIManager.GainScore(5);
+			}
+			else
+			{
+				myUIManager.GainScore(10);
+			}
 		}
 	}
 }
 
-void GameWorld::HandleScore() const
+bool GameWorld::CheckCollision(AABB aAABB, AABB aBBAA) const
 {
-	Tga::Vector2f playerPos = myHelicopter->GetPosition();
-	std::vector<TerrainPiece>& pieces = myTerrain->GetPieces();
+	const Tga::Vector2f sizeHalfA = {std::abs(aAABB.aSize.x / 2), std::abs(aAABB.aSize.x / 2)};
+	const Tga::Vector2f sizeHalfB = {std::abs(aBBAA.aSize.x / 2), std::abs(aBBAA.aSize.y / 2)};
 
-	for (auto& piece : pieces)
-	{
-		if (playerPos.x >= piece.GetPosition().x &&
-			!piece.GetHasScored() &&
-			piece.GetId() >= 0)
-		{
-			piece.SetHasScored();
-			myGameState->UpdateScore();
-		}
-	}
-}
+	const float dx = std::fabs(aAABB.aPosition.x - aBBAA.aPosition.x);
+	const float dy = std::fabs(aAABB.aPosition.y - aBBAA.aPosition.y);
 
-void GameWorld::HandleGameOver() const
-{
-	myHelicopter->OnDeath();
-	myHud->ShowRestart(true);
-	myHud->ShowFinish(true);
-	myTerrain->StopTerrainMovement();
-	myGameState->SetStartGame(false);
-	//myHud->ShowFinish(true);
-}
-
-void GameWorld::Render() const
-{
-	auto& engine = *Tga::Engine::GetInstance();
-	Tga::SpriteDrawer& spriteDrawer(engine.GetGraphicsEngine().GetSpriteDrawer());
-
-	myPlayer->Render(spriteDrawer);
-	myHelicopter->Render(spriteDrawer);
-	myPlayer->GetHelicopter()->Render(spriteDrawer);
-	myTerrain->Render(spriteDrawer);
-
-	myHud->Render(spriteDrawer);
-
-	// Debug draw pivot
-#ifndef _RETAIL
-	//{
-	//	Tga::DebugDrawer& dbg = engine.GetDebugDrawer();
-	//	Tga::Color c1 = myTGELogoInstance.myColor;
-	//	dbg.DrawCircle(myTGELogoInstance.myPosition, 5.f,
-	//	               (c1.myR + c1.myG + c1.myB) / 3 > 0.3f ? Tga::Color(0, 0, 0, 1) : Tga::Color(1, 1, 1, 1));
-	//}
-#endif
+	return (dx <= (sizeHalfA.x + sizeHalfB.x)) && (dy <= (sizeHalfA.y + sizeHalfB.y));
 }

@@ -6,11 +6,6 @@
 #include <tge/settings/settings.h>
 #include <tge/error/ErrorManager.h>
 
-#include "CommonUtilities/InputHandler.h"
-#include "CommonUtilities/Timer.h"
-
-static CommonUtilities::Timer myTimer;
-
 LRESULT WinProc([[maybe_unused]] HWND hWnd, UINT message, [[maybe_unused]] WPARAM wParam,
                 [[maybe_unused]] LPARAM lParam)
 {
@@ -61,12 +56,11 @@ void Go()
 		gameWorld.Init();
 
 		Tga::Engine& engine = *Tga::Engine::GetInstance();
-
 		while (engine.BeginFrame())
 		{
-			globalTimer.Update();
-			gameWorld.Update(globalTimer.GetDeltaTime());
+			// Update is now called in logic thread via ThreadingManager
 			gameWorld.Render();
+
 
 			engine.EndFrame();
 		}

@@ -9,6 +9,16 @@ static const int KEY_SPACE = VK_SPACE;
 static const int KEY_ESCAPE = VK_ESCAPE;
 static const int KEY_ENTER = VK_RETURN;
 
+//Mouse
+static const int KEY_LMB = VK_LBUTTON;
+static const int KEY_RMB = VK_RBUTTON;
+static const int KEY_MID = VK_MBUTTON;
+
+static const int KEY_ARROW_L = VK_LEFT;
+static const int KEY_ARROW_R = VK_RIGHT;
+static const int KEY_ARROW_UP = VK_UP;
+static const int KEY_ARROW_DOWN = VK_DOWN;
+
 namespace CommonUtilities
 {
 	//global variable declared here

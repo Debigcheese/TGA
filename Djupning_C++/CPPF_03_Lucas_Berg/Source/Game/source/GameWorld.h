@@ -1,9 +1,19 @@
 #pragma once
-#include "GameState.h"
-#include "Helicopter.h"
-#include "HUD.h"
+#include "EnemySpawner.h"
 #include "Player.h"
-#include "Terrain.h"
+#include "tge/math/Vector2.h"
+#include "CommonUtilities/InputHandler.h"
+#include "RenderCommand.h"
+#include "ThreadingManager.h"
+#include "UIManager.h"
+
+using Input = CommonUtilities::InputHandler;
+
+struct AABB
+{
+	Tga::Vector2f aPosition;
+	Tga::Vector2f aSize;
+};
 
 class GameWorld
 {
@@ -13,22 +23,27 @@ public:
 
 	void Init();
 	void Update(float aTimeDelta);
-	void Render() const;
-
-	void StartGame();
+	void Render();
 
 	void HandleCollision();
-	void HandleGameOver() const;
-	void HandleScore() const;
+	bool CheckCollision(AABB aAABB, AABB aBBAA) const;
+	Input* GetInput() const { return myInput; }
 
 private:
+	bool myStartGame = false;
 	Tga::Vector2f myScreenResolution;
 
-	Bounds myBounds;
-	GameState* myGameState;
-	HUD* myHud;
+	ThreadingManager myThreadingManager;
+	RenderCommand myRenderCommand;
+	UIManager myUIManager;
 
-	Player* myPlayer;
-	Helicopter* myHelicopter;
-	Terrain* myTerrain;
+	Input* myInput;
+	Player myPlayer;
+	EnemySpawner myEnemySpawner;
+
+	Tga::Sprite2DInstanceData myGroundInstance;
+	Tga::SpriteSharedData myGroundData;
+
+	Tga::Sprite2DInstanceData myTowerInstance;
+	Tga::SpriteSharedData myTowerData;
 };
