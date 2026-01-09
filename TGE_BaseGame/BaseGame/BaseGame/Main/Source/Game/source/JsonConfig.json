@@ -1,0 +1,112 @@
+{
+    "Texts": [
+        {
+            "uniqueId": "Start",
+            "visibleWhen": "Intro",
+            "text": "         \n\nPress 'Space' to play\nHold 'I' for instructions\nPress 'ESC' to quit\n\nGame made by Lucas Berg",
+            "posX": 0.422,
+            "posY": 0.407,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "Title",
+            "visibleWhen": "Intro",
+            "text": "PARATROOPERS",
+            "posX": 0.357,
+            "posY": 0.685,
+            "size": 48,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "Username",
+            "visibleWhen": "Intro",
+            "text": "Enter your username\n\t\tUsername:",
+            "posX": 0.448,
+            "posY": 0.593,
+            "size": 14,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "Instructions",
+            "visibleWhen": "Instructions",
+            "text": "*Your Mission*\nDont let 4 paratroopers land\non one side of your gun base\nor they'll blow it up.\nAfter helicopters, watch for\njet bombers with deadly aim!\n\nControls:\n'<-' or 'A' - counterclockwise\n'->' or 'D' - clockwise\n'^' or 'W' - stop and fire\nScoring:\nHELICOPTER/JET - 10 points\nPARATROOPER - 5 points\nBOMB - 30 points\nEach bullet - -1 point",
+            "posX": 0.708,
+            "posY": 0.417,
+            "size": 10,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "Score",
+            "visibleWhen": "InGame",
+            "text": "Points:",
+            "posX": 0.469,
+            "posY": 0.639,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "GameOver",
+            "visibleWhen": "GameOver",
+            "text": "Game Over!",
+            "posX": 0.448,
+            "posY": 0.417,
+            "size": 36,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "PlayAgain",
+            "visibleWhen": "GameOver",
+            "text": "Press 'Space' to play again",
+            "posX": 0.448,
+            "posY": 0.491,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "highScore_1",
+            "visibleWhen": "Intro",
+            "text": "HighScore 1: 0",
+            "posX": 0.292,
+            "posY": 0.639,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "highScore_2",
+            "visibleWhen": "Intro",
+            "text": "HighScore 2: 0",
+            "posX": 0.292,
+            "posY": 0.611,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "highScore_3",
+            "visibleWhen": "Intro",
+            "text": "HighScore 3: 0",
+            "posX": 0.292,
+            "posY": 0.583,
+            "size": 12,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "Paused",
+            "visibleWhen": "Paused",
+            "text": "Paused",
+            "posX": 0.448,
+            "posY": 0.417,
+            "size": 24,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        },
+        {
+            "uniqueId": "BombCount",
+            "visibleWhen": "InGame",
+            "text": "SmartBombs 'S':",
+            "posX": 0.344,
+            "posY": 0.222,
+            "size": 14,
+            "fontPath": "Text/Ac437_IBM_CGA.ttf"
+        }
+    ]
+}
