@@ -1,0 +1,2 @@
+Connection->setup Connection -> server:ssl:perforce.tga.learnet.se:1666
+wiki:https://wiki.tga.learnet.se/books/perforce/page/installera-och-konfigurera-perforce-helix
