@@ -1,0 +1,10 @@
+﻿  Actor.cpp
+  Command.cpp
+  Component.cpp
+  GameState.cpp
+  Spell.cpp
+  StatsComponent.cpp
+  TangledTomb.cpp
+  Tile.cpp
+  Generating Code...
+  ToRefactor.vcxproj -> C:\Users\lucas\Downloads\ToRefactor\x64\Debug\ToRefactor.exe

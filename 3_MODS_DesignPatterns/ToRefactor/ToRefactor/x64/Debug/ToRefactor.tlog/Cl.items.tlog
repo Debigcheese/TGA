@@ -1,0 +1,11 @@
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Actor.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Actor.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Command.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Command.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Component.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Component.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Game.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Game.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\GameState.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\GameState.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\MapConfigSingleton.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\MapConfigSingleton.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\MessageBus.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\MessageBus.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Spell.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Spell.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\StatsComponent.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\StatsComponent.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\TangledTomb.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\TangledTomb.obj
+C:\Users\lucas\Downloads\ToRefactor\ToRefactor\Tile.cpp;C:\Users\lucas\Downloads\ToRefactor\ToRefactor\x64\Debug\Tile.obj
