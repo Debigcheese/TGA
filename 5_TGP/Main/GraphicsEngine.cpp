@@ -49,7 +49,7 @@ bool GraphicsEngine::Initialize(HWND windowHandle)
 	backBufferTexture->GetDesc(&textureDesc);
 	backBufferTexture->Release();
 	myContext->OMSetRenderTargets(1, myBackBuffer.GetAddressOf(), nullptr);
-	D3D11_VIEWPORT viewport = { };
+	D3D11_VIEWPORT viewport = {};
 	viewport.TopLeftX = 0.0f;
 	viewport.TopLeftY = 0.0f;
 	viewport.Width = static_cast<float>(textureDesc.Width);
@@ -62,7 +62,7 @@ bool GraphicsEngine::Initialize(HWND windowHandle)
 
 void GraphicsEngine::Render()
 {
-	float color[4] = { 1.0f,0.8f,0.5f,1.0f }; 
+	float color[4] = {1.0f, 0.8f, 0.5f, 1.0f};
 	myContext->ClearRenderTargetView(myBackBuffer.Get(), color);
 	mySwapChain->Present(1, 0);
 }
