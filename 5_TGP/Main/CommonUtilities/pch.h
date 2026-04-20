@@ -9,11 +9,38 @@
 
 // add headers that you want to pre-compile here
 
+#include "targetver.h"
+#if !defined(WIN32_LEAN_AND_MEAN)
+#define WIN32_LEAN_AND_MEAN
+#endif
+
 #include "framework.h"
 #include "Timer.h"
 #include "UtilityFunctions.h"
 #include "InputHandler.h"
 #include "Random.h"
+
+#include "math/Matrix4x4.h"
+#include "math/vector2.h"
+#include "math/vector4.h"
+
+#include "input/InputManager.h"
+#include "input/XInput.h"
+
+#include "math/FMath.h"
+#include "math/CommonMath.h"
+
+#include <algorithm>
+#include <array>
+#include <exception>
+#include <malloc.h>
+#include <map>
+#include <memory>
+#include <set>
+#include <string>
+#include <vector>
+
+//#include "imgui/imgui.h"
 
 //#include "Vector2.h"
 //#include "Vector3.h"

@@ -2,15 +2,18 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Lucas.berg4\Documents\GitHub\TGA\5_TGP\Main\x64\Debug\Main.exe</FullPath>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\Main\x64\Debug\Main.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\Lucas.berg4\Documents\GitHub\TGA\5_TGP\Main\x64\Debug\colored_mesh_PS.cso</FullPath>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\Main\x64\Debug\animated_mesh_PS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Lucas.berg4\Documents\GitHub\TGA\5_TGP\Main\x64\Debug\colored_mesh_VS.cso</FullPath>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\Main\x64\Debug\colored_mesh_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\Main\x64\Debug\colored_mesh_VS.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

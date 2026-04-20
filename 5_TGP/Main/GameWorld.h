@@ -1,45 +1,59 @@
 #pragma once
 #include <d3d11.h>
 #include <wrl/client.h>
-#include "main.h"
-#include <fstream>
+#include "Camera/Camera.h"
+#include "Model/Mesh.h"
+#include "Camera/CameraController.h"
+#include "GameObject/GameObjectFactory.h"
+#include <vector>
+
+#include "CommonUtilities/input/InputManager.h"
+#include "CommonUtilities/math/vector3.h"
+#include "CommonUtilities/math/Matrix4x4.h"
 
 using Microsoft::WRL::ComPtr;
 
-class Triangle;
+namespace Tga
+{
+	class InputManager;
+}
+
+// Must match cbuffer FrameBuffer : register(b0) in shaders
+struct FrameBufferData
+{
+	Matrix4x4f worldToClipMatrix; // 64 bytes
+	float totalTime;         // 4 bytes
+	float padding[3];        // 12 bytes, keeps 16-byte alignment
+};
+
+// Must match cbuffer ObjectBuffer : register(b1) in shaders
+struct ObjectBufferData
+{
+	Matrix4x4f modelToWorldMatrix; // 64 bytes
+};
 
 class GameWorld
 {
 public:
-	GameWorld();
+	GameWorld() = default;
 
-	bool Initialize(ID3D11Device* aDevice);
-	void Update(float dt);
+	bool Init();
+	void Update(float aDeltaTime);
 	void Render();
 
 private:
-	Triangle* myTriangle;
-	ID3D11Device *myDevice;
-	ID3D11DeviceContext* myContext;
-};
+	bool CreateConstantBuffers();
+	void UpdateFrameBuffer();
+	void UpdateObjectBuffer(const Matrix4x4f& aModelToWorld);
 
-class Triangle
-{
-	struct Vertex
-	{
-		float x, y, z, w;
-		float r, g, b, a;
-	};
-public:
-	Triangle() = default;
-	~Triangle() = default;
+	CameraController myCameraController;
+	Camera myCamera;
 
-	bool Initialize(ID3D11Device*);
-	void Render(ID3D11DeviceContext*);
-private:
-	ComPtr<ID3D11Buffer> myVertexBuffer;
-	ComPtr<ID3D11Buffer> myIndexBuffer;
-	ComPtr<ID3D11VertexShader> myVertexShader;
-	ComPtr<ID3D11PixelShader> myPixelShader;
-	ComPtr<ID3D11InputLayout> myInputLayout;
+	std::vector<GameObject>  myObjects;
+
+	ComPtr<ID3D11Buffer> myFrameBuffer;
+	ComPtr<ID3D11Buffer> myObjectBuffer;
+
+	Tga::InputManager* myInputManager = nullptr;
+	float myTotalTime{};
 };

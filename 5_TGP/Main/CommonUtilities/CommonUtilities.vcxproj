@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -112,6 +112,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <TreatWarningAsError>false</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -144,8 +145,23 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputTest.h" />
+    <ClInclude Include="input\InputManager.h" />
+    <ClInclude Include="input\XInput.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="LineVolume.h" />
+    <ClInclude Include="math\color.h" />
+    <ClInclude Include="math\CommonMath.h" />
+    <ClInclude Include="math\FMath.h" />
+    <ClInclude Include="math\Matrix.h" />
+    <ClInclude Include="math\Matrix2x2.h" />
+    <ClInclude Include="math\Matrix3x3.h" />
+    <ClInclude Include="math\Matrix4x4.h" />
+    <ClInclude Include="math\Quaternion.h" />
+    <ClInclude Include="math\ScaleRotationTranslation.h" />
+    <ClInclude Include="math\Vector.h" />
+    <ClInclude Include="math\vector2.h" />
+    <ClInclude Include="math\Vector3.h" />
+    <ClInclude Include="math\vector4.h" />
     <ClInclude Include="Matrix3x3.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="pch.h" />
@@ -164,7 +180,13 @@
   <ItemGroup>
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="InputTest.cpp" />
-    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="input\InputManager.cpp" />
+    <ClCompile Include="input\XInput.cpp" />
+    <ClCompile Include="math\CommonMath.cpp" />
+    <ClCompile Include="math\FMath.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Print.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Timer.cpp">

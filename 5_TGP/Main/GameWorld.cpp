@@ -1,140 +1,127 @@
 #include "GameWorld.h"
-
+#include "Engine.h"
 #include <cassert>
-#include <iterator>
-#include <string>
+#include <cstring>
+#include "Shader/ShaderFactory.h"
 
-GameWorld::GameWorld()
+bool GameWorld::Init()
 {
-}
+	auto& engine = *Engine::GetInstance();
+	auto device = engine.GetGraphicsEngine().GetDevice();
 
-bool GameWorld::Initialize(ID3D11Device* aDevice)
-{
-	myDevice = aDevice;
-	myDevice->GetImmediateContext(&myContext);
-	myTriangle = new Triangle();
-	return myTriangle->Initialize(aDevice);
-}
+	if (!myCamera.Initialize(90.0f, { (float)engine.GetGraphicsEngine().GetWidth(),
+									  (float)engine.GetGraphicsEngine().GetHeight() }, 0.1f, 1000.0f))
+		return false;
 
-void GameWorld::Update([[maybe_unused]]float dt)
-{
-}
+	myCamera.SetPosition({ 0.0f, 1.0f, -4.0f });
+	myCameraController.Initialize(&myCamera, &engine.GetInputManager());
 
-void GameWorld::Render()
-{
+	auto& shaderFactory = ShaderFactory::GetInstance();
+	if (!shaderFactory.Init(device))
+		return false;
 
-	myTriangle->Render(myContext);
-}
+	auto& objectFactory = GameObjectFactory::GetInstance();
+	if (!objectFactory.Init(device))
+		return false;
 
-bool Triangle::Initialize(ID3D11Device* device)
-{
-	assert(device && "Device is null");
-
-	HRESULT result;
-
-	Vertex vertices[3] =
+	for (int i = 0; i < 5; i++)
 	{
-		{ -0.8f, -0.8f, 0, 1, 1, 0, 0, 1},
-		{  0.0f,  0.8f, 0, 1, 0, 1, 0, 1},
-		{  0.8f, -0.8f, 0, 1, 0, 0, 1, 1}
-	};
+		auto cube = objectFactory.CreateGameObject("Cube");
+		cube.SetPosition({ 0,(float)i,0 });
 
-	unsigned int indices[3] = { 0, 1, 2 };
+		Shader* shader = nullptr;
+		i % 2 == 0 ? shader = ShaderFactory::GetInstance().GetShader("animated") : shader = ShaderFactory::GetInstance().GetShader("colored");
 
-	// Vertex buffer
-	{
-		D3D11_BUFFER_DESC desc = {};
-		desc.ByteWidth = sizeof(vertices);
-		desc.Usage = D3D11_USAGE_IMMUTABLE;
-		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-
-		D3D11_SUBRESOURCE_DATA data = {};
-		data.pSysMem = vertices;
-
-		result = device->CreateBuffer(&desc, &data, &myVertexBuffer);
-		if (FAILED(result))
-		{
-			assert(false && "Failed to create vertex buffer");
-			return false;
-		}
+		cube.SetShader(shader);
+		myObjects.push_back(cube);
 	}
 
-	// Index buffer
-	{
-		D3D11_BUFFER_DESC desc = {};
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.ByteWidth = sizeof(indices);
-		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	auto pyramid = objectFactory.CreateGameObject("Pyramid");
+	pyramid.SetPosition({ 2, 0, 0 });
+	myObjects.push_back(pyramid);
 
-		D3D11_SUBRESOURCE_DATA data = {};
-		data.pSysMem = indices;
-
-		result = device->CreateBuffer(&desc, &data, &myIndexBuffer);
-		if (FAILED(result))
-		{
-			assert(false && "Failed to create index buffer");
-			return false;
-		}
-	}
-
-	std::string vsData;
-
-	// Shaders
-	{
-		std::ifstream vsFile("colored_mesh_VS.cso", std::ios::binary);
-		assert(vsFile && "Failed to open VS file");
-
-		vsData = { std::istreambuf_iterator<char>(vsFile), {} };
-
-		result = device->CreateVertexShader(vsData.data(), vsData.size(), nullptr, &myVertexShader);
-		if (FAILED(result))
-		{
-			assert(false && "Failed to create vertex shader");
-			return false;
-		}
-
-		std::ifstream psFile("colored_mesh_PS.cso", std::ios::binary);
-		assert(psFile && "Failed to open PS file");
-
-		std::string psData = { std::istreambuf_iterator<char>(psFile), {} };
-
-		result = device->CreatePixelShader(psData.data(), psData.size(), nullptr, &myPixelShader);
-		if (FAILED(result))
-		{
-			assert(false && "Failed to create pixel shader");
-			return false;
-		}
-	}
-
-	// Input layout
-	{
-		D3D11_INPUT_ELEMENT_DESC layout[] =
-		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		};
-
-		result = device->CreateInputLayout(layout, 2, vsData.data(), vsData.size(), &myInputLayout);
-		if (FAILED(result))
-		{
-			assert(false && "Failed to create input layout");
-			return false;
-		}
-	}
+	if (!CreateConstantBuffers())
+		return false;
 
 	return true;
 }
 
-void Triangle::Render(ID3D11DeviceContext* context)
+void GameWorld::Render()
 {
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetInputLayout(myInputLayout.Get());
-	unsigned int stride = sizeof(Vertex);
-	unsigned int offset = 0;
-	context->IASetVertexBuffers(0, 1, myVertexBuffer.GetAddressOf(), &stride, &offset);
-	context->IASetIndexBuffer(myIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-	context->VSSetShader(myVertexShader.Get(), nullptr, 0);
-	context->PSSetShader(myPixelShader.Get(), nullptr, 0);
-	context->DrawIndexed(3, 0, 0);
+	auto& engine = *Engine::GetInstance();
+	auto context = engine.GetGraphicsEngine().GetContext();
 
+	UpdateFrameBuffer();
+
+	for (auto& obj : myObjects)
+	{
+		UpdateObjectBuffer(obj.GetTransform());
+		obj.Render(context);
+	}
 }
+
+bool GameWorld::CreateConstantBuffers()
+{
+	HRESULT result;
+
+	D3D11_BUFFER_DESC desc = {};
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	auto& engine = *Engine::GetInstance();
+	auto device = engine.GetGraphicsEngine().GetDevice();
+
+	desc.ByteWidth = sizeof(FrameBufferData);
+	result = device->CreateBuffer(&desc, nullptr, &myFrameBuffer);
+	assert(SUCCEEDED(result) && "Failed to create frame constant buffer");
+	if (FAILED(result)) return false;
+
+	desc.ByteWidth = sizeof(ObjectBufferData);
+	result = device->CreateBuffer(&desc, nullptr, &myObjectBuffer);
+	assert(SUCCEEDED(result) && "Failed to create object constant buffer");
+	if (FAILED(result)) return false;
+
+	return true;
+}
+
+void GameWorld::UpdateFrameBuffer()
+{
+	FrameBufferData data = {};
+	data.worldToClipMatrix = Matrix4x4f::Transpose(myCamera.GetWorldToClipMatrix());
+	data.totalTime = myTotalTime;
+
+	auto& engine = *Engine::GetInstance();
+	auto context = engine.GetGraphicsEngine().GetContext();
+
+	D3D11_MAPPED_SUBRESOURCE mapped = {};
+	context->Map(myFrameBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	memcpy(mapped.pData, &data, sizeof(FrameBufferData));
+	context->Unmap(myFrameBuffer.Get(), 0);
+
+	context->VSSetConstantBuffers(0, 1, myFrameBuffer.GetAddressOf());
+	context->PSSetConstantBuffers(0, 1, myFrameBuffer.GetAddressOf());
+}
+
+void GameWorld::UpdateObjectBuffer(const Matrix4x4f& aModelToWorld)
+{
+	ObjectBufferData data = {};
+	data.modelToWorldMatrix = Matrix4x4f::Transpose(aModelToWorld);
+
+	auto& engine = *Engine::GetInstance();
+	auto context = engine.GetGraphicsEngine().GetContext();
+
+	D3D11_MAPPED_SUBRESOURCE mapped = {};
+	context->Map(myObjectBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+	memcpy(mapped.pData, &data, sizeof(ObjectBufferData));
+	context->Unmap(myObjectBuffer.Get(), 0);
+
+	context->VSSetConstantBuffers(1, 1, myObjectBuffer.GetAddressOf());
+}
+
+void GameWorld::Update(float aDeltaTime)
+{
+	myTotalTime += aDeltaTime;
+	myCameraController.Update(aDeltaTime);
+}
+
