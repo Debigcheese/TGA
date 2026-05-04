@@ -1,0 +1,14 @@
+﻿  GameWorld.cpp
+F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(3,9): warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
+  (compiling source file 'GameWorld.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(3,9):
+      'WIN32_LEAN_AND_MEAN' previously declared on the command line
+  
+F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(4,9): warning C4005: 'NOMINMAX': macro redefinition
+  (compiling source file 'GameWorld.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(4,9):
+      'NOMINMAX' previously declared on the command line
+  
+  Main.vcxproj -> F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Main.exe
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\Textures\texture_2.png
+  1 File(s) copied

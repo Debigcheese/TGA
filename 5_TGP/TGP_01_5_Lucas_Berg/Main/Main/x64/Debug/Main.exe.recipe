@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Main.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\animated_mesh_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\camera_pos_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\colored_mesh_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\colored_mesh_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\default_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\default_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_animated_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_animated_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_lit_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_lit_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Terrain_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Terrain_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\textured_mesh_PS.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
