@@ -18,20 +18,31 @@ void CameraController::Update(float aDeltaTime)
 	Vector3f movement = {};
 
 	if (myInputManager->IsKeyHeld(KEY_W))
-		movement = movement + myCamera->GetForward() * CameraSpeed * aDeltaTime;
+		movement = movement + myCamera->GetForward() * mySpeed * aDeltaTime;
 	if (myInputManager->IsKeyHeld(KEY_S))
-		movement = movement + myCamera->GetForward() * (-CameraSpeed * aDeltaTime);
+		movement = movement + myCamera->GetForward() * (-mySpeed * aDeltaTime);
 	if (myInputManager->IsKeyHeld(KEY_D))
-		movement = movement + myCamera->GetRight() * CameraSpeed * aDeltaTime;
+		movement = movement + myCamera->GetRight() * mySpeed * aDeltaTime;
 	if (myInputManager->IsKeyHeld(KEY_A))
-		movement = movement + myCamera->GetRight() * (-CameraSpeed * aDeltaTime);
+		movement = movement + myCamera->GetRight() * (-mySpeed * aDeltaTime);
 
 	if (myInputManager->IsKeyHeld(KEY_E))
-		movement = movement + Vector3f(0, 1, 0) * CameraSpeed * aDeltaTime;
+		movement = movement + Vector3f(0, 1, 0) * mySpeed * aDeltaTime;
 	if (myInputManager->IsKeyHeld(KEY_Q))
-		movement = movement + Vector3f(0, -1, 0) * CameraSpeed * aDeltaTime;
+		movement = movement + Vector3f(0, -1, 0) * mySpeed * aDeltaTime;
 
 	myCamera->SetPosition(myCamera->GetPosition() + movement);
+
+	if (myInputManager->GetMouseWheelDelta() > 0.f)
+	{
+		mySpeed += 1.f;
+		mySpeed = std::max(mySpeed, MaxCameraSpeed);
+	}
+	if (myInputManager->GetMouseWheelDelta() < 0.f)
+	{
+		mySpeed -= 1.f;
+		mySpeed = std::max(mySpeed, MinCameraSpeed);
+	}
 
 	if (!myInputManager->IsKeyHeld(VK_RBUTTON))
 		return;

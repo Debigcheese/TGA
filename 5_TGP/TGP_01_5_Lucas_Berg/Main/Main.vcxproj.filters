@@ -141,6 +141,15 @@
     <Image Include="texture.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Grass001.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Rock051.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Snow010A.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="colored_mesh_VS.hlsl">

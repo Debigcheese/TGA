@@ -1,4 +1,30 @@
-﻿  GameWorld.cpp
+﻿  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Grass001.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Grass_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Grass_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Rock051.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Rock_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Rock_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Snow010A.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Snow_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\Snow_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\testnormal.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\texture.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\textures\texture_2.png
+  12 File(s) copied
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\animated_mesh_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\camera_pos_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\colored_mesh_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\colored_mesh_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\default_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\default_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_animated_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_animated_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_lit_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Model_lit_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Terrain_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Terrain_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\textured_mesh_PS.cso
+  GameWorld.cpp
 F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(3,9): warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
   (compiling source file 'GameWorld.cpp')
       F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(3,9):
@@ -9,6 +35,7 @@ F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\Inpu
       F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\CommonUtilities\input\InputManager.h(4,9):
       'NOMINMAX' previously declared on the command line
   
+  LINK : F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Main.exe not found or not built by the last incremental link; performing full link
   Main.vcxproj -> F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\x64\Debug\Main.exe
   F:\TheGameAssembly\TGA\5_TGP\TGP_01_5_Lucas_Berg\Main\Textures\texture_2.png
   1 File(s) copied

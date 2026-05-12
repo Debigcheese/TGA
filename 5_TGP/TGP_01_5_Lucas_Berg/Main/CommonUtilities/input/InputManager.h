@@ -41,7 +41,6 @@ namespace Tga
 		float myTentativeMouseWheelDelta;
 		float myMouseWheelDelta;
 
-
 	public:
 
 		InputManager(HWND aWindowHandle);
@@ -52,6 +51,7 @@ namespace Tga
 
 		Vector2f GetMouseDelta() const;
 		Vector2f GetMousePosition() const;
+		float GetMouseWheelDelta() const;
 
 		void ShowMouse() const;
 		void HideMouse() const;

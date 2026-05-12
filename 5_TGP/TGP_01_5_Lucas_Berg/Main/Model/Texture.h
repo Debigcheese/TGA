@@ -11,7 +11,7 @@ public:
 	~Texture() = default;
 
 	// Initialize from raw RGBA pixel data (4 bytes per pixel).
-	bool Initialize(ID3D11Device* aDevice, const unsigned char* aRGBAPixels, int aWidth, int aHeight);
+	bool Initialize(ID3D11Device* aDevice, const unsigned char* aRGBAPixels, int aWidth, int aHeight, bool aUseSrgb);
 
 	// Bind the texture to the pixel shader at the given slot (t0, t1, …).
 	void Bind(ID3D11DeviceContext* aContext, int aSlot) const;

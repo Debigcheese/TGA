@@ -45,7 +45,7 @@ bool GameWorld::Init()
 
 	{
 		std::vector<unsigned int> idx;
-		auto verts = myTerrain.BuildTerrain(idx, 200.0f, 30.0f);
+		auto verts = myTerrain.BuildTerrain(idx);
 		if (!myTerrain.Init(device, verts, idx)) return false;
 	}
 
@@ -65,11 +65,11 @@ bool GameWorld::Init()
 					rgba[4 * i + 2] = img[3 * i + 2];
 					rgba[4 * i + 3] = 255;
 				}
-				myFileTexture.Initialize(device, rgba.data(), tw, th);
+				myFileTexture.Initialize(device, rgba.data(), tw, th, false);
 			}
 			else
 			{
-				myFileTexture.Initialize(device, img, tw, th);
+				myFileTexture.Initialize(device, img, tw, th, false);
 			}
 			stbi_image_free(img);
 		}
@@ -79,7 +79,7 @@ bool GameWorld::Init()
 			if (img) stbi_image_free(img);
 			// Fallback: solid purple 2x2
 			unsigned char fallback[] = { 180,80,220,255, 80,180,220,255, 80,180,220,255, 180,80,220,255 };
-			myFileTexture.Initialize(device, fallback, 2, 2);
+			myFileTexture.Initialize(device, fallback, 2, 2, false);
 		}
 	}
 
@@ -95,8 +95,15 @@ bool GameWorld::Init()
 				pixels[i + 0] = pixels[i + 1] = pixels[i + 2] = white ? 230 : 30;
 				pixels[i + 3] = 255;
 			}
-		myProceduralTexture.Initialize(device, pixels.data(), Size, Size);
+		myProceduralTexture.Initialize(device, pixels.data(), Size, Size, false);
 	}
+
+	LoadTextureFromFile(device, "textures/Grass_c.png", myGrassColor, true);
+	LoadTextureFromFile(device, "textures/Grass_n.png", myGrassNormal, false);
+	LoadTextureFromFile(device, "textures/Rock_c.png", myRockColor, true);
+	LoadTextureFromFile(device, "textures/Rock_n.png", myRockNormal, false);
+	LoadTextureFromFile(device, "textures/Snow_c.png", mySnowColor, true);
+	LoadTextureFromFile(device, "textures/Snow_n.png", mySnowNormal, false);
 
 	//objectFactory.LoadObj(device, "craneo", "craneo.obj");
 
@@ -143,6 +150,14 @@ void GameWorld::Render()
 	UpdateLightBuffer();
 
 	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
+
+	myGrassColor.Bind(context, 0);   // t0
+	myRockColor.Bind(context, 1);    // t1
+	mySnowColor.Bind(context, 2);    // t2
+	myGrassNormal.Bind(context, 3);  // t3
+	myRockNormal.Bind(context, 4);   // t4
+	mySnowNormal.Bind(context, 5);   // t5
+
 	myTerrain.Render({ context, &myTerrainShader });
 
 	for (auto& obj : myObjects)
@@ -221,40 +236,41 @@ void GameWorld::UpdateObjectBuffer(const Matrix4x4f& aModelToWorld)
 
 	context->VSSetConstantBuffers(1, 1, myObjectBuffer.GetAddressOf());
 }
-
 void GameWorld::UpdateLightBuffer()
 {
+	auto& c = myLightConfig;
+
 	float sunY = cosf(myDayAngle);
 	float sunX = sinf(myDayAngle);
 
-	float shifted = sunY + 0.6f;
-	float day = FMath::Saturate(shifted / 1.6f);
+	float shifted = sunY + c.dayShift;
+	float day = FMath::Saturate(shifted / c.dayRange);
 	day = day * day * (3.0f - 2.0f * day);
 
 	float dx = sunX;
 	float dy = sunY;
-	float dz = -0.3f;
+	float dz = c.sunDirZ;
 	float dl = sqrtf(dx * dx + dy * dy + dz * dz);
 
 	LightBufferData data = {};
 	data.dirLightDir[0] = dx / dl;
-	data.dirLightDir[1] = dy / dl; data.dirLightDir[2] = dz / dl;
+	data.dirLightDir[1] = dy / dl;
+	data.dirLightDir[2] = dz / dl;
 
-	float dirStrength = FMath::Lerp(0.18f, 1.2f, day);
-	data.dirLightColor[0] = dirStrength * 1.00f;
-	data.dirLightColor[1] = dirStrength * 0.95f;
-	data.dirLightColor[2] = dirStrength * 0.85f;
+	float str = FMath::Lerp(c.dirStrengthMin, c.dirStrengthMax, day);
+	data.dirLightColor[0] = str * c.dirColorR;
+	data.dirLightColor[1] = str * c.dirColorG;
+	data.dirLightColor[2] = str * c.dirColorB;
 
-	data.ambientSky[0] = FMath::Lerp(0.10f, 0.15f, day);
-	data.ambientSky[1] = FMath::Lerp(0.12f, 0.20f, day);
-	data.ambientSky[2] = FMath::Lerp(0.25f, 0.30f, day);
+	data.ambientSky[0] = FMath::Lerp(c.ambSkyMinR, c.ambSkyMaxR, day);
+	data.ambientSky[1] = FMath::Lerp(c.ambSkyMinG, c.ambSkyMaxG, day);
+	data.ambientSky[2] = FMath::Lerp(c.ambSkyMinB, c.ambSkyMaxB, day);
 
-	data.ambientGround[0] = FMath::Lerp(0.07f, 0.08f, day);
-	data.ambientGround[1] = FMath::Lerp(0.07f, 0.08f, day);
-	data.ambientGround[2] = FMath::Lerp(0.09f, 0.05f, day);
+	data.ambientGround[0] = FMath::Lerp(c.ambGndMinR, c.ambGndMaxR, day);
+	data.ambientGround[1] = FMath::Lerp(c.ambGndMinG, c.ambGndMaxG, day);
+	data.ambientGround[2] = FMath::Lerp(c.ambGndMinB, c.ambGndMaxB, day);
 
-	auto& engine = *Engine::GetInstance();
-	auto context = engine.GetGraphicsEngine().GetContext();
+	auto context = Engine::GetInstance()->GetGraphicsEngine().GetContext();
 
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	context->Map(myLightBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
@@ -265,9 +281,19 @@ void GameWorld::UpdateLightBuffer()
 	context->PSSetConstantBuffers(2, 1, myLightBuffer.GetAddressOf());
 }
 
+bool GameWorld::LoadTextureFromFile(ID3D11Device* device, const char* path, Texture& tex, bool srgb)
+{
+	int w, h, ch;
+	unsigned char* img = stbi_load(path, &w, &h, &ch, 4); // force RGBA
+	if (!img) return false;
+	bool ok = tex.Initialize(device, img, w, h, srgb);
+	stbi_image_free(img);
+	return ok;
+}
+
 void GameWorld::Update(float aDeltaTime)
 {
 	myTotalTime += aDeltaTime;
-	myDayAngle += 0.1f * aDeltaTime;
+	myDayAngle += myLightConfig.daySpeed * aDeltaTime;
 	myCameraController.Update(aDeltaTime);
 }

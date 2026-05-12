@@ -14,7 +14,11 @@ private:
 
 	float myPitch = 0.0f;
 	float myYaw = 0.0f;
+	float mySpeed = 5.0f;
 
-	static constexpr float CameraSpeed = 5.0f;
+	static constexpr float DefaultCameraSpeed = 5.0f;
+	static constexpr float MinCameraSpeed = 1.0f;
+	static constexpr float MaxCameraSpeed = 25.0f;
+
 	static constexpr float CameraRotSpeed = 0.13f;
 };

@@ -46,6 +46,35 @@ struct LightBufferData
 	float ambientGround[3]; float lp4;
 };
 
+struct DirectionalLightConfig
+{
+	float daySpeed = 0.1f;
+
+	// Sun direction offsets
+	float sunDirZ = -0.3f;
+
+	// Day/night ramp
+	float dayShift = 1.6f;
+	float dayRange = 1.6f;
+
+	// Directional light strength
+	float dirStrengthMin = 1.5f;
+	float dirStrengthMax = 2.3f;
+	float dirColorR = 1.00f;
+	float dirColorG = 0.95f;
+	float dirColorB = 0.85f;
+
+	// Ambient sky
+	float ambSkyMinR = 0.20f, ambSkyMaxR = 0.25f;
+	float ambSkyMinG = 0.25f, ambSkyMaxG = 0.30f;
+	float ambSkyMinB = 0.30f, ambSkyMaxB = 0.35f;
+
+	// Ambient ground
+	float ambGndMinR = 0.2f, ambGndMaxR = 0.21f;
+	float ambGndMinG = 0.23f, ambGndMaxG = 0.25f;
+	float ambGndMinB = 0.25f, ambGndMaxB = 0.27f;
+};
+
 class GameWorld
 {
 public:
@@ -63,12 +92,21 @@ private:
 	void UpdateObjectBuffer(const Matrix4x4f& m);
 	void UpdateLightBuffer();
 
+	// Helper to avoid repeating the stbi boilerplate
+	bool LoadTextureFromFile(ID3D11Device* device, const char* path, Texture& tex, bool srgb);
+
 	CameraController myCameraController;
 	Camera myCamera;
 
 	std::vector<GameObject>  myObjects;
+
 	TerrainMesh myTerrain;
 	Shader myTerrainShader;
+	DirectionalLightConfig myLightConfig;
+	float myDayAngle = 0.0f;
+
+	Texture myGrassColor, myRockColor, mySnowColor;
+	Texture myGrassNormal, myRockNormal, mySnowNormal;
 
 	Texture myFileTexture;
 	Texture myProceduralTexture;
@@ -80,5 +118,4 @@ private:
 
 	Tga::InputManager* myInputManager = nullptr;
 	float myTotalTime{};
-	float myDayAngle = 0.0f;
 };

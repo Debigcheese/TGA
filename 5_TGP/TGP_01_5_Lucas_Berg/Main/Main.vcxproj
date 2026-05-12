@@ -119,6 +119,9 @@
     <FxCompile>
       <ObjectFileOutput>$(OutDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
+    <PreBuildEvent>
+      <Command>xcopy /Y /E /I "$(ProjectDir)textures" "$(OutDir)textures"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -179,8 +182,11 @@
     <ResourceCompile Include="Main.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Grass001.png" />
     <Image Include="Main.ico" />
+    <Image Include="Rock051.png" />
     <Image Include="small.ico" />
+    <Image Include="Snow010A.png" />
     <Image Include="texture.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,4 @@
+#include "InputManager.h"
 #include "pch.h"
 #include "InputManager.h"
 #include "Windowsx.h"
@@ -54,6 +55,11 @@ Vector2f InputManager::GetMouseDelta() const
 Vector2f InputManager::GetMousePosition() const
 {
 	return Vector2f((float)myCurrentMousePosition.x, (float)myCurrentMousePosition.y);
+}
+
+float Tga::InputManager::GetMouseWheelDelta() const
+{
+	return myMouseWheelDelta;
 }
 
 void InputManager::ShowMouse() const

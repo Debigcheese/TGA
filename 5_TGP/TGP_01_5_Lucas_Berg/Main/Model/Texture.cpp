@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <cassert>
 
-bool Texture::Initialize(ID3D11Device* aDevice, const unsigned char* aRGBAPixels, int aWidth, int aHeight)
+bool Texture::Initialize(ID3D11Device* aDevice, const unsigned char* aRGBAPixels, int aWidth, int aHeight, bool aUseSrgb)
 {
 	assert(aDevice && aRGBAPixels && aWidth > 0 && aHeight > 0);
 
@@ -13,7 +13,8 @@ bool Texture::Initialize(ID3D11Device* aDevice, const unsigned char* aRGBAPixels
 	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
 	desc.Usage = D3D11_USAGE_IMMUTABLE;
-	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	desc.Format = aUseSrgb ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB
+		: DXGI_FORMAT_R8G8B8A8_UNORM;
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	desc.CPUAccessFlags = 0;
 	desc.MiscFlags = 0;

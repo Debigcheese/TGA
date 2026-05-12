@@ -10,9 +10,23 @@ using namespace Tga;
 
 struct TerrainVertex
 {
-	Vector3<float> pos;
-	Vector3<float> normal;
-	Vector2<float> uv;
+	Tga::Vector3f pos;
+	Tga::Vector3f normal;
+	Tga::Vector2f uv;
+	Tga::Vector3f tangent;
+	Tga::Vector3f bitangent;
+};
+
+struct TerrainConfig
+{
+	float worldSize = 200.0f;
+	float heightScale = 30.0f;
+	int   octaves = 6;
+	int   smoothPasses = 3;
+	float uvTiling = 20.0f;  // for shader tiling
+
+	// Noise amplitude falloff per octave: 1 / (1 << (oct + falloffPower))
+	int   falloffPower = 1;
 };
 
 class Shader;
@@ -32,8 +46,7 @@ public:
 
 	void Render(RenderData aRenderData) const;
 
-	static std::vector<TerrainVertex> BuildTerrain(std::vector<unsigned int>& idx,
-		float worldSize, float heightScale);
+	std::vector<TerrainVertex> BuildTerrain(std::vector<unsigned int>& idx);
 private:
 	ComPtr<ID3D11Buffer> myVertexBuffer;
 	ComPtr<ID3D11Buffer> myIndexBuffer;

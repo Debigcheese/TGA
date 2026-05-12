@@ -8,4 +8,6 @@ struct Vertex
 	float u, v;
 	float nx, ny, nz;
 
+	float tx, ty, tz;  // tangent
+	float bx, by, bz;  // bitangent
 };

@@ -61,4 +61,5 @@ void Mesh::Render(RenderData aRenderData) const
 	aRenderData.context->VSSetShader(aRenderData.shader->GetVertexShader(), nullptr, 0);
 	aRenderData.context->PSSetShader(aRenderData.shader->GetPixelShader(), nullptr, 0);
 	aRenderData.context->DrawIndexed(myIndexCount, 0, 0);
+
 }
