@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\model\\primitivemeshes.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\model\\primitivemeshes.h",
+            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\model\\vertex.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

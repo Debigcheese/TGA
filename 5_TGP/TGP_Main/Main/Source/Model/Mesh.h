@@ -30,7 +30,10 @@ public:
 
 	unsigned int GetIndexCount() const { return myIndexCount; }
 
+	static void SetFallbackTexture(const Texture* aTexture) { ourFallbackTexture = aTexture; }
+
 private:
+	static inline const Texture* ourFallbackTexture = nullptr;
 	ComPtr<ID3D11Buffer> myVertexBuffer;
 	ComPtr<ID3D11Buffer> myIndexBuffer;
 

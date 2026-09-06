@@ -13,6 +13,32 @@ cbuffer FrameBuffer : register(b0)
 cbuffer ObjectBuffer : register(b1)
 {
     float4x4 modelToWorldMatrix;
+    float3 emissiveColor;
+    float emissiveStrength;
+};
+
+#define MAX_LIGHTS_PER_PASS 8
+
+struct PointLightData
+{
+    float3 position;
+    float range;
+    float3 color;
+    float intensity;
+};
+
+struct SpotLightData
+{
+    float3 position;
+    float range;
+    float3 direction;
+    float cosOuter;
+    float3 color;
+    float intensity;
+    float cosInner;
+    float spad0;
+    float spad1;
+    float spad2;
 };
 
 cbuffer LightBuffer : register(b2)
@@ -36,13 +62,21 @@ cbuffer LightBuffer : register(b2)
 
     float3 cameraPos;
     float camPad;
+
+    int numPointLights;
+    int numSpotLights;
+    int isAdditivePass;
+    int pad3;
+
+    PointLightData pointLights[MAX_LIGHTS_PER_PASS];
+    SpotLightData spotLights[MAX_LIGHTS_PER_PASS];
 };
 
 cbuffer ReflectionBuffer : register(b3)
 {
     float2 resolution;
-    float  waterHeight;
-    float  reflectMode; 
+    float waterHeight;
+    float reflectMode;
 };
 
 // ===== TEXTURES =====
@@ -100,8 +134,9 @@ struct TerrainPSInput
     float3 tangent : TANGENT;
     float3 binormal : BINORMAL;
     float2 uv : TEXCOORD0;
-    float  clip : SV_ClipDistance0;
+    float clip : SV_ClipDistance0;
 };
+
 
 // ===== UTILS =====
 int GetNumMipsCube(TextureCube tex)

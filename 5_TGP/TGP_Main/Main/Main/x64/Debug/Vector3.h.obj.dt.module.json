@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Main\\x64\\Debug\\Vector3.obj",
+            "outputs": [
+                "Main\\x64\\Debug\\Vector3.h.obj.dt.module.json",
+                "Main\\x64\\Debug\\Vector3.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

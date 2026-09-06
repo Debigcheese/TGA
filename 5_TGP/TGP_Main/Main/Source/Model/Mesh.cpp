@@ -12,7 +12,6 @@ bool Mesh::Init(
 	myIndexCount = aIndexCount;
 
 	HRESULT result;
-
 	// Vertex buffer
 	{
 		D3D11_BUFFER_DESC desc = {};
@@ -48,8 +47,9 @@ bool Mesh::Init(
 
 void Mesh::Render(RenderData aRenderData) const
 {
-	if (aRenderData.texture)
-		aRenderData.texture->Bind(aRenderData.context, 0);
+	const Texture* tex = aRenderData.texture ? aRenderData.texture : ourFallbackTexture;
+	if (tex)
+		tex->Bind(aRenderData.context, 10);
 
 	const unsigned int stride = sizeof(Vertex);
 	const unsigned int offset = 0;
@@ -61,5 +61,4 @@ void Mesh::Render(RenderData aRenderData) const
 	aRenderData.context->VSSetShader(aRenderData.shader->GetVertexShader(), nullptr, 0);
 	aRenderData.context->PSSetShader(aRenderData.shader->GetPixelShader(), nullptr, 0);
 	aRenderData.context->DrawIndexed(myIndexCount, 0, 0);
-
 }

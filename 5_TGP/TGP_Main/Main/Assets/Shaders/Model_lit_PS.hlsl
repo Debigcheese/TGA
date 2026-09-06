@@ -9,25 +9,70 @@ struct PSIn
     float3 worldNormal : NORMAL;
 };
 
+float Attenuate(float dist, float range)
+{
+    float t = saturate(1.0f - dist / range);
+    return t * t;
+}
+
+float3 Shade(float3 N, float3 V, float3 L, float3 lightColor)
+{
+    float NdotL = saturate(dot(N, L));
+    float3 H = normalize(L + V);
+    float spec = pow(saturate(dot(N, H)), 32.0f);
+    return (NdotL + spec * 0.2f) * lightColor;
+}
+
 float4 main(PSIn i) : SV_TARGET
 {
+    if (emissiveStrength > 0.0f)
+        return float4(emissiveColor * emissiveStrength, 1.0f);
+
     float3 N = normalize(i.worldNormal);
-
-    float upFac = N.y * 0.5 + 0.5;
-    float3 ambient = lerp(ambientGround, ambientSky, upFac);
-
-    float3 lightDir = normalize(-dirLightDir);
-    float3 diffuse = dirLightColor * saturate(dot(N, lightDir));
+    float3 P = i.worldPosition.xyz;
+    float3 V = normalize(cameraPos - P);
 
     float4 texCol = albedoTexture.Sample(defaultSampler, i.uv);
+    float3 albedo = texCol.rgb * i.color.rgb;
+    float3 result = 0.0f;
 
-    float3 emissive = float3(
-        sin(totalTime * 1.0) * 0.5 + 0.5,
-        sin(totalTime * 1.3 + 2.094) * 0.5 + 0.5,
-        sin(totalTime * 1.7 + 4.189) * 0.5 + 0.5
-    ) * 0.3;
+    if (isAdditivePass == 0)
+    {
+        float upFac = N.y * 0.5f + 0.5f;
+        float3 ambient = lerp(ambientGround, ambientSky, upFac);
 
-    float3 finalColor = texCol.rgb * i.color.rgb * (ambient + diffuse) + emissive;
+        float3 sunL = normalize(-dirLightDir);
+        float3 diffuse = dirLightColor * dirLightIntensity * saturate(dot(N, sunL));
 
-    return float4(finalColor, texCol.a);
+        result += albedo * (ambient + diffuse);
+    }
+
+    // point lights
+    for (int p = 0; p < numPointLights; ++p)
+    {
+        float3 toLight = pointLights[p].position - P;
+        float dist = length(toLight);
+        float3 L = toLight / max(dist, 0.0001f);
+
+        float att = Attenuate(dist, pointLights[p].range);
+        result += albedo * Shade(N, V, L, pointLights[p].color * pointLights[p].intensity * att);
+    }
+
+    // spot lights
+    for (int s = 0; s < numSpotLights; ++s)
+    {
+        float3 toLight = spotLights[s].position - P;
+        float dist = length(toLight);
+        float3 L = toLight / max(dist, 0.0001f);
+
+        float att = Attenuate(dist, spotLights[s].range);
+
+        // -L is the direction light travels, compare against the cone axis
+        float cosAngle = dot(spotLights[s].direction, -L);
+        float cone = smoothstep(spotLights[s].cosOuter, spotLights[s].cosInner, cosAngle);
+
+        result += albedo * Shade(N, V, L, spotLights[s].color * spotLights[s].intensity * att * cone);
+    }
+
+    return float4(result, texCol.a);
 }

@@ -1,0 +1,58 @@
+﻿  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass001.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock051.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow010A.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\testnormal.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture_2.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\cube_1024_preblurred_angle3_Skansen3.dds
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Grass_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Rock_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Snow_m.png
+  16 File(s) copied
+  GameWorld.cpp
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(3,9): warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
+  (compiling source file 'Source/GameWorld.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(3,9):
+      'WIN32_LEAN_AND_MEAN' previously declared on the command line
+  
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(4,9): warning C4005: 'NOMINMAX': macro redefinition
+  (compiling source file 'Source/GameWorld.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(4,9):
+      'NOMINMAX' previously declared on the command line
+  
+  Main.cpp
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(3,9): warning C4005: 'WIN32_LEAN_AND_MEAN': macro redefinition
+  (compiling source file 'Source/Main.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(3,9):
+      'WIN32_LEAN_AND_MEAN' previously declared on the command line
+  
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(4,9): warning C4005: 'NOMINMAX': macro redefinition
+  (compiling source file 'Source/Main.cpp')
+      F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\CommonUtilities\input\InputManager.h(4,9):
+      'NOMINMAX' previously declared on the command line
+  
+  Generating Code...
+  Main.vcxproj -> F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Main.exe
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass001.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock051.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow010A.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\testnormal.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture_2.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\cube_1024_preblurred_angle3_Skansen3.dds
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Grass_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Rock_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Snow_m.png
+  16 File(s) copied
