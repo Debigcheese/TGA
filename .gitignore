@@ -1,4 +1,23 @@
-Intro_C++/Inlämningsuppgifter/Uppgift 1.3 Utöka kasinot/Uppgift 1.3 utöka kasinot/.vs/Uppgift 1.3 uötka kasinot/v17/ipch/AutoPCH/dc33236f6db4b0a4/VCTMP25076_691959.UPPGIFT 1.3 UÖTKA KASINOT.00000000.ipch
+gitignore
+# Ignore the Local directory in repository root
+/Local/
+
+# Ignore the Lib directory in repository root
+/Lib/
+
+# Ignore all Temp directories
+Temp/
+
+# Ignore compiled shader/object files
+*.cso
+*.obj
+
+# Ignore generated build/project files
+Makefile
+*.sln
 .vs/
-ipch/
-*.ipch
+
+# Ignore Bin directories in repository root
+/Bin/
+/bin/
+
