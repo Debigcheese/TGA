@@ -4,19 +4,11 @@
 #include "Vertex.h"
 
 using Microsoft::WRL::ComPtr;
-class Texture;
 class Shader;
 
 class Mesh
 {
 public:
-	struct RenderData
-	{
-		ID3D11DeviceContext* context;
-		Shader* shader;
-		Texture* texture;
-	};
-
 	Mesh() = default;
 	~Mesh() = default;
 
@@ -26,14 +18,11 @@ public:
 		const unsigned int* aIndices, unsigned int aIndexCount
 	);
 
-	void Render(RenderData aRenderData) const;
+	void Render(ID3D11DeviceContext* aContext, const Shader* aShader) const;
 
 	unsigned int GetIndexCount() const { return myIndexCount; }
 
-	static void SetFallbackTexture(const Texture* aTexture) { ourFallbackTexture = aTexture; }
-
 private:
-	static inline const Texture* ourFallbackTexture = nullptr;
 	ComPtr<ID3D11Buffer> myVertexBuffer;
 	ComPtr<ID3D11Buffer> myIndexBuffer;
 

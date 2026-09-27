@@ -6,6 +6,8 @@ struct VSIn
     float4 color : COLOR;
     float2 uv : TEXCOORD0;
     float3 normal : NORMAL;
+    float3 tangent : TANGENT;
+    float3 binormal : BINORMAL;
 };
 
 struct VSOut
@@ -15,6 +17,8 @@ struct VSOut
     float4 color : COLOR0;
     float2 uv : TEXCOORD0;
     float3 worldNormal : NORMAL;
+    float3 worldTangent : TANGENT;
+    float3 worldBinormal : BINORMAL;
 };
 
 VSOut main(VSIn i)
@@ -26,5 +30,7 @@ VSOut main(VSIn i)
     o.color = i.color;
     o.uv = i.uv;
     o.worldNormal = normalize(mul(i.normal, (float3x3) modelToWorldMatrix));
+    o.worldTangent = mul(i.tangent, (float3x3) modelToWorldMatrix);
+    o.worldBinormal = mul(i.binormal, (float3x3) modelToWorldMatrix);
     return o;
 }

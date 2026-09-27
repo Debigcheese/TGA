@@ -7,7 +7,6 @@
 #include "GameObject/GameObjectFactory.h"
 #include "Graphics/Lights.h"
 #include "Graphics/RenderTarget.h"
-#include "Model/Mesh.h"
 #include "Model/TerrainMesh.h"
 #include "Model/Texture.h"
 #include "Shader/Shader.h"
@@ -79,15 +78,8 @@ struct DirectionalLightConfig
 	Vector3f direction = {-0.4f, -1.0f, 0.3f};
 	Vector3f color = {1.0f, 0.95f, 0.85f};
 	float intensity = 0.18f;
-	Vector3f ambientSky = {0.038f, 0.045f, 0.05f};
-	Vector3f ambientGround = {0.031f, 0.037f, 0.04f};
-};
-
-struct ArenaPiece
-{
-	Matrix4x4f transform;
-	Vector3f position;
-	float radius;
+	Vector3f ambientSky = {0.03f, 0.04f, 0.05f};
+	Vector3f ambientGround = {0.03f, 0.03f, 0.04f};
 };
 
 class GameWorld
@@ -99,15 +91,15 @@ public:
 	bool Init();
 	void Update(float aDeltaTime);
 	void Render();
+	static constexpr float FLOOR_HEIGHT = 30.0f;
 
 private:
+	static constexpr int TERRAIN_TEXTURE_COUNT = 9;
+
 	bool CreateConstantBuffers();
 	bool CreateRenderStates();
-	bool LoadTextureFromFile(ID3D11Device* aDevice, ID3D11DeviceContext* aContext, const char* aPath, Texture& aTexture,
-	                         bool anSRGB);
 
 	void CreateObjects();
-	void CreateArena();
 	void CreateLights();
 	void AnimateLights();
 
@@ -119,10 +111,7 @@ private:
 	void BindTerrainTextures(ID3D11DeviceContext* aContext);
 
 	std::vector<LightRef> CollectLightsForObject(const Vector3f& anObjectPosition, float anObjectRadius);
-	void RenderPieceWithLights(ID3D11DeviceContext* aContext, GameObject& anObject, const Matrix4x4f& aTransform,
-	                           const Vector3f& aWorldPosition, float aRadius);
-	void RenderObjectWithLights(ID3D11DeviceContext* aContext, GameObject& anObject);
-	void RenderArena(ID3D11DeviceContext* aContext);
+	void RenderObjectWithLights(ID3D11DeviceContext* aContext, const GameObject& anObject);
 	void RenderLightMarkers(ID3D11DeviceContext* aContext);
 
 	Camera myCamera;
@@ -139,8 +128,7 @@ private:
 	ComPtr<ID3D11RasterizerState> myFrontFaceCullingRasterizerState;
 
 	Shader* myLitShader = nullptr;
-	Texture myWhiteTexture;
-	Texture myFileTexture;
+	Texture* myFileTexture = nullptr;
 
 	DirectionalLightConfig myDirectionalLight;
 	std::vector<PointLight> myPointLights;
@@ -149,16 +137,10 @@ private:
 	GameObject mySpotMarker;
 
 	std::vector<GameObject> myObjects;
-	std::vector<Mesh> myFbxMeshes;
-	Matrix4x4f myFbxTransform;
-	GameObject myArenaBlock;
-	std::vector<ArenaPiece> myArenaPieces;
 
 	TerrainMesh myTerrain;
 	Shader myTerrainShader;
-	Texture myGrassColor, myRockColor, mySnowColor;
-	Texture myGrassNormal, myRockNormal, mySnowNormal;
-	Texture myGrassMaterial, myRockMaterial, mySnowMaterial;
+	Texture* myTerrainTextures[TERRAIN_TEXTURE_COUNT] = {};
 	Cubemap myEnvironmentCubemap;
 
 	RenderTarget myReflectionRT;

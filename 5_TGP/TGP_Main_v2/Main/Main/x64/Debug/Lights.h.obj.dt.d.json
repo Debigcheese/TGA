@@ -1,7 +1,7 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\graphics\\lights.h",
+        "Source": "f:\\thegameassembly\\tga\\5_tgp\\tgp_main_v2\\main\\source\\graphics\\lights.h",
         "ProvidedModule": "",
         "Includes": [
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\cmath",
@@ -41,7 +41,7 @@
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\errno.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\vcruntime_string.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\corecrt_wstring.h",
-            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\commonutilities\\math\\vector3.h",
+            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main_v2\\main\\source\\commonutilities\\math\\vector3.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\array",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\xutility",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\__msvc_iter_core.hpp",
@@ -128,7 +128,7 @@
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\ctype.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\clocale",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\locale.h",
-            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main\\main\\source\\commonutilities\\math\\vector2.h",
+            "f:\\thegameassembly\\tga\\5_tgp\\tgp_main_v2\\main\\source\\commonutilities\\math\\vector2.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\iostream",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\ostream",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.44.35207\\include\\cassert",

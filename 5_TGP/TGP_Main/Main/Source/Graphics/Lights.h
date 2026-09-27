@@ -8,8 +8,8 @@ struct PointLight
 {
 	Tga::Vector3f position = { 0.0f, 0.0f, 0.0f };
 	Tga::Vector3f color = { 1.0f, 1.0f, 1.0f };
-	float intensity = 30.0f;
-	float range = 15.0f;
+	float intensity = 6.0f;
+	float range = 20.0f;
 
 	Tga::Vector3f orbitCenter = {0.0f, 0.0f, 0.0f};
 	float orbitRadius = 6.0f;
@@ -22,10 +22,10 @@ struct SpotLight
 	Tga::Vector3f position = { 0.0f, 0.0f, 0.0f };
 	Tga::Vector3f direction = { 0.0f, -1.0f, 0.0f };
 	Tga::Vector3f color = { 1.0f, 1.0f, 1.0f };
-	float intensity = 40.0f;
+	float intensity = 5.0f;
 	float range = 20.0f;
-	float innerAngle = 0.25f;
-	float outerAngle = 0.45f;
+	float innerAngle = 0.35f;
+	float outerAngle = 0.65f;
 
 	Tga::Vector3f orbitCenter = {0.0f, 0.0f, 0.0f};
 	float orbitRadius = 8.0f;

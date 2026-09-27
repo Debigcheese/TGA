@@ -79,7 +79,6 @@ cbuffer ReflectionBuffer : register(b3)
     float reflectMode;
 };
 
-// ===== TEXTURES =====
 TextureCube environmentTexture : register(t0);
 Texture2D grassColor : register(t1);
 Texture2D rockColor : register(t2);
@@ -90,12 +89,13 @@ Texture2D snowNormal : register(t6);
 Texture2D grassMaterial : register(t7);
 Texture2D rockMaterial : register(t8);
 Texture2D snowMaterial : register(t9);
-Texture2D albedoTexture : register(t10);
 
-// ===== SAMPLER =====
+Texture2D albedoTexture : register(t10);
+Texture2D normalTexture : register(t12);
+Texture2D materialTexture : register(t13);
+
 SamplerState defaultSampler : register(s0);
 
-// ===== BASIC MESH TYPES =====
 struct VertexInputType
 {
     float4 position : POSITION;
@@ -116,7 +116,6 @@ struct PixelOutput
     float4 color : SV_TARGET;
 };
 
-// ===== TERRAIN TYPES =====
 struct TerrainVSInput
 {
     float3 position : POSITION;
@@ -137,8 +136,6 @@ struct TerrainPSInput
     float clip : SV_ClipDistance0;
 };
 
-
-// ===== UTILS =====
 int GetNumMipsCube(TextureCube tex)
 {
     return numEnvMapMipLevels;

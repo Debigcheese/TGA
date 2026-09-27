@@ -1074,10 +1074,13 @@
     <ClInclude Include="External\TGAFBXImporter\TgaFbxStructs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Model\FBXLoader.h">
+    <ClInclude Include="Source\CommonUtilities\TransformUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CommonUtilities\TransformUtils.h">
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1173,9 +1176,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="External\TGAFBXImporter\source\TgaFbxStructs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Model\FBXLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\CommonUtilities\TransformUtils.cpp">

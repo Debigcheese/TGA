@@ -4,22 +4,17 @@
 #include <cassert>
 #include <cmath>
 #include <cstring>
+#include <utility>
 #include <vector>
 #include "Shader/ShaderFactory.h"
 #include "Shader/Shader.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 #include "TGAFBXImporter/source/Importer.h"
-#include "Model/FBXLoader.h"
 
 #include "CommonUtilities/input/InputManager.h"
 #include "CommonUtilities/TransformUtils.h"
 #include "CommonUtilities/Random.h"
 
-static constexpr float kObjectRadius = 2.0f;
-static constexpr float kArenaFloorY = 30.0f;
-static constexpr float kTwoPi = 6.2831853f;
 
 GameWorld::~GameWorld()
 {
@@ -39,13 +34,14 @@ bool GameWorld::Init()
 	if (!myCamera.Initialize(90.0f, {(float)ge.GetWidth(), (float)ge.GetHeight()}, 0.1f, 1000.0f))
 		return false;
 
-	myCamera.SetPosition({0.0f, kArenaFloorY + 7.0f, -34.0f});
+	myCamera.SetPosition({0.0f, FLOOR_HEIGHT + 7.0f, -34.0f});
 	myCameraController.Initialize(&myCamera, &engine.GetInputManager());
 
 	if (!ShaderFactory::GetInstance().Init(device))
 		return false;
 
-	if (!GameObjectFactory::GetInstance().Init(device))
+	auto& factory = GameObjectFactory::GetInstance();
+	if (!factory.Init(device, context))
 		return false;
 
 	myLitShader = ShaderFactory::GetInstance().GetShader("lit");
@@ -56,15 +52,7 @@ bool GameWorld::Init()
 	if (!CreateRenderStates())
 		return false;
 
-	unsigned char white[] = {255, 255, 255, 255};
-	myWhiteTexture.Initialize(device, context, white, 1, 1, false);
-	Mesh::SetFallbackTexture(&myWhiteTexture);
-
-	if (!LoadTextureFromFile(device, context, "Assets/Textures/texture_2.png", myFileTexture, false))
-	{
-		unsigned char fallback[] = {180, 80, 220, 255, 80, 180, 220, 255, 80, 180, 220, 255, 180, 80, 220, 255};
-		myFileTexture.Initialize(device, context, fallback, 2, 2, false);
-	}
+	myFileTexture = factory.GetTexture("Assets/Textures/texture_2.png", false);
 
 	if (!myTerrainShader.Init(device, "terrain_VS.cso", "terrain_PS.cso", Shader::Layout::Terrain))
 		return false;
@@ -74,30 +62,49 @@ bool GameWorld::Init()
 	if (!myTerrain.Init(device, terrainVertices, terrainIndices))
 		return false;
 
-	LoadTextureFromFile(device, context, "Assets/Textures/Grass_c.png", myGrassColor, true);
-	LoadTextureFromFile(device, context, "Assets/Textures/Grass_n.png", myGrassNormal, false);
-	LoadTextureFromFile(device, context, "Assets/Textures/Rock_c.png", myRockColor, true);
-	LoadTextureFromFile(device, context, "Assets/Textures/Rock_n.png", myRockNormal, false);
-	LoadTextureFromFile(device, context, "Assets/Textures/Snow_c.png", mySnowColor, true);
-	LoadTextureFromFile(device, context, "Assets/Textures/Snow_n.png", mySnowNormal, false);
-	LoadTextureFromFile(device, context, "Assets/Textures/cubemap/Grass_m.png", myGrassMaterial, false);
-	LoadTextureFromFile(device, context, "Assets/Textures/cubemap/Rock_m.png", myRockMaterial, false);
-	LoadTextureFromFile(device, context, "Assets/Textures/cubemap/Snow_m.png", mySnowMaterial, false);
+	const std::pair<const char*, bool> terrainTextures[TERRAIN_TEXTURE_COUNT] = {
+		{"Assets/Textures/Grass_c.png", true},
+		{"Assets/Textures/Rock_c.png", true},
+		{"Assets/Textures/Snow_c.png", true},
+		{"Assets/Textures/Grass_n.png", false},
+		{"Assets/Textures/Rock_n.png", false},
+		{"Assets/Textures/Snow_n.png", false},
+		{"Assets/Textures/cubemap/Grass_m.png", false},
+		{"Assets/Textures/cubemap/Rock_m.png", false},
+		{"Assets/Textures/cubemap/Snow_m.png", false},
+	};
+	for (int i = 0; i < TERRAIN_TEXTURE_COUNT; ++i)
+	{
+		myTerrainTextures[i] = factory.GetTexture(terrainTextures[i].first, terrainTextures[i].second);
+		if (!myTerrainTextures[i])
+		{
+			assert(false && "GameWorld: failed to load terrain texture");
+			return false;
+		}
+	}
 
 	if (!myEnvironmentCubemap.Initialize(device, L"Assets/Textures/cubemap/cube_1024_preblurred_angle3_Skansen3.dds"))
 		return false;
 
-	if (!LoadFBXModel(device, "../../Assets/Models/low-poly-truck-car-drifter/Particle_Chest.fbx", myFbxMeshes))
+	const std::pair<const char*, const char*> models[] = {
+		{"Chest", "../../Assets/Models/Particle_Chest.fbx"},
+		{"StoneFloor", "../../Assets/Models/stone-floor/source/StoneFloor.fbx"},
+		{"StoneFloorBlack", "../../Assets/Models/stone-floor-black/source/StoneFloor Low.fbx"},
+		{"Jeep", "../../Assets/Models/Jeep_done_2.fbx"},
+	};
+	for (const auto& [name, path] : models)
 	{
-		assert(false && "GameWorld: LoadFBXModel failed to load fbx");
-		return false;
+		if (!factory.LoadFbx(name, path))
+		{
+			assert(false && "GameWorld: LoadFbx failed, check the path");
+			return false;
+		}
 	}
 
 	if (!myReflectionRT.Initialize(device, ge.GetWidth(), ge.GetHeight()))
 		return false;
 
 	CreateObjects();
-	CreateArena();
 	CreateLights();
 
 	return true;
@@ -134,7 +141,7 @@ void GameWorld::Render()
 
 	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
 	BindTerrainTextures(context);
-	myTerrain.Render({ context, &myTerrainShader });
+	myTerrain.Render({context, &myTerrainShader});
 
 	for (auto& obj : myObjects)
 	{
@@ -154,21 +161,13 @@ void GameWorld::Render()
 	UpdateLightBuffer({}, false);
 	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
 	BindTerrainTextures(context);
-	myTerrain.Render({ context, &myTerrainShader });
+	myTerrain.Render({context, &myTerrainShader});
 
 	context->RSSetState(myNoCullRasterizerState.Get());
 
-	RenderArena(context);
-
-	for (auto& obj : myObjects)
+	for (const auto& obj : myObjects)
 	{
 		RenderObjectWithLights(context, obj);
-	}
-
-	UpdateObjectBuffer(myFbxTransform);
-	for (const Mesh& mesh : myFbxMeshes)
-	{
-		mesh.Render({context, myLitShader, &myWhiteTexture});
 	}
 
 	RenderLightMarkers(context);
@@ -182,7 +181,7 @@ void GameWorld::Render()
 	myWaterObject.Render(context);
 
 	ID3D11ShaderResourceView* nullSRV = nullptr;
-	context->PSSetShaderResources(10, 1, &nullSRV);
+	context->PSSetShaderResources(11, 1, &nullSRV);
 }
 
 bool GameWorld::CreateConstantBuffers()
@@ -260,22 +259,6 @@ bool GameWorld::CreateRenderStates()
 	return true;
 }
 
-bool GameWorld::LoadTextureFromFile(ID3D11Device* aDevice, ID3D11DeviceContext* aContext, const char* aPath,
-                                    Texture& aTexture, bool anSRGB)
-{
-	int width, height, channels;
-	unsigned char* pixels = stbi_load(aPath, &width, &height, &channels, 4);
-	if (!pixels)
-	{
-		assert(false && "LoadTextureFromFile: failed to load file");
-		return false;
-	}
-
-	bool ok = aTexture.Initialize(aDevice, aContext, pixels, width, height, anSRGB);
-	stbi_image_free(pixels);
-	return ok;
-}
-
 void GameWorld::CreateObjects()
 {
 	auto& factory = GameObjectFactory::GetInstance();
@@ -296,86 +279,49 @@ void GameWorld::CreateObjects()
 			{
 				case 0:
 				{
-					obj.SetMesh(&myFbxMeshes[0]);
-					obj.SetTexture(&myWhiteTexture);
+					obj = factory.CreateGameObject("Chest");
 					obj.SetScale(0.01f);
-					obj.SetPosition({posX, kArenaFloorY + 0.5f, posZ});
+					obj.SetPosition({posX, FLOOR_HEIGHT + 0.5f, posZ});
 					break;
 				}
 				case 1:
 				{
 					obj = factory.CreateGameObject("Cube");
-					obj.SetTexture(&myWhiteTexture);
 					obj.SetScale(1.5f);
-					obj.SetPosition({posX, kArenaFloorY + 0.75f, posZ});
+					obj.SetPosition({posX, FLOOR_HEIGHT + 0.75f, posZ});
 					break;
 				}
 				default:
 				{
 					obj = factory.CreateGameObject("Pyramid");
-					obj.SetTexture(&myFileTexture);
 					obj.SetScale(1.5f);
-					obj.SetPosition({posX, kArenaFloorY, posZ});
+					obj.SetPosition({posX, FLOOR_HEIGHT, posZ});
 					break;
 				}
 			}
+			obj.SetTexture(TextureSlot::Albedo, myFileTexture);
 			obj.SetShader(myLitShader);
 			myObjects.push_back(obj);
 		}
 	}
 
-	myFbxTransform = BuildBoxTransform({0.0f, kArenaFloorY + 2.0f, 0.0f}, {0.01f, 0.01f, 0.01f});
-
-	myArenaBlock = factory.CreateGameObject("Cube");
-	myArenaBlock.SetShader(myLitShader);
-	myArenaBlock.SetTexture(&myWhiteTexture);
+	GameObject stoneFloor = factory.CreateGameObject("StoneFloor");
+	stoneFloor.SetShader(myLitShader);
+	stoneFloor.SetScale(0.10f);
+	stoneFloor.SetPosition({0.0f, FLOOR_HEIGHT + 0.05f, 0.0f});
+	stoneFloor.SetRotation(-90.0f, 0.0f, 0.0f);
+	myObjects.push_back(stoneFloor);
 
 	myPointMarker = factory.CreateGameObject("Cube");
 	myPointMarker.SetShader(myLitShader);
-	myPointMarker.SetTexture(&myWhiteTexture);
 
 	mySpotMarker = factory.CreateGameObject("Pyramid");
 	mySpotMarker.SetShader(myLitShader);
-	mySpotMarker.SetTexture(&myWhiteTexture);
 
 	myWaterObject = factory.CreateGameObject("Plane");
 	myWaterObject.SetShader(ShaderFactory::GetInstance().GetShader("water"));
 	myWaterObject.SetScale(100.0f);
 	myWaterObject.SetPosition({0.0f, myWaterHeight, 0.0f});
-}
-
-void GameWorld::CreateArena()
-{
-	const float half = 20.0f;
-	const int tiles = 4;
-	const float tileSize = (half * 2.0f) / tiles;
-	const float wallHeight = 8.0f;
-	const float wallY = kArenaFloorY + wallHeight * 0.5f;
-
-	for (int x = 0; x < tiles; ++x)
-	{
-		for (int z = 0; z < tiles; ++z)
-		{
-			Vector3f position = {
-				-half + tileSize * ((float)x + 0.5f),
-				kArenaFloorY - 0.5f,
-				-half + tileSize * ((float)z + 0.5f)
-			};
-			myArenaPieces.push_back({
-				BuildBoxTransform(position, {tileSize, 1.0f, tileSize}), position, tileSize * 0.75f
-			});
-		}
-	}
-
-	const Vector3f wallPositions[3] = {{0.0f, wallY, half}, {-half, wallY, 0.0f}, {half, wallY, 0.0f}};
-	const Vector3f wallScales[3] = {
-		{half * 2.0f, wallHeight, 1.0f}, {1.0f, wallHeight, half * 2.0f}, {1.0f, wallHeight, half * 2.0f}
-	};
-
-	for (int i = 0; i < 3; ++i)
-	{
-		myArenaPieces.push_back({BuildBoxTransform(wallPositions[i], wallScales[i]), wallPositions[i], half});
-	}
 }
 
 void GameWorld::CreateLights()
@@ -389,10 +335,10 @@ void GameWorld::CreateLights()
 		l.color = {1.0f, globalRNG.RangeFloat(0.35f, 0.85f), 0.15f};
 		l.intensity = 1.5f;
 		l.range = 8.0f;
-		l.orbitCenter = {0.0f, kArenaFloorY + globalRNG.RangeFloat(2.0f, 5.0f), 0.0f};
+		l.orbitCenter = {0.0f, FLOOR_HEIGHT + globalRNG.RangeFloat(2.0f, 5.0f), 0.0f};
 		l.orbitRadius = globalRNG.RangeFloat(3.0f, 17.0f);
 		l.orbitSpeed = globalRNG.RangeFloat(0.25f, 0.45f);
-		l.phase = globalRNG.RangeFloat(0.0f, kTwoPi);
+		l.phase = globalRNG.RangeFloat(0.0f, FMath::Tau);
 		myPointLights.push_back(l);
 	}
 
@@ -404,9 +350,9 @@ void GameWorld::CreateLights()
 		l.range = 25.0f;
 		l.innerAngle = 0.18f;
 		l.outerAngle = 0.28f;
-		l.orbitRadius = globalRNG.RangeFloat(5.0f, 17.0f);
-		l.orbitSpeed = -globalRNG.RangeFloat(0.15f, 0.25f);
-		l.phase = globalRNG.RangeFloat(0.0f, kTwoPi);
+		l.orbitRadius = globalRNG.RangeFloat(-5.0f, 17.0f);
+		l.orbitSpeed = -globalRNG.RangeFloat(0.15f, 0.65f);
+		l.phase = globalRNG.RangeFloat(0.0f, FMath::Tau);
 		mySpotLights.push_back(l);
 	}
 }
@@ -428,7 +374,7 @@ void GameWorld::AnimateLights()
 		float a = myTotalTime * l.orbitSpeed + l.phase;
 		l.position = {
 			l.orbitCenter.x + cosf(a) * l.orbitRadius,
-			kArenaFloorY + 12.0f,
+			FLOOR_HEIGHT + 12.0f,
 			l.orbitCenter.z + sinf(a) * l.orbitRadius
 		};
 		l.direction = {-l.position.x * 0.15f, -1.0f, -l.position.z * 0.15f};
@@ -530,15 +476,10 @@ void GameWorld::UpdateReflectionBuffer(float aResolutionX, float aResolutionY, f
 void GameWorld::BindTerrainTextures(ID3D11DeviceContext* aContext)
 {
 	myEnvironmentCubemap.Bind(aContext, 0);
-	myGrassColor.Bind(aContext, 1);
-	myRockColor.Bind(aContext, 2);
-	mySnowColor.Bind(aContext, 3);
-	myGrassNormal.Bind(aContext, 4);
-	myRockNormal.Bind(aContext, 5);
-	mySnowNormal.Bind(aContext, 6);
-	myGrassMaterial.Bind(aContext, 7);
-	myRockMaterial.Bind(aContext, 8);
-	mySnowMaterial.Bind(aContext, 9);
+	for (int i = 0; i < TERRAIN_TEXTURE_COUNT; ++i)
+	{
+		myTerrainTextures[i]->Bind(aContext, i + 1);
+	}
 }
 
 std::vector<LightRef> GameWorld::CollectLightsForObject(const Vector3f& anObjectPosition, float anObjectRadius)
@@ -549,14 +490,14 @@ std::vector<LightRef> GameWorld::CollectLightsForObject(const Vector3f& anObject
 	{
 		float dist = (myPointLights[i].position - anObjectPosition).Length();
 		if (dist < myPointLights[i].range + anObjectRadius)
-			result.push_back({ false, i, dist });
+			result.push_back({false, i, dist});
 	}
 
 	for (int i = 0; i < (int)mySpotLights.size(); ++i)
 	{
 		float dist = (mySpotLights[i].position - anObjectPosition).Length();
 		if (dist < mySpotLights[i].range + anObjectRadius)
-			result.push_back({ true, i, dist });
+			result.push_back({true, i, dist});
 	}
 
 	std::sort(result.begin(), result.end(),
@@ -565,10 +506,10 @@ std::vector<LightRef> GameWorld::CollectLightsForObject(const Vector3f& anObject
 	return result;
 }
 
-void GameWorld::RenderPieceWithLights(ID3D11DeviceContext* aContext, GameObject& anObject, const Matrix4x4f& aTransform,
-                                      const Vector3f& aWorldPosition, float aRadius)
+void GameWorld::RenderObjectWithLights(ID3D11DeviceContext* aContext, const GameObject& anObject)
 {
-	std::vector<LightRef> lights = CollectLightsForObject(aWorldPosition, aRadius);
+	const Matrix4x4f& transform = anObject.GetTransform();
+	std::vector<LightRef> lights = CollectLightsForObject(transform.GetPosition(), anObject.GetRadius());
 
 	int lightsDone = 0;
 	bool firstPass = true;
@@ -583,35 +524,22 @@ void GameWorld::RenderPieceWithLights(ID3D11DeviceContext* aContext, GameObject&
 		lightsDone += (int)chunk.size();
 
 		UpdateLightBuffer(chunk, !firstPass);
-		UpdateObjectBuffer(aTransform);
+		UpdateObjectBuffer(transform);
 
 		if (!firstPass)
 		{
-			const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			const float blendFactor[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 			aContext->OMSetBlendState(myAdditiveBlendState.Get(), blendFactor, 0xFFFFFFFF);
 			aContext->OMSetDepthStencilState(myAdditiveDepthState.Get(), 0);
 		}
 
 		anObject.Render(aContext);
 		firstPass = false;
-	} while (lightsDone < (int)lights.size());
+	}
+	while (lightsDone < (int)lights.size());
 
 	aContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 	aContext->OMSetDepthStencilState(nullptr, 0);
-}
-
-void GameWorld::RenderObjectWithLights(ID3D11DeviceContext* aContext, GameObject& anObject)
-{
-	const Matrix4x4f& transform = anObject.GetTransform();
-	RenderPieceWithLights(aContext, anObject, transform, transform.GetPosition(), kObjectRadius);
-}
-
-void GameWorld::RenderArena(ID3D11DeviceContext* aContext)
-{
-	for (const ArenaPiece& piece : myArenaPieces)
-	{
-		RenderPieceWithLights(aContext, myArenaBlock, piece.transform, piece.position, piece.radius);
-	}
 }
 
 void GameWorld::RenderLightMarkers(ID3D11DeviceContext* aContext)

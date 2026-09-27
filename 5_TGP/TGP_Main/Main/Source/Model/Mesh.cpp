@@ -1,7 +1,9 @@
 #include "Mesh.h"
 #include "Texture.h"
-#include <cassert>
 #include "Shader/Shader.h"
+#include "Texture.h"
+
+#include <cassert>
 
 bool Mesh::Init(
 	ID3D11Device* aDevice,
@@ -45,20 +47,16 @@ bool Mesh::Init(
 	return true;
 }
 
-void Mesh::Render(RenderData aRenderData) const
+void Mesh::Render(ID3D11DeviceContext* aContext, const Shader* aShader) const
 {
-	const Texture* tex = aRenderData.texture ? aRenderData.texture : ourFallbackTexture;
-	if (tex)
-		tex->Bind(aRenderData.context, 10);
-
 	const unsigned int stride = sizeof(Vertex);
 	const unsigned int offset = 0;
 
-	aRenderData.context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	aRenderData.context->IASetInputLayout(aRenderData.shader->GetInputLayout());
-	aRenderData.context->IASetVertexBuffers(0, 1, myVertexBuffer.GetAddressOf(), &stride, &offset);
-	aRenderData.context->IASetIndexBuffer(myIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-	aRenderData.context->VSSetShader(aRenderData.shader->GetVertexShader(), nullptr, 0);
-	aRenderData.context->PSSetShader(aRenderData.shader->GetPixelShader(), nullptr, 0);
-	aRenderData.context->DrawIndexed(myIndexCount, 0, 0);
+	aContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	aContext->IASetInputLayout(aShader->GetInputLayout());
+	aContext->IASetVertexBuffers(0, 1, myVertexBuffer.GetAddressOf(), &stride, &offset);
+	aContext->IASetIndexBuffer(myIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	aContext->VSSetShader(aShader->GetVertexShader(), nullptr, 0);
+	aContext->PSSetShader(aShader->GetPixelShader(), nullptr, 0);
+	aContext->DrawIndexed(myIndexCount, 0, 0);
 }

@@ -134,7 +134,7 @@ void GameWorld::Render()
 
 	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
 	BindTerrainTextures(context);
-	myTerrain.Render({ context, &myTerrainShader });
+	myTerrain.Render({context, &myTerrainShader});
 
 	for (auto& obj : myObjects)
 	{
@@ -154,7 +154,7 @@ void GameWorld::Render()
 	UpdateLightBuffer({}, false);
 	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
 	BindTerrainTextures(context);
-	myTerrain.Render({ context, &myTerrainShader });
+	myTerrain.Render({context, &myTerrainShader});
 
 	context->RSSetState(myNoCullRasterizerState.Get());
 
@@ -549,14 +549,14 @@ std::vector<LightRef> GameWorld::CollectLightsForObject(const Vector3f& anObject
 	{
 		float dist = (myPointLights[i].position - anObjectPosition).Length();
 		if (dist < myPointLights[i].range + anObjectRadius)
-			result.push_back({ false, i, dist });
+			result.push_back({false, i, dist});
 	}
 
 	for (int i = 0; i < (int)mySpotLights.size(); ++i)
 	{
 		float dist = (mySpotLights[i].position - anObjectPosition).Length();
 		if (dist < mySpotLights[i].range + anObjectRadius)
-			result.push_back({ true, i, dist });
+			result.push_back({true, i, dist});
 	}
 
 	std::sort(result.begin(), result.end(),
@@ -587,14 +587,15 @@ void GameWorld::RenderPieceWithLights(ID3D11DeviceContext* aContext, GameObject&
 
 		if (!firstPass)
 		{
-			const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			const float blendFactor[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 			aContext->OMSetBlendState(myAdditiveBlendState.Get(), blendFactor, 0xFFFFFFFF);
 			aContext->OMSetDepthStencilState(myAdditiveDepthState.Get(), 0);
 		}
 
 		anObject.Render(aContext);
 		firstPass = false;
-	} while (lightsDone < (int)lights.size());
+	}
+	while (lightsDone < (int)lights.size());
 
 	aContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 	aContext->OMSetDepthStencilState(nullptr, 0);
