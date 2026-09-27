@@ -1163,12 +1163,6 @@
     <ClCompile Include="Source\External\DDSTextureLoader\DDSTextureLoader11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\RenderTarget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\Lights.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="External\TGAFBXImporter\source\Importer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

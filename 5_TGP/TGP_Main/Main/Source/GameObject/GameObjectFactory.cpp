@@ -3,7 +3,6 @@
 #include "../Shader/ShaderFactory.h"
 #define TINYOBJLOADER_IMPLEMENTATION
 #define TINYOBJLOADER_DISABLE_FAST_FLOAT
-#define NOMINMAX 
 
 #include "tiny_obj_loader.h"
 
@@ -17,19 +16,16 @@ GameObjectFactory& GameObjectFactory::GetInstance()
 
 bool GameObjectFactory::Init(ID3D11Device* aDevice)
 {
-	auto& shaders = ShaderFactory::GetInstance();
-
 	myMeshes["Cube"].Init(aDevice,
-		Primitives::UVCubeVertices, 24,
-		Primitives::UVCubeIndices, 36);
+	                      Primitives::UVCubeVertices, 24,
+	                      Primitives::UVCubeIndices, 36);
 
 	myMeshes["Pyramid"].Init(aDevice,
 		Primitives::PyramidVertices, 16,
 		Primitives::PyramidIndices, 18);
 	
 	static const Vertex planeVerts[4] = {
-		// x  y  z  w   r g b a   u v    nx ny nz   tx ty tz   bx by bz
-		{ -1, 0,-1, 1,  1,1,1,1,  0,0,   0,1,0,     1,0,0,     0,0,1 },
+		{-1, 0, -1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1},
 		{ -1, 0, 1, 1,  1,1,1,1,  0,1,   0,1,0,     1,0,0,     0,0,1 },
 		{  1, 0, 1, 1,  1,1,1,1,  1,1,   0,1,0,     1,0,0,     0,0,1 },
 		{  1, 0,-1, 1,  1,1,1,1,  1,0,   0,1,0,     1,0,0,     0,0,1 },

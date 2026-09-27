@@ -1,6 +1,3 @@
-// Main.cpp : Defines the entry point for the application.
-
-//#include "framework.h"
 #include "Main.h"
 #include "Engine.h"
 #include "GameWorld.h"
@@ -14,7 +11,6 @@ int APIENTRY wWinMain(
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-	// Start engine 
 	EngineConfiguration engineConfig;
 	engineConfig.hInstance = hInstance;
 	engineConfig.nCmdShow = nCmdShow;
@@ -25,7 +21,6 @@ int APIENTRY wWinMain(
 	if (!Engine::Start(engineConfig))
 		return FALSE;
 
-	// Initialize game world
 	Engine& engine = *Engine::GetInstance();
 
 	GameWorld gameWorld;
@@ -35,7 +30,6 @@ int APIENTRY wWinMain(
 		return FALSE;
 	}
 
-	// Main loop 
 	while (engine.BeginFrame())
 	{
 		gameWorld.Update(engine.GetDeltaTime());

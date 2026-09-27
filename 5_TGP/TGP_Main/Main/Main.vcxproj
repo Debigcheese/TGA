@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -100,12 +103,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;NOMINMAX;WIN32_LEAN_AND_MEAN;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)CommonUtilities\;$(SolutionDir)Shader\;$(SolutionDir)Source\CommonUtilities\;$(SolutionDir)Assets\Shader\;$(ProjectDir)Source;$(ProjectDir)Source\CommonUtilities;$(ProjectDir)Source\External\DDSTextureLoader;$(ProjectDir)External\;$(ProjectDir)External\TGAFBXImporter\FBXSDK\include</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,14 +118,12 @@
       <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir);$(ProjectDir)CommonUtilities\;$(ProjectDir)CommonUtilities\input\;$(ProjectDir)External\TGAFBXImporter\FBXSDK\lib;$(ProjectDir)External\TGAFBXImporter\FBXSDK\lib\debug</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /E /I "$(ProjectDir)Assets\Textures" "$(OutDir)Assets\Textures"</Command>
+      <Command>xcopy /Y /E /I /D "$(ProjectDir)Assets\Textures" "$(OutDir)Assets\Textures\"
+xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ObjectFileOutput>$(OutDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <PreBuildEvent>
-      <Command>xcopy /Y /E /I "$(ProjectDir)Assets\Textures" "$(OutDir)Assets\Textures"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -506,8 +508,14 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
-    <ClCompile Include="External\TGAFBXImporter\source\Importer.cpp" />
-    <ClCompile Include="External\TGAFBXImporter\source\Internals.cpp" />
+    <ClCompile Include="External\TGAFBXImporter\source\Importer.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</TreatWarningAsError>
+    </ClCompile>
+    <ClCompile Include="External\TGAFBXImporter\source\Internals.cpp">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level3</WarningLevel>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</TreatWarningAsError>
+    </ClCompile>
     <ClCompile Include="External\TGAFBXImporter\source\TGAFbx.pch.cpp" />
     <ClCompile Include="External\TGAFBXImporter\source\TgaFbxStructs.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
@@ -531,8 +539,6 @@
     <ClCompile Include="Source\GameObject\GameObjectFactory.cpp" />
     <ClCompile Include="Source\GameWorld.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsEngine.cpp" />
-    <ClCompile Include="Source\Graphics\Lights.cpp" />
-    <ClCompile Include="Source\Graphics\RenderTarget.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model\FBXLoader.cpp" />
     <ClCompile Include="Source\Model\Mesh.cpp" />

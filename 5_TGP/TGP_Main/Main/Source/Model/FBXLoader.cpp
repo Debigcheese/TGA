@@ -26,10 +26,10 @@ bool LoadFBXModel(ID3D11Device* aDevice, const char* aPath, std::vector<Mesh>& o
 			dst.z = src.Position[2];
 			dst.w = src.Position[3];
 
-			dst.r = 1.f; /* src.VertexColors[0][0];*/
-			dst.g = 1.f; //src.VertexColors[0][1];
-			dst.b = 1.f; //src.VertexColors[0][2];
-			dst.a = 1.f; //src.VertexColors[0][3];
+			dst.r = 1.f;
+			dst.g = 1.f;
+			dst.b = 1.f;
+			dst.a = 1.f; 
 
 			dst.u = src.UVs[0][0];
 			dst.v = src.UVs[0][1];

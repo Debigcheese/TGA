@@ -23,8 +23,6 @@ F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\GameObject\GameObject.cpp;F:\T
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\GameObject\GameObjectFactory.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GameObjectFactory.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\GameWorld.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GameWorld.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\GraphicsEngine.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GraphicsEngine.obj
-F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\Lights.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Lights.obj
-F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\RenderTarget.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\RenderTarget.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Main.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Main.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\FBXLoader.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\FBXLoader.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\Mesh.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Mesh.obj
