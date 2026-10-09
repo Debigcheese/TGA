@@ -1083,6 +1083,12 @@
     <ClInclude Include="Source\Model\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\AssetPaths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\GBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp">
@@ -1181,6 +1187,12 @@
     <ClCompile Include="Source\CommonUtilities\TransformUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\AssetPaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\GBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\Grass_c.png">
@@ -1262,6 +1274,12 @@
     <Image Include="Assets\Textures\cubemap\Snow_m.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Main.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\animated_mesh_PS.hlsl" />
@@ -1280,6 +1298,11 @@
     <FxCompile Include="Assets\Shaders\PostprocessTonemapPS.hlsl" />
     <FxCompile Include="Assets\Shaders\Water_PS.hlsl" />
     <FxCompile Include="Assets\Shaders\Water_VS.hlsl" />
+    <FxCompile Include="Assets\Shaders\Model_GBuffer_PS.hlsl" />
+    <FxCompile Include="Assets\Shaders\Terrain_GBuffer_PS.hlsl" />
+    <FxCompile Include="Assets\Shaders\Fullscreen_VS.hlsl" />
+    <FxCompile Include="Assets\Shaders\Deferred_Directional_PS.hlsl" />
+    <FxCompile Include="Assets\Shaders\Deferred_LightVolume_PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Main.slnx" />
@@ -1289,5 +1312,12 @@
     <None Include="Assets\Shaders\PBRFunctions.hlsli" />
     <None Include="Assets\Shaders\PostprocessStructs.hlsli" />
     <None Include="Assets\Shaders\Tonemap.hlsli" />
+    <None Include="libfbxsdk.dll" />
+    <None Include="Assets\Shaders\Deferred.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Main.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

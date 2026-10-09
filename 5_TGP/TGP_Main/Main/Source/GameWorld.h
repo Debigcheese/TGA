@@ -11,6 +11,7 @@
 #include "Model/Texture.h"
 #include "Shader/Shader.h"
 #include "Cubemap.h"
+#include "Graphics/GBuffer.h"
 
 #include "CommonUtilities/math/vector3.h"
 #include "CommonUtilities/math/Matrix4x4.h"
@@ -20,6 +21,19 @@ using Microsoft::WRL::ComPtr;
 namespace Tga
 {
 	class InputManager;
+}
+
+namespace DeferredShader
+{
+	enum : int
+	{
+		ModelGBuffer = 0,
+		TerrainGBuffer,
+		DirectionalLight,
+		LightVolume,
+		Tonemap,
+		Count
+	};
 }
 
 struct FrameBufferData
@@ -64,8 +78,6 @@ struct LightBufferData
 	SpotLightGPU spotLights[MAX_LIGHTS_PER_PASS];
 };
 
-static_assert(sizeof(LightBufferData) == 896, "LightBufferData size mismatch");
-
 struct ReflectionBufferData
 {
 	float resolution[2];
@@ -80,7 +92,12 @@ struct DirectionalLightConfig
 	float intensity = 0.18f;
 	Vector3f ambientSky = {0.03f, 0.04f, 0.05f};
 	Vector3f ambientGround = {0.03f, 0.03f, 0.04f};
+	float ambientIntensity = 0.4f;
 };
+
+static constexpr float FLOOR_HEIGHT = 30.0f;
+static constexpr int TERRAIN_TEXTURE_COUNT = 9;
+static constexpr int GBUFFER_TEXTURE_SLOT = 14;
 
 class GameWorld
 {
@@ -91,11 +108,8 @@ public:
 	bool Init();
 	void Update(float aDeltaTime);
 	void Render();
-	static constexpr float FLOOR_HEIGHT = 30.0f;
 
 private:
-	static constexpr int TERRAIN_TEXTURE_COUNT = 9;
-
 	bool CreateConstantBuffers();
 	bool CreateRenderStates();
 
@@ -114,6 +128,11 @@ private:
 	void RenderObjectWithLights(ID3D11DeviceContext* aContext, const GameObject& anObject);
 	void RenderLightMarkers(ID3D11DeviceContext* aContext);
 
+	void RenderGBuffer(ID3D11DeviceContext* aContext, ID3D11DepthStencilView* aDepthBuffer);
+	void RenderDeferredLighting(ID3D11DeviceContext* aContext, ID3D11DepthStencilView* aDepthBuffer);
+	void RenderLightVolumes(ID3D11DeviceContext* aContext);
+	void RenderFullscreen(ID3D11DeviceContext* aContext, const Shader& aShader);
+
 	Camera myCamera;
 	CameraController myCameraController;
 
@@ -124,6 +143,7 @@ private:
 	ComPtr<ID3D11SamplerState> mySampler;
 	ComPtr<ID3D11BlendState> myAdditiveBlendState;
 	ComPtr<ID3D11DepthStencilState> myAdditiveDepthState;
+	ComPtr<ID3D11DepthStencilState> myReadOnlyGreaterDepthState;
 	ComPtr<ID3D11RasterizerState> myNoCullRasterizerState;
 	ComPtr<ID3D11RasterizerState> myFrontFaceCullingRasterizerState;
 
@@ -146,6 +166,11 @@ private:
 	RenderTarget myReflectionRT;
 	GameObject myWaterObject;
 	float myWaterHeight = -5.0f;
+
+	GBuffer myGBuffer;
+	RenderTarget mySceneRT;
+	Shader myDeferredShaders[DeferredShader::Count];
+	GameObject myLightVolume;
 
 	float myTotalTime = 0.0f;
 };

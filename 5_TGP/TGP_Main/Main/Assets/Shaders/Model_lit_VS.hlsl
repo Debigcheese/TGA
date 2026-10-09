@@ -23,14 +23,14 @@ struct VSOut
 
 VSOut main(VSIn i)
 {
-    VSOut o;
+    VSOut result;
     float4 wp = mul(i.position, modelToWorldMatrix);
-    o.position = mul(wp, worldToClipMatrix);
-    o.worldPos = wp;
-    o.color = i.color;
-    o.uv = i.uv;
-    o.worldNormal = normalize(mul(i.normal, (float3x3) modelToWorldMatrix));
-    o.worldTangent = mul(i.tangent, (float3x3) modelToWorldMatrix);
-    o.worldBinormal = mul(i.binormal, (float3x3) modelToWorldMatrix);
-    return o;
+    result.position = mul(wp, worldToClipMatrix);
+    result.worldPos = wp;
+    result.color = i.color;
+    result.uv = i.uv;
+    result.worldNormal = normalize(mul(i.normal, (float3x3) modelToWorldMatrix));
+    result.worldTangent = mul(i.tangent, (float3x3) modelToWorldMatrix);
+    result.worldBinormal = mul(i.binormal, (float3x3) modelToWorldMatrix);
+    return result;
 }

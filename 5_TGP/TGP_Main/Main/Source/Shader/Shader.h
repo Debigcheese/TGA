@@ -12,6 +12,7 @@ public:
 	{
 		Default,
 		Terrain,
+		None,
 	};
 
 	bool Init(ID3D11Device* aDevice,

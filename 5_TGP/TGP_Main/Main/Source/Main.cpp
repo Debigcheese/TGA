@@ -1,6 +1,7 @@
 #include "Main.h"
 #include "Engine.h"
 #include "GameWorld.h"
+#include "AssetPaths.h"
 
 int APIENTRY wWinMain(
 	_In_     HINSTANCE hInstance,
@@ -21,6 +22,7 @@ int APIENTRY wWinMain(
 	if (!Engine::Start(engineConfig))
 		return FALSE;
 
+	AssetPaths::Init();
 	Engine& engine = *Engine::GetInstance();
 
 	GameWorld gameWorld;

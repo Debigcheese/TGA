@@ -6,6 +6,8 @@
 #include <cstring>
 #include <utility>
 #include <vector>
+
+#include "AssetPaths.h"
 #include "Shader/ShaderFactory.h"
 #include "Shader/Shader.h"
 
@@ -14,7 +16,6 @@
 #include "CommonUtilities/input/InputManager.h"
 #include "CommonUtilities/TransformUtils.h"
 #include "CommonUtilities/Random.h"
-
 
 GameWorld::~GameWorld()
 {
@@ -57,21 +58,41 @@ bool GameWorld::Init()
 	if (!myTerrainShader.Init(device, "terrain_VS.cso", "terrain_PS.cso", Shader::Layout::Terrain))
 		return false;
 
+	const struct
+	{
+		std::string vertexShader;
+		std::string pixelShader;
+		Shader::Layout layout;
+	}
+	deferredShaders[DeferredShader::Count] = {
+		{"model_lit_VS.cso", "Model_GBuffer_PS.cso", Shader::Layout::Default},
+		{"terrain_VS.cso", "Terrain_GBuffer_PS.cso", Shader::Layout::Terrain},
+		{"Fullscreen_VS.cso", "Deferred_Directional_PS.cso", Shader::Layout::None},
+		{"default_VS.cso", "Deferred_LightVolume_PS.cso", Shader::Layout::Default},
+		{"Fullscreen_VS.cso", "PostprocessTonemapPS.cso", Shader::Layout::None},
+	};
+	for (int i = 0; i < DeferredShader::Count; ++i)
+	{
+		const auto& desc = deferredShaders[i];
+		if (!myDeferredShaders[i].Init(device, desc.vertexShader, desc.pixelShader, desc.layout))
+			return false;
+	}
+
 	std::vector<unsigned int> terrainIndices;
 	auto terrainVertices = myTerrain.BuildTerrain(terrainIndices);
 	if (!myTerrain.Init(device, terrainVertices, terrainIndices))
 		return false;
 
-	const std::pair<const char*, bool> terrainTextures[TERRAIN_TEXTURE_COUNT] = {
-		{"Assets/Textures/Grass_c.png", true},
-		{"Assets/Textures/Rock_c.png", true},
-		{"Assets/Textures/Snow_c.png", true},
-		{"Assets/Textures/Grass_n.png", false},
-		{"Assets/Textures/Rock_n.png", false},
-		{"Assets/Textures/Snow_n.png", false},
-		{"Assets/Textures/cubemap/Grass_m.png", false},
-		{"Assets/Textures/cubemap/Rock_m.png", false},
-		{"Assets/Textures/cubemap/Snow_m.png", false},
+	const std::pair<std::string, bool> terrainTextures[TERRAIN_TEXTURE_COUNT] = {
+		{"Grass_c.png", true},
+		{"Rock_c.png", true},
+		{"Snow_c.png", true},
+		{"Grass_n.png", false},
+		{"Rock_n.png", false},
+		{"Snow_n.png", false},
+		{"Grass_m.png", false},
+		{"Rock_m.png", false},
+		{"Snow_m.png", false},
 	};
 	for (int i = 0; i < TERRAIN_TEXTURE_COUNT; ++i)
 	{
@@ -83,25 +104,35 @@ bool GameWorld::Init()
 		}
 	}
 
-	if (!myEnvironmentCubemap.Initialize(device, L"Assets/Textures/cubemap/cube_1024_preblurred_angle3_Skansen3.dds"))
+	if (!myEnvironmentCubemap.Initialize(
+		device, AssetPaths::ResolveWString(L"cube_1024_preblurred_angle3_Skansen3.dds").c_str()))
 		return false;
 
-	const std::pair<const char*, const char*> models[] = {
-		{"Chest", "../../Assets/Models/Particle_Chest.fbx"},
-		{"StoneFloor", "../../Assets/Models/stone-floor/source/StoneFloor.fbx"},
-		{"StoneFloorBlack", "../../Assets/Models/stone-floor-black/source/StoneFloor Low.fbx"},
-		{"Jeep", "../../Assets/Models/Jeep_done_2.fbx"},
+	const std::pair<std::string, std::string> models[] = {
+		{"Chest", "Particle_Chest.fbx"},
+		{"StoneFloor", "StoneFloor.fbx"},
+		{"StoneFloorBlack", "StoneFloor Low.fbx"},
+		{"Jeep", "Jeep_done_2.fbx"},
 	};
 	for (const auto& [name, path] : models)
 	{
 		if (!factory.LoadFbx(name, path))
 		{
+			const std::string message = "LoadFbx failed for '" + name + "' (" + path + "): " +
+				TGA::FBX::Importer::GetLastError() + "\n";
+			OutputDebugStringA(message.c_str());
 			assert(false && "GameWorld: LoadFbx failed, check the path");
 			return false;
 		}
 	}
 
 	if (!myReflectionRT.Initialize(device, ge.GetWidth(), ge.GetHeight()))
+		return false;
+
+	if (!myGBuffer.Initialize(device, ge.GetWidth(), ge.GetHeight()))
+		return false;
+
+	if (!mySceneRT.Initialize(device, ge.GetWidth(), ge.GetHeight(), DXGI_FORMAT_R16G16B16A16_FLOAT))
 		return false;
 
 	CreateObjects();
@@ -150,37 +181,32 @@ void GameWorld::Render()
 	}
 
 	ID3D11RenderTargetView* backBuffer = graphicsEngine.GetBackBufferRTV();
-	context->OMSetRenderTargets(1, &backBuffer, graphicsEngine.GetDepthBufferDSV());
-	context->ClearDepthStencilView(graphicsEngine.GetDepthBufferDSV(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f,
-	                               0);
+	ID3D11DepthStencilView* depthBuffer = graphicsEngine.GetDepthBufferDSV();
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+
+	context->ClearDepthStencilView(depthBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	context->RSSetState(nullptr);
 
 	UpdateReflectionBuffer((float)graphicsEngine.GetWidth(), (float)graphicsEngine.GetHeight(), myWaterHeight, 0.0f);
 	UpdateFrameBuffer(myCamera.GetWorldToClipMatrix());
 
-	UpdateLightBuffer({}, false);
-	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
-	BindTerrainTextures(context);
-	myTerrain.Render({context, &myTerrainShader});
+	RenderGBuffer(context, depthBuffer);
+	RenderDeferredLighting(context, depthBuffer);
 
+	context->OMSetRenderTargets(1, &backBuffer, nullptr);
+	mySceneRT.BindAsTexture(context, 0);
+	RenderFullscreen(context, myDeferredShaders[DeferredShader::Tonemap]);
+	context->PSSetShaderResources(0, 1, &nullSRV);
+
+	context->OMSetRenderTargets(1, &backBuffer, depthBuffer);
 	context->RSSetState(myNoCullRasterizerState.Get());
-
-	for (const auto& obj : myObjects)
-	{
-		RenderObjectWithLights(context, obj);
-	}
-
 	RenderLightMarkers(context);
-
 	context->RSSetState(nullptr);
 
 	UpdateLightBuffer({}, false);
 	myReflectionRT.BindAsTexture(context, 11);
-
 	UpdateObjectBuffer(myWaterObject.GetTransform());
 	myWaterObject.Render(context);
-
-	ID3D11ShaderResourceView* nullSRV = nullptr;
 	context->PSSetShaderResources(11, 1, &nullSRV);
 }
 
@@ -240,9 +266,9 @@ bool GameWorld::CreateRenderStates()
 	D3D11_DEPTH_STENCIL_DESC dsd = {};
 	dsd.DepthEnable = true;
 	dsd.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-	dsd.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
+	dsd.DepthFunc = D3D11_COMPARISON_GREATER;
 	dsd.StencilEnable = false;
-	if (FAILED(device->CreateDepthStencilState(&dsd, &myAdditiveDepthState)))
+	if (FAILED(device->CreateDepthStencilState(&dsd, &myReadOnlyGreaterDepthState)))
 		return false;
 
 	D3D11_RASTERIZER_DESC rd = {};
@@ -267,15 +293,15 @@ void GameWorld::CreateObjects()
 	constexpr float offset = 3.5f;
 	constexpr float offsetMultiplier = 4.f;
 
-	for (int x = 0; x < gridSize; ++x)
+	for (int i = 0; i < gridSize; ++i)
 	{
-		for (int z = 0; z < gridSize; ++z)
+		for (int j = 0; j < gridSize; ++j)
 		{
-			const float posX = ((float)x - offset) * offsetMultiplier;
-			const float posZ = ((float)z - offset) * offsetMultiplier;
+			const float posX = ((float)i - offset) * offsetMultiplier;
+			const float posZ = ((float)j - offset) * offsetMultiplier;
 
 			GameObject obj;
-			switch ((x + z) % 3)
+			switch ((i + j) % 3)
 			{
 				case 0:
 				{
@@ -307,8 +333,8 @@ void GameWorld::CreateObjects()
 
 	GameObject stoneFloor = factory.CreateGameObject("StoneFloor");
 	stoneFloor.SetShader(myLitShader);
-	stoneFloor.SetScale(0.10f);
-	stoneFloor.SetPosition({0.0f, FLOOR_HEIGHT + 0.05f, 0.0f});
+	stoneFloor.SetScale(0.15f);
+	stoneFloor.SetPosition({-10.0f, FLOOR_HEIGHT - 1.25f, 5.0f});
 	stoneFloor.SetRotation(-90.0f, 0.0f, 0.0f);
 	myObjects.push_back(stoneFloor);
 
@@ -318,6 +344,9 @@ void GameWorld::CreateObjects()
 	mySpotMarker = factory.CreateGameObject("Pyramid");
 	mySpotMarker.SetShader(myLitShader);
 
+	myLightVolume = factory.CreateGameObject("Cube");
+	myLightVolume.SetShader(&myDeferredShaders[DeferredShader::LightVolume]);
+
 	myWaterObject = factory.CreateGameObject("Plane");
 	myWaterObject.SetShader(ShaderFactory::GetInstance().GetShader("water"));
 	myWaterObject.SetScale(100.0f);
@@ -326,14 +355,14 @@ void GameWorld::CreateObjects()
 
 void GameWorld::CreateLights()
 {
-	const int pointCount = 30;
-	const int spotCount = 20;
+	const int pointCount = 100;
+	const int spotCount = 30;
 
 	for (int i = 0; i < pointCount; ++i)
 	{
 		PointLight l;
 		l.color = {1.0f, globalRNG.RangeFloat(0.35f, 0.85f), 0.15f};
-		l.intensity = 1.5f;
+		l.intensity = 5.0f;
 		l.range = 8.0f;
 		l.orbitCenter = {0.0f, FLOOR_HEIGHT + globalRNG.RangeFloat(2.0f, 5.0f), 0.0f};
 		l.orbitRadius = globalRNG.RangeFloat(3.0f, 17.0f);
@@ -346,7 +375,7 @@ void GameWorld::CreateLights()
 	{
 		SpotLight l;
 		l.color = {0.2f, globalRNG.RangeFloat(0.5f, 0.9f), 1.0f};
-		l.intensity = 2.5f;
+		l.intensity = 100.0f;
 		l.range = 25.0f;
 		l.innerAngle = 0.18f;
 		l.outerAngle = 0.28f;
@@ -359,25 +388,25 @@ void GameWorld::CreateLights()
 
 void GameWorld::AnimateLights()
 {
-	for (auto& l : myPointLights)
+	for (auto& point : myPointLights)
 	{
-		float a = myTotalTime * l.orbitSpeed + l.phase;
-		l.position = {
-			l.orbitCenter.x + cosf(a) * l.orbitRadius,
-			l.orbitCenter.y + sinf(a * 0.5f),
-			l.orbitCenter.z + sinf(a) * l.orbitRadius
+		float a = myTotalTime * point.orbitSpeed + point.phase;
+		point.position = {
+			point.orbitCenter.x + cosf(a) * point.orbitRadius,
+			point.orbitCenter.y + sinf(a * 0.5f),
+			point.orbitCenter.z + sinf(a) * point.orbitRadius
 		};
 	}
 
-	for (auto& l : mySpotLights)
+	for (auto& spot : mySpotLights)
 	{
-		float a = myTotalTime * l.orbitSpeed + l.phase;
-		l.position = {
-			l.orbitCenter.x + cosf(a) * l.orbitRadius,
+		float a = myTotalTime * spot.orbitSpeed + spot.phase;
+		spot.position = {
+			spot.orbitCenter.x + cosf(a) * spot.orbitRadius,
 			FLOOR_HEIGHT + 12.0f,
-			l.orbitCenter.z + sinf(a) * l.orbitRadius
+			spot.orbitCenter.z + sinf(a) * spot.orbitRadius
 		};
-		l.direction = {-l.position.x * 0.15f, -1.0f, -l.position.z * 0.15f};
+		spot.direction = {-spot.position.x * 0.15f, -1.0f, -spot.position.z * 0.15f};
 	}
 }
 
@@ -427,21 +456,22 @@ void GameWorld::UpdateLightBuffer(const std::vector<LightRef>& someLights, bool 
 	data.numEnvMapMipLevels = myEnvironmentCubemap.GetNumMips();
 	data.cameraPosition = myCamera.GetPosition();
 	data.isAdditivePass = anAdditivePass ? 1 : 0;
+	data.ambientIntensity = myDirectionalLight.ambientIntensity;
 
 	for (const LightRef& ref : someLights)
 	{
 		if (ref.isSpot)
 		{
-			const SpotLight& l = mySpotLights[ref.index];
+			const SpotLight& spot = mySpotLights[ref.index];
 			data.spotLights[data.numSpotLights++] = {
-				l.position, l.range, l.direction.GetNormalized(), cosf(l.outerAngle),
-				l.color, l.intensity, cosf(l.innerAngle)
+				spot.position, spot.range, spot.direction.GetNormalized(), cosf(spot.outerAngle),
+				spot.color, spot.intensity, cosf(spot.innerAngle)
 			};
 		}
 		else
 		{
-			const PointLight& l = myPointLights[ref.index];
-			data.pointLights[data.numPointLights++] = {l.position, l.range, l.color, l.intensity};
+			const PointLight& point = myPointLights[ref.index];
+			data.pointLights[data.numPointLights++] = {point.position, point.range, point.color, point.intensity};
 		}
 	}
 
@@ -509,34 +539,30 @@ std::vector<LightRef> GameWorld::CollectLightsForObject(const Vector3f& anObject
 void GameWorld::RenderObjectWithLights(ID3D11DeviceContext* aContext, const GameObject& anObject)
 {
 	const Matrix4x4f& transform = anObject.GetTransform();
-	std::vector<LightRef> lights = CollectLightsForObject(transform.GetPosition(), anObject.GetRadius());
+	const std::vector<LightRef> lights = CollectLightsForObject(transform.GetPosition(), anObject.GetRadius());
+	UpdateObjectBuffer(transform);
 
-	int lightsDone = 0;
-	bool firstPass = true;
-
-	do
+	size_t start = 0;
+	while (start == 0 || start < lights.size())
 	{
-		std::vector<LightRef> chunk;
-		for (int i = lightsDone; i < (int)lights.size() && (int)chunk.size() < MAX_LIGHTS_PER_PASS; ++i)
-		{
-			chunk.push_back(lights[i]);
-		}
-		lightsDone += (int)chunk.size();
+		const size_t end = std::min(start + MAX_LIGHTS_PER_PASS, lights.size());
+		const std::vector<LightRef> chunk(lights.begin() + start, lights.begin() + end);
+		const bool additive = start > 0;
 
-		UpdateLightBuffer(chunk, !firstPass);
-		UpdateObjectBuffer(transform);
-
-		if (!firstPass)
+		if (additive)
 		{
-			const float blendFactor[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+			const float blendFactor[4] = {};
 			aContext->OMSetBlendState(myAdditiveBlendState.Get(), blendFactor, 0xFFFFFFFF);
 			aContext->OMSetDepthStencilState(myAdditiveDepthState.Get(), 0);
 		}
 
+		UpdateLightBuffer(chunk, additive);
 		anObject.Render(aContext);
-		firstPass = false;
+
+		if (end == start)
+			break;
+		start = end;
 	}
-	while (lightsDone < (int)lights.size());
 
 	aContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 	aContext->OMSetDepthStencilState(nullptr, 0);
@@ -557,4 +583,79 @@ void GameWorld::RenderLightMarkers(ID3D11DeviceContext* aContext)
 		UpdateObjectBuffer(BuildAimedTransform(l.position, l.direction, 1.5f), l.color, 1.5f);
 		mySpotMarker.Render(aContext);
 	}
+}
+
+void GameWorld::RenderGBuffer(ID3D11DeviceContext* aContext, ID3D11DepthStencilView* aDepthBuffer)
+{
+	myGBuffer.Clear(aContext);
+	myGBuffer.SetAsTarget(aContext, aDepthBuffer);
+
+	UpdateObjectBuffer(Matrix4x4f::CreateIdentityMatrix());
+	BindTerrainTextures(aContext);
+	myTerrain.Render({aContext, &myDeferredShaders[DeferredShader::TerrainGBuffer]});
+
+	aContext->RSSetState(myNoCullRasterizerState.Get());
+
+	for (const auto& obj : myObjects)
+	{
+		UpdateObjectBuffer(obj.GetTransform());
+		obj.Render(aContext, &myDeferredShaders[DeferredShader::ModelGBuffer]);
+	}
+
+	aContext->RSSetState(nullptr);
+}
+
+void GameWorld::RenderDeferredLighting(ID3D11DeviceContext* aContext, ID3D11DepthStencilView* aDepthBuffer)
+{
+	const float sceneClearColor[4] = {0.1f, 0.1f, 0.15f, 1.0f};
+	mySceneRT.SetAsTarget(aContext, nullptr);
+	mySceneRT.Clear(aContext, sceneClearColor);
+
+	myGBuffer.BindAsTextures(aContext, GBUFFER_TEXTURE_SLOT);
+	myEnvironmentCubemap.Bind(aContext, 0);
+
+	UpdateLightBuffer({}, false);
+	RenderFullscreen(aContext, myDeferredShaders[DeferredShader::DirectionalLight]);
+
+	const float blendFactor[4] = {};
+	mySceneRT.SetAsTarget(aContext, aDepthBuffer);
+	aContext->OMSetBlendState(myAdditiveBlendState.Get(), blendFactor, 0xFFFFFFFF);
+	aContext->OMSetDepthStencilState(myReadOnlyGreaterDepthState.Get(), 0);
+	aContext->RSSetState(myFrontFaceCullingRasterizerState.Get());
+
+	RenderLightVolumes(aContext);
+
+	aContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
+	aContext->OMSetDepthStencilState(nullptr, 0);
+	aContext->RSSetState(nullptr);
+
+	myGBuffer.UnbindTextures(aContext, GBUFFER_TEXTURE_SLOT);
+}
+
+void GameWorld::RenderLightVolumes(ID3D11DeviceContext* aContext)
+{
+	for (int i = 0; i < (int)myPointLights.size(); ++i)
+	{
+		const float size = myPointLights[i].range * 2.0f;
+		UpdateLightBuffer({LightRef{false, i, 0.0f}}, true);
+		UpdateObjectBuffer(BuildBoxTransform(myPointLights[i].position, {size, size, size}));
+		myLightVolume.Render(aContext);
+	}
+
+	for (int i = 0; i < (int)mySpotLights.size(); ++i)
+	{
+		const float size = mySpotLights[i].range * 2.0f;
+		UpdateLightBuffer({LightRef{true, i, 0.0f}}, true);
+		UpdateObjectBuffer(BuildBoxTransform(mySpotLights[i].position, {size, size, size}));
+		myLightVolume.Render(aContext);
+	}
+}
+
+void GameWorld::RenderFullscreen(ID3D11DeviceContext* aContext, const Shader& aShader)
+{
+	aContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	aContext->IASetInputLayout(nullptr);
+	aContext->VSSetShader(aShader.GetVertexShader(), nullptr, 0);
+	aContext->PSSetShader(aShader.GetPixelShader(), nullptr, 0);
+	aContext->Draw(3, 0);
 }

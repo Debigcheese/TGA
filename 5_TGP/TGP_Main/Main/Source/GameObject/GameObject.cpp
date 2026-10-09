@@ -76,7 +76,12 @@ void GameObject::RebuildTransform()
 
 void GameObject::Render(ID3D11DeviceContext* aContext) const
 {
-	if (!myModel || !myShader) return;
+	Render(aContext, myShader);
+}
+
+void GameObject::Render(ID3D11DeviceContext* aContext, const Shader* aShader) const
+{
+	if (!myModel || !aShader) return;
 
 	for (int i = 0; i < myModel->GetSubMeshCount(); ++i)
 	{
@@ -87,6 +92,6 @@ void GameObject::Render(ID3D11DeviceContext* aContext) const
 				texture->Bind(aContext, TextureSlot::Registers[slot]);
 			}
 		}
-		myModel->GetSubMesh(i).mesh.Render(aContext, myShader);
+		myModel->GetSubMesh(i).mesh.Render(aContext, aShader);
 	}
 }

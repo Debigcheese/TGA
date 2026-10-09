@@ -31,12 +31,7 @@ Matrix4x4f BuildAimedTransform(const Vector3f& aPosition,
 
 Matrix4x4f BuildBoxTransform(const Vector3f& aPosition, const Vector3f& aScale)
 {
-	Matrix4x4f m = Matrix4x4f::CreateIdentityMatrix();
-	m(1, 1) = aScale.x;
-	m(2, 2) = aScale.y;
-	m(3, 3) = aScale.z;
-	m(4, 1) = aPosition.x;
-	m(4, 2) = aPosition.y;
-	m(4, 3) = aPosition.z;
+	Matrix4x4f m = Matrix4x4f::CreateFromScale(aScale);
+	m.SetPosition(aPosition);
 	return m;
 }

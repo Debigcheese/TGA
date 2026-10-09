@@ -12,6 +12,7 @@
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #define TINYOBJLOADER_DISABLE_FAST_FLOAT
+#include "AssetPaths.h"
 #include "tiny_obj_loader.h"
 
 GameObjectFactory& GameObjectFactory::GetInstance()
@@ -27,9 +28,11 @@ bool GameObjectFactory::Init(ID3D11Device* aDevice, ID3D11DeviceContext* aContex
 
 	const unsigned char white[] = {255, 255, 255, 255};
 	const unsigned char flatNormal[] = {128, 128, 255, 255};
+	const unsigned char defaultMaterial[] = {255, 255, 0, 255};
 	if (!myFallbackTextures[TextureSlot::Albedo].Initialize(aDevice, aContext, white, 1, 1, true)) return false;
 	if (!myFallbackTextures[TextureSlot::Normal].Initialize(aDevice, aContext, flatNormal, 1, 1, false)) return false;
-	if (!myFallbackTextures[TextureSlot::Material].Initialize(aDevice, aContext, white, 1, 1, false)) return false;
+	if (!myFallbackTextures[TextureSlot::Material].Initialize(aDevice, aContext, defaultMaterial, 1, 1, false)) return
+		false;
 
 	using namespace Primitives;
 	if (!AddSubMesh(CreateModel("Cube"), UVCubeVertices, (unsigned int)std::size(UVCubeVertices),
@@ -67,22 +70,24 @@ Model* GameObjectFactory::GetModel(const std::string& aModelName)
 
 Texture* GameObjectFactory::GetTexture(const std::string& aFilePath, bool anSRGB)
 {
-	auto it = myTextures.find(aFilePath);
+	const std::string fullPath = AssetPaths::ResolveString(aFilePath);
+
+	auto it = myTextures.find(fullPath);
 	if (it != myTextures.end())
 		return &it->second;
 
 	int width, height, channels;
-	unsigned char* pixels = stbi_load(aFilePath.c_str(), &width, &height, &channels, 4);
+	unsigned char* pixels = stbi_load(fullPath.c_str(), &width, &height, &channels, 4);
 	if (!pixels)
 		return nullptr;
 
-	Texture& texture = myTextures[aFilePath];
+	Texture& texture = myTextures[fullPath];
 	const bool ok = texture.Initialize(myDevice, myContext, pixels, width, height, anSRGB);
 	stbi_image_free(pixels);
 
 	if (!ok)
 	{
-		myTextures.erase(aFilePath);
+		myTextures.erase(fullPath);
 		return nullptr;
 	}
 	return &texture;
@@ -125,7 +130,7 @@ Texture* GameObjectFactory::FindTexture(const std::string& aFolder, const std::v
 	static const std::vector<std::string> suffixes[TextureSlot::Count] = {
 		{"_C", "_Diffuse", "_Albedo", "_BaseColor", "_Color"},
 		{"_N", "_Normal"},
-		{"_M", "_Specular", "_Material"},
+		{"_M", "_Specular", "_Material", "_OcclusionRoughnessMetallic"},
 	};
 	static const char* folders[] = {"", "textures/", "../textures/"};
 	static const char* extensions[] = {".png", ".jpg", ".jpeg", ".tga", ".tga.png"};
@@ -148,8 +153,10 @@ Texture* GameObjectFactory::FindTexture(const std::string& aFolder, const std::v
 	return nullptr;
 }
 
-bool GameObjectFactory::LoadFbx(const std::string& aModelName, const std::string& aFilePath)
+bool GameObjectFactory::LoadFbx(const std::string& aModelName, const std::string& aRelativeFilePath)
 {
+	const std::string aFilePath = AssetPaths::ResolveString(aRelativeFilePath);
+
 	TGA::FBX::Mesh fbxMesh;
 	if (!TGA::FBX::Importer::LoadMeshA(aFilePath, fbxMesh))
 		return false;

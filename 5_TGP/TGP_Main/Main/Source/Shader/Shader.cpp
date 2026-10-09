@@ -3,14 +3,16 @@
 #include <iterator>
 #include <cassert>
 
+#include "AssetPaths.h"
+
 bool Shader::Init(ID3D11Device* aDevice,
-	const std::string& aVSPath,
-	const std::string& aPSPath,
-	Layout aLayout)
+                  const std::string& aVSPath,
+                  const std::string& aPSPath,
+                  Layout aLayout)
 {
 	HRESULT result;
 
-	std::ifstream vsFile(aVSPath, std::ios::binary);
+	std::ifstream vsFile(AssetPaths::Resolve(aVSPath), std::ios::binary);
 	assert(vsFile && "Shader: failed to open vertex shader");
 	if (!vsFile) return false;
 	std::string vsData = { std::istreambuf_iterator<char>(vsFile), {} };
@@ -19,7 +21,7 @@ bool Shader::Init(ID3D11Device* aDevice,
 	assert(SUCCEEDED(result) && "Shader: failed to create vertex shader");
 	if (FAILED(result)) return false;
 
-	std::ifstream psFile(aPSPath, std::ios::binary);
+	std::ifstream psFile(AssetPaths::Resolve(aPSPath), std::ios::binary);
 	assert(psFile && "Shader: failed to open pixel shader");
 	if (!psFile) return false;
 	std::string psData = { std::istreambuf_iterator<char>(psFile), {} };

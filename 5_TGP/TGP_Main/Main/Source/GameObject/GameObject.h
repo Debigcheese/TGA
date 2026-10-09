@@ -31,7 +31,7 @@ public:
 
 	const Matrix4x4f& GetTransform() const { return myTransform; }
 	void Render(ID3D11DeviceContext* aContext) const;
-
+	void Render(ID3D11DeviceContext* aContext, const Shader* aShader) const;
 private:
 	void RebuildTransform();
 

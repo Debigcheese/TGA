@@ -119,11 +119,15 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y /E /I /D "$(ProjectDir)Assets\Textures" "$(OutDir)Assets\Textures\"
+xcopy /Y /E /I /D "$(ProjectDir)Assets\Models" "$(OutDir)Assets\Models\"
 xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ObjectFileOutput>$(OutDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -432,6 +436,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClInclude Include="External\TGAFBXImporter\source\Version.h" />
     <ClInclude Include="External\TGAFBXImporter\TgaFbxStructs.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Source\AssetPaths.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Camera\CameraController.h" />
     <ClInclude Include="Source\CommonUtilities\AABB3D.h" />
@@ -480,6 +485,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\GameObject\GameObjectFactory.h" />
     <ClInclude Include="Source\GameWorld.h" />
+    <ClInclude Include="Source\Graphics\GBuffer.h" />
     <ClInclude Include="Source\Graphics\GraphicsEngine.h" />
     <ClInclude Include="Source\Graphics\Lights.h" />
     <ClInclude Include="Source\Graphics\RenderTarget.h" />
@@ -499,6 +505,26 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClInclude Include="Source\uppgift_1_5_helper.h" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Assets\Shaders\Deferred_Directional_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\Deferred_LightVolume_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\Fullscreen_VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\Model_GBuffer_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\Terrain_GBuffer_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Assets\Shaders\Water_PS.hlsl">
       <FileType>Document</FileType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -519,6 +545,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="External\TGAFBXImporter\source\TGAFbx.pch.cpp" />
     <ClCompile Include="External\TGAFBXImporter\source\TgaFbxStructs.cpp" />
+    <ClCompile Include="Source\AssetPaths.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Camera\CameraController.cpp" />
     <ClCompile Include="Source\CommonUtilities\InputHandler.cpp" />
@@ -539,6 +566,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
     <ClCompile Include="Source\GameObject\GameObjectFactory.cpp" />
     <ClCompile Include="Source\GameWorld.cpp" />
+    <ClCompile Include="Source\Graphics\GBuffer.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsEngine.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model\Mesh.cpp" />
@@ -576,6 +604,8 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <Image Include="Assets\Textures\testnormal.png" />
     <Image Include="Assets\Textures\texture.png" />
     <Image Include="Assets\Textures\texture_2.png" />
+    <Image Include="Main.ico" />
+    <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\animated_mesh_PS.hlsl">
@@ -639,9 +669,11 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <None Include="Assets\Models\car\Pony_cartoon.mtl" />
     <None Include="Assets\Models\skull-downloadable\source\craneo.zip.zip" />
     <None Include="Assets\Shaders\common.hlsli" />
+    <None Include="Assets\Shaders\Deferred.hlsli" />
     <None Include="Assets\Shaders\PBRFunctions.hlsli" />
     <None Include="Assets\Shaders\PostprocessStructs.hlsli" />
     <None Include="Assets\Shaders\Tonemap.hlsli" />
+    <None Include="libfbxsdk.dll" />
     <None Include="Main.slnx" />
   </ItemGroup>
   <ItemGroup>
@@ -690,6 +722,9 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <Folder Include="Source\Main\x64\Debug\Main_MD.tlog\" />
     <Folder Include="Source\Main\x64\Debug\microsoft\STL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Main.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
