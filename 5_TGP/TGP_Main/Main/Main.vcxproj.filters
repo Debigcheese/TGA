@@ -1089,6 +1089,12 @@
     <ClInclude Include="Source\Graphics\GBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\GraphicsRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp">
@@ -1191,6 +1197,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\GBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\GraphicsRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

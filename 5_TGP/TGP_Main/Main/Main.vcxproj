@@ -487,6 +487,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClInclude Include="Source\GameWorld.h" />
     <ClInclude Include="Source\Graphics\GBuffer.h" />
     <ClInclude Include="Source\Graphics\GraphicsEngine.h" />
+    <ClInclude Include="Source\Graphics\GraphicsRenderer.h" />
     <ClInclude Include="Source\Graphics\Lights.h" />
     <ClInclude Include="Source\Graphics\RenderTarget.h" />
     <ClInclude Include="Source\Main.h" />
@@ -497,6 +498,7 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClInclude Include="Source\Model\Texture.h" />
     <ClInclude Include="Source\Model\Vertex.h" />
     <ClInclude Include="Source\Resource.h" />
+    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Shader\Shader.h" />
     <ClInclude Include="Source\Shader\ShaderFactory.h" />
     <ClInclude Include="Source\stb_image.h" />
@@ -568,11 +570,13 @@ xcopy /Y /D "$(ProjectDir)libfbxsdk.dll" "$(OutDir)"</Command>
     <ClCompile Include="Source\GameWorld.cpp" />
     <ClCompile Include="Source\Graphics\GBuffer.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsEngine.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsRenderer.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Model\Mesh.cpp" />
     <ClCompile Include="Source\Model\PrimitiveMeshes.cpp" />
     <ClCompile Include="Source\Model\TerrainMesh.cpp" />
     <ClCompile Include="Source\Model\Texture.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Shader\Shader.cpp" />
     <ClCompile Include="Source\Shader\ShaderFactory.cpp" />
   </ItemGroup>

@@ -1,5 +1,117 @@
-﻿  GameWorld.cpp
+﻿  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Deferred_Directional_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Deferred_LightVolume_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Fullscreen_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Model_GBuffer_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Terrain_GBuffer_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Water_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Water_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\animated_mesh_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\camera_pos_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\colored_mesh_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\colored_mesh_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\default_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\default_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Model_animated_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Model_animated_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Model_lit_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Model_lit_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\PostprocessTonemapPS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Terrain_PS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Terrain_VS.cso
+  compilation object save succeeded; see F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\textured_mesh_PS.cso
+  Importer.cpp
+  Internals.cpp
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\External\TGAFBXImporter\source\Internals.cpp(3,9): warning C4005: 'NOMINMAX': macro redefinition
+      F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\External\TGAFBXImporter\source\Internals.cpp(3,9):
+      'NOMINMAX' previously declared on the command line
+  
+  Generating Code...
+  TGAFbx.pch.cpp
+  TgaFbxStructs.cpp
+  AssetPaths.cpp
+  Camera.cpp
+  CameraController.cpp
+  InputHandler.cpp
+  InputTest.cpp
+  InputManager.cpp
+  XInput.cpp
+  CommonMath.cpp
+  FMath.cpp
+  pch.cpp
+  Print.cpp
+  Random.cpp
+  Timer.cpp
+  TransformUtils.cpp
+  Cubemap.cpp
+  Engine.cpp
+  DDSTextureLoader11.cpp
+  DDSTextureLoader9.cpp
+  Generating Code...
+  Compiling...
+  GameObject.cpp
+  GameObjectFactory.cpp
+  GameWorld.cpp
+  GBuffer.cpp
+  GraphicsEngine.cpp
+  GraphicsRenderer.cpp
+  Main.cpp
+  Mesh.cpp
+  PrimitiveMeshes.cpp
+  TerrainMesh.cpp
+  Texture.cpp
+  Scene.cpp
+  Shader.cpp
+  ShaderFactory.cpp
+  Generating Code...
   Main.vcxproj -> F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\x64\Debug\Main.exe
-  0 File(s) copied
-  0 File(s) copied
-  0 File(s) copied
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass001.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Grass_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock051.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Rock_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow010A.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_c.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\Snow_n.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\testnormal.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\texture_2.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\cube_1024_preblurred_angle3_Skansen3.dds
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Grass_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Rock_m.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Textures\cubemap\Snow_m.png
+  16 File(s) copied
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\Jeep_done_2.fbx
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\Particle_Chest.fbx
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Body_dDo_d_orange.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Body_dDo_g.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Body_dDo_s.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Body_illumination.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Interior_dDo_d_black.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Interior_dDo_g.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Interior_dDo_s.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Pony_cartoon.mtl
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Pony_cartoon.obj
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\car\Pony_cartoon_shadow.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\skull-downloadable\source\craneo.zip.zip
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\skull-downloadable\source\craneo.zip\craneo.OBJ
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\skull-downloadable\textures\difuso_flip_oscuro.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\skull-downloadable\textures\difuso_flip_oscuro_5.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\skull-downloadable\textures\normal_flip_3.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\source\StoneFloor.fbx
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorDetails_Diffuse.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorDetails_Normal.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorDetails_Specular.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorGrass_Diffuse.tga.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorGrass_Normal.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloorGrass_Specular.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloor_Diffuse.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloor_Normal.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor\textures\StoneFloor_Specular.jpg
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor-black\source\StoneFloor Low.FBX
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor-black\textures\StoneFloor Low_DefaultMaterial_BaseColor.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor-black\textures\StoneFloor Low_DefaultMaterial_Normal.png
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Assets\Models\stone-floor-black\textures\StoneFloor Low_DefaultMaterial_OcclusionRoughnessMetallic.png
+  31 File(s) copied
+  F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\libfbxsdk.dll
+  1 File(s) copied

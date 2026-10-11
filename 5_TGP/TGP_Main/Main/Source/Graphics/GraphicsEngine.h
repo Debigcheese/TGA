@@ -6,28 +6,23 @@ using Microsoft::WRL::ComPtr;
 
 struct GraphicsConfig
 {
-	// Window
 	int width = 1280;
 	int height = 720;
 	bool fullscreen = false;
-	bool vsync = true; // (1,0) vs (0,0)
+	bool vsync = true; 
 
-	// Back buffer
 	DXGI_FORMAT backBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
 	int bufferCount = 1; // 1 = single, 2 = double buffering
 
-	// Background Color 
-	float backgroundColor[4] = { 0.1f, 0.1f, 0.15f, 1.0f };
+	float backgroundColor[4] = {0.1f, 0.1f, 0.15f, 1.0f};
 
-	// Depth buffer
 	DXGI_FORMAT depthFormat = DXGI_FORMAT_D32_FLOAT;
 
 	// MSAA (multisampling / anti-aliasing)
 	int sampleCount = 1; // 1 = off, 4 = 4x MSAA
 	int sampleQuality = 0;
 
-	// Debug
-	bool enableDXDebug = true; // D3D11_CREATE_DEVICE_DEBUG
+	bool enableDXDebug = true; 
 };
 
 class GraphicsEngine

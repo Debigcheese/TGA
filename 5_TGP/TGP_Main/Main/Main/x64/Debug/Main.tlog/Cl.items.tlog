@@ -25,10 +25,12 @@ F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\GameObject\GameObjectFactory.c
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\GameWorld.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GameWorld.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\GBuffer.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GBuffer.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\GraphicsEngine.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GraphicsEngine.obj
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Graphics\GraphicsRenderer.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\GraphicsRenderer.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Main.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Main.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\Mesh.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Mesh.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\PrimitiveMeshes.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\PrimitiveMeshes.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\TerrainMesh.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\TerrainMesh.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Model\Texture.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Texture.obj
+F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Scene.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Scene.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Shader\Shader.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\Shader.obj
 F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Source\Shader\ShaderFactory.cpp;F:\TheGameAssembly\TGA\5_TGP\TGP_Main\Main\Main\x64\Debug\ShaderFactory.obj

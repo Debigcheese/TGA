@@ -11,7 +11,6 @@ bool GraphicsEngine::Init(HWND aWindowHandle, const GraphicsConfig& aConfig)
 	HRESULT result;
 
 	myConfig = aConfig;
-	// Swap chain & device 
 	DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 	swapChainDesc.BufferCount = aConfig.bufferCount;
 	swapChainDesc.BufferDesc.Format = aConfig.backBufferFormat;
@@ -44,7 +43,6 @@ bool GraphicsEngine::Init(HWND aWindowHandle, const GraphicsConfig& aConfig)
 	assert(SUCCEEDED(result) && "Failed to create device and swap chain");
 	if (FAILED(result)) return false;
 
-	// Back buffer render target 
 	ID3D11Texture2D* backBufferTexture = nullptr;
 	result = mySwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture);
 	assert(SUCCEEDED(result) && "Failed to get back buffer");
@@ -61,7 +59,6 @@ bool GraphicsEngine::Init(HWND aWindowHandle, const GraphicsConfig& aConfig)
 	myConfig.width = backBufferDesc.Width;
 	myConfig.height = backBufferDesc.Height;
 
-	// Depth buffer 
 	D3D11_TEXTURE2D_DESC depthDesc = {};
 	depthDesc.Width = myConfig.width;
 	depthDesc.Height = myConfig.height;
@@ -81,10 +78,8 @@ bool GraphicsEngine::Init(HWND aWindowHandle, const GraphicsConfig& aConfig)
 	depthTexture->Release();
 	if (FAILED(result)) return false;
 
-	// Bind render target + depth buffer 
 	myContext->OMSetRenderTargets(1, myBackBuffer.GetAddressOf(), myDepthBuffer.Get());
 
-	// Viewport 
 	D3D11_VIEWPORT viewport = {};
 	viewport.Width = static_cast<float>(myConfig.width);
 	viewport.Height = static_cast<float>(myConfig.height);
@@ -134,7 +129,6 @@ bool GraphicsEngine::CreateSamplerState()
 	assert(SUCCEEDED(hr) && "Failed to create sampler state");
 	if (FAILED(hr)) return false;
 
-	// Bind once – all pixel shaders share this sampler at slot s0
 	myContext->PSSetSamplers(0, 1, mySamplerState.GetAddressOf());
 	return true;
 }
